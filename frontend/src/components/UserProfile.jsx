@@ -24,7 +24,7 @@ const UserProfile = () => {
           return;
         }
 
-        const response = await fetch('http://localhost:5000/api/profile', {
+        const response = await fetch('https://xcel-back.onrender.com/api/profile', {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${token}`,
@@ -55,7 +55,7 @@ const UserProfile = () => {
   const handleUpdateProfile = async (updatedProfileData) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/profile', {
+      const response = await fetch('https://xcel-back.onrender.com/api/profile', {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -109,7 +109,7 @@ const UserProfile = () => {
         <div className="profile-info">
           <div className="profile-image-container">
             <motion.img
-              src={`http://localhost:5000/${userProfile.profileImage}`}
+              src={`https://xcel-back.onrender.com/${userProfile.profileImage}`}
               alt="Profile"
               className="profile-image"
               whileHover={{ scale: 1.1 }}
