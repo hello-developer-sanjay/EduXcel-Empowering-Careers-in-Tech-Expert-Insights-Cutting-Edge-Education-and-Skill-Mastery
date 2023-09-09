@@ -1,0 +1,223 @@
+/* SignInSignUp.css */
+
+/* Container for centering the authentication box */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: linear-gradient(to right top, #899baf, #122f43);
+  }
+  
+  /* Authentication box styling */
+  .auth-box {
+    background-color: rgba(123, 152, 108, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    text-align: center;
+    width: 400px;
+    max-width: 80%;
+  }
+  
+  /* Header styling */
+  .auth-box h2 {
+    font-size: 28px;
+    color: #333333;
+    margin-bottom: 20px;
+  }
+  
+  /* Form input styling */
+  .auth-box .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .auth-box .form-group label {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333333;
+  }
+  
+  .auth-box .form-group input[type="text"],
+  .auth-box .form-group input[type="email"],
+  .auth-box .form-group input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e6e6e6;
+    border-radius: 8px;
+    font-size: 18px;
+    color: #333333;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: border-color 0.3s ease;
+  }
+  
+  .auth-box .form-group input[type="text"]:focus,
+  .auth-box .form-group input[type="email"]:focus,
+  .auth-box .form-group input[type="password"]:focus {
+    border-color: #007BFF;
+  }
+  
+  /* Form button styling */
+  .auth-box .form-group button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(to right top, #007BFF, #0056b3);
+    color: #291717;
+    border: none;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .auth-box .form-group button[type="submit"]:hover {
+    background: linear-gradient(to right top, #0056b3, #004ba3);
+  }
+  
+  /* Error message styling */
+  .auth-box .error-message {
+    color: red;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  /* Additional styles specific to sign-up */
+  .auth-box .signup-info {
+    text-align: center;
+    margin-top: 20px;
+    color: #333333;
+  }
+  
+  /* Additional styles specific to sign-in */
+  .auth-box .signin-forgot-password {
+    text-align: right;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  
+  .auth-box .signin-forgot-password a {
+    color: #007BFF;
+    text-decoration: none;
+  }
+  
+  .auth-box .signin-forgot-password a:hover {
+    text-decoration: underline;
+  }
+  .password-input {
+    position: relative;
+  }
+  
+  /* Style for the eye icon */
+  .password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #007BFF; /* Change the eye icon color to blue */
+    font-size: 20px; /* Adjust the eye icon size */
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+  
+  
+  }
+  
+ 
+.form-button {
+  background-color: #a8a637; /* Background color */
+  color: #fff; /* Text color */
+  border: none;
+  padding: 12px 24px; /* Padding for a larger button */
+  font-size: 20px; /* Font size */
+  border-radius: 50px; /* Circular button */
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out; /* Smooth transition effects */
+  outline: none; /* Remove the default focus outline */
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.form-button:before {
+  content: '';
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 70%);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: scale(0);
+  transition: transform 0.5s ease;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.form-button:hover {
+  background-color: #97e636; /* Change the background color on hover */
+  transform: translateY(-5px); /* Move the button slightly up on hover */
+}
+
+.form-button:hover:before {
+  transform: scale(2);
+}
+
+/* Add a press effect when clicked */
+.form-button:active {
+  transform: translateY(3px); /* Move the button down when clicked */
+}
+
+/* Add a transition effect for focus */
+.form-button:focus {
+  background-color: #ff4848;
+}
+
+/* You can further customize the button with additional styles */
+/* Add this to your existing CSS or create a new CSS file */
+.auth-toggle {
+  text-align: center;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.toggle-link {
+  font-size: 16px; /* Adjust font size as needed */
+  color: #000000; /* Default link color */
+  text-decoration: none;
+
+  display: inline-block;
+  position: relative;
+  padding-bottom: 4px; /* Add some space below the link for the underline */
+}
+
+.toggle-link::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px; /* Underline height */
+  bottom: 0;
+  left: 0;
+  background-color: transparent; /* Initial underline color */
+  transition: background-color 0.3s ease-in-out;
+}
+
+.toggle-link:hover {
+  color: #47fd23; /* Change link color on hover */
+}
+
+.toggle-link:hover::before {
+  background-color: #e74c3c; /* Change underline color on hover */
+}
+
+
+
+
+  /* Media query for screens with a maximum width of 768px (typical for mobile devices) */
+  @media (max-width: 768px) {
+    .auth-box {
+      width: 90%; /* Adjust the width for smaller screens */
+    }
+  }
+  

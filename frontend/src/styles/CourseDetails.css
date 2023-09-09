@@ -1,0 +1,149 @@
+/* course-details.css */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+/* Reset some default styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Set a global container for centering and responsiveness */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Add styles for your loader */
+.loader {
+  font-size: 24px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Style the course details container */
+.course-details-container {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Style the module list */
+.module-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.module-list li {
+  margin-bottom: 10px;
+}
+
+/* Add text styles for titles and descriptions */
+h2 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Style the links */
+/* CourseDetails.css */
+/* ... (existing styles) */
+
+/* Style for the module link */
+.module-link {
+  color: #007BFF;
+  text-decoration: none;
+  position: relative; /* Position relative for pseudo-element animation */
+  transition: color 0.3s ease;
+
+  /* Add an underline effect with a pseudo-element */
+  overflow: hidden;
+}
+
+.module-link::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px; /* Thickness of the underline */
+  bottom: 0;
+  left: 0;
+  background-color: #007BFF;
+  transform: scaleX(0); /* Initially hidden */
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+/* Hover effect for the underline */
+.module-link:hover::before {
+  transform: scaleX(1); /* Show the underline on hover */
+  transform-origin: left;
+}
+
+/* Change color on hover */
+.module-link:hover {
+  color: #0056b3;
+}
+
+
+/* Center the loader and error message */
+.center-content {
+  text-align: center;
+}
+
+
+.video-container {
+  position: relative;
+  max-width: 100%;
+  padding-top: 56.25%; /* 16:9 aspect ratio for responsive video */
+  overflow: hidden;
+  min-height: 300px; /* Set a minimum height to ensure visibility */
+}
+
+/* Style for the video wrapper */
+.video-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex; /* Use flex to center the video vertically and horizontally */
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style for the video player */
+.react-player {
+  max-width: 100%; /* Ensure the video player scales with its container */
+  max-height: 100%; /* Ensure the video player scales with its container */
+}
+
+/* Custom aspect ratio for a 300x700 video container */
+@media screen and (max-width: 768px) {
+  .video-container.custom-aspect-ratio {
+    padding-top: 233.33%; /* 700 / 300 * 100% */               
+  }
+}
+
+/* Style for the module image */
+.module-image {
+  max-width: 100%;
+  height: auto;
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}

@@ -1,0 +1,47 @@
+/* SubHeader.css */
+.subheader {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: inline;
+  margin-right: 20px;
+  position: relative; /* Added for positioning */
+}
+
+li a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Dropdown styles */
+.module-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #444;
+  z-index: 1;
+  min-width: 160px;
+}
+
+.course-item:hover .module-menu {
+  display: block;
+}
+
+/* Active styles for selected course/module */
+.course-item.active a {
+  font-weight: bold;
+}
+
+.module-item.active a {
+  font-weight: bold;
+}

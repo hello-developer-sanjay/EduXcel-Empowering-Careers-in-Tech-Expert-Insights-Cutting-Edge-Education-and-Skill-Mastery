@@ -1,0 +1,171 @@
+/* global.CSS */
+/* ... (existing styles) */
+
+/* Container for ModuleDetails */
+.module-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Style for the loader */
+.module-container .loading {
+  font-size: 24px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Style for the error message */
+.module-container .error {
+  font-size: 24px;
+  text-align: center;
+  margin-top: 20px;
+  color: #ff0000; /* Customize error message color */
+}
+
+/* Style for the "not found" message */
+.module-container .not-found {
+  font-size: 24px;
+  text-align: center;
+  margin-top: 20px;
+  color: #666; /* Customize not found message color */
+}
+
+/* Style for the module details */
+.module-container .module-details {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Style for the module content */
+.module-container .module-details .module-content {
+  margin-top: 20px;
+}
+
+/* Style for the module items */
+.module-container .module-details .module-item {
+  margin-bottom: 20px;
+}
+
+/* Style for the module item titles */
+.module-container .module-details .module-item h3 {
+  color: #333;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* Style for the module item descriptions */
+.module-container .module-details .module-item p {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Style for the video container within module items */
+.module-container .module-details .module-item .video-container {
+  position: relative;
+  max-width: 100%;
+  padding-top: 56.25%; /* 16:9 aspect ratio for responsive video */
+  overflow: hidden;
+  min-height: 300px; /* Set a minimum height to ensure visibility */
+}
+
+/* Style for the video player within module items */
+.module-container .module-details .module-item .video-container .video-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex; /* Use flex to center the video vertically and horizontally */
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style for the video player within module items */
+.module-container .module-details .module-item .video-container .video-wrapper .react-player {
+  max-width: 100%; /* Ensure the video player scales with its container */
+  max-height: 100%; /* Ensure the video player scales with its container */
+}
+
+/* Style for the module item images */
+.module-container .module-details .module-item .module-image {
+  max-width: 100%;
+  height: auto;
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Add an underline effect to module links on hover */
+.module-container .module-details .module-item h3 a {
+  color: #007BFF;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
+  overflow: hidden;
+}
+
+.module-container .module-details .module-item h3 a::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px; /* Thickness of the underline */
+  bottom: 0;
+  left: 0;
+  background-color: #007BFF;
+  transform: scaleX(0); /* Initially hidden */
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+/* Hover effect for the underline */
+.module-container .module-details .module-item h3 a:hover::before {
+  transform: scaleX(1); /* Show the underline on hover */
+  transform-origin: left;
+}
+
+/* Change color on hover */
+.module-container .module-details .module-item h3 a:hover {
+  color: #0056b3;
+}
+
+.video-container {
+  position: relative;
+  max-width: 100%;
+  padding-top: 56.25%; /* 16:9 aspect ratio for responsive video */
+  overflow: hidden;
+  min-height: 300px; /* Set a minimum height to ensure visibility */
+}
+
+/* Style for the video wrapper */
+.video-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex; /* Use flex to center the video vertically and horizontally */
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style for the video player */
+.react-player {
+  max-width: 100%; /* Ensure the video player scales with its container */
+  max-height: 100%; /* Ensure the video player scales with its container */
+}
+
+/* Custom aspect ratio for a 300x700 video container */
+@media screen and (max-width: 768px) {
+  .video-container.custom-aspect-ratio {
+    padding-top: 233.33%; /* 700 / 300 * 100% */               
+  }
+}

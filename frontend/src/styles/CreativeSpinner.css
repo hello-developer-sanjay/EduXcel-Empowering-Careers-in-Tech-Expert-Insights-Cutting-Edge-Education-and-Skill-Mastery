@@ -1,0 +1,85 @@
+/* CreativeSpinner.css */
+
+.creative-spinner {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    animation: spin 2s linear infinite;
+  }
+  
+  .spinner-inner {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-origin: center;
+  }
+  
+  .spinner-blade {
+    width: 4px;
+    height: 20px;
+    background: #50a804; /* Customize blade color */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: 50% 100%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .spinner-blade:nth-child(1) {
+    animation: blade-spin 1s linear infinite;
+    animation-delay: 0.125s;
+  }
+  
+  .spinner-blade:nth-child(2) {
+    animation: blade-spin 1s linear infinite;
+    animation-delay: 0.25s;
+  }
+  
+  .spinner-blade:nth-child(3) {
+    animation: blade-spin 1s linear infinite;
+    animation-delay: 0.375s;
+  }
+  
+  .spinner-blade:nth-child(4) {
+    animation: blade-spin 1s linear infinite;
+    animation-delay: 0.5s;
+  }
+  
+  .spinner-blade:nth-child(5) {
+    animation: blade-spin 1s linear infinite;
+    animation-delay: 0.625s;
+  }
+  
+  .spinner-blade:nth-child(6) {
+    animation: blade-spin 1s linear infinite;
+    animation-delay: 0.75s;
+  }
+  
+  .spinner-blade:nth-child(7) {
+    animation: blade-spin 1s linear infinite;
+    animation-delay: 0.875s;
+  }
+  
+  .spinner-blade:nth-child(8) {
+    animation: blade-spin 1s linear infinite;
+    animation-delay: 1s;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes blade-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

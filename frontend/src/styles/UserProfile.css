@@ -1,0 +1,110 @@
+/* UserProfile.css */
+
+/* Container Styles */
+.user-profile-container {
+    text-align: center;
+    max-width: 600px;
+    min-height: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9d9d9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Title Styles */
+  .user-profile-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Error Message Styles */
+  .error-message {
+    color: red;
+    font-weight: bold;
+  }
+  
+  /* Profile Info Styles */
+  .profile-info {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .profile-info p {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #333;
+  }
+  
+  /* Profile Image Styles */
+  /* .profile-image-container styles */
+.profile-image-container {
+    position: relative;
+    max-width: 200px; /* Adjust the maximum width as needed */
+    display: inline-block;
+  }
+  
+  /* .profile-image styles */
+  .profile-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(12, 12, 12, 0.4); /* Increased shadow for a more pronounced effect */
+    transition: transform 0.3s ease; /* Add a smooth scale transition on hover */
+  }
+  
+  /* Hover effect to enlarge the profile image */
+  .profile-image:hover {
+    transform: scale(1.1); /* Enlarge the image by 10% on hover */
+  }
+  
+  
+  /* Edit Button Styles */
+  .edit-button {
+    background-color: #b2b14c;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .edit-button:hover {
+    background-color: #2e500a;
+  }
+  
+
+  /* Add these styles to your CSS file */
+button.logout-button {
+  padding: 10px 14px;
+  background: linear-gradient(90deg, #ff4500, #ff0000);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.1s ease;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+button.logout-button:hover {
+  background: linear-gradient(90deg, #ff0000, #d10000);
+  transform: scale(1.02);
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Add these styles for a focus effect */
+button.logout-button:focus {
+  background: linear-gradient(90deg, #ff4500, #ff0000);
+  transform: scale(1.02);
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+}
