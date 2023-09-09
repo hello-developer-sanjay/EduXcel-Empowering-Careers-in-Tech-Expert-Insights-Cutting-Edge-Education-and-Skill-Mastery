@@ -79,7 +79,7 @@ const UserProfile = () => {
   const handleLogout = async () => {
     try {
       // Send a request to the server to log the user out
-      await axios.post('http://localhost:5000/api/logout');
+      await axios.post('https://xcel-back.onrender.com/api/logout');
       // Clear the token from local storage
       localStorage.removeItem('token');
       // Redirect the user to the login page using navigate
