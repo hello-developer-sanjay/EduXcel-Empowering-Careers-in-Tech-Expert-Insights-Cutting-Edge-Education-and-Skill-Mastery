@@ -13,7 +13,7 @@ function CourseList() {
   useEffect(() => {
     async function fetchCourses() {
       try {
-        const response = await axios.get('http://localhost:5000/api/courses');
+        const response = await axios.get('https://xcel-back.onrender.com/api/courses');
         setCourses(response.data);
       } catch (error) {
         console.error('Error fetching courses:', error);
