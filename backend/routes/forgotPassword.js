@@ -104,7 +104,7 @@ router.post('/', async (req, res) => {
               <p>You are receiving this email because you (or someone else) has requested a password reset for your Eduxcel account.</p>
               <p>Your reset token is: <strong>${resetToken}</strong></p>
               <p>To complete the password reset process, please click on the following link:</p>
-              <p><a href="http://localhost:5173/reset?token=${resetToken}" class="button">Reset Password</a></p>
+              <p><a href="https://eduxcel.vercel.app/reset?token=${resetToken}" class="button">Reset Password</a></p>
               <p>If you did not make this request, please disregard this email, and your password will remain unchanged.</p>
               <p>Thank you for choosing Eduxcel for your learning needs.</p>
               <p class="signature">Sanjay Patidar</p>
