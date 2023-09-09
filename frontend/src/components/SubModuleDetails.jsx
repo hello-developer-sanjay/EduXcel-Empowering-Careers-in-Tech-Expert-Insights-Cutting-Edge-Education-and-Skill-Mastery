@@ -14,7 +14,7 @@ function SubModuleDetails() {
     async function fetchSubModuleDetails() {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/courses/${encodeURIComponent(title)}/modules/${encodeURIComponent(module)}/${encodeURIComponent(submodule)}`
+          `https://xcel-back.onrender.com/api/courses/${encodeURIComponent(title)}/modules/${encodeURIComponent(module)}/${encodeURIComponent(submodule)}`
         );
 
         
