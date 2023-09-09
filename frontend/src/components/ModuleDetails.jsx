@@ -14,7 +14,7 @@ function ModuleDetails() {
     async function fetchModuleDetails() {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/courses/${encodeURIComponent(title)}/modules/${encodeURIComponent(module)}`
+          `https://xcel-back.onrender.com/api/courses/${encodeURIComponent(title)}/modules/${encodeURIComponent(module)}`
         );
 
        
