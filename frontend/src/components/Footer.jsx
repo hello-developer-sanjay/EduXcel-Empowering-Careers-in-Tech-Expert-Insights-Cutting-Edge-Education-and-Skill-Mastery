@@ -317,7 +317,7 @@ const handleFormSubmit = async (e) => {
       successMessage = "Query sent! Await our swift reply, tailored just for you.";
     }
 
-    const response = await fetch(`https://eduxcel-back.onrender.com/api/${endpoint}`, {
+    const response = await fetch(`https://xcel-back.onrender.com/api/${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
