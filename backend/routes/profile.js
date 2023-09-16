@@ -4,6 +4,7 @@ const router = express.Router();
 const authMiddleware = require('../middleware/authMiddleware');
 const UserProfile = require('../models/UserProfile');
 const multer = require('multer');
+const fs = require('fs'); // Require the 'fs' module
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
