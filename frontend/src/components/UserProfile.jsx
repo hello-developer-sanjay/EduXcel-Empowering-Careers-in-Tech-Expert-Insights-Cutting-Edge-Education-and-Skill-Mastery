@@ -55,12 +55,18 @@ const UserProfile = () => {
   const handleUpdateProfile = async (updatedProfileData) => {
     try {
       const token = localStorage.getItem('token');
+      const formData = new FormData();
+      formData.append('profileImage', updatedProfileData.profileImage);
+      formData.append('firstName', updatedProfileData.firstName);
+      formData.append('lastName', updatedProfileData.lastName);
+      formData.append('bio', updatedProfileData.bio);
+
       const response = await fetch('https://xcel-back.onrender.com/api/profile', {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        body: updatedProfileData,
+        body: formData,
       });
 
       if (!response.ok) {
