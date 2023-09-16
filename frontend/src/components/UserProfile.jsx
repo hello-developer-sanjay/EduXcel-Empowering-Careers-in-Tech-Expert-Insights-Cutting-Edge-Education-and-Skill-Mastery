@@ -52,7 +52,7 @@ const UserProfile = () => {
     setIsEditing(true);
   };
 
-  const handleUpdateProfile = async (updatedProfileData) => {
+   const handleUpdateProfile = async (updatedProfileData) => {
     try {
       const token = localStorage.getItem('token');
       const formData = new FormData();
