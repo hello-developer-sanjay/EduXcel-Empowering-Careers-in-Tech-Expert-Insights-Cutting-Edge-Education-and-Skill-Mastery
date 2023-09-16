@@ -44,23 +44,29 @@ router.put('/', authMiddleware, upload.single('profileImage'), async (req, res) 
     console.log('User ID:', req.user._id);
     console.log('Request Body:', req.body);
 
-    const userProfile = await UserProfile.findOneAndUpdate(
-      { user: req.user._id },
-      {
-        firstName: req.body.firstName || '',
-        lastName: req.body.lastName || '',
-        bio: req.body.bio || '',
-        profileImage: req.file
-          ? path.join('uploads', req.file.filename)
-          : '', // Store the relative file path
-      },
-      { new: true } // Use the { new: true } option to get the updated document
-    );
+    const userProfile = await UserProfile.findOne({ user: req.user._id });
 
     if (!userProfile) {
       console.log('User profile not found');
       return res.status(404).json({ message: 'User profile not found' });
     }
+
+    // Remove the old profile image if it exists
+    if (userProfile.profileImage) {
+      const imagePath = path.join(__dirname, '..', userProfile.profileImage);
+      fs.unlinkSync(imagePath); // Remove the old image
+    }
+
+    userProfile.firstName = req.body.firstName || '';
+    userProfile.lastName = req.body.lastName || '';
+    userProfile.bio = req.body.bio || '';
+    
+    if (req.file) {
+      userProfile.profileImage = path.join('uploads', req.file.filename);
+    }
+
+    // Save the updated user profile
+    await userProfile.save();
 
     console.log('Updated user profile:', userProfile);
     res.status(200).json(userProfile);
