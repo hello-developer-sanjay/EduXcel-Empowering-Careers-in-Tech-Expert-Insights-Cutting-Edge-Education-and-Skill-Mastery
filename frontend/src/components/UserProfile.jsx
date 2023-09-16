@@ -52,21 +52,15 @@ const UserProfile = () => {
     setIsEditing(true);
   };
 
-   const handleUpdateProfile = async (updatedProfileData) => {
+  const handleUpdateProfile = async (updatedProfileData) => {
     try {
       const token = localStorage.getItem('token');
-      const formData = new FormData();
-      formData.append('profileImage', updatedProfileData.profileImage);
-      formData.append('firstName', updatedProfileData.firstName);
-      formData.append('lastName', updatedProfileData.lastName);
-      formData.append('bio', updatedProfileData.bio);
-
       const response = await fetch('https://xcel-back.onrender.com/api/profile', {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        body: formData,
+        body: updatedProfileData,
       });
 
       if (!response.ok) {
@@ -115,7 +109,7 @@ const UserProfile = () => {
         <div className="profile-info">
           <div className="profile-image-container">
             <motion.img
-              src={`https://xcel-back.onrender.com/${userProfile.profileImage}`}
+              src={`https://xcel-back.onrender.com/${userProfile.profileImage}`} // Use an absolute URL here
               alt="Profile"
               className="profile-image"
               whileHover={{ scale: 1.1 }}
@@ -130,9 +124,8 @@ const UserProfile = () => {
             Edit Profile
           </button>
           <button onClick={handleLogout} className="logout-button">
-  Log Out
-</button>
-
+            Log Out
+          </button>
         </div>
       )}
       {isEditing && (
