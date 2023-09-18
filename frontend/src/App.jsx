@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
+ import SubHeader from './components/SubHeader';
 import Home from './pages/Home';
 import UserProfile from './components/UserProfile';
 import ModuleDetails from './components/ModuleDetails';
@@ -16,7 +17,7 @@ function App() {
       <div className='relative z-0 bg-primary'>
         <div className='bg-hero-pattern bg-cover bg-no-repeat bg-center'>
           <Header />
-   
+    <SubHeader/>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<UserProfile />} />
