@@ -1,47 +1,96 @@
 /* SubHeader.css */
+
+/* Container for the entire SubHeader */
 .subheader {
-  background-color: #333;
-  color: white;
-  padding: 10px;
+  background-color: #c6bf7f;
+  padding: 20px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+/* Dropdown container */
+
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+  width: auto; /* Adjust the width as needed */
 }
 
-li {
-  display: inline;
-  margin-right: 20px;
-  position: relative; /* Added for positioning */
-}
-
-li a {
-  color: white;
-  text-decoration: none;
-}
-
-/* Dropdown styles */
-.module-menu {
-  display: none;
+/* Dropdown label */
+.dropdown-label {
   position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #444;
-  z-index: 1;
-  min-width: 160px;
+  top: -15px;
+  left: 10px;
+  background-color: #ffffff;
+  padding: 0 5px;
+  font-size: 14px;
+  color: #333;
 }
 
-.course-item:hover .module-menu {
-  display: block;
+.courses-dropdown {
+  padding: 10px;
+  background-color: #85a6a8;
+  color: #333;
+  font-size: 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%; /* Fill the container width */
+  max-width: 200px; /* Limit the width of the select */
 }
 
-/* Active styles for selected course/module */
-.course-item.active a {
-  font-weight: bold;
+/* Dropdown options */
+.dropdown-option {
+  padding: 10px;
+  background-color: #757289;
+  color: #333;
+  font-size: 12px;
+  display: flex;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px; /* Limit the width of options */
 }
 
-.module-item.active a {
-  font-weight: bold;
+
+
+/* Disabled option (placeholder) */
+.dropdown-option[disabled] {
+  color: #aaa;
+}
+
+/* Styling for selected option */
+.courses-dropdown option:checked {
+  background-color: #143c14;
+  color: #fff;
+}
+
+/* Custom arrow indicator */
+.courses-dropdown::-ms-expand {
+  display: none;
+}
+
+.courses-dropdown::after {
+  content: "\f107"; /* Unicode for down arrow icon */
+  font-family: FontAwesome;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #333;
+  font-size: 12px;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .courses-dropdown {
+    max-width: 100%; /* Allow full width on smaller screens */
+  }
+
+  .dropdown-option {
+    max-width: 100%; /* Allow full width on smaller screens */
+  }
 }
