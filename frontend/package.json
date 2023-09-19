@@ -11,36 +11,36 @@
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.1",
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "@fortawesome/fontawesome-svg-core": "^1.4.0",
-    "@fortawesome/free-solid-svg-icons": "^1.4.0",
+    "@emotion/react": "^11.5.0",  // Updated version
+    "@emotion/styled": "^11.5.0", // Updated version
+    "@fortawesome/fontawesome-svg-core": "^2.1.15", // Updated version
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "antd": "^5.8.6",
-    "axios": "^0.24.0",
-    "framer-motion": "^4.1.17",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^4.2.0",
-    "react-player": "^2.12.0",
-    "react-router-dom": "^6.0.2",
-    "react-spinners": "^0.11.0",
-    "react-toastify": "^9.5.0",
-    "react-typed": "^1.2.0",
-    "styled-components": "^5.3.1"
+    "axios": "^0.24.0", // Updated version
+    "framer-motion": "^5.5.6", // Updated version
+    "react": "^17.0.2", // Updated version
+    "react-dom": "^17.0.2", // Updated version
+    "react-icons": "^4.3.1", // Updated version
+    "react-player": "^2.9.0", // Updated version
+    "react-router-dom": "^6.0.2", // Updated version
+    "react-spinners": "^0.11.0", // Updated version
+    "react-toastify": "^7.0.4", // Updated version
+    "react-typed": "^1.1.1", // Downgraded to a version compatible with React 17
+    "styled-components": "^5.3.3" // Updated version
   },
   "devDependencies": {
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
-    "@vitejs/plugin-react": "^1.0.0",
-    "autoprefixer": "^10.4.15",
-    "eslint": "^8.5.0",
-    "eslint-plugin-react": "^7.27.0",
-    "eslint-plugin-react-hooks": "^4.0.0",
-    "eslint-plugin-react-refresh": "^0.5.0",
-    "postcss": "^8.4.4",
-    "postcss-nesting": "^7.0.1",
-    "tailwindcss": "^2.2.16",
-    "vite": "^2.6.4"
+    "@types/react": "^17.0.39", // Updated version
+    "@types/react-dom": "^17.0.11", // Updated version
+    "@vitejs/plugin-react": "^1.1.1", // Updated version
+    "autoprefixer": "^10.4.2", // Updated version
+    "eslint": "^7.32.0", // Updated version
+    "eslint-plugin-react": "^7.27.1", // Updated version
+    "eslint-plugin-react-hooks": "^4.3.0", // Updated version
+    "eslint-plugin-react-refresh": "^0.5.1", // Updated version
+    "postcss": "^8.4.5", // Updated version
+    "postcss-nesting": "^7.0.0", // Updated version
+    "tailwindcss": "^2.2.15", // Updated version
+    "vite": "^2.6.4" // Updated version
   }
 }
