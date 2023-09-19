@@ -11,36 +11,36 @@
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.1",
-    "@emotion/react": "^11.5.0",  // Updated version
-    "@emotion/styled": "^11.5.0", // Updated version
-    "@fortawesome/fontawesome-svg-core": "^2.1.15", // Updated version
+    "@emotion/react": "^11.5.0",  
+    "@emotion/styled": "^11.5.0",
+    "@fortawesome/fontawesome-svg-core": "^2.1.15", 
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "antd": "^5.8.6",
-    "axios": "^0.24.0", // Updated version
-    "framer-motion": "^5.5.6", // Updated version
-    "react": "^17.0.2", // Updated version
-    "react-dom": "^17.0.2", // Updated version
-    "react-icons": "^4.3.1", // Updated version
-    "react-player": "^2.9.0", // Updated version
-    "react-router-dom": "^6.0.2", // Updated version
-    "react-spinners": "^0.11.0", // Updated version
-    "react-toastify": "^7.0.4", // Updated version
-    "react-typed": "^1.1.1", // Downgraded to a version compatible with React 17
-    "styled-components": "^5.3.3" // Updated version
+    "axios": "^0.24.0", 
+    "framer-motion": "^5.5.6", 
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2", 
+    "react-icons": "^4.3.1",
+    "react-player": "^2.9.0",
+    "react-router-dom": "^6.0.2",
+    "react-spinners": "^0.11.0",
+    "react-toastify": "^7.0.4", 
+    "react-typed": "^1.1.1", 
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
-    "@types/react": "^17.0.39", // Updated version
-    "@types/react-dom": "^17.0.11", // Updated version
-    "@vitejs/plugin-react": "^1.1.1", // Updated version
-    "autoprefixer": "^10.4.2", // Updated version
-    "eslint": "^7.32.0", // Updated version
-    "eslint-plugin-react": "^7.27.1", // Updated version
-    "eslint-plugin-react-hooks": "^4.3.0", // Updated version
-    "eslint-plugin-react-refresh": "^0.5.1", // Updated version
-    "postcss": "^8.4.5", // Updated version
-    "postcss-nesting": "^7.0.0", // Updated version
-    "tailwindcss": "^2.2.15", // Updated version
-    "vite": "^2.6.4" // Updated version
+    "@types/react": "^17.0.39", 
+    "@types/react-dom": "^17.0.11",
+    "@vitejs/plugin-react": "^1.1.1",
+    "autoprefixer": "^10.4.2",
+    "eslint": "^7.32.0", 
+    "eslint-plugin-react": "^7.27.1", 
+    "eslint-plugin-react-hooks": "^4.3.0", 
+    "eslint-plugin-react-refresh": "^0.5.1",
+    "postcss": "^8.4.5", 
+    "postcss-nesting": "^7.0.0", 
+    "tailwindcss": "^2.2.15", 
+    "vite": "^2.6.4"
   }
 }
