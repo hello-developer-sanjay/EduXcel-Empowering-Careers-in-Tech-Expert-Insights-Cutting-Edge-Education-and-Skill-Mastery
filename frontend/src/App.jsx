@@ -7,6 +7,7 @@ import UserProfile from './components/UserProfile';
 import ModuleDetails from './components/ModuleDetails';
 import CourseDetails from './components/CourseDetails';
 import SubModuleDetails from './components/SubModuleDetails';
+import Blogs from './components/Blogs';
 import Footer from './components/Footer';
 import SignInSignUp from './components/SignInSignUp'; // Import the SignInSignUp component
 import ForgotPassword from './components/ForgotPassword';
@@ -31,6 +32,7 @@ function App() {
             <Route path="/signin" element={<SignInSignUp />} /> {/* Use SignInSignUp component for sign-in */}
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset" element={<ResetPassword />} />
+               <Route path="/blogs/*" element={<Blogs />} />
           </Routes>
         </div>
         <div className='relative z-0'>
