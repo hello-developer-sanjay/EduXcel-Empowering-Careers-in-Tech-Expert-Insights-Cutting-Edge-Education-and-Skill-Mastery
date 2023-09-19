@@ -75,6 +75,23 @@ const Feedback = mongoose.model('feedback', {
   feedback: String,
 });
 const Query = mongoose.model('query', { name: String, email: String, query: String });
+const Tools = mongoose.model('tools', {
+  title: String,
+  overview: [String],
+  description: [String],
+  keypoints: [String],
+  imageURL: [String],
+  videoURL: [String],
+});
+
+const Working = mongoose.model('working', {
+  title: String,
+  overview: [String],
+  description: [String],
+  keypoints: [String],
+  imageURL: [String],
+  videoURL: [String],
+});
 
 // Define your routes and APIs here
 app.use('/api/signup', signupRouter);
@@ -112,7 +129,28 @@ app.put('/api/profile', authMiddleware, async (req, res) => {
     res.status(500).json({ message: 'Error updating user profile' });
   }
 });
-
+app.get('/api/:collection', async (req, res) => {
+  const collection = req.params.collection;
+  try {
+    let data;
+    switch (collection) {
+     
+      case 'tools':
+        data = await Tools.find().lean();
+        break;
+      case 'working':
+        data = await Working.find().lean();
+        break;
+      default:
+        return res.status(404).json({ error: 'Collection not found' });
+    }
+    console.log('Data fetched successfully from', collection, 'collection:', data);
+    res.json(data);
+  } catch (error) {
+    console.error(`Error fetching data from ${collection} collection:`, error);
+    res.status(500).json({ error: `Error fetching data from ${collection} collection` });
+  }
+});
 app.get('/api/courses/:title', async (req, res) => {
   try {
     const courseTitle = req.params.title;
@@ -208,7 +246,13 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
-
+app.get('/', (req, res) => {
+  res.send('Welcome to My API');
+});
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+// Listen for MongoDB collection events
+mongoose.connection.on('collection', (collectionName) => {
+  console.log(`Collection ${collectionName} changed.`);
+})
