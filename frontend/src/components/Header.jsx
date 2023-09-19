@@ -1,5 +1,7 @@
+import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Typed from 'react-typed';
 
 const HeaderContainer = styled.header`
   background-color: #333;
@@ -10,11 +12,45 @@ const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
 `;
 
 const HeaderContent = styled.div`
   margin-left: 20px;
   color: #fff;
+  flex: 1;
+`;
+
+const Logo = styled.h1`
+  font-size: 24px;
+  margin: 0;
+  color: #fff;
+`;
+
+const EduxcelText = styled.span`
+  font-size: 25px;
+  font-weight: bold;
+  color: #ff9900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  transition: color 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    color: #00bfff;
+  }
+
+  &::before {
+    content: "E";
+    position: absolute;
+    top: 50%;
+    left: -5px;
+    transform: translateY(-50%);
+    font-size: 35px;
+    color: #00bfff;
+    text-shadow: 0 0 10px rgba(0, 191, 255, 0.8);
+  }
 `;
 
 const Nav = styled.nav`
@@ -28,36 +64,61 @@ const NavList = styled.ul`
   margin: 0;
   padding: 0;
   display: flex;
-  margin-right: 20px;
+  gap: 20px; /* Add margin between NavItems */
+  flex-wrap: wrap;
 `;
 
 const NavItem = styled.li`
-  margin-right: 20px;
+  white-space: nowrap;
 `;
 
-const NavLink = styled(Link)`
+const NavLinkItem = styled(Link)`
   color: #fff;
   text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #00bfff;
+  }
 `;
 
 function Header() {
+  const typedTexts = [
+    "Spark Minds",
+    "Explore Ideas",
+    "Unleash Cognizance",
+    "Nurture Genius",
+    "Awaken Insight",
+    "Brainwave Ballet"
+  ];
+
   return (
     <HeaderContainer>
       <HeaderContent>
-        <h1>Eduxcel</h1>
+        <Logo>
+          <EduxcelText className="eduxcel-text">Eduxcel</EduxcelText>
+        </Logo>
+        <Typed
+          strings={typedTexts}
+          typeSpeed={40}
+          backSpeed={40}
+          loop
+        />
       </HeaderContent>
       <Nav>
         <NavList>
           <NavItem>
-            <NavLink to="/">Home</NavLink>
+            <NavLinkItem to="/">Home</NavLinkItem>
           </NavItem>
           <NavItem>
-            <NavLink to="/profile">Profile</NavLink>
+            <NavLinkItem to="/profile">Profile</NavLinkItem>
           </NavItem>
           <NavItem>
-            <NavLink to="/signup">Signup</NavLink>
+            <NavLinkItem to="/signup">Signup</NavLinkItem>
           </NavItem>
-         
+          <NavItem>
+            <NavLinkItem to="/blogs">Blogs</NavLinkItem>
+          </NavItem>
           {/* Add more navigation links */}
         </NavList>
       </Nav>
