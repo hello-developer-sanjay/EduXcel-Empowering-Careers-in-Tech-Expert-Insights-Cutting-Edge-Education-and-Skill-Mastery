@@ -8,12 +8,4 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
-
-  app.use(
-    '/api',
-    createProxyMiddleware({
-      target: 'https://hello-back-0iam.onrender.com',
-      changeOrigin: true,
-    })
-  );
 };
