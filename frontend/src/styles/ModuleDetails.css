@@ -10,6 +10,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: #666;
 }
 
 /* Style for the loader */
@@ -32,12 +33,12 @@
   font-size: 24px;
   text-align: center;
   margin-top: 20px;
-  color: #666; /* Customize not found message color */
+  color: #8b8d5d; /* Customize not found message color */
 }
 
 /* Style for the module details */
 .module-container .module-details {
-  background-color: #f9f9f9;
+  background-color: #8b8d5d;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
@@ -168,4 +169,68 @@
   .video-container.custom-aspect-ratio {
     padding-top: 233.33%; /* 700 / 300 * 100% */               
   }
+}
+/* CSS for the description text */
+/* Style for the module item descriptions */
+.module-container .module-details .module-item .module-description {
+  color: #000000; /* Text color */
+  font-size: 16px; /* Font size */
+  margin-bottom: 10px; /* Margin at the bottom */
+}
+
+
+/* Additional styles based on previous responses */
+
+/* Style for HTML Basics elements list */
+.module-container .module-details .module-item .html-basics-elements ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+/* Style for CSS Styling options list */
+.module-container .module-details .module-item .css-styling-options ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+/* Style for JavaScript Features list */
+.module-container .module-details .module-item .javascript-features ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+/* Style for Responsive Techniques list */
+.module-container .module-details .module-item .responsive-techniques ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+/* Style for Frontend Frameworks list */
+.module-container .module-details .module-item .frontend-frameworks ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+/* Style for Machine Learning Topics list */
+.module-container .module-details .module-item .machine-learning-topics ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+/* Style for Machine Learning Types list */
+.module-container .module-details .module-item .machine-learning-types ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+/* Style for Machine Learning Algorithms list */
+.module-container .module-details .module-item .machine-learning-algorithms ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+/* Style for Feature Engineering list */
+.module-container .module-details .module-item .feature-engineering ul {
+  list-style-type: disc;
+  margin-left: 20px;
 }
