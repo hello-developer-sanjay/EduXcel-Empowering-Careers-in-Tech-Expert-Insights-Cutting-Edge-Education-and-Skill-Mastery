@@ -105,16 +105,20 @@ const UserProfile = () => {
         </motion.div>
       )}
       {error && <p className="error-message">Error: {error}</p>}
-      {!loading && !error && userProfile && (
-        <div className="profile-info">
-          <div className="profile-image-container">
-            <motion.img
-             src={`https://xcel-back.onrender.com/${userProfile.profileImage}?${Date.now()}`}
-              alt="Profile"
-              className="profile-image"
-              whileHover={{ scale: 1.1 }}
-            />
-          </div>
+     {!loading && !error && userProfile && (
+  <div className="profile-info">
+    <div className="profile-image-container">
+      <motion.img
+        src={`https://xcel-back.onrender.com/${userProfile.profileImage}?key=${Date.now()}`}
+        alt="Profile"
+        className="profile-image"
+        whileHover={{ scale: 1.1 }}
+        onError={(e) => {
+          e.target.onerror = null; // Prevent infinite error loop
+          e.target.src = 'https://sanjaybasket.s3.ap-south-1.amazonaws.com/logo.png'; // Display a default image on error
+        }}
+      />
+    </div>
           <p>Username: {userProfile.username}</p>
           <p>Email: {userProfile.email}</p>
           <p>First Name: {userProfile.firstName}</p>
