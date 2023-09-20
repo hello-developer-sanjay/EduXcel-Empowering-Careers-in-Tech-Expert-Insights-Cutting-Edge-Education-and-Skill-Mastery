@@ -3,7 +3,6 @@ import axios from 'axios';
 import '../styles/AuthForms.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-
 function Signup() {
   const [formData, setFormData] = useState({
     username: '',
@@ -13,7 +12,7 @@ function Signup() {
 
   const [signupError, setSignupError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-  const [signupSuccess, setSignupSuccess] = useState(null); // New state for signup success
+  const [signupSuccess, setSignupSuccess] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,16 +29,21 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Client-side email format validation
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      if (!emailRegex.test(formData.email)) {
+        setSignupError('Invalid email format');
+        return;
+      }
+
       const response = await axios.post('https://xcel-back.onrender.com/api/signup', formData);
-      console.log('Signup success:', response);
-      setSignupSuccess('Signup successful!'); // Set signup success message
-      // Handle successful signup (e.g., redirect or show success message)
+      console.log('Signup success');
+      setSignupSuccess('Signup successful!');
     } catch (error) {
       console.error('Signup error:', error.response.data.message);
-      setSignupError(error.response.data.message);
+      setSignupError(error.response.message);
     }
   };
-
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit}>
