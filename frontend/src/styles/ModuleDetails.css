@@ -106,36 +106,40 @@
 }
 
 /* Add an underline effect to module links on hover */
+/* Add an underline effect to module links on hover */
+
 .module-container .module-details .module-item h3 a {
-  color: #007BFF;
-  text-decoration: none;
-  position: relative;
-  transition: color 0.3s ease;
-  overflow: hidden;
+  color: #120101; /* Link text color */
+  text-decoration: none; /* Remove underlines */
+  font-weight: bold; /* Make the text bold */
+  position: relative; /* Enable relative positioning for pseudo-elements */
+  transition: color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+  overflow: hidden; /* Hide overflowing content */
 }
 
+/* Underline effect for module item links */
 .module-container .module-details .module-item h3 a::before {
-  content: '';
-  position: absolute;
-  width: 100%;
+  content: ''; /* Create an empty pseudo-element */
+  position: absolute; /* Position it absolutely */
+  width: 100%; /* Full width */
   height: 2px; /* Thickness of the underline */
-  bottom: 0;
-  left: 0;
-  background-color: #007BFF;
+  bottom: 0; /* Position it at the bottom */
+  left: 0; /* Align it to the left */
+  background-color: #49be37; /* Underline color */
   transform: scaleX(0); /* Initially hidden */
-  transform-origin: right;
-  transition: transform 0.3s ease;
+  transform-origin: right; /* Start the animation from the right */
+  transition: transform 0.3s ease; /* Smooth underline animation */
 }
 
 /* Hover effect for the underline */
 .module-container .module-details .module-item h3 a:hover::before {
   transform: scaleX(1); /* Show the underline on hover */
-  transform-origin: left;
+  transform-origin: left; /* Animate from left to right */
 }
 
-/* Change color on hover */
+/* Change color on hover with a smoother transition */
 .module-container .module-details .module-item h3 a:hover {
-  color: #0056b3;
+  color: #33420f; /* Hovered link text color */
 }
 
 .video-container {
