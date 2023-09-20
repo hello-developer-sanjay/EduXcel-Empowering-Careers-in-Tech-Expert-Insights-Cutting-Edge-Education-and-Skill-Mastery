@@ -133,7 +133,7 @@ router.post('/', async (req, res) => {
           </head>
           <body>
             <div class="container">
-              <img class="header-image" src="https://sanjaybas ket.s3.ap-south-1.amazonaws.com/logo.png" alt="Welcome to Eduxcel">
+             <img class="header-image" src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/logo.png" alt="Welcome to Eduxcel">
               <h2>Dear ${username},</h2>
               <p>Welcome to <strong>Eduxcel</strong>! We are thrilled to have you as a part of our vibrant learning community.</p>
               <p>Your journey towards knowledge and growth begins now!</p>
