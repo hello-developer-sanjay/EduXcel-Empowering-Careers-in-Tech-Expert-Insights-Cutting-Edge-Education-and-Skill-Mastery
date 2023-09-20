@@ -47,7 +47,8 @@ app.use(cors({
   },
 }));
 app.use(express.json());
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static('uploads', { maxAge: 0 }));
+
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Connect to MongoDB using the MONGODB_URI_MYDB environment variable
