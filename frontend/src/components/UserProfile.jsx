@@ -109,7 +109,7 @@ const UserProfile = () => {
         <div className="profile-info">
           <div className="profile-image-container">
             <motion.img
-              src={`https://xcel-back.onrender.com/${userProfile.profileImage}`} // Use an absolute URL here
+             src={`https://xcel-back.onrender.com/${userProfile.profileImage}?${Date.now()}`}
               alt="Profile"
               className="profile-image"
               whileHover={{ scale: 1.1 }}
