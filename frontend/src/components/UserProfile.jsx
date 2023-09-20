@@ -115,7 +115,7 @@ const UserProfile = () => {
         whileHover={{ scale: 1.1 }}
         onError={(e) => {
           e.target.onerror = null; // Prevent infinite error loop
-          e.target.src = 'https://sanjaybasket.s3.ap-south-1.amazonaws.com/logo.png'; // Display a default image on error
+          e.target.src = 'https://sanjaybasket.s3.ap-south-1.amazonaws.com/image.webp'; // Display a default image on error
         }}
       />
     </div>
