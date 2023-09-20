@@ -14,7 +14,17 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ 
+  storage: storage,
+  fileFilter: (req, file, callback) => {
+    const allowedExtensions = ['.jpg', '.jpeg', '.png', '.gif']; // Add allowed extensions
+    const ext = path.extname(file.originalname);
+    if (!allowedExtensions.includes(ext)) {
+      return callback(new Error('Only image files are allowed.'));
+    }
+    callback(null, true);
+  }
+});
 
 // Fetch user profile route
 router.get('/', authMiddleware, async (req, res) => {
@@ -69,4 +79,5 @@ router.put('/', authMiddleware, upload.single('profileImage'), async (req, res) 
     res.status(500).json({ message: 'Error updating user profile' });
   }
 });
+
 module.exports = router;
