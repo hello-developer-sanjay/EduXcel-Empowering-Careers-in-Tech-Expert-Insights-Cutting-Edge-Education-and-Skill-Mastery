@@ -4,7 +4,7 @@ const router = express.Router();
 const authMiddleware = require('../middleware/authMiddleware');
 const UserProfile = require('../models/UserProfile');
 const multer = require('multer');
-
+const { v4: uuidv4 } = require('uuid');
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads/'); // Specify the directory where uploaded images will be stored
@@ -51,7 +51,7 @@ router.put('/', authMiddleware, upload.single('profileImage'), async (req, res) 
         lastName: req.body.lastName || '',
         bio: req.body.bio || '',
         profileImage: req.file
-          ? path.join('uploads', req.file.filename)
+          ? `uploads/${uuidv4()}-${req.file.originalname}` // Use a unique filename
           : '', // Store the relative file path
       },
       { new: true } // Use the { new: true } option to get the updated document
@@ -69,5 +69,4 @@ router.put('/', authMiddleware, upload.single('profileImage'), async (req, res) 
     res.status(500).json({ message: 'Error updating user profile' });
   }
 });
-
 module.exports = router;
