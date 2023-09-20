@@ -147,3 +147,11 @@ p {
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
+.custom-toast-container .Toastify__toast {
+  margin-top: 150px;
+  margin-bottom: 0.5rem;
+  background-color: #2890b5;
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+}
