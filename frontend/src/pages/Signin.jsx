@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // Import Link for navigation
+import { Link, useNavigate } from 'react-router-dom'; // Import Link and useNavigate
 import '../styles/AuthForms.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -13,6 +13,8 @@ function Signin() {
 
   const [signinError, setSigninError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
+
+  const navigate = useNavigate(); // Use the useNavigate hook for navigation
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,8 +36,9 @@ function Signin() {
 
       // Store the token in localStorage
       localStorage.setItem('token', response.data.token);
-      
-      // Redirect or show a success message
+
+      // Navigate to the Profile page after successful sign-in
+      navigate('/profile');
     } catch (error) {
       console.error('Signin error:', error.response.data.message);
       setSigninError(error.response.data.message);
@@ -68,7 +71,7 @@ function Signin() {
         <button type="submit" className="form-button">
           Sign In
         </button>
-        <Link to="/forgot-password">Forgot Password</Link> {/* Add a link to the Forgot Password page */}
+        <Link to="/forgot-password">Forgot Password</Link>
       </form>
       {signinError && <p className="error-message">{signinError}</p>}
     </div>
