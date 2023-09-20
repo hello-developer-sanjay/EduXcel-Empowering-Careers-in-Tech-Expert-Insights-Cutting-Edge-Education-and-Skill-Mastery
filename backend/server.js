@@ -47,7 +47,7 @@ app.use(cors({
   },
 }));
 app.use(express.json());
-app.use('/uploads', express.static('uploads', { maxAge: 0 }));
+app.use('/uploads', express.static('uploads'));
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 
@@ -129,6 +129,11 @@ app.put('/api/profile', authMiddleware, async (req, res) => {
     console.error('Error updating user profile:', error);
     res.status(500).json({ message: 'Error updating user profile' });
   }
+});
+// Serve profile images with caching disabled
+app.get('/uploads/:filename', (req, res) => {
+  res.setHeader('Cache-Control', 'no-store'); // Disable caching
+  res.sendFile(path.join(__dirname, 'uploads', req.params.filename));
 });
 app.get('/api/:collection', async (req, res) => {
   const collection = req.params.collection;
