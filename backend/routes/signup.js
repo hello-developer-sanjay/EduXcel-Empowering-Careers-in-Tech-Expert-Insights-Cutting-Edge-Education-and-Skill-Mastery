@@ -2,39 +2,49 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
-const UserProfile = require('../models/UserProfile'); // Import UserProfile model
+const UserProfile = require('../models/UserProfile');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
+const dns = require('dns'); // Import the 'dns' module
 
 router.post('/', async (req, res) => {
   const { username, email, password, firstName, lastName, bio, profileImage } = req.body;
 
   try {
-    // Check if the user already exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: 'User already exists' });
+    // Basic email format validation
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ message: 'Invalid email format' });
     }
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Check if the domain has valid MX records (email server)
+    const [, domain] = email.split('@');
+    dns.resolveMx(domain, (err, addresses) => {
+      if (err || !addresses || addresses.length === 0) {
+        return res.status(400).json({ message: 'Invalid email domain' });
+      } else {
+        // Hash the password
+        bcrypt.hash(password, 10, async (hashErr, hashedPassword) => {
+          if (hashErr) {
+            return res.status(500).json({ message: 'Error hashing password' });
+          }
 
-    // Create a new user
-    const newUser = new User({ username, email, password: hashedPassword });
-    await newUser.save();
+          // Create a new user
+          const newUser = new User({ username, email, password: hashedPassword });
+          await newUser.save();
 
-    // Create a user profile for the new user with additional information
-    const newUserProfile = new UserProfile({
-      user: newUser._id,
-      username,
-      email,
-      firstName,
-      lastName,
-      bio,
-      profileImage,
-    });
+          // Create a user profile for the new user with additional information
+          const newUserProfile = new UserProfile({
+            user: newUser._id,
+            username,
+            email,
+            firstName,
+            lastName,
+            bio,
+            profileImage,
+          });
 
-    await newUserProfile.save();
+          await newUserProfile.save();
 
     // Send a welcome email
     const transporter = nodemailer.createTransport({
@@ -123,7 +133,7 @@ router.post('/', async (req, res) => {
           </head>
           <body>
             <div class="container">
-              <img class="header-image" src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/logo.png" alt="Welcome to Eduxcel">
+              <img class="header-image" src="https://sanjaybas ket.s3.ap-south-1.amazonaws.com/logo.png" alt="Welcome to Eduxcel">
               <h2>Dear ${username},</h2>
               <p>Welcome to <strong>Eduxcel</strong>! We are thrilled to have you as a part of our vibrant learning community.</p>
               <p>Your journey towards knowledge and growth begins now!</p>
@@ -149,10 +159,13 @@ router.post('/', async (req, res) => {
     await transporter.sendMail(mailOptions);
 
     res.status(201).json({ message: 'User created successfully' });
-  } catch (error) {
-    console.error('Registration error:', error);
-    res.status(500).json({ message: 'Error creating user' });
-  }
+  });
+}
+});
+} catch (error) {
+console.error('Registration error:', error);
+res.status(500).json({ message: 'Error creating user' });
+}
 });
 
 module.exports = router;
