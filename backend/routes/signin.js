@@ -111,7 +111,7 @@ const sendWelcomeEmail = async (email, userName) => {
                   <li>Stay updated with personalized notifications.</li>
               </ul>
               <p>If you have any questions, need assistance, or want to share feedback, don't hesitate to reach out to us.</p>
-              <p>Thank you for choosing <strong>YourApp</strong> for your online journey. We're here to make it awesome!</p>
+              <p>Thank you for choosing <strong>Eduxcel</strong> for your online journey. We're here to make it awesome!</p>
               <a href="https://eduxcel.vercel.app" class="button">Start Exploring</a>
               <p class="signature">Best regards,</p>
               <p>Eduxcel Team</p>
