@@ -36,13 +36,7 @@ const allowedOrigins = [
   'http://localhost:5173',
   // Add more domains if needed
 ];
-const AWS = require('aws-sdk'); // Import AWS SDK
 
-AWS.config.update({
-  accessKeyId: 'YOUR_ACCESS_KEY_ID',
-  secretAccessKey: 'YOUR_SECRET_ACCESS_KEY',
-  region: 'YOUR_S3_REGION',
-});
 app.use(cors({
   origin: (origin, callback) => {
     if (allowedOrigins.includes(origin) || !origin) {
@@ -139,22 +133,30 @@ app.put('/api/profile', authMiddleware, async (req, res) => {
 // Serve profile images with caching disabled
 app.get('/uploads/:filename', (req, res) => {
   res.setHeader('Cache-Control', 'no-store'); // Disable caching
-  const s3 = new AWS.S3();
-  const params = {
-    Bucket: 'profileusersupload', // Replace with your S3 bucket name
-    Key: req.params.filename,
-  };
-  s3.getObject(params, (err, data) => {
-    if (err) {
-      console.error('Error fetching profile image:', err);
-      res.status(404).send('Profile image not found');
-    } else {
-      res.setHeader('Content-Type', data.ContentType);
-      res.send(data.Body);
-    }
-  });
+  res.sendFile(path.join(__dirname, 'uploads', req.params.filename));
 });
-
+app.get('/api/:collection', async (req, res) => {
+  const collection = req.params.collection;
+  try {
+    let data;
+    switch (collection) {
+     
+      case 'tools':
+        data = await Tools.find().lean();
+        break;
+      case 'working':
+        data = await Working.find().lean();
+        break;
+      default:
+        return res.status(404).json({ error: 'Collection not found' });
+    }
+    console.log('Data fetched successfully from', collection, 'collection:', data);
+    res.json(data);
+  } catch (error) {
+    console.error(`Error fetching data from ${collection} collection:`, error);
+    res.status(500).json({ error: `Error fetching data from ${collection} collection` });
+  }
+});
 app.get('/api/courses/:title', async (req, res) => {
   try {
     const courseTitle = req.params.title;
