@@ -28,7 +28,7 @@
     "passport-local-mongoose": "^8.0.0",
     "slugify": "^1.6.6",
     "uuid": "^9.0.1",
-    "@aws-sdk/client-s3": "^2.1089.0", 
+    "@aws-sdk/client-s3": "latest", 
     "multer-s3": "latest"
   },
   "devDependencies": {}
