@@ -11,7 +11,8 @@ const storage = multer.diskStorage({
     cb(null, 'uploads/'); // Specify the directory where uploaded images will be stored
   },
   filename: (req, file, cb) => {
-    const uniqueFilename = `${uuidv4()}${path.extname(file.originalname)}`;
+    const uniqueFilename = `${uuidv4()}-${file.originalname}`;
+    req.uniqueFilename = uniqueFilename; // Store the unique filename in the request object
     cb(null, uniqueFilename); // Set the filename to be unique
   },
 });
@@ -62,7 +63,9 @@ router.put('/', authMiddleware, upload.single('profileImage'), async (req, res) 
         firstName: req.body.firstName || '',
         lastName: req.body.lastName || '',
         bio: req.body.bio || '',
-        profileImage: req.file ? req.file.filename : '', // Use the filename provided by multer
+        profileImage: req.uniqueFilename // Use the unique filename from the request object
+          ? `uploads/${req.uniqueFilename}` // Store the relative file path
+          : '', 
       },
       { new: true } // Use the { new: true } option to get the updated document
     );
