@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import EditProfile from './EditProfile';
 import '../styles/UserProfile.css';
@@ -109,14 +109,11 @@ const UserProfile = () => {
         <div className="profile-info">
           <div className="profile-image-container">
             <motion.img
-              src={userProfile.profileImage}
+             src={`https://xcel-back.onrender.com/${userProfile.profileImage}?${Date.now()}`}
+
               alt="Profile"
               className="profile-image"
               whileHover={{ scale: 1.1 }}
-              onError={(e) => {
-                e.target.onerror = null; // Prevent infinite error loop
-                e.target.src = 'https://sanjaybasket.s3.ap-south-1.amazonaws.com/image.webp'; // Display a default image on error
-              }}
             />
           </div>
           <p>Username: {userProfile.username}</p>
@@ -124,12 +121,14 @@ const UserProfile = () => {
           <p>First Name: {userProfile.firstName}</p>
           <p>Last Name: {userProfile.lastName}</p>
           <p>Bio: {userProfile.bio}</p>
-          <button className="edit-button" onClick={handleEditProfile}>
-            Edit Profile
-          </button>
-          <button onClick={handleLogout} className="logout-button">
-            Log Out
-          </button>
+          <div className='buttonWrapper'>
+            <button className="edit-button" onClick={handleEditProfile}>
+              Edit Profile
+            </button>
+            <button onClick={handleLogout} className="logout-button">
+              Log Out
+            </button>
+          </div>
         </div>
       )}
       {isEditing && (
