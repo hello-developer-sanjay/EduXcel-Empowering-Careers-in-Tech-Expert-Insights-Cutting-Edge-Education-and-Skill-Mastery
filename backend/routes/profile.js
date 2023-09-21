@@ -5,20 +5,27 @@ const authMiddleware = require('../middleware/authMiddleware');
 const UserProfile = require('../models/UserProfile');
 const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
+const AWS = require('aws-sdk'); // Import AWS SDK
+const multerS3 = require('multer-s3');
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/'); // Specify the directory where uploaded images will be stored
-  },
-  filename: (req, file, cb) => {
-    const uniqueFilename = `${uuidv4()}-${file.originalname}`;
-    req.uniqueFilename = uniqueFilename; // Store the unique filename in the request object
-    cb(null, uniqueFilename); // Set the filename to be unique
-  },
+const s3 = new AWS.S3({
+  accessKeyId: 'YOUR_ACCESS_KEY_ID',
+  secretAccessKey: 'YOUR_SECRET_ACCESS_KEY',
+  region: 'YOUR_S3_REGION',
 });
 
-const upload = multer({ 
-  storage: storage,
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: 'YOUR_S3_BUCKET_NAME', // Replace with your S3 bucket name
+    acl: 'public-read', // Set the appropriate ACL
+    metadata: function (req, file, cb) {
+      cb(null, { fieldName: file.fieldname });
+    },
+    key: function (req, file, cb) {
+      cb(null, 'profileImages/' + uuidv4() + '-' + file.originalname);
+    },
+  }),
   fileFilter: (req, file, callback) => {
     const allowedExtensions = ['.jpg', '.jpeg', '.png', '.gif']; // Add allowed extensions
     const ext = path.extname(file.originalname);
@@ -26,7 +33,7 @@ const upload = multer({
       return callback(new Error('Only image files are allowed.'));
     }
     callback(null, true);
-  }
+  },
 });
 
 // Fetch user profile route
@@ -63,9 +70,7 @@ router.put('/', authMiddleware, upload.single('profileImage'), async (req, res) 
         firstName: req.body.firstName || '',
         lastName: req.body.lastName || '',
         bio: req.body.bio || '',
-        profileImage: req.uniqueFilename // Use the unique filename from the request object
-          ? `uploads/${req.uniqueFilename}` // Store the relative file path
-          : '', 
+        profileImage: req.file ? req.file.location : '', // Use the S3 object URL
       },
       { new: true } // Use the { new: true } option to get the updated document
     );
