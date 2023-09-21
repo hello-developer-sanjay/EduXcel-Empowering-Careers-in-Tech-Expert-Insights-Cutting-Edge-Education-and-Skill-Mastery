@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import EditProfile from './EditProfile';
 import '../styles/UserProfile.css';
@@ -105,30 +105,31 @@ const UserProfile = () => {
         </motion.div>
       )}
       {error && <p className="error-message">Error: {error}</p>}
-      {!loading && !error && userProfile && (
-        <div className="profile-info">
-          <div className="profile-image-container">
-            <motion.img
-             src={`https://xcel-back.onrender.com/${userProfile.profileImage}?${Date.now()}`}
-
-              alt="Profile"
-              className="profile-image"
-              whileHover={{ scale: 1.1 }}
-            />
-          </div>
+     {!loading && !error && userProfile && (
+  <div className="profile-info">
+    <div className="profile-image-container">
+      <motion.img
+        src={`https://xcel-back.onrender.com/${userProfile.profileImage}?key=${Date.now()}`}
+        alt="Profile"
+        className="profile-image"
+        whileHover={{ scale: 1.1 }}
+        onError={(e) => {
+          e.target.onerror = null; // Prevent infinite error loop
+          e.target.src = 'https://sanjaybasket.s3.ap-south-1.amazonaws.com/image.webp'; // Display a default image on error
+        }}
+      />
+    </div>
           <p>Username: {userProfile.username}</p>
           <p>Email: {userProfile.email}</p>
           <p>First Name: {userProfile.firstName}</p>
           <p>Last Name: {userProfile.lastName}</p>
           <p>Bio: {userProfile.bio}</p>
-          <div className='buttonWrapper'>
-            <button className="edit-button" onClick={handleEditProfile}>
-              Edit Profile
-            </button>
-            <button onClick={handleLogout} className="logout-button">
-              Log Out
-            </button>
-          </div>
+          <button className="edit-button" onClick={handleEditProfile}>
+            Edit Profile
+          </button>
+          <button onClick={handleLogout} className="logout-button">
+            Log Out
+          </button>
         </div>
       )}
       {isEditing && (
