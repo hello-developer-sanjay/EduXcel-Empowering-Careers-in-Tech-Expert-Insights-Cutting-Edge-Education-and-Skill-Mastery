@@ -3,10 +3,9 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const path = require('path');
-const session = require('express-session'); // Add session middleware
-const passport = require('passport'); // Add Passport.js
+const session = require('express-session');
+const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-dotenv.config();
 const signupRouter = require('./routes/signup');
 const signinRouter = require('./routes/signin');
 const authMiddleware = require('./middleware/authMiddleware');
@@ -14,86 +13,23 @@ const profileRouter = require('./routes/profile');
 const coursesRouter = require('./routes/courses');
 const forgotPasswordRouter = require('./routes/forgotPassword');
 const resetPasswordRouter = require('./routes/resetPassword');
-const app = express();
+const User = require('./models/User'); // Import the User model
+const UserProfile = require('./models/UserProfile'); // Import the UserProfile model
 
-const PORT = process.env.PORT || 5000;
+dotenv.config();
+const app = express();
 
 // Configure sessions before Passport middleware
 app.use(
   session({
-    secret: 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA', // Replace with your secret key
+    secret: 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA',
     resave: false,
     saveUninitialized: false,
-    // Add other session configuration options as needed
   })
 );
 
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: '325528469583-a46gmh0imv5fm4d0v13emjdga3n2b2pn.apps.googleusercontent.com',
-      clientSecret: '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',
-      callbackURL: 'https://xcel-back.onrender.com/auth/google/callback',
-    },
-    async (accessToken, refreshToken, profile, done) => {
-      try {
-        // Check if the user already exists in your database based on the Google profile ID
-        const existingUser = await User.findOne({ googleId: profile.id });
-
-        if (existingUser) {
-          // If the user exists, return the user
-          return done(null, existingUser);
-        }
-
-        // If the user does not exist, create a new user in your database
-        const newUser = new User({
-          googleId: profile.id,
-          username: profile.displayName,
-          // Add other user properties as needed
-        });
-
-        // Save the new user to the database
-        await newUser.save();
-
-        // Create a user profile for the new user
-        const newProfile = new UserProfile({
-          user: newUser._id,
-          // Add other profile properties as needed
-        });
-
-        // Save the new profile to the database
-        await newProfile.save();
-
-        // Return the new user
-        done(null, newUser);
-      } catch (error) {
-        done(error, null);
-      }
-    }
-  )
-);
-
-const allowedOrigins = [
-'https://eduxcel.vercel.app',
-  'http://localhost:5173',
-  // Add more domains if needed
-];
-
-app.use(cors({
-  origin: (origin, callback) => {
-    if (allowedOrigins.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-}));
-app.use(express.json());
-app.use('/uploads', express.static('uploads'));
-
-app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Connect to MongoDB using the MONGODB_URI_MYDB environment variable
 mongoose.connect(process.env.MONGODB_URI_MYDB, {
@@ -107,13 +43,6 @@ mongoose.connection.on('connected', () => {
 
 // Define your MongoDB collections (models)
 const Course = require('./models/Course');
-const User = require('./models/User');
-passport.use(User.createStrategy());
-
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-const UserProfile = require('./models/UserProfile');
-
 const Feedback = mongoose.model('feedback', {
   name: String,
   email: String,
@@ -138,6 +67,74 @@ const Working = mongoose.model('working', {
   videoURL: [String],
 });
 
+// Define Passport strategies
+passport.use(User.createStrategy());
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// Google OAuth2 routes
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: '325528469583-a46gmh0imv5fm4d0v13emjdga3n2b2pn.apps.googleusercontent.com',
+      clientSecret: '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',
+      callbackURL: 'https://xcel-back.onrender.com/auth/google/callback',
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        const existingUser = await User.findOne({ googleId: profile.id });
+
+        if (existingUser) {
+          return done(null, existingUser);
+        }
+
+        const newUser = new User({
+          googleId: profile.id,
+          username: profile.displayName,
+          // Add other user properties as needed
+        });
+
+        await newUser.save();
+
+        const newProfile = new UserProfile({
+          user: newUser._id,
+          // Add other profile properties as needed
+        });
+
+        await newProfile.save();
+
+        done(null, newUser);
+      } catch (error) {
+        done(error, null);
+      }
+    }
+  )
+);
+
+const allowedOrigins = [
+  'https://eduxcel.vercel.app',
+  'http://localhost:5173',
+  // Add more domains if needed
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (allowedOrigins.includes(origin) || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+  })
+);
+
+app.use(express.json());
+app.use('/uploads', express.static('uploads'));
+
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 // Define your routes and APIs here
 app.use('/api/signup', signupRouter);
 app.use('/api/signin', signinRouter);
@@ -146,6 +143,7 @@ app.use('/api/profile', profileRouter);
 app.use('/api/courses', coursesRouter);
 app.use('/api/forgotpassword', forgotPasswordRouter);
 app.use('/api/reset-password', resetPasswordRouter);
+
 app.put('/api/profile', authMiddleware, async (req, res) => {
   try {
     console.log('Received a request to update user profile');
@@ -309,13 +307,21 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
-app.get('/', (req, res) => {
-  res.send('Welcome to My API');
-});
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+
 // Listen for MongoDB collection events
 mongoose.connection.on('collection', (collectionName) => {
   console.log(`Collection ${collectionName} changed.`);
-})
+});
+
+// Serve the React app in production
+if (process.env.NODE_ENV === 'production') {
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
+}
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
