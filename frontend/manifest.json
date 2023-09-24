@@ -1,0 +1,17 @@
+{
+    "name": "Eduxcel",
+    "short_name": "Eduxcel",
+    "description": "Your app description",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#007BFF",
+    "icons": [
+      {
+        "src": "/path/to/icon.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }
+    ]
+  }
+  
