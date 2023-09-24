@@ -6,62 +6,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="manifest" href="./manifest.json">
   <title>Eduxcel</title>
-  <style>
-    /* Add your custom CSS styles here */
-    #install-prompt {
-      display: none;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background-color: #007BFF;
-      color: #fff;
-      text-align: center;
-      padding: 10px;
-      z-index: 1000;
-    }
-
-    #install-button {
-      background-color: #fff;
-      color: #007BFF;
-      border: none;
-      padding: 10px 20px;
-      margin-top: 10px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  </style>
 </head>
 <body>
   <div id="root"></div>
   <script>
     if ('serviceWorker' in navigator && 'Notification' in window) {
-      navigator.serviceWorker.ready.then((registration) => {
-        // Check if the app is installed
-        if (!window.matchMedia('(display-mode: standalone)').matches) {
-          const installPrompt = document.createElement('div');
-          installPrompt.id = 'install-prompt';
-          installPrompt.innerHTML = `
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        const installPrompt = document.createElement('div');
+        installPrompt.innerHTML = `
+          <div style="background-color: #007BFF; color: white; padding: 10px;">
             <p>Install this app for a better experience.</p>
-            <button id="install-button">Install</button>
-          `;
-          document.body.appendChild(installPrompt);
+            <button id="install-button" style="background-color: white; color: #007BFF; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Install</button>
+          </div>
+        `;
+        document.body.appendChild(installPrompt);
+        
+        const installButton = document.getElementById('install-button');
 
-          const installButton = document.getElementById('install-button');
-
-          // Show the popup
-          installPrompt.style.display = 'block';
-
-          // Handle the Install button click
-          installButton.addEventListener('click', () => {
-            // Show the browser's install prompt
-            window.addEventListener('beforeinstallprompt', (e) => {
-              e.preventDefault(); // Prevent default browser install prompt
-              e.prompt(); // Show custom install prompt
-            });
-            installPrompt.style.display = 'none';
-          });
-        }
+        installButton.addEventListener('click', () => {
+          e.prompt();
+          installPrompt.style.display = 'none';
+        });
       });
     }
   </script>
