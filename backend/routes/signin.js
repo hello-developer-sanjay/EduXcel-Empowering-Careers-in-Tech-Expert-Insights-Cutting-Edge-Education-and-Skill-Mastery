@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
+const UserProfile = require('../models/UserProfile');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const nodemailer = require('nodemailer'); // Import nodemailer for sending emails
@@ -126,26 +127,20 @@ const sendWelcomeEmail = async (email, userName) => {
 };
 
 // Google OAuth callback route
-router.get(
-  '/auth/google/callback',
+router.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/signin' }), // Redirect to sign-in page on failure
   async (req, res) => {
     try {
       // Check if the user exists or create a new user (similar to your local authentication)
-      const existingUser = await User.findOne({ googleId: req.user.googleId });
+      const user = await User.findOne({ googleId: req.user.googleId });
 
-      if (!existingUser) {
-        // If the user does not exist, create a new user with required fields
+      if (!user) {
         const newUser = new User({
           username: req.user.displayName,
           email: req.user.emails[0].value,
-          password: 'your_default_password', // Provide a default password for Google OAuth users
           googleId: req.user.googleId,
         });
-
-        // Save the new user to the database
         await newUser.save();
-
         // Send a welcome email (if needed)
         await sendWelcomeEmail(newUser.email, newUser.username);
       }
