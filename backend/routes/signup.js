@@ -5,12 +5,15 @@ const User = require('../models/User');
 const UserProfile = require('../models/UserProfile');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
-const dns = require('dns'); // Import the 'dns' module
+const dns = require('dns');
 
 router.post('/', async (req, res) => {
-  const { username, email, password, firstName, lastName, bio, profileImage } = req.body;
-
   try {
+    const { username, email, password, firstName, lastName, bio, profileImage } = req.body;
+
+    // Debugging: Log the request body to check if email and password are present
+    console.log('Request Body:', req.body);
+
     // Basic email format validation
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailRegex.test(email)) {
@@ -19,46 +22,45 @@ router.post('/', async (req, res) => {
 
     // Check if the domain has valid MX records (email server)
     const [, domain] = email.split('@');
-    dns.resolveMx(domain, (err, addresses) => {
+    dns.resolveMx(domain, async (err, addresses) => {
       if (err || !addresses || addresses.length === 0) {
         return res.status(400).json({ message: 'Invalid email domain' });
-      } else {
-        // Hash the password
-        bcrypt.hash(password, 10, async (hashErr, hashedPassword) => {
-          if (hashErr) {
-            return res.status(500).json({ message: 'Error hashing password' });
-          }
+      }
 
-          // Create a new user
-          const newUser = new User({ username, email, password: hashedPassword });
-          await newUser.save();
+      // Hash the password
+      const hashedPassword = await bcrypt.hash(password, 10);
 
-          // Create a user profile for the new user with additional information
-          const newUserProfile = new UserProfile({
-            user: newUser._id,
-            username,
-            email,
-            firstName,
-            lastName,
-            bio,
-            profileImage,
-          });
+      // Create a new user
+      const newUser = new User({ username, email, password: hashedPassword });
+      await newUser.save();
 
-          await newUserProfile.save();
+      // Create a user profile for the new user with additional information
+      const newUserProfile = new UserProfile({
+        user: newUser._id,
+        username,
+        email,
+        firstName,
+        lastName,
+        bio,
+        profileImage,
+      });
 
-    // Send a welcome email
-    const transporter = nodemailer.createTransport({
-      service: 'Gmail', // Use Gmail as your email service provider
-      auth: {
-        user: process.env.EMAIL_ADDRESS, // Use the email address from your environment variables
-        pass: process.env.EMAIL_PASSWORD,  // Use the email password from your environment variables
-      },
-    });
-    const mailOptions = {
-      from: process.env.EMAIL_ADDRESS,
-      to: email,
-      subject: 'Welcome to Eduxcel - Your Learning Journey Begins Here!',
-      html: `
+      await newUserProfile.save();
+
+      // Send a welcome email
+      const transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+          user: process.env.EMAIL_ADDRESS,
+          pass: process.env.EMAIL_PASSWORD,
+        },
+      });
+
+      const mailOptions = {
+        from: process.env.EMAIL_ADDRESS,
+        to: email,
+        subject: 'Welcome to Eduxcel - Your Learning Journey Begins Here!',
+        html: `
         <html>
           <head>
             <style>
@@ -156,16 +158,15 @@ router.post('/', async (req, res) => {
     };
     
 
-    await transporter.sendMail(mailOptions);
 
-    res.status(201).json({ message: 'User created successfully' });
-  });
-}
-});
-} catch (error) {
-console.error('Registration error:', error);
-res.status(500).json({ message: 'Error creating user' });
-}
+      await transporter.sendMail(mailOptions);
+
+      res.status(201).json({ message: 'User created successfully' });
+    });
+  } catch (error) {
+    console.error('Registration error:', error);
+    res.status(500).json({ message: 'Error creating user' });
+  }
 });
 
 module.exports = router;
