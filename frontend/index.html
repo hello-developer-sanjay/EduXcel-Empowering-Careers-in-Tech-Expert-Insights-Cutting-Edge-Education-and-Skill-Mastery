@@ -8,7 +8,7 @@
   <title>Eduxcel</title>
   <style>
     /* Add your custom CSS styles here */
-    #install-banner {
+    #install-prompt {
       display: none;
       position: fixed;
       bottom: 0;
@@ -39,25 +39,27 @@
       navigator.serviceWorker.ready.then((registration) => {
         // Check if the app is installed
         if (!window.matchMedia('(display-mode: standalone)').matches) {
-          const installBanner = document.createElement('div');
-          installBanner.id = 'install-banner';
-          installBanner.innerHTML = `
+          const installPrompt = document.createElement('div');
+          installPrompt.id = 'install-prompt';
+          installPrompt.innerHTML = `
             <p>Install this app for a better experience.</p>
             <button id="install-button">Install</button>
           `;
-          document.body.appendChild(installBanner);
-          
+          document.body.appendChild(installPrompt);
+
           const installButton = document.getElementById('install-button');
 
-          // Show the banner
-          installBanner.style.display = 'block';
+          // Show the popup
+          installPrompt.style.display = 'block';
 
           // Handle the Install button click
           installButton.addEventListener('click', () => {
-            registration.showNotification('Install the app', {
-              body: 'Add this app to your home screen for quick access!',
+            // Show the browser's install prompt
+            window.addEventListener('beforeinstallprompt', (e) => {
+              e.preventDefault(); // Prevent default browser install prompt
+              e.prompt(); // Show custom install prompt
             });
-            installBanner.style.display = 'none';
+            installPrompt.style.display = 'none';
           });
         }
       });
