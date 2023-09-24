@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 const path = require('path');
 const session = require('express-session'); // Add session middleware
 const passport = require('passport'); // Add Passport.js
-
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 dotenv.config();
 const signupRouter = require('./routes/signup');
 const signinRouter = require('./routes/signin');
@@ -30,6 +30,50 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: '325528469583-a46gmh0imv5fm4d0v13emjdga3n2b2pn.apps.googleusercontent.com',
+      clientSecret: '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',
+      callbackURL: 'https://xcel-back.onrender.com/auth/google/callback',
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        // Check if the user already exists in your database based on the Google profile ID
+        const existingUser = await User.findOne({ googleId: profile.id });
+
+        if (existingUser) {
+          // If the user exists, return the user
+          return done(null, existingUser);
+        }
+
+        // If the user does not exist, create a new user in your database
+        const newUser = new User({
+          googleId: profile.id,
+          username: profile.displayName,
+          // Add other user properties as needed
+        });
+
+        // Save the new user to the database
+        await newUser.save();
+
+        // Create a user profile for the new user
+        const newProfile = new UserProfile({
+          user: newUser._id,
+          // Add other profile properties as needed
+        });
+
+        // Save the new profile to the database
+        await newProfile.save();
+
+        // Return the new user
+        done(null, newUser);
+      } catch (error) {
+        done(error, null);
+      }
+    }
+  )
+);
 
 const allowedOrigins = [
 'https://eduxcel.vercel.app',
@@ -239,7 +283,20 @@ app.get('/api/courses/:title/:module', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+// Google OAuth2 routes
+app.get(
+  '/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
 
+app.get(
+  '/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/signin' }),
+  (req, res) => {
+    // Successful authentication, redirect to a page or send a response.
+    res.redirect('/profile');
+  }
+);
 // Serve the React app in production
 if (process.env.NODE_ENV === 'production') {
   app.get('*', (req, res) => {
