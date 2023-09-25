@@ -48,6 +48,7 @@ const UserProfile = () => {
     fetchUserProfile();
   }, [navigate, location.search]);
 
+
   const handleEditProfile = () => {
     setIsEditing(true);
   };
