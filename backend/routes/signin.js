@@ -126,7 +126,6 @@ const sendWelcomeEmail = async (email, userName) => {
   await transporter.sendMail(mailOptions);
 };
 
-// Google OAuth callback route
 router.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/signin' }), // Redirect to sign-in page on failure
   async (req, res) => {
@@ -145,17 +144,21 @@ router.get('/auth/google/callback',
         await sendWelcomeEmail(newUser.email, newUser.username);
       }
 
+      // Fetch the user's profile data (if available)
+      const userProfile = await UserProfile.findOne({ user: user._id });
+
       // Generate a JWT token for the user
       const token = jwt.sign({ userId: req.user._id }, 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA', { expiresIn: '1h' });
 
-      // Redirect or respond with the token as needed
-      res.redirect(`/profile?token=${token}`);
+      // Send the token and user profile data (if available) back to the React app
+      res.json({ token, userProfile }); // Modify this to send the profile data
     } catch (error) {
       console.error('Google OAuth callback error:', error);
       res.redirect('/signin'); // Redirect to sign-in page on error
     }
   }
 );
+
 
 router.post('/', async (req, res) => {
   const { email, password } = req.body;
