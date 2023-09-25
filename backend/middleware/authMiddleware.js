@@ -11,7 +11,16 @@ const authMiddleware = async (req, res, next) => {
     console.log('Decoded token:', decoded);
 
     // Find the user by their ID and add it to the request
-    const user = await User.findById(decoded.userId); // Use decoded.userId
+    let user;
+
+    if (mongoose.Types.ObjectId.isValid(decoded.userId)) {
+      // If userId is a valid ObjectId, convert it to a string
+      user = await User.findById(decoded.userId.toString());
+    } else {
+      // If userId is not a valid ObjectId, use it as is
+      user = await User.findById(decoded.userId);
+    }
+
     if (!user) {
       console.error('User not found');
       return res.status(401).json({ error: 'User not found' });
