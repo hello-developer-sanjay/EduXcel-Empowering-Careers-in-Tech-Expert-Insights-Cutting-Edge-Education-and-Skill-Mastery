@@ -91,6 +91,7 @@ passport.use(
 
         const newUser = new User({
           googleId: profile.id,
+           email: profile.emails[0].value, // Set email from Google profile
           username: profile.displayName,
           // Add other user properties as needed
         });
