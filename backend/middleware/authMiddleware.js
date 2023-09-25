@@ -1,4 +1,4 @@
-const User = require('../models/User'); // Import your User model
+const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
 const authMiddleware = async (req, res, next) => {
@@ -11,8 +11,7 @@ const authMiddleware = async (req, res, next) => {
     console.log('Decoded token:', decoded);
 
     // Find the user by ID and add it to the request
-    const user = await User.findById(decoded.userId);
-
+    const user = await User.findById(decoded.user._id); // Use decoded.user._id
     if (!user) {
       console.error('User not found');
       return res.status(401).json({ error: 'User not found' });
