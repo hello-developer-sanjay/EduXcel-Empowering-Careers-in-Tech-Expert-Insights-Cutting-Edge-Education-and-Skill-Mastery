@@ -335,15 +335,15 @@ app.get(
         await newProfile.save();
       }
 
-      // Redirect to the profile page
-      res.redirect('https://eduxcel.vercel.app/profile');
+      // Redirect to the profile page with a JWT token
+      const token = jwt.sign({ userId: req.user._id }, 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA', { expiresIn: '1h' });
+      res.redirect(`https://eduxcel.vercel.app/profile?token=${token}`);
     } catch (error) {
       console.error('Error fetching or creating user profile:', error);
       res.redirect('/signin'); // Redirect to the sign-in page on error
     }
   }
 );
-
 
 
 // Serve the React app in production
