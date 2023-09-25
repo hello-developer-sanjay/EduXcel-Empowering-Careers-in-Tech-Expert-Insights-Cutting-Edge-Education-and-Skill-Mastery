@@ -28,18 +28,30 @@ function Signin() {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('https://xcel-back.onrender.com/api/signin', formData);
-      console.log('Signin success');
-      localStorage.setItem('token', response.data.token);
-      navigate('/profile');
-    } catch (error) {
-      console.error('Signin error:', error.response.data.message);
-      setSigninError(error.response.data.message);
-    }
-  };
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await axios.post('https://xcel-back.onrender.com/api/signin', formData);
+    console.log('Signin success');
+    localStorage.setItem('token', response.data.token);
+
+    // Fetch the user profile data here
+    const profileResponse = await axios.get('https://xcel-back.onrender.com/api/profile', {
+      headers: {
+        Authorization: `Bearer ${response.data.token}`,
+      },
+    });
+
+    const userProfileData = profileResponse.data;
+    // Set the user profile data in your state here
+
+    navigate('/profile');
+  } catch (error) {
+    console.error('Signin error:', error.response.data.message);
+    setSigninError(error.response.data.message);
+  }
+};
+
 
   // Google OAuth2 URL
   const googleAuthUrl = 'https://xcel-back.onrender.com/auth/google';
