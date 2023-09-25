@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import EditProfile from './EditProfile';
 import '../styles/UserProfile.css';
 import CreativeSpinner from './CreativeSpinner';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -15,10 +15,20 @@ const UserProfile = () => {
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
 
+ const UserProfile = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [userProfile, setUserProfile] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const token = localStorage.getItem('token');
+        const token = new URLSearchParams(location.search).get('token');
+
         if (!token) {
           navigate('/signin'); // Redirect the user to the login page if no token is found
           return;
@@ -44,7 +54,8 @@ const UserProfile = () => {
     };
 
     fetchUserProfile();
-  }, [navigate]);
+  }, [navigate, location.search]);
+
 
   const handleEditProfile = () => {
     setIsEditing(true);
@@ -112,7 +123,9 @@ const UserProfile = () => {
           </div>
           <p>Username: {userProfile.username}</p>
           <p>Email: {userProfile.email}</p>
-          {/* Add other profile fields here */}
+          <p>First Name: {userProfile.firstName}</p>
+          <p>Last Name: {userProfile.lastName}</p>
+          <p>Bio: {userProfile.bio}</p>
           <button className="edit-button" onClick={handleEditProfile}>
             Edit Profile
           </button>
