@@ -295,7 +295,7 @@ app.get(
   passport.authenticate('google', { failureRedirect: '/signin' }),
   (req, res) => {
     // Successful authentication, redirect to a page or send a response.
-    res.redirect('https://eduxcel.vercel.app'); 
+    res.redirect('https://eduxcel.vercel.app/profile'); 
   }
 );
 // Serve the React app in production
