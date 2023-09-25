@@ -9,14 +9,6 @@ import axios from 'axios';
 
 const UserProfile = () => {
   const navigate = useNavigate();
-
-  const [userProfile, setUserProfile] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [isEditing, setIsEditing] = useState(false);
-
- const UserProfile = () => {
-  const navigate = useNavigate();
   const location = useLocation();
 
   const [userProfile, setUserProfile] = useState({});
@@ -55,7 +47,6 @@ const UserProfile = () => {
 
     fetchUserProfile();
   }, [navigate, location.search]);
-
 
   const handleEditProfile = () => {
     setIsEditing(true);
