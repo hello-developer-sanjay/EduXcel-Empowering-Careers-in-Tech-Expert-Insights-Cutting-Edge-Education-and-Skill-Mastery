@@ -77,7 +77,7 @@ passport.deserializeUser(User.deserializeUser());
 passport.use(
   new GoogleStrategy(
     {
-      clientID: '325528469583-a46gmh0imv5fm4d0v13emjdga3n2b2pn.apps.googleusercontent.com',
+   clientID: '325528469583-a46gmh0imv5fm4d0v13emjdga3n2b2pn.apps.googleusercontent.com',
       clientSecret: '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',
       callbackURL: 'https://xcel-back.onrender.com/auth/google/callback',
     },
@@ -96,20 +96,6 @@ passport.use(
 
           await existingUser.save();
 
-          // Find or create the user profile
-          let userProfile = await UserProfile.findOne({ user: existingUser._id });
-
-          if (!userProfile) {
-            userProfile = new UserProfile({
-              user: existingUser._id,
-              email: profile.emails[0].value,
-              username: profile.displayName,
-              // Add other profile properties as needed
-            });
-          }
-
-          await userProfile.save();
-
           // Generate a JWT token for the user
           const token = jwt.sign({ userId: existingUser._id }, 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA', { expiresIn: '1h' });
 
@@ -125,14 +111,15 @@ passport.use(
 
         await newUser.save();
 
-        const newProfile = new UserProfile({
+        // Create a user profile for the new user
+        const newUserProfile = new UserProfile({
           user: newUser._id,
           email: profile.emails[0].value,
           username: profile.displayName,
           // Add other profile properties as needed
         });
 
-        await newProfile.save();
+        await newUserProfile.save();
 
         // Generate a JWT token for the user
         const token = jwt.sign({ userId: newUser._id }, 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA', { expiresIn: '1h' });
@@ -144,8 +131,6 @@ passport.use(
     }
   )
 );
-
-
 
 const allowedOrigins = [
   'https://eduxcel.vercel.app',
