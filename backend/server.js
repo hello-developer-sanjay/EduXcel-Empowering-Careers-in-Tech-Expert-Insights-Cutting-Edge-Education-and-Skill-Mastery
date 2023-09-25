@@ -15,7 +15,7 @@ const forgotPasswordRouter = require('./routes/forgotPassword');
 const resetPasswordRouter = require('./routes/resetPassword');
 const User = require('./models/User'); // Import the User model
 const UserProfile = require('./models/UserProfile'); // Import the UserProfile model
-
+const jwt = require('jsonwebtoken');
 dotenv.config();
 const app = express();
 
