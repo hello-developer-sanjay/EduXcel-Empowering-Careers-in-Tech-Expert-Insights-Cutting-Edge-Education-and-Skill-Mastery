@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
+
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
-  email: { type: String },
-   password: { type: String },
-  resetToken: String, // Add resetToken field
-  resetTokenExpiration: Date, // Add resetTokenExpiration field
+  email: { type: String, required: true },
+  password: { type: String }, // Password field should not be required here
+  resetToken: String,
+  resetTokenExpiration: Date,
 });
+
 userSchema.plugin(passportLocalMongoose);
 module.exports = mongoose.model('User', userSchema);
