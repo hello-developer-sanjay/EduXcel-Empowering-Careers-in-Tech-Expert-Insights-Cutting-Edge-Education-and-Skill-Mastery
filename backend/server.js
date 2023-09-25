@@ -77,9 +77,9 @@ passport.deserializeUser(User.deserializeUser());
 passport.use(
   new GoogleStrategy(
     {
-      clientID: 'your-google-client-id',
-      clientSecret: 'your-google-client-secret',
-      callbackURL: 'your-callback-url',
+      clientID: '325528469583-a46gmh0imv5fm4d0v13emjdga3n2b2pn.apps.googleusercontent.com',
+      clientSecret: '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',
+      callbackURL: 'https://xcel-back.onrender.com/auth/google/callback',
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
