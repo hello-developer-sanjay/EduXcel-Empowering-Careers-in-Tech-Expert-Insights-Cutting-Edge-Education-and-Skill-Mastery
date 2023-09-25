@@ -293,11 +293,32 @@ app.get(
 app.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/signin' }),
-  (req, res) => {
-    // Successful authentication, redirect to a page or send a response.
-    res.redirect('https://eduxcel.vercel.app/profile'); 
+  async (req, res) => {
+    // Successful authentication
+    try {
+      // Fetch or create user profile here
+      const userProfile = await UserProfile.findOne({ user: req.user._id });
+
+      if (!userProfile) {
+        // Create a new user profile if it doesn't exist
+        const newProfile = new UserProfile({
+          user: req.user._id,
+          email: req.user.email, // Set email from Google profile
+          username: req.user.username, // Set username from Google profile
+          // Add other profile properties as needed
+        });
+        await newProfile.save();
+      }
+
+      // Redirect to the profile page
+      res.redirect('https://eduxcel.vercel.app/profile');
+    } catch (error) {
+      console.error('Error fetching or creating user profile:', error);
+      res.redirect('/signin'); // Redirect to the sign-in page on error
+    }
   }
 );
+
 // Serve the React app in production
 if (process.env.NODE_ENV === 'production') {
   app.get('*', (req, res) => {
