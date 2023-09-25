@@ -4,6 +4,7 @@ import EditProfile from './EditProfile';
 import '../styles/UserProfile.css';
 import CreativeSpinner from './CreativeSpinner';
 import { useNavigate } from 'react-router-dom';
+
 import axios from 'axios';
 
 const UserProfile = () => {
@@ -99,7 +100,7 @@ const UserProfile = () => {
         <div className="profile-info">
           <div className="profile-image-container">
             <motion.img
-              src={`https://xcel-back.onrender.com/uploads/${userProfile.profileImage}?key=${Date.now()}`}
+              src={`https://xcel-back.onrender.com/${userProfile.profileImage}?key=${Date.now()}`}
               alt="Profile"
               className="profile-image"
               whileHover={{ scale: 1.1 }}
@@ -111,7 +112,7 @@ const UserProfile = () => {
           </div>
           <p>Username: {userProfile.username}</p>
           <p>Email: {userProfile.email}</p>
-          {/* Add more profile information fields here */}
+          {/* Add other profile fields here */}
           <button className="edit-button" onClick={handleEditProfile}>
             Edit Profile
           </button>
