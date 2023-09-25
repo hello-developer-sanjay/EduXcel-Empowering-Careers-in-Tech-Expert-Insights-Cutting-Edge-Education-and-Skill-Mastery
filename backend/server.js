@@ -77,8 +77,8 @@ passport.deserializeUser(User.deserializeUser());
 passport.use(
   new GoogleStrategy(
     {
-      clientID: 'your-client-id',
-      clientSecret: 'your-client-secret',
+      clientID: '325528469583-a46gmh0imv5fm4d0v13emjdga3n2b2pn.apps.googleusercontent.com',
+      clientSecret: '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',
       callbackURL: 'https://xcel-back.onrender.com/auth/google/callback',
     },
     async (accessToken, refreshToken, profile, done) => {
@@ -111,7 +111,7 @@ passport.use(
           await userProfile.save();
 
           // Generate a JWT token for the user
-          const token = jwt.sign({ userId: existingUser._id }, 'your-secret-key', { expiresIn: '1h' });
+          const token = jwt.sign({ userId: existingUser._id }, 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA', { expiresIn: '1h' });
 
           return done(null, { user: existingUser, token }); // Return both user and token
         }
