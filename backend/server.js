@@ -81,7 +81,7 @@ passport.use(
       clientSecret: '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',
       callbackURL: 'https://xcel-back.onrender.com/auth/google/callback',
     },
-    async (accessToken, refreshToken, profile, done) => {
+      async (accessToken, refreshToken, profile, done) => {
       try {
         const existingUser = await User.findOne({ googleId: profile.id });
 
@@ -91,7 +91,7 @@ passport.use(
 
         const newUser = new User({
           googleId: profile.id,
-           email: profile.emails[0].value, // Set email from Google profile
+          email: profile.emails[0].value,
           username: profile.displayName,
           // Add other user properties as needed
         });
@@ -100,6 +100,8 @@ passport.use(
 
         const newProfile = new UserProfile({
           user: newUser._id,
+          email: profile.emails[0].value, // Set email from Google profile
+          username: profile.displayName, // Set username from Google profile
           // Add other profile properties as needed
         });
 
