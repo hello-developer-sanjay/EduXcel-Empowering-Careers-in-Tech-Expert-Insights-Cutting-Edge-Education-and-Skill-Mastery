@@ -52,29 +52,36 @@ const UserProfile = () => {
     setIsEditing(true);
   };
 
-  const handleUpdateProfile = async (updatedProfileData) => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await fetch('https://xcel-back.onrender.com/api/profile', {
-        method: 'PUT',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: updatedProfileData,
-      });
+ const handleUpdateProfile = async (updatedProfileData) => {
+  try {
+    const token = localStorage.getItem('token');
+    const formData = new FormData();
+    formData.append('firstName', updatedProfileData.firstName);
+    formData.append('lastName', updatedProfileData.lastName);
+    formData.append('bio', updatedProfileData.bio);
+    formData.append('profileImage', updatedProfileData.profileImage); // Use the selected file
 
-      if (!response.ok) {
-        throw new Error(`Error updating user profile: ${response.status}`);
-      }
+    const response = await fetch('https://xcel-back.onrender.com/api/profile', {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData, // Send form data
+    });
 
-      const updatedProfile = await response.json();
-      setUserProfile(updatedProfile);
-      setIsEditing(false);
-    } catch (error) {
-      console.error('Error updating user profile:', error);
-      setError(error.message);
+    if (!response.ok) {
+      throw new Error(`Error updating user profile: ${response.status}`);
     }
-  };
+
+    const updatedProfile = await response.json();
+    setUserProfile(updatedProfile);
+    setIsEditing(false);
+  } catch (error) {
+    console.error('Error updating user profile:', error);
+    setError(error.message);
+  }
+};
+
 
   const handleLogout = async () => {
     try {
