@@ -10,8 +10,8 @@ const authMiddleware = async (req, res, next) => {
     const decoded = jwt.verify(token, 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA'); // Replace with your secret key
     console.log('Decoded token:', decoded);
 
-    // Find the user by ID and add it to the request
-    const user = await User.findById(decoded.user._id); // Use decoded.user._id
+    // Find the user by their ID and add it to the request
+    const user = await User.findById(decoded.userId); // Use decoded.userId
     if (!user) {
       console.error('User not found');
       return res.status(401).json({ error: 'User not found' });
