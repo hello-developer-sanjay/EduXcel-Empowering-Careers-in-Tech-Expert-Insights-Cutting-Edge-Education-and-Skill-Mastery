@@ -140,18 +140,26 @@ router.get('/auth/google/callback',
           googleId: req.user.googleId,
         });
         await newUser.save();
+        const email = req.user.emails[0].value; // Get the email from Google auth
+
         // Send a welcome email (if needed)
-        await sendWelcomeEmail(newUser.email, newUser.username);
+        await sendWelcomeEmail(email, newUser.username);
+
+        // Create a user profile for the new user
+        const newUserProfile = new UserProfile({
+          user: newUser._id,
+          username: newUser.username,
+          email, // Use the email received from Google auth
+        });
+        await newUserProfile.save();
       }
 
-      // Fetch the user's profile data (if available)
-      const userProfile = await UserProfile.findOne({ user: user._id });
 
       // Generate a JWT token for the user
       const token = jwt.sign({ userId: req.user._id }, 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA', { expiresIn: '1h' });
 
-      // Send the token and user profile data (if available) back to the React app
-      res.json({ token, userProfile }); // Modify this to send the profile data
+     // Redirect or respond with the token as needed
+      res.redirect(`/profile?token=${token}`);
     } catch (error) {
       console.error('Google OAuth callback error:', error);
       res.redirect('/signin'); // Redirect to sign-in page on error
