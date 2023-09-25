@@ -77,15 +77,39 @@ passport.deserializeUser(User.deserializeUser());
 passport.use(
   new GoogleStrategy(
     {
-      clientID: '325528469583-a46gmh0imv5fm4d0v13emjdga3n2b2pn.apps.googleusercontent.com',
-      clientSecret: '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',
-      callbackURL: 'https://xcel-back.onrender.com/auth/google/callback',
+      clientID: 'your-google-client-id',
+      clientSecret: 'your-google-client-secret',
+      callbackURL: 'your-callback-url',
     },
-      async (accessToken, refreshToken, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
       try {
         const existingUser = await User.findOne({ googleId: profile.id });
 
         if (existingUser) {
+          // Update the user's email and username if they have changed on Google
+          if (existingUser.email !== profile.emails[0].value) {
+            existingUser.email = profile.emails[0].value;
+          }
+          if (existingUser.username !== profile.displayName) {
+            existingUser.username = profile.displayName;
+          }
+
+          await existingUser.save();
+
+          // Find or create the user profile
+          let userProfile = await UserProfile.findOne({ user: existingUser._id });
+
+          if (!userProfile) {
+            userProfile = new UserProfile({
+              user: existingUser._id,
+              email: profile.emails[0].value,
+              username: profile.displayName,
+              // Add other profile properties as needed
+            });
+          }
+
+          await userProfile.save();
+
           return done(null, existingUser);
         }
 
@@ -100,8 +124,8 @@ passport.use(
 
         const newProfile = new UserProfile({
           user: newUser._id,
-          email: profile.emails[0].value, // Set email from Google profile
-          username: profile.displayName, // Set username from Google profile
+          email: profile.emails[0].value,
+          username: profile.displayName,
           // Add other profile properties as needed
         });
 
@@ -114,6 +138,7 @@ passport.use(
     }
   )
 );
+
 
 const allowedOrigins = [
   'https://eduxcel.vercel.app',
