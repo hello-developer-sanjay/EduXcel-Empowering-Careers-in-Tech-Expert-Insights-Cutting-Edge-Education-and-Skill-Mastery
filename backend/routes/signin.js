@@ -127,10 +127,9 @@ const sendWelcomeEmail = async (email, userName) => {
 };
 
 router.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/signin' }), // Redirect to sign-in page on failure
+  passport.authenticate('google', { failureRedirect: '/signin' }),
   async (req, res) => {
     try {
-      // Check if the user exists or create a new user (similar to your local authentication)
       const user = await User.findOne({ googleId: req.user.googleId });
 
       if (!user) {
@@ -140,24 +139,28 @@ router.get('/auth/google/callback',
           googleId: req.user.googleId,
         });
         await newUser.save();
+        const email = req.user.emails[0].value;
+
+        // Send a welcome email
+        await sendWelcomeEmail(email, newUser.username);
 
         // Create a user profile for the new user
         const newUserProfile = new UserProfile({
           user: newUser._id,
           username: newUser.username,
-          email: newUser.email, // Use the email received from Google auth
+          email,
         });
         await newUserProfile.save();
       }
 
-      // Generate a JWT token for the user (if needed)
+      // Generate a JWT token for the user
       const token = jwt.sign({ userId: user._id }, 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA', { expiresIn: '1h' });
 
-      // Redirect or respond with the token as needed
+      // Redirect to the profile page with the token as a query parameter
       res.redirect(`/profile?token=${token}`);
     } catch (error) {
       console.error('Google OAuth callback error:', error);
-      res.redirect('/signin'); // Redirect to sign-in page on error
+      res.redirect('/signin');
     }
   }
 );
