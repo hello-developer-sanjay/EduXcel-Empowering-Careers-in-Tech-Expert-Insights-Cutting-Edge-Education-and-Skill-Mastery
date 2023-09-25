@@ -49,15 +49,16 @@ router.get('/', authMiddleware, async (req, res) => {
     res.status(500).json({ message: 'Error fetching user profile' });
   }
 });
+
 // Update user profile route with file upload
 router.put('/', authMiddleware, upload.single('profileImage'), async (req, res) => {
   try {
     console.log('Received a request to update user profile');
-    console.log('User ID:', req.user._id);
+    console.log('User ID:', req.userId); // Use req.userId instead of req.user._id
     console.log('Request Body:', req.body);
 
     const userProfile = await UserProfile.findOneAndUpdate(
-      { user: req.user._id },
+      { user: req.userId }, // Use req.userId instead of req.user._id
       {
         firstName: req.body.firstName || '',
         lastName: req.body.lastName || '',
