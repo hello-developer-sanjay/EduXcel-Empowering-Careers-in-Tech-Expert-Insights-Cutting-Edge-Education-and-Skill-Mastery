@@ -63,11 +63,11 @@ router.put('/', authMiddleware, upload.single('profileImage'), async (req, res) 
         firstName: req.body.firstName || '',
         lastName: req.body.lastName || '',
         bio: req.body.bio || '',
-        profileImage: req.uniqueFilename // Use the unique filename from the request object
-          ? `uploads/${req.uniqueFilename}` // Store the relative file path
-          : '', 
+        profileImage: req.uniqueFilename
+          ? `uploads/${req.uniqueFilename}`
+          : '',
       },
-      { new: true } // Use the { new: true } option to get the updated document
+      { new: true }
     );
 
     if (!userProfile) {
