@@ -319,9 +319,8 @@ app.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/signin' }),
   async (req, res) => {
-    // Successful authentication
+    // Fetch or create user profile here
     try {
-      // Fetch or create user profile here
       const userProfile = await UserProfile.findOne({ user: req.user._id });
 
       if (!userProfile) {
@@ -343,6 +342,7 @@ app.get(
     }
   }
 );
+
 
 // Serve the React app in production
 if (process.env.NODE_ENV === 'production') {
