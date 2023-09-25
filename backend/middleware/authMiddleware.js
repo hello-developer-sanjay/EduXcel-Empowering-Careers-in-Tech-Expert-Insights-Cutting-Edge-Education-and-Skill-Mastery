@@ -6,23 +6,29 @@ const authMiddleware = async (req, res, next) => {
     const token = req.header('Authorization').replace('Bearer ', '');
     console.log('Received token:', token);
 
-    try {
-      // Verify the token using the correct secret
-      const decoded = jwt.verify(token, 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA'); // Replace with your secret key
-      console.log('Decoded token:', decoded);
+    // Verify the token using the correct secret
+    const decoded = jwt.verify(token, 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA'); // Replace with your secret key
+    console.log('Decoded token:', decoded);
 
-      // Add the user object to the request
-      const user = await User.findById(decoded.userId);
-      req.user = user;
+    // Find the user by ID and add it to the request
+    const user = await User.findById(decoded.userId);
 
-      next(); // Continue with the next middleware or route
-    } catch (verifyError) {
-      console.error('JWT Verification Error:', verifyError);
-      throw verifyError;
+    if (!user) {
+      console.error('User not found');
+      return res.status(401).json({ error: 'User not found' });
     }
+
+    req.user = user;
+    next(); // Continue with the next middleware or route
   } catch (error) {
     console.error('Authentication error:', error);
-    res.status(401).json({ error: 'Please authenticate' });
+
+    if (error instanceof jwt.JsonWebTokenError) {
+      // Handle JWT verification errors specifically
+      return res.status(401).json({ error: 'Invalid token' });
+    }
+
+    res.status(500).json({ error: 'Server error' });
   }
 };
 
