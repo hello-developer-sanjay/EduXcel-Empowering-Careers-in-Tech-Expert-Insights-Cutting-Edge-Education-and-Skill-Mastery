@@ -15,87 +15,57 @@ const UserProfile = () => {
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
 
-useEffect(() => {
-  const fetchUserProfile = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        const params = new URLSearchParams(window.location.search);
-        const queryToken = params.get('token');
-
-        if (!queryToken) {
-          navigate('/signin');
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          navigate('/signin'); // Redirect the user to the login page if no token is found
           return;
         }
 
-        localStorage.setItem('token', queryToken);
+        const response = await axios.get('https://xcel-back.onrender.com/api/profile', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.data) {
+          throw new Error('User profile not found');
+        }
+
+        setUserProfile(response.data);
+        setLoading(false);
+        setError(null);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
       }
+    };
 
-      console.log('Token:', token); // Add this line for debugging
-
-      const response = await fetch('https://xcel-back.onrender.com/api/profile', {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      console.log('Response:', response); // Add this line for debugging
-
-      if (!response.ok) {
-        throw new Error(`Error fetching user profile: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log('User Profile Data:', data); // Add this line for debugging
-
-      setUserProfile(data);
-      setLoading(false);
-      setError(null);
-    } catch (error) {
-      setError(error.message);
-      setLoading(false);
-    }
-  };
-
-  fetchUserProfile();
-}, [navigate]);
-
+    fetchUserProfile();
+  }, [navigate]);
 
   const handleEditProfile = () => {
     setIsEditing(true);
   };
 
- const handleUpdateProfile = async (updatedProfileData) => {
-  try {
-    const token = localStorage.getItem('token');
-    const formData = new FormData();
-    formData.append('firstName', updatedProfileData.firstName);
-    formData.append('lastName', updatedProfileData.lastName);
-    formData.append('bio', updatedProfileData.bio);
-    formData.append('profileImage', updatedProfileData.profileImage); // Use the selected file
+  const handleUpdateProfile = async (updatedProfileData) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.put('https://xcel-back.onrender.com/api/profile', updatedProfileData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-    const response = await fetch('https://xcel-back.onrender.com/api/profile', {
-      method: 'PUT',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: formData, // Send form data
-    });
-
-    if (!response.ok) {
-      throw new Error(`Error updating user profile: ${response.status}`);
+      setUserProfile(response.data);
+      setIsEditing(false);
+    } catch (error) {
+      console.error('Error updating user profile:', error);
+      setError(error.message);
     }
-
-    const updatedProfile = await response.json();
-    setUserProfile(updatedProfile);
-    setIsEditing(false);
-  } catch (error) {
-    console.error('Error updating user profile:', error);
-    setError(error.message);
-  }
-};
-
+  };
 
   const handleLogout = async () => {
     try {
@@ -126,20 +96,20 @@ useEffect(() => {
         </motion.div>
       )}
       {error && <p className="error-message">Error: {error}</p>}
-     {!loading && !error && userProfile && (
-  <div className="profile-info">
-    <div className="profile-image-container">
-      <motion.img
-        src={`https://xcel-back.onrender.com/${userProfile.profileImage}?key=${Date.now()}`}
-        alt="Profile"
-        className="profile-image"
-        whileHover={{ scale: 1.1 }}
-        onError={(e) => {
-          e.target.onerror = null; // Prevent infinite error loop
-          e.target.src = 'https://sanjaybasket.s3.ap-south-1.amazonaws.com/image.webp'; // Display a default image on error
-        }}
-      />
-    </div>
+      {!loading && !error && userProfile && (
+        <div className="profile-info">
+          <div className="profile-image-container">
+            <motion.img
+              src={`https://xcel-back.onrender.com/${userProfile.profileImage}?key=${Date.now()}`}
+              alt="Profile"
+              className="profile-image"
+              whileHover={{ scale: 1.1 }}
+              onError={(e) => {
+                e.target.onerror = null; // Prevent infinite error loop
+                e.target.src = 'https://sanjaybasket.s3.ap-south-1.amazonaws.com/image.webp'; // Display a default image on error
+              }}
+            />
+          </div>
           <p>Username: {userProfile.username}</p>
           <p>Email: {userProfile.email}</p>
           <p>First Name: {userProfile.firstName}</p>
@@ -154,10 +124,7 @@ useEffect(() => {
         </div>
       )}
       {isEditing && (
-        <EditProfile
-          userProfile={userProfile}
-          onUpdateProfile={handleUpdateProfile}
-        />
+        <EditProfile userProfile={userProfile} onUpdateProfile={handleUpdateProfile} />
       )}
     </div>
   );
