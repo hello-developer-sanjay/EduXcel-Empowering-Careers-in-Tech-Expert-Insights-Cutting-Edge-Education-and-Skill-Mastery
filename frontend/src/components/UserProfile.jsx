@@ -20,8 +20,17 @@ const UserProfile = () => {
       try {
         const token = localStorage.getItem('token');
         if (!token) {
-          navigate('/signin'); // Redirect the user to the login page
-          return;
+          // Check if there's a token in query parameters (for Google Auth)
+          const params = new URLSearchParams(window.location.search);
+          const queryToken = params.get('token');
+
+          if (!queryToken) {
+            navigate('/signin'); // Redirect the user to the login page
+            return;
+          }
+
+          // If a query token exists, store it in localStorage
+          localStorage.setItem('token', queryToken);
         }
 
         const response = await fetch('https://xcel-back.onrender.com/api/profile', {
