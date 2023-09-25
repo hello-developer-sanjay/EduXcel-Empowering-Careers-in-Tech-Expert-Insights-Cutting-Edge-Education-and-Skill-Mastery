@@ -33,9 +33,9 @@ const upload = multer({
 router.get('/', authMiddleware, async (req, res) => {
   try {
     console.log('Received a request to fetch user profile');
-    console.log('User ID:', req.user._id);
+    console.log('User ID:', req.userId); // Use req.userId instead of req.user._id
 
-    const userProfile = await UserProfile.findOne({ user: req.user._id });
+    const userProfile = await UserProfile.findOne({ user: req.userId });
 
     if (!userProfile) {
       console.log('User profile not found');
@@ -49,7 +49,6 @@ router.get('/', authMiddleware, async (req, res) => {
     res.status(500).json({ message: 'Error fetching user profile' });
   }
 });
-
 // Update user profile route with file upload
 router.put('/', authMiddleware, upload.single('profileImage'), async (req, res) => {
   try {
