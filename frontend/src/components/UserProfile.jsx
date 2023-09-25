@@ -15,47 +15,52 @@ const UserProfile = () => {
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
 
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        if (!token) {
-          // Check if there's a token in query parameters (for Google Auth)
-          const params = new URLSearchParams(window.location.search);
-          const queryToken = params.get('token');
+useEffect(() => {
+  const fetchUserProfile = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        const params = new URLSearchParams(window.location.search);
+        const queryToken = params.get('token');
 
-          if (!queryToken) {
-            navigate('/signin'); // Redirect the user to the login page
-            return;
-          }
-
-          // If a query token exists, store it in localStorage
-          localStorage.setItem('token', queryToken);
+        if (!queryToken) {
+          navigate('/signin');
+          return;
         }
 
-        const response = await fetch('https://xcel-back.onrender.com/api/profile', {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`Error fetching user profile: ${response.status}`);
-        }
-
-        const data = await response.json();
-        setUserProfile(data);
-        setLoading(false);
-        setError(null);
-      } catch (error) {
-        setError(error.message);
-        setLoading(false);
+        localStorage.setItem('token', queryToken);
       }
-    };
 
-    fetchUserProfile();
-  }, [navigate]);
+      console.log('Token:', token); // Add this line for debugging
+
+      const response = await fetch('https://xcel-back.onrender.com/api/profile', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log('Response:', response); // Add this line for debugging
+
+      if (!response.ok) {
+        throw new Error(`Error fetching user profile: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('User Profile Data:', data); // Add this line for debugging
+
+      setUserProfile(data);
+      setLoading(false);
+      setError(null);
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
+
+  fetchUserProfile();
+}, [navigate]);
+
 
   const handleEditProfile = () => {
     setIsEditing(true);
