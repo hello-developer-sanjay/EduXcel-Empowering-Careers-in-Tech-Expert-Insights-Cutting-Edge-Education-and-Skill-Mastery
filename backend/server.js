@@ -18,7 +18,7 @@ const app = express();
 
 const PORT = process.env.PORT || 5000;
 
-// Configure sessions before Passport middleware
+
 app.use(
   session({
     secret: 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA', // Replace with your secret key
@@ -240,12 +240,7 @@ app.get('/api/courses/:title/:module', async (req, res) => {
   }
 });
 
-// Serve the React app in production
-if (process.env.NODE_ENV === 'production') {
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-  });
-}
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {
