@@ -5,8 +5,8 @@ const dotenv = require('dotenv');
 const path = require('path');
 const session = require('express-session');
 const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy; // Import LocalStrategy
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const LocalStrategy = require('passport-local').Strategy;
 const signupRouter = require('./routes/signup');
 const signinRouter = require('./routes/signin');
 const authMiddleware = require('./middleware/authMiddleware');
@@ -69,7 +69,8 @@ const Working = mongoose.model('working', {
 });
 
 // Define Passport strategies
-passport.use(User.createStrategy());
+
+// LocalStrategy for local authentication
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
