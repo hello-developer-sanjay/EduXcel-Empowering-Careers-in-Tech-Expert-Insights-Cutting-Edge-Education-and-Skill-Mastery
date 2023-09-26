@@ -1,21 +1,32 @@
 import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import EditProfile from './EditProfile';
+import '../styles/UserProfile.css';
+import CreativeSpinner from './CreativeSpinner';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
 
-function UserProfile() {
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const token = queryParams.get('token');
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
 
-  const [userProfile, setUserProfile] = useState(null);
+const UserProfile = () => {
+  const navigate = useNavigate();
+  const [userProfile, setUserProfile] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
+        const token = getCookie('token');
+
         if (!token) {
-          throw new Error('Token not found');
+          navigate('/signin');
+          return;
         }
 
         const response = await axios.get('https://xcel-back.onrender.com/api/profile', {
@@ -38,22 +49,88 @@ function UserProfile() {
     };
 
     fetchUserProfile();
-  }, [token]);
+  }, [navigate]);
+
+  const handleEditProfile = () => {
+    setIsEditing(true);
+  };
+
+  const handleUpdateProfile = async (updatedProfileData) => {
+    try {
+      const token = getCookie('token');
+      const response = await axios.put('https://xcel-back.onrender.com/api/profile', updatedProfileData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setUserProfile(response.data);
+      setIsEditing(false);
+    } catch (error) {
+      console.error('Error updating user profile:', error);
+      setError(error.message);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await axios.post('https://xcel-back.onrender.com/api/logout');
+      document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+
+      navigate('/signin');
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
 
   return (
-    <div>
+    <div className="user-profile-container">
       <h1>User Profile</h1>
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>}
-      {userProfile && (
-        <div>
+      {loading && (
+        <motion.div
+          className="loading-container"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
+          transition={{ duration: 0.5 }}
+        >
+          <CreativeSpinner />
+          <p className="loading-text">Loading...</p>
+        </motion.div>
+      )}
+      {error && <p className="error-message">Error: {error}</p>}
+      {!loading && !error && userProfile && (
+        <div className="profile-info">
+          <div className="profile-image-container">
+            <motion.img
+              src={`https://xcel-back.onrender.com/${userProfile.profileImage}?key=${Date.now()}`}
+              alt="Profile"
+              className="profile-image"
+              whileHover={{ scale: 1.1 }}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = 'https://sanjaybasket.s3.ap-south-1.amazonaws.com/image.webp';
+              }}
+            />
+          </div>
           <p>Username: {userProfile.username}</p>
           <p>Email: {userProfile.email}</p>
-          {/* Add other profile information here */}
+          <p>First Name: {userProfile.firstName}</p>
+          <p>Last Name: {userProfile.lastName}</p>
+          <p>Bio: {userProfile.bio}</p>
+          <button className="edit-button" onClick={handleEditProfile}>
+            Edit Profile
+          </button>
+          <button onClick={handleLogout} className="logout-button">
+            Log Out
+          </button>
         </div>
+      )}
+      {isEditing && (
+        <EditProfile userProfile={userProfile} onUpdateProfile={handleUpdateProfile} />
       )}
     </div>
   );
-}
+};
 
 export default UserProfile;
