@@ -1,4 +1,4 @@
-const User = require('../models/User'); // Import your User model
+const User = require('../models/User'); 
 const jwt = require('jsonwebtoken');
 
 const authMiddleware = async (req, res, next) => {
