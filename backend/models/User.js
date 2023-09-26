@@ -2,14 +2,12 @@ const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const userSchema = new mongoose.Schema({
-  email: { type: String, required: true, unique: true }, // Change 'username' to 'email'
-  // Other user properties as needed
-  googleId: String, // Add this field for Google OAuth
+  username: { type: String, required: true },
+  email: { type: String, required: true },
+  password: { type: String }, // Password field should not be required here
   resetToken: String,
   resetTokenExpiration: Date,
 });
 
-// Use passportLocalMongoose and configure it to use 'email' as the usernameField
-userSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
-
+userSchema.plugin(passportLocalMongoose);
 module.exports = mongoose.model('User', userSchema);
