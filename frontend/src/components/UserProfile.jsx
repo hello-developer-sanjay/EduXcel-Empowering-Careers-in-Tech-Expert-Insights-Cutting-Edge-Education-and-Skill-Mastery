@@ -3,50 +3,48 @@ import { motion } from 'framer-motion';
 import EditProfile from './EditProfile';
 import '../styles/UserProfile.css';
 import CreativeSpinner from './CreativeSpinner';
-import { useNavigate,useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
 const UserProfile = () => {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [userProfile, setUserProfile] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
 
-useEffect(() => {
-  const fetchUserProfile = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        navigate('/signin'); // Redirect the user to the login page if no token is found
-        return;
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          navigate('/signin'); // Redirect the user to the login page if no token is found
+          return;
+        }
+
+        const response = await axios.get('https://xcel-back.onrender.com/api/profile', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.data) {
+          throw new Error('User profile not found');
+        }
+
+        setUserProfile(response.data);
+        setLoading(false);
+        setError(null);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
       }
+    };
 
-      const response = await axios.get('https://xcel-back.onrender.com/api/profile', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!response.data) {
-        throw new Error('User profile not found');
-      }
-
-      setUserProfile(response.data.user); // Update user object
-      setLoading(false);
-      setError(null);
-    } catch (error) {
-      setError(error.message);
-      setLoading(false);
-    }
-  };
-
-  fetchUserProfile();
-}, [navigate]);
-
+    fetchUserProfile();
+  }, [navigate]);
 
   const handleEditProfile = () => {
     setIsEditing(true);
