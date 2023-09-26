@@ -310,36 +310,27 @@ app.get('/api/courses/:title/:module', async (req, res) => {
   }
 });
 // Google OAuth2 routes
-app.get(
+router.get(
   '/auth/google',
   passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
-app.get(
+router.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/signin' }),
   async (req, res) => {
-    // Successful authentication
     try {
-      // Fetch or create user profile here
-      const userProfile = await UserProfile.findOne({ user: req.user._id });
+      // Generate a JWT token for the user
+      const token = jwt.sign({ userId: req.user._id }, 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA', { expiresIn: '1h' });
 
-      if (!userProfile) {
-        // Create a new user profile if it doesn't exist
-        const newProfile = new UserProfile({
-          user: req.user._id,
-          email: req.user.email, // Set email from Google profile
-          username: req.user.username, // Set username from Google profile
-          // Add other profile properties as needed
-        });
-        await newProfile.save();
-      }
+      // Set the token as an HTTP-only cookie
+      res.cookie('token', token, { httpOnly: true });
 
       // Redirect to the profile page
       res.redirect('https://eduxcel.vercel.app/profile');
     } catch (error) {
-      console.error('Error fetching or creating user profile:', error);
-      res.redirect('/signin'); // Redirect to the sign-in page on error
+      console.error('Google OAuth callback error:', error);
+      res.redirect('/signin');
     }
   }
 );
