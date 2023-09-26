@@ -8,7 +8,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/'); // Specify the directory where uploaded images will be stored
+    cb(null, 'uploads/'); 
   },
   filename: (req, file, cb) => {
     const uniqueFilename = `${uuidv4()}-${file.originalname}`;
