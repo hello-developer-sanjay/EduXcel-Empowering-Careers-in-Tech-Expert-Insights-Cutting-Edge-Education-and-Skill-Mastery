@@ -33,9 +33,9 @@ const upload = multer({
 router.get('/', authMiddleware, async (req, res) => {
   try {
     console.log('Received a request to fetch user profile');
-    console.log('User ID:', req.userId); // Use req.userId instead of req.user._id
+    console.log('User ID:', req.user._id);
 
-    const userProfile = await UserProfile.findOne({ user: req.userId });
+    const userProfile = await UserProfile.findOne({ user: req.user._id });
 
     if (!userProfile) {
       console.log('User profile not found');
@@ -54,20 +54,20 @@ router.get('/', authMiddleware, async (req, res) => {
 router.put('/', authMiddleware, upload.single('profileImage'), async (req, res) => {
   try {
     console.log('Received a request to update user profile');
-    console.log('User ID:', req.userId); // Use req.userId instead of req.user._id
+    console.log('User ID:', req.user._id);
     console.log('Request Body:', req.body);
 
     const userProfile = await UserProfile.findOneAndUpdate(
-      { user: req.userId }, // Use req.userId instead of req.user._id
+      { user: req.user._id },
       {
         firstName: req.body.firstName || '',
         lastName: req.body.lastName || '',
         bio: req.body.bio || '',
-        profileImage: req.uniqueFilename
-          ? `uploads/${req.uniqueFilename}`
-          : '',
+        profileImage: req.uniqueFilename // Use the unique filename from the request object
+          ? `uploads/${req.uniqueFilename}` // Store the relative file path
+          : '', 
       },
-      { new: true }
+      { new: true } // Use the { new: true } option to get the updated document
     );
 
     if (!userProfile) {
