@@ -307,8 +307,7 @@ app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'em
 app.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/signin' }),
-  (req, res) => {
-    // Successful authentication
+  async (req, res) => {
     try {
       // Fetch or create user profile here
       const userProfile = await UserProfile.findOne({ user: req.user._id });
