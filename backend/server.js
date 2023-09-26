@@ -3,8 +3,8 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const path = require('path');
-const session = require('express-session'); // Add session middleware
-const passport = require('passport'); // Add Passport.js
+const session = require('express-session'); 
+const passport = require('passport'); 
 
 dotenv.config();
 const signupRouter = require('./routes/signup');
