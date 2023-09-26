@@ -138,7 +138,7 @@ router.post('/', async (req, res) => {
       return res.status(401).json({ message: 'Authentication failed: Invalid password' });
     }
 
-    // Sign a token as before
+  
     const token = jwt.sign({ userId: user._id }, 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA');
 
     // Send a welcome email to the user
