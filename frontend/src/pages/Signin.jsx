@@ -31,7 +31,7 @@ function Signin() {
 const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-    const response = await axios.post('/api/signin', formData); // Use a relative URL
+    const response = await axios.post('https://xcel-back.onrender.com/api/signin', formData); // Use a relative URL
     console.log('Signin success');
     localStorage.setItem('token', response.data.token);
 
