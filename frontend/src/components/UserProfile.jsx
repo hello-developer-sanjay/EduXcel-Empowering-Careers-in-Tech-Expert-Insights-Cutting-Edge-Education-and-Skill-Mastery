@@ -4,16 +4,12 @@ import EditProfile from './EditProfile';
 import '../styles/UserProfile.css';
 import CreativeSpinner from './CreativeSpinner';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-}
+import axios from 'axios';
 
 const UserProfile = () => {
   const navigate = useNavigate();
+
   const [userProfile, setUserProfile] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -22,24 +18,25 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const token = getCookie('token');
-
+        const token = localStorage.getItem('token');
         if (!token) {
-          navigate('/signin');
+          navigate('/signin'); // Redirect the user to the login page
           return;
         }
 
-        const response = await axios.get('https://xcel-back.onrender.com/api/profile', {
+        const response = await fetch('https://xcel-back.onrender.com/api/profile', {
+          method: 'GET',
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
-        if (!response.data) {
-          throw new Error('User profile not found');
+        if (!response.ok) {
+          throw new Error(`Error fetching user profile: ${response.status}`);
         }
 
-        setUserProfile(response.data);
+        const data = await response.json();
+        setUserProfile(data);
         setLoading(false);
         setError(null);
       } catch (error) {
@@ -57,14 +54,21 @@ const UserProfile = () => {
 
   const handleUpdateProfile = async (updatedProfileData) => {
     try {
-      const token = getCookie('token');
-      const response = await axios.put('https://xcel-back.onrender.com/api/profile', updatedProfileData, {
+      const token = localStorage.getItem('token');
+      const response = await fetch('https://xcel-back.onrender.com/api/profile', {
+        method: 'PUT',
         headers: {
           Authorization: `Bearer ${token}`,
         },
+        body: updatedProfileData,
       });
 
-      setUserProfile(response.data);
+      if (!response.ok) {
+        throw new Error(`Error updating user profile: ${response.status}`);
+      }
+
+      const updatedProfile = await response.json();
+      setUserProfile(updatedProfile);
       setIsEditing(false);
     } catch (error) {
       console.error('Error updating user profile:', error);
@@ -74,9 +78,11 @@ const UserProfile = () => {
 
   const handleLogout = async () => {
     try {
+      // Send a request to the server to log the user out
       await axios.post('https://xcel-back.onrender.com/api/logout');
-      document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-
+      // Clear the token from local storage
+      localStorage.removeItem('token');
+      // Redirect the user to the login page using navigate
       navigate('/signin');
     } catch (error) {
       console.error('Logout error:', error);
@@ -99,20 +105,20 @@ const UserProfile = () => {
         </motion.div>
       )}
       {error && <p className="error-message">Error: {error}</p>}
-      {!loading && !error && userProfile && (
-        <div className="profile-info">
-          <div className="profile-image-container">
-            <motion.img
-              src={`https://xcel-back.onrender.com/${userProfile.profileImage}?key=${Date.now()}`}
-              alt="Profile"
-              className="profile-image"
-              whileHover={{ scale: 1.1 }}
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = 'https://sanjaybasket.s3.ap-south-1.amazonaws.com/image.webp';
-              }}
-            />
-          </div>
+     {!loading && !error && userProfile && (
+  <div className="profile-info">
+    <div className="profile-image-container">
+      <motion.img
+        src={`https://xcel-back.onrender.com/${userProfile.profileImage}?key=${Date.now()}`}
+        alt="Profile"
+        className="profile-image"
+        whileHover={{ scale: 1.1 }}
+        onError={(e) => {
+          e.target.onerror = null; // Prevent infinite error loop
+          e.target.src = 'https://sanjaybasket.s3.ap-south-1.amazonaws.com/image.webp'; // Display a default image on error
+        }}
+      />
+    </div>
           <p>Username: {userProfile.username}</p>
           <p>Email: {userProfile.email}</p>
           <p>First Name: {userProfile.firstName}</p>
@@ -127,7 +133,10 @@ const UserProfile = () => {
         </div>
       )}
       {isEditing && (
-        <EditProfile userProfile={userProfile} onUpdateProfile={handleUpdateProfile} />
+        <EditProfile
+          userProfile={userProfile}
+          onUpdateProfile={handleUpdateProfile}
+        />
       )}
     </div>
   );
