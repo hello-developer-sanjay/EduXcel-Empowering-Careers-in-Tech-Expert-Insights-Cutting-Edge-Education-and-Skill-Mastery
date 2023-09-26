@@ -301,9 +301,6 @@ app.get('/api/courses/:title/:module', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-// Google OAuth2 routes
-app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-
 app.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/signin' }),
@@ -332,6 +329,7 @@ app.get(
     }
   }
 );
+
 
 
 
