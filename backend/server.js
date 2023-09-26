@@ -5,7 +5,6 @@ const dotenv = require('dotenv');
 const path = require('path');
 const session = require('express-session');
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy; // Import LocalStrategy
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const signupRouter = require('./routes/signup');
 const signinRouter = require('./routes/signin');
@@ -16,7 +15,7 @@ const forgotPasswordRouter = require('./routes/forgotPassword');
 const resetPasswordRouter = require('./routes/resetPassword');
 const User = require('./models/User'); // Import the User model
 const UserProfile = require('./models/UserProfile'); // Import the UserProfile model
-const jwt = require('jsonwebtoken');
+
 dotenv.config();
 const app = express();
 
@@ -69,9 +68,8 @@ const Working = mongoose.model('working', {
 });
 
 // Define Passport strategies
+passport.use(User.createStrategy());
 
-// LocalStrategy for local authentication
-passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -98,10 +96,21 @@ passport.use(
 
           await existingUser.save();
 
-          // Generate a JWT token for the user
-          const token = jwt.sign({ userId: existingUser._id }, 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA', { expiresIn: '1h' });
+          // Find or create the user profile
+          let userProfile = await UserProfile.findOne({ user: existingUser._id });
 
-          return done(null, { user: existingUser, token }); // Return both user and token
+          if (!userProfile) {
+            userProfile = new UserProfile({
+              user: existingUser._id,
+              email: profile.emails[0].value,
+              username: profile.displayName,
+              // Add other profile properties as needed
+            });
+          }
+
+          await userProfile.save();
+
+          return done(null, existingUser);
         }
 
         const newUser = new User({
@@ -113,26 +122,23 @@ passport.use(
 
         await newUser.save();
 
-        // Create a user profile for the new user
-        const newUserProfile = new UserProfile({
+        const newProfile = new UserProfile({
           user: newUser._id,
           email: profile.emails[0].value,
           username: profile.displayName,
           // Add other profile properties as needed
         });
 
-        await newUserProfile.save();
+        await newProfile.save();
 
-        // Generate a JWT token for the user
-        const token = jwt.sign({ userId: newUser._id }, 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA', { expiresIn: '1h' });
-
-        done(null, { user: newUser, token }); // Return both user and token
+        done(null, newUser);
       } catch (error) {
         done(error, null);
       }
     }
   )
 );
+
 
 const allowedOrigins = [
   'https://eduxcel.vercel.app',
@@ -303,13 +309,17 @@ app.get('/api/courses/:title/:module', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
 // Google OAuth2 routes
-app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+app.get(
+  '/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
 app.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/signin' }),
   async (req, res) => {
+    // Successful authentication
     try {
       // Fetch or create user profile here
       const userProfile = await UserProfile.findOne({ user: req.user._id });
@@ -325,18 +335,14 @@ app.get(
         await newProfile.save();
       }
 
-      // Generate a JWT token for the user
-      const token = jwt.sign({ userId: req.user._id }, 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA', { expiresIn: '1h' });
-      res.redirect(`/profile?token=${token}`);
+      // Redirect to the profile page
+      res.redirect('https://eduxcel.vercel.app/profile');
     } catch (error) {
       console.error('Error fetching or creating user profile:', error);
       res.redirect('/signin'); // Redirect to the sign-in page on error
     }
   }
 );
-
-
-
 
 // Serve the React app in production
 if (process.env.NODE_ENV === 'production') {
