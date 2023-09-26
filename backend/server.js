@@ -167,8 +167,9 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Define your routes and APIs here
 app.use('/api/signup', signupRouter);
-app.use('/api/signin', signinRouter);
 app.use('/api/profile', authMiddleware);
+app.use('/api/signin', signinRouter);
+
 app.use('/api/profile', profileRouter);
 app.use('/api/courses', coursesRouter);
 app.use('/api/forgotpassword', forgotPasswordRouter);
