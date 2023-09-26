@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import EditProfile from './EditProfile';
 import '../styles/UserProfile.css';
 import CreativeSpinner from './CreativeSpinner';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 
 import axios from 'axios';
 
