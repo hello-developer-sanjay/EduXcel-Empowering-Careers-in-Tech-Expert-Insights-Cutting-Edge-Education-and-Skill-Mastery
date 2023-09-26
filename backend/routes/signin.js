@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer'); // Import nodemailer for sending emails
+const nodemailer = require('nodemailer'); 
 require('dotenv').config();
 
 // Function to send a welcome email
