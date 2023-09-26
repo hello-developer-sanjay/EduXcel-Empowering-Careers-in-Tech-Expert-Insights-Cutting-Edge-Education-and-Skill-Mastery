@@ -11,5 +11,10 @@ const userSchema = new mongoose.Schema({
   resetTokenExpiration: Date,
 });
 
-userSchema.plugin(passportLocalMongoose);
+// Ensure the usernameField is 'email' for Passport Local Strategy
+const passportLocalMongooseOptions = {
+  usernameField: 'email',
+};
+
+userSchema.plugin(passportLocalMongoose, passportLocalMongooseOptions);
 module.exports = mongoose.model('User', userSchema);
