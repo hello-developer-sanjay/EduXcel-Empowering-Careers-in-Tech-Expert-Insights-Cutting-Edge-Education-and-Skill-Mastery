@@ -311,30 +311,48 @@ app.get('/api/courses/:title/:module', async (req, res) => {
   }
 });
 // Google OAuth2 routes
-router.get(
+app.get(
   '/auth/google',
   passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
-router.get(
+app.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/signin' }),
   async (req, res) => {
     try {
+      // Check if the user exists or create a new user (similar to your local authentication)
+      const user = await User.findOne({ googleId: req.user.googleId });
+
+      if (!user) {
+        const newUser = new User({
+          username: req.user.displayName,
+          email: req.user.emails[0].value,
+          googleId: req.user.googleId,
+        });
+        await newUser.save();
+
+        // Create a user profile for the new user
+        const newUserProfile = new UserProfile({
+          user: newUser._id,
+          username: newUser.username,
+          email: newUser.email, // Use the email from the newly created user
+        });
+        await newUserProfile.save();
+      }
+
       // Generate a JWT token for the user
-      const token = jwt.sign({ userId: req.user._id }, 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA', { expiresIn: '1h' });
+      const token = jwt.sign({ userId: user._id }, 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA', { expiresIn: '1h' });
 
-      // Set the token as an HTTP-only cookie
-      res.cookie('token', token, { httpOnly: true });
-
-      // Redirect to the profile page
-      res.redirect('https://eduxcel.vercel.app/profile');
+      // Redirect or respond with the token as needed
+      res.redirect(`/profile?token=${token}`);
     } catch (error) {
       console.error('Google OAuth callback error:', error);
       res.redirect('/signin');
     }
   }
 );
+
 
 // Serve the React app in production
 if (process.env.NODE_ENV === 'production') {
