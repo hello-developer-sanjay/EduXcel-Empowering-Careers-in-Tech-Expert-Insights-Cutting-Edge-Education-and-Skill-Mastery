@@ -126,6 +126,13 @@ const sendWelcomeEmail = async (email, userName) => {
   await transporter.sendMail(mailOptions);
 };
 
+// Passport local authentication for '/api/signin'
+router.post('/api/signin', passport.authenticate('local', {
+  successRedirect: '/profile', // Redirect on successful authentication
+  failureRedirect: '/signin', // Redirect on failed authentication
+}));
+
+// Google OAuth2 callback route (already shown in previous responses)
 router.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/signin' }),
   async (req, res) => {
@@ -162,10 +169,8 @@ router.get('/auth/google/callback',
   }
 );
 
-
-
-
-router.post('/', async (req, res) => {
+// Handle local authentication (username/password) for '/api/signin'
+router.post('/api/signin', async (req, res) => {
   const { email, password } = req.body;
 
   try {
