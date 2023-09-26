@@ -131,10 +131,11 @@ router.get(
   passport.authenticate('google', { failureRedirect: '/signin' }),
   async (req, res) => {
     try {
-      // Check if the user exists or create a new user (similar to your local authentication)
+      // Find or create the user based on their Google ID
       const user = await User.findOne({ googleId: req.user.googleId });
 
       if (!user) {
+        // Create a new user if they don't exist
         const newUser = new User({
           username: req.user.displayName,
           email: req.user.emails[0].value,
@@ -144,9 +145,9 @@ router.get(
 
         // Create a user profile for the new user
         const newUserProfile = new UserProfile({
-          user: newUser._id,
-          email: newUser.email, // Use the email from the newly created user
-          username: newUser.username,
+          user: newUser._id, // Use the newly created user's ID
+          email: newUser.email, // Use the email from the Google profile
+          username: newUser.username, // Use the username from the Google profile
           // Add other profile properties as needed
         });
         await newUserProfile.save();
@@ -157,14 +158,15 @@ router.get(
         expiresIn: '1h',
       });
 
-      // Redirect to the frontend with the token as a query parameter
-      res.redirect(`https://eduxcel.vercel.app/profile?token=${token}`);
+      // Redirect or respond with the token as needed
+      res.redirect(`/profile?token=${token}`);
     } catch (error) {
       console.error('Google OAuth callback error:', error);
       res.redirect('/signin');
     }
   }
 );
+
 
 
 
