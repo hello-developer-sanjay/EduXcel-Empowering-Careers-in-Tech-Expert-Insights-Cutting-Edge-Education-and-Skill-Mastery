@@ -77,7 +77,7 @@ passport.deserializeUser(User.deserializeUser());
 passport.use(
   new GoogleStrategy(
     {
-   clientID: '325528469583-a46gmh0imv5fm4d0v13emjdga3n2b2pn.apps.googleusercontent.com',
+      clientID: '325528469583-a46gmh0imv5fm4d0v13emjdga3n2b2pn.apps.googleusercontent.com',
       clientSecret: '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',
       callbackURL: 'https://xcel-back.onrender.com/auth/google/callback',
     },
@@ -302,15 +302,12 @@ app.get('/api/courses/:title/:module', async (req, res) => {
   }
 });
 // Google OAuth2 routes
-app.get(
-  '/auth/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] })
-);
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 app.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/signin' }),
-  async (req, res) => {
+  (req, res) => {
     // Successful authentication
     try {
       // Fetch or create user profile here
@@ -327,15 +324,16 @@ app.get(
         await newProfile.save();
       }
 
-      // Redirect to the profile page with a JWT token
+      // Generate a JWT token for the user
       const token = jwt.sign({ userId: req.user._id }, 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA', { expiresIn: '1h' });
-      res.redirect(`https://eduxcel.vercel.app/profile?token=${token}`);
+      res.redirect(`/profile?token=${token}`);
     } catch (error) {
       console.error('Error fetching or creating user profile:', error);
       res.redirect('/signin'); // Redirect to the sign-in page on error
     }
   }
 );
+
 
 
 // Serve the React app in production
