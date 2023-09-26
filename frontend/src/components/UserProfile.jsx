@@ -3,22 +3,23 @@ import { motion } from 'framer-motion';
 import EditProfile from './EditProfile';
 import '../styles/UserProfile.css';
 import CreativeSpinner from './CreativeSpinner';
-import { useNavigate } from 'react-router-dom';
+import { useLocation , useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
 const UserProfile = () => {
   const navigate = useNavigate();
+const location = useLocation();
+  const token = new URLSearchParams(location.search).get('token');
 
   const [userProfile, setUserProfile] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
 
-  useEffect(() => {
+ useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const token = localStorage.getItem('token');
         if (!token) {
           navigate('/signin'); // Redirect the user to the login page if no token is found
           return;
@@ -44,7 +45,8 @@ const UserProfile = () => {
     };
 
     fetchUserProfile();
-  }, [navigate]);
+  }, [navigate, token]);
+
 
   const handleEditProfile = () => {
     setIsEditing(true);
