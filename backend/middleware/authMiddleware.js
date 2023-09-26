@@ -8,7 +8,7 @@ const authMiddleware = async (req, res, next) => {
 
     try {
       // Verify the token using the correct secret
-      const decoded = jwt.verify(token, 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA'); // Replace with your secret key
+      const decoded = jwt.verify(token, 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA'); 
       console.log('Decoded token:', decoded);
 
       // Add the user object to the request
