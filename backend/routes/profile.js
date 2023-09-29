@@ -28,7 +28,7 @@ const upload = multer({
     callback(null, true);
   }
 });
-
+router.use('/uploads', express.static('uploads'));
 // Fetch user profile route
 router.get('/', authMiddleware, async (req, res) => {
   try {
