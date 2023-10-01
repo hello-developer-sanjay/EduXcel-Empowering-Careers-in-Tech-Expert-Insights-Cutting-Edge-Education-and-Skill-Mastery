@@ -52,8 +52,8 @@ function Home() {
 
       try {
         // Search for both courses and modules
-        const courseSearchResponse = await axios.get(`https://xcel-back.onrender.com/search/courses?query=${encodeURIComponent(searchTerm)}`);
-        const moduleSearchResponse = await axios.get(`https://xcel-back.onrender.com/search/modules?query=${encodeURIComponent(searchTerm)}`);
+        const courseSearchResponse = await axios.get(`https://xcel-back.onrender.com/search?query=${encodeURIComponent(searchTerm)}`);
+        const moduleSearchResponse = await axios.get(`https://xcel-back.onrender.com/search?query=${encodeURIComponent(searchTerm)}`);
 
         const combinedResults = [...courseSearchResponse.data, ...moduleSearchResponse.data];
         setSearchResults(combinedResults);
