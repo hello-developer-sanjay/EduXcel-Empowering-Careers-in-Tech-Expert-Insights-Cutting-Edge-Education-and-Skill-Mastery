@@ -51,12 +51,9 @@ function Home() {
       setLoading(true);
 
       try {
-        // Search for both courses and modules
-        const courseSearchResponse = await axios.get(`https://xcel-back.onrender.com/search?query=${encodeURIComponent(searchTerm)}`);
-        const moduleSearchResponse = await axios.get(`https://xcel-back.onrender.com/search?query=${encodeURIComponent(searchTerm)}`);
-
-        const combinedResults = [...courseSearchResponse.data, ...moduleSearchResponse.data];
-        setSearchResults(combinedResults);
+        // Search for both courses and modules using the same endpoint
+        const response = await axios.get(`https://xcel-back.onrender.com/search?query=${encodeURIComponent(searchTerm)}`);
+        setSearchResults(response.data);
         setLoading(false);
       } catch (error) {
         console.error('Error searching:', error);
@@ -66,6 +63,7 @@ function Home() {
 
     search();
   }, [searchTerm]);
+
 
   return (
     <section className={`relative w-full min-h-screen mx-auto overflow-y-auto`}>
