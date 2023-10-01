@@ -38,11 +38,11 @@ function CourseListItems() {
   // Fetch course data and generate CourseList items dynamically
   const courseData = [...]; // Your course data
 
-  return courseData.map((course, index) => {
+   return courseData.map((course, index) => {
     return {
       "@type": "ListItem",
       "position": index + 1,
-   "url": `https://eduxcel.vercel.app/courses/${encodeURIComponent(course.title)}`,
+      "url": `https://eduxcel.vercel.app/courses/${encodeURIComponent(course.title)}`,
       "name": course.title,
       "description": course.description,
       "image": course.imageURL
