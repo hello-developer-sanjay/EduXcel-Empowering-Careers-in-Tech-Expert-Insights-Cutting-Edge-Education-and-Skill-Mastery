@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  resetToken: String, // Add resetToken field
+  resetToken: String, 
   resetTokenExpiration: Date, 
 });
 userSchema.plugin(passportLocalMongoose);
