@@ -6,21 +6,25 @@ import axios from 'axios'; // Import axios for making API requests
 
 function Home() {
   const [courseData, setCourseData] = useState([]);
+  const [moduleData, setModuleData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    async function fetchCourses() {
+    async function fetchData() {
       try {
-        const response = await axios.get('https://xcel-back.onrender.com/api/courses');
-        setCourseData(response.data); // Assuming your API response is an array of course objects
+        const coursesResponse = await axios.get('https://xcel-back.onrender.com/api/courses');
+        const modulesResponse = await axios.get('https://xcel-back.onrender.com/api/modules');
+
+        setCourseData(coursesResponse.data);
+        setModuleData(modulesResponse.data);
       } catch (error) {
-        console.error('Error fetching courses:', error);
+        console.error('Error fetching data:', error);
       }
     }
 
-    fetchCourses();
+    fetchData();
   }, []); // Empty dependency array ensures the effect runs once after initial render
 
   // Function to generate CourseList items for structured data
@@ -38,7 +42,7 @@ function Home() {
   }
 
   useEffect(() => {
-    async function searchCourses() {
+    async function search() {
       if (searchTerm.trim() === '') {
         setSearchResults([]);
         return;
@@ -47,24 +51,27 @@ function Home() {
       setLoading(true);
 
       try {
-    const response = await axios.get(`https://xcel-back.onrender.com/search?query=${encodeURIComponent(searchTerm)}`);
+        // Search for both courses and modules
+        const courseSearchResponse = await axios.get(`https://xcel-back.onrender.com/search/courses?query=${encodeURIComponent(searchTerm)}`);
+        const moduleSearchResponse = await axios.get(`https://xcel-back.onrender.com/search/modules?query=${encodeURIComponent(searchTerm)}`);
 
-        setSearchResults(response.data);
+        const combinedResults = [...courseSearchResponse.data, ...moduleSearchResponse.data];
+        setSearchResults(combinedResults);
         setLoading(false);
       } catch (error) {
-        console.error('Error searching for courses:', error);
+        console.error('Error searching:', error);
         setLoading(false);
       }
     }
 
-    searchCourses();
+    search();
   }, [searchTerm]);
 
   return (
     <section className={`relative w-full min-h-screen mx-auto overflow-y-auto`}>
       <Helmet>
         <title>Eduxcel - Online Education Platform</title>
-        <meta name="description" content="Explore our courses and enhance your skills with Eduxcel. Find a wide range of online courses on various topics to boost your knowledge." />
+        <meta name="description" content="Explore our courses and modules and enhance your skills with Eduxcel. Find a wide range of online courses and modules on various topics to boost your knowledge." />
         {/* Add structured data for CourseList */}
         <script type="application/ld+json">
           {JSON.stringify({
@@ -78,14 +85,14 @@ function Home() {
       <div className={`absolute inset-0 top-[120px] max-w-7xl mx-auto ${styles.paddingX} flex flex-row items-start gap-5`}>
         <div>
           <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-            Explore our courses and enhance your skills
+            Explore our courses and modules and enhance your skills
           </p>
 
           {/* Add a search bar */}
           <div className='mt-6'>
             <input
               type='text'
-              placeholder='Search for courses...'
+              placeholder='Search for courses and modules...'
               className='border border-gray-300 rounded-lg p-2 w-full'
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -103,7 +110,11 @@ function Home() {
               <ul>
                 {searchResults.map((result) => (
                   <li key={result._id}>
-                    <a href={`/courses/${result.title}`}>{result.title}</a>
+                    {result.type === 'course' ? (
+                      <a href={`/courses/${result.title}`}>{result.title}</a>
+                    ) : (
+                      <a href={`/courses/${result.courseTitle}/${result.moduleTitle}`}>{result.moduleTitle}</a>
+                    )}
                   </li>
                 ))}
               </ul>
