@@ -135,6 +135,30 @@ app.get('/uploads/:filename', (req, res) => {
   res.setHeader('Cache-Control', 'no-store'); // Disable caching
   res.sendFile(path.join(__dirname, 'uploads', req.params.filename));
 });
+// Search for courses based on a query parameter
+router.get('/search', async (req, res) => {
+  try {
+    const query = req.query.query;
+
+    if (!query) {
+      return res.status(400).json({ error: 'Query parameter is missing' });
+    }
+
+    // Use a case-insensitive regular expression for searching
+    const regex = new RegExp(query, 'i');
+
+    // Search for courses by title or description
+    const courses = await Course.find({
+      $or: [{ title: regex }, { description: regex }],
+    });
+
+    res.json(courses);
+  } catch (error) {
+    console.error('Error searching for courses:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 app.get('/api/:collection', async (req, res) => {
   const collection = req.params.collection;
   try {
