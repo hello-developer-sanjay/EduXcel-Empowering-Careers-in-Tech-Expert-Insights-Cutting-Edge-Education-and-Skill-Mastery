@@ -1,9 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CourseList from '../components/CourseList';
 import { Helmet } from 'react-helmet';
 import { styles } from '../styles';
+import axios from 'axios'; // Import axios for making API requests
 
 function Home() {
+  const [courseData, setCourseData] = useState([]);
+
+  useEffect(() => {
+    // Fetch course data from your API endpoint
+    async function fetchCourses() {
+      try {
+       const response = await axios.get('https://xcel-back.onrender.com/api/courses');
+        setCourseData(response.data); // Assuming your API response is an array of course objects
+      } catch (error) {
+        console.error('Error fetching courses:', error);
+      }
+    }
+
+    fetchCourses();
+  }, []); // Empty dependency array ensures the effect runs once after initial render
+
+  // Function to generate CourseList items for structured data
+  function generateCourseListItems() {
+    return courseData.map((course, index) => {
+      return {
+        "@type": "ListItem",
+        "position": index + 1,
+        "url": `https://eduxcel.vercel.app/courses/${encodeURIComponent(course.title)}`,
+        "name": course.title,
+        "description": course.description,
+        "image": course.imageURL
+      };
+    });
+  }
+
   return (
     <section className={`relative w-full min-h-screen mx-auto overflow-y-auto`}>
       <Helmet>
@@ -14,7 +45,7 @@ function Home() {
           {JSON.stringify({
             "@context": "http://schema.org",
             "@type": "ItemList",
-            "itemListElement": CourseListItems() // Function to generate CourseList items
+            "itemListElement": generateCourseListItems()
           })}
         </script>
       </Helmet>
@@ -25,29 +56,12 @@ function Home() {
             Explore our courses and enhance your skills
           </p>
           <div className='mt-10'>
-            <CourseList />
+            <CourseList courseData={courseData} /> {/* Pass course data as a prop to CourseList component */}
           </div>
         </div>
       </div>
     </section>
   );
-}
-
-// Function to generate CourseList items for structured data
-function CourseListItems() {
-  // Fetch course data and generate CourseList items dynamically
-  const courseData = [...]; // Your course data
-
-   return courseData.map((course, index) => {
-    return {
-      "@type": "ListItem",
-      "position": index + 1,
-      "url": `https://eduxcel.vercel.app/courses/${encodeURIComponent(course.title)}`,
-      "name": course.title,
-      "description": course.description,
-      "image": course.imageURL
-    };
-  });
 }
 
 export default Home;
