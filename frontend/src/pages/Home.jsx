@@ -47,7 +47,8 @@ function Home() {
       setLoading(true);
 
       try {
-        const response = await axios.get(`https://xcel-back.onrender.com/api/search?query=${encodeURIComponent(searchTerm)}`);
+    const response = await axios.get(`https://xcel-back.onrender.com/search?query=${encodeURIComponent(searchTerm)}`);
+
         setSearchResults(response.data);
         setLoading(false);
       } catch (error) {
