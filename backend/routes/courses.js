@@ -14,6 +14,7 @@ router.get('/', async (req, res) => {
 });
 // Define a route to fetch module titles for a course
 
+
 // Search for courses and modules based on a query parameter
 router.get('/search', async (req, res) => {
   try {
@@ -36,23 +37,14 @@ router.get('/search', async (req, res) => {
       $or: [{ title: regex }, { description: regex }],
     });
 
-    // Format the response properly and return both courses and modules
-    const formattedCourses = courses.map(course => ({
-      type: 'course',
-      ...course.toObject()  // Convert Mongoose object to plain JavaScript object
-    }));
-
-    const formattedModules = modules.map(module => ({
-      type: 'module',
-      ...module.toObject()  // Convert Mongoose object to plain JavaScript object
-    }));
-
-    res.json([...formattedCourses, ...formattedModules]); // Return combined results in the response
+    // Combine and send both courses and modules in the response
+    res.json({ courses, modules });
   } catch (error) {
     console.error('Error searching for courses and modules:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 
 router.get('/:title/moduletitles', async (req, res) => {
   try {
