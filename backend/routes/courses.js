@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 });
 // Define a route to fetch module titles for a course
 
-// Search for courses based on a query parameter
+// Search for courses and modules based on a query parameter
 router.get('/search', async (req, res) => {
   try {
     const query = req.query.query;
@@ -31,12 +31,18 @@ router.get('/search', async (req, res) => {
       $or: [{ title: regex }, { description: regex }],
     });
 
-    res.json(courses);
+    // Search for modules by title or description
+    const modules = await Module.find({
+      $or: [{ title: regex }, { description: regex }],
+    });
+
+    res.json({ courses, modules }); // Return both courses and modules in the response
   } catch (error) {
-    console.error('Error searching for courses:', error);
+    console.error('Error searching for courses and modules:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 
 router.get('/:title/moduletitles', async (req, res) => {
   try {
