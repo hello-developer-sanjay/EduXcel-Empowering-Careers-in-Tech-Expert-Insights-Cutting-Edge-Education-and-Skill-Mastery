@@ -6,6 +6,7 @@ import courseImage1 from '../assets/full.jpg';
 import courseImage2 from '../assets/binary.jpg';
 import courseImage3 from '../assets/machine.jpg';
 import SignInSignUp from './SignInSignUp';
+
 function CourseList() {
   const [courses, setCourses] = useState([]);
   const [showSignInSignUp, setShowSignInSignUp] = useState(false);
@@ -25,7 +26,10 @@ function CourseList() {
 
   // Function to handle hover over course card
   const handleCourseCardHover = () => {
-    setShowSignInSignUp(true);
+    // Only show the signup form if the user is not signed in
+    if (!localStorage.getItem('token')) {
+      setShowSignInSignUp(true);
+    }
   };
 
   // Function to handle hover out of course card
