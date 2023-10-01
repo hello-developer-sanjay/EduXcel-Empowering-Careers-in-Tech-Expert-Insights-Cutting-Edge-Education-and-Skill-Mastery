@@ -136,7 +136,7 @@ app.get('/uploads/:filename', (req, res) => {
   res.sendFile(path.join(__dirname, 'uploads', req.params.filename));
 });
 // Search for courses and modules based on a query parameter
-app.get('/search', async (req, res) => {
+router.get('/search', async (req, res) => {
   try {
     const query = req.query.query;
 
@@ -157,18 +157,8 @@ app.get('/search', async (req, res) => {
       $or: [{ title: regex }, { description: regex }],
     });
 
-    // Format the response properly and return both courses and modules
-    const formattedCourses = courses.map(course => ({
-      type: 'course',
-      ...course.toObject()  // Convert Mongoose object to plain JavaScript object
-    }));
-
-    const formattedModules = modules.map(module => ({
-      type: 'module',
-      ...module.toObject()  // Convert Mongoose object to plain JavaScript object
-    }));
-
-    res.json([...formattedCourses, ...formattedModules]); // Return combined results in the response
+    // Combine and send both courses and modules in the response
+    res.json({ courses, modules });
   } catch (error) {
     console.error('Error searching for courses and modules:', error);
     res.status(500).json({ error: 'Internal server error' });
