@@ -136,7 +136,7 @@ app.get('/uploads/:filename', (req, res) => {
   res.sendFile(path.join(__dirname, 'uploads', req.params.filename));
 });
 // Search for courses based on a query parameter
-router.get('/search', async (req, res) => {
+app.get('/search', async (req, res) => {
   try {
     const query = req.query.query;
 
