@@ -135,7 +135,7 @@ app.get('/uploads/:filename', (req, res) => {
   res.setHeader('Cache-Control', 'no-store'); // Disable caching
   res.sendFile(path.join(__dirname, 'uploads', req.params.filename));
 });
-// Search for courses based on a query parameter
+// Search for courses and modules based on a query parameter
 app.get('/search', async (req, res) => {
   try {
     const query = req.query.query;
@@ -152,12 +152,18 @@ app.get('/search', async (req, res) => {
       $or: [{ title: regex }, { description: regex }],
     });
 
-    res.json(courses);
+    // Search for modules by title or description
+    const modules = await Module.find({
+      $or: [{ title: regex }, { description: regex }],
+    });
+
+    res.json({ courses, modules }); // Return both courses and modules in the response
   } catch (error) {
-    console.error('Error searching for courses:', error);
+    console.error('Error searching for courses and modules:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 
 app.get('/api/:collection', async (req, res) => {
   const collection = req.params.collection;
