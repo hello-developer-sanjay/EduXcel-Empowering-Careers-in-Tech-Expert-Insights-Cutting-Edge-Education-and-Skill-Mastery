@@ -6,7 +6,6 @@ import axios from 'axios'; // Import axios for making API requests
 
 function Home() {
   const [courseData, setCourseData] = useState([]);
-  const [moduleData, setModuleData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -15,10 +14,8 @@ function Home() {
     async function fetchData() {
       try {
         const coursesResponse = await axios.get('https://xcel-back.onrender.com/api/courses');
-        const modulesResponse = await axios.get('https://xcel-back.onrender.com/api/modules');
 
         setCourseData(coursesResponse.data);
-        setModuleData(modulesResponse.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -51,7 +48,7 @@ function Home() {
       setLoading(true);
 
       try {
-        // Search for both courses and modules using the same endpoint
+        // Search for both courses and modules using a unified search endpoint
         const response = await axios.get(`https://xcel-back.onrender.com/search?query=${encodeURIComponent(searchTerm)}`);
         setSearchResults(response.data);
         setLoading(false);
@@ -63,7 +60,6 @@ function Home() {
 
     search();
   }, [searchTerm]);
-
 
   return (
     <section className={`relative w-full min-h-screen mx-auto overflow-y-auto`}>
