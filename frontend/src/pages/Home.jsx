@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CourseList from '../components/CourseList';
 import { Helmet } from 'react-helmet';
 import axios from 'axios'; // Import axios for making API requests
+import { styles } from '../styles';
 
 function Home() {
   const [courseData, setCourseData] = useState([]);
