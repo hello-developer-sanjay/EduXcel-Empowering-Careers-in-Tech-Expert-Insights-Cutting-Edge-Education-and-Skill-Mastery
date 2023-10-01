@@ -8,7 +8,7 @@ function Home() {
   const [courseData, setCourseData] = useState([]);
 
   useEffect(() => {
-    // Fetch course data from your API endpoint
+    
     async function fetchCourses() {
       try {
        const response = await axios.get('https://xcel-back.onrender.com/api/courses');
