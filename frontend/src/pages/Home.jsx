@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import CourseList from '../components/CourseList';
 import { Helmet } from 'react-helmet';
-import axios from 'axios'; // Import axios for making API requests
 import { styles } from '../styles';
+import axios from 'axios'; // Import axios for making API requests
 
 function Home() {
   const [courseData, setCourseData] = useState([]);
@@ -39,13 +39,16 @@ function Home() {
     <section className={`relative w-full min-h-screen mx-auto overflow-y-auto`}>
       <Helmet>
         <title>EduXcel E-Learning Platform</title>
-        <meta name="description" content="EduXcel is a comprehensive e-learning platform that offers high-quality courses and personalized learning experiences. Explore our courses and enhance your skills with EduXcel." />
-        {/* Add structured data for CourseList */}
+        <meta name="description" content="EduXcel is a comprehensive e-learning platform aimed at enhancing the learning experience for both students and instructors. Explore our courses and enhance your skills with EduXcel." />
+        {/* Add structured data for Organization */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "http://schema.org",
-            "@type": "ItemList",
-            "itemListElement": generateCourseListItems()
+            "@type": "Organization",
+            "name": "EduXcel E-Learning Platform",
+            "description": "Comprehensive e-learning platform for high-quality courses and personalized learning experiences.",
+            "url": "https://eduxcel.vercel.app/",
+            "logo": "https://sanjaybasket.s3.ap-south-1.amazonaws.com/logo.png"
           })}
         </script>
       </Helmet>
@@ -74,6 +77,13 @@ function Home() {
               <li><strong>Tailored Recommendations:</strong> Our recommendation system suggests courses based on user preferences and learning history.</li>
             </ul>
           </section>
+
+          <p className={`${styles.heroSubText} mt-2 text-white-100`}>
+            Explore our courses and enhance your skills
+          </p>
+          <div className='mt-10'>
+            <CourseList courseData={courseData} /> {/* Pass course data as a prop to CourseList component */}
+          </div>
         </div>
       </div>
     </section>
