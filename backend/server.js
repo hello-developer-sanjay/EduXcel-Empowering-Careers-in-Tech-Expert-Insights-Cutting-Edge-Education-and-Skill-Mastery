@@ -74,6 +74,10 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use((req, res, next) => {
+  res.setHeader('Expect-CT', 'max-age=0');
+  next();
+});
 
 const allowedOrigins = [
   'https://eduxcel.vercel.app',
