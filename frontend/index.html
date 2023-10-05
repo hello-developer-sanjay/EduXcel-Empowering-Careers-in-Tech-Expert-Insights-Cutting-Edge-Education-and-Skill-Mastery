@@ -16,31 +16,10 @@
 
 <body>
   <div id="root"></div>
-  <script>
-    if ('serviceWorker' in navigator && 'Notification' in window) {
-      window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        const installPrompt = document.createElement('div');
-        installPrompt.innerHTML = `
-          <div style="background-color: #007BFF; color: white; padding: 10px;">
-            <p>Install this app for a better experience.</p>
-            <button id="install-button" style="background-color: white; color: #007BFF; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Install</button>
-          </div>
-        `;
-        document.body.appendChild(installPrompt);
-
-        const installButton = document.getElementById('install-button');
-
-        installButton.addEventListener('click', () => {
-          e.prompt();
-          installPrompt.style.display = 'none';
-        });
-      });
-    }
-  </script>
+ 
   <script type="module" src="./src/index.jsx"></script>
 
-  <!-- Additional Scripts, Stylesheets, and Meta Tags for SEO -->
+
 
   <!-- Schema.org structured data for organization -->
   <script type="application/ld+json">
