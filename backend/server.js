@@ -6,7 +6,7 @@ const path = require('path');
 const session = require('express-session'); 
 const passport = require('passport'); 
 const helmet = require('helmet');
-const mongoSanitize = require('express-mongo-sanitize');
+
 const xss = require('xss'); // Use 'xss' instead of 'xss-clean'
 const rateLimit = require('express-rate-limit');
 const hpp = require('hpp');
@@ -37,7 +37,7 @@ app.use(
     },
   })
 );
-app.use(mongoSanitize());
+
 app.use(express.json());
 
 // Use 'xss' to prevent XSS attacks
@@ -66,7 +66,7 @@ app.use(cors({
 // Implement rate limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100,
+  max: 10000,
 });
 
 app.use(limiter);
