@@ -10,7 +10,7 @@ const helmet = require('helmet');
 const xss = require('xss'); // Use 'xss' instead of 'xss-clean'
 const rateLimit = require('express-rate-limit');
 const hpp = require('hpp');
-const { v4: uuidv4 } = require('uuid');
+
 
 dotenv.config();
 const signupRouter = require('./routes/signup');
@@ -73,10 +73,7 @@ app.use(limiter);
 
 app.use(hpp());
 
-app.use((req, res, next) => {
-  req.id = uuidv4();
-  next();
-});
+
 
 app.use(
   session({
