@@ -11,7 +11,7 @@
 }
 
 .course-card {
-  width: calc(33.33% - 20px); /* Adjust the width as per your layout */
+  width: calc(33.33% - 20px);
   margin-bottom: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -21,9 +21,8 @@
   position: relative;
   transition: transform 0.3s ease;
 
-  /* Specify the max width for responsive design */
   @media screen and (max-width: 768px) {
-    width: 100%; /* Stack cards vertically on small screens */
+    width: 100%;
   }
 
   &:hover {
@@ -32,7 +31,7 @@
 }
 
 .course-image {
-  height: 200px; /* Set the desired height for your image */
+  height: 200px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -42,7 +41,6 @@
   overflow: hidden;
 }
 
-/* Add a gradient overlay with different colors */
 .course-image::before {
   content: '';
   position: absolute;
@@ -50,62 +48,56 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(rgba(10, 35, 67, 0.6), rgba(34, 45, 99, 0.6)); /* Gradient overlay */
+  background: linear-gradient(rgba(10, 35, 67, 0.6), rgba(34, 45, 99, 0.6));
   z-index: 1;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
-/* Show the overlay on hover */
 .course-card:hover .course-image::before {
   opacity: 1;
 }
 
-/* Course Info Container */
 .course-info {
   padding: 20px;
   position: relative;
   z-index: 2;
-  color: #fff;
+  color: #333; /* Changed text color to a darker shade for better visibility */
   transition: color 0.3s ease;
-  text-align: center; /* Center align the text */
+  text-align: center;
 }
 
-/* Title styles */
 h2 {
   font-size: 24px;
   margin-bottom: 10px;
-  text-shadow: 2px 2px 4px rgba(62, 9, 219, 0.5); /* Add text shadow for emphasis */
+  text-shadow: 2px 2px 4px rgba(62, 9, 219, 0.5);
 }
+
 h3 {
   font-size: 24px;
   margin-bottom: 10px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow for emphasis */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Description styles */
 p {
   font-size: 16px;
   margin-bottom: 10px;
-  color: #f0f0f0; /* Light gray description text */
+  color: #666; /* Slightly lighter gray description text */
 }
 
-/* Link styles */
 a {
-  color: #f9a825; /* Link color */
+  color: #007bff; /* Changed link color to a darker shade of blue */
   text-decoration: none;
   transition: color 0.3s ease;
-  font-weight: bold; /* Make links bold */
+  font-weight: bold;
 }
 
-/* Change link color on hover */
 .course-card:hover a {
-  color: #d48b14; /* Change to your desired link hover color */
+  color: #0056b3; /* Darker blue on hover */
 }
-
 
 .close-button {
-  background-color: #f44336; /* Red background color */
+  background-color: #f44336;
   color: white;
   border: none;
   border-radius: 4px;
@@ -113,18 +105,17 @@ a {
   cursor: pointer;
   font-size: 16px;
   position: absolute;
-  top: 10px; /* Adjust top position as needed */
-  right: 10px; /* Adjust right position as needed */
-  z-index: 2; /* Place the button above the form */
+  top: 10px;
+  right: 10px;
+  z-index: 2;
 }
 
 .close-button:hover {
-  background-color: #ff0000; /* Darker red on hover */
+  background-color: #ff0000;
 }
 
-/* Add margin to the form container */
 .sign-in-sign-up-container {
-  margin-top: 20px; /* Adjust top margin as needed */
+  margin-top: 20px;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
