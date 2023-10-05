@@ -360,13 +360,14 @@ const handleFormSubmit = async (e) => {
       <CatchyMessage>
         {getRandomCatchyMessage()}
       </CatchyMessage>
-      <FooterButton
+     <FooterButton
         color="#4db6ac"
         onClick={toggleIcons}
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
+        aria-label="Toggle Social Icons"
       >
         {isIconsVisible ? <FaTimes /> : <FaUsers />}
       </FooterButton>
@@ -391,7 +392,7 @@ const handleFormSubmit = async (e) => {
           </SocialIconsContainer>
         }
       </AnimatePresence>
-      <FloatingFeedbackButton onClick={toggleForm}>
+      <FloatingFeedbackButton onClick={toggleForm} aria-label="Toggle Feedback Form">
         {isFormVisible ? <FaTimes /> : <FaComment />}
       </FloatingFeedbackButton>
       <AnimatePresence>
