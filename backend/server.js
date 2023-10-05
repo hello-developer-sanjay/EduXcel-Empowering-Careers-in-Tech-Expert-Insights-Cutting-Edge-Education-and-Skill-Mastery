@@ -24,7 +24,19 @@ const app = express();
 
 const PORT = process.env.PORT || 5000;
 
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'", 'cdn.jsdelivr.net'], // Allowing inline styles for the FontAwesome icons
+        scriptSrc: ["'self'", 'cdn.jsdelivr.net'], // Allowing scripts from cdn.jsdelivr.net
+        imgSrc: ["'self'", 'data:'],
+        fontSrc: ["'self'", 'cdn.jsdelivr.net'], // Allowing fonts from cdn.jsdelivr.net
+      },
+    },
+  })
+);
 app.use(mongoSanitize());
 app.use(express.json());
 
