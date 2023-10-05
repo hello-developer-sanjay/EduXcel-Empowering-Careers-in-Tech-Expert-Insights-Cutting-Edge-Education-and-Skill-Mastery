@@ -5,12 +5,6 @@ const dotenv = require('dotenv');
 const path = require('path');
 const session = require('express-session'); 
 const passport = require('passport'); 
-const helmet = require('helmet');
-
-const xss = require('xss'); // Use 'xss' instead of 'xss-clean'
-const rateLimit = require('express-rate-limit');
-const hpp = require('hpp');
-
 
 dotenv.config();
 const signupRouter = require('./routes/signup');
@@ -24,31 +18,21 @@ const app = express();
 
 const PORT = process.env.PORT || 5000;
 
+
 app.use(
-  helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-        styleSrc: ["'self'", "'unsafe-inline'", 'cdn.jsdelivr.net'], // Allowing inline styles for the FontAwesome icons
-        scriptSrc: ["'self'", 'cdn.jsdelivr.net'], // Allowing scripts from cdn.jsdelivr.net
-        imgSrc: ["'self'", 'data:'],
-        fontSrc: ["'self'", 'cdn.jsdelivr.net'], // Allowing fonts from cdn.jsdelivr.net
-      },
-    },
+  session({
+    secret: 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA', // Replace with your secret key
+    resave: false,
+    saveUninitialized: false,
+    // Add other session configuration options as needed
   })
 );
 
-app.use(express.json());
-
-// Use 'xss' to prevent XSS attacks
-app.use((req, res, next) => {
-  const sanitizedBody = xss(req.body);
-  req.body = sanitizedBody;
-  next();
-});
+app.use(passport.initialize());
+app.use(passport.session());
 
 const allowedOrigins = [
-  'https://eduxcel.vercel.app',
+'https://eduxcel.vercel.app',
   'http://localhost:5173',
   // Add more domains if needed
 ];
@@ -62,30 +46,6 @@ app.use(cors({
     }
   },
 }));
-
-// Implement rate limiting
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 10000,
-});
-
-app.use(limiter);
-
-app.use(hpp());
-
-
-
-app.use(
-  session({
-    secret: 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA',
-    resave: false,
-    saveUninitialized: false,
-  })
-);
-
-app.use(passport.initialize());
-app.use(passport.session());
-
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
