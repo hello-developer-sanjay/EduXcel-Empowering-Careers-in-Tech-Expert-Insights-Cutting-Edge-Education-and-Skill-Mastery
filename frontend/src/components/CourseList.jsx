@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../styles/CourseList.css';
-import courseImage1 from '../assets/full.webp';
-import courseImage2 from '../assets/binary.webp';
-import courseImage3 from '../assets/machine.webp';
+import courseImage1 from '../assets/full2.webp';
+import courseImage2 from '../assets/binary2.webp';
+import courseImage3 from '../assets/machine2.webp';
 import SignInSignUp from './SignInSignUp';
 
 function CourseList() {
