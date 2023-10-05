@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../styles/AuthForms.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import validator from 'validator';
 function Signup() {
   const [formData, setFormData] = useState({
     username: '',
@@ -29,10 +30,7 @@ function Signup() {
 const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-    // Client-side email format validation
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-    if (!emailRegex.test(formData.email)) {
+    if (!validator.isEmail(formData.email)) {
       setSignupError('Invalid email format');
       return;
     }
