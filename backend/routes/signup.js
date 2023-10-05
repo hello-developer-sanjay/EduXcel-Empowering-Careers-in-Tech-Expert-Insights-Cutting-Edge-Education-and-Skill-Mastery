@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const UserProfile = require('../models/UserProfile');
 const nodemailer = require('nodemailer');
+const validator = require('validator'); // Import validator package
 require('dotenv').config();
 const dns = require('dns');
 
@@ -11,12 +12,8 @@ router.post('/', async (req, res) => {
   try {
     const { username, email, password, firstName, lastName, bio, profileImage } = req.body;
 
-    // Debugging: Log the request body to check if email and password are present
-    console.log('Request Body:', req.body);
-
-    // Basic email format validation
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    if (!emailRegex.test(email)) {
+    // Basic email format validation using validator package
+    if (!validator.isEmail(email)) {
       return res.status(400).json({ message: 'Invalid email format' });
     }
 
@@ -55,6 +52,7 @@ router.post('/', async (req, res) => {
           pass: process.env.EMAIL_PASSWORD,
         },
       });
+
 
       const mailOptions = {
         from: process.env.EMAIL_ADDRESS,
