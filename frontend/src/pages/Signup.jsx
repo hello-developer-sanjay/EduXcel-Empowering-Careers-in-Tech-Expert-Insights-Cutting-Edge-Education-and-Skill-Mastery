@@ -30,7 +30,8 @@ const handleSubmit = async (e) => {
   e.preventDefault();
   try {
     // Client-side email format validation
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
     if (!emailRegex.test(formData.email)) {
       setSignupError('Invalid email format');
       return;
