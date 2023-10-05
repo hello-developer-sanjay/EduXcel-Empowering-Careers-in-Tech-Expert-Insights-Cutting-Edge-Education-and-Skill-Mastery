@@ -26,24 +26,25 @@ function Signup() {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      // Client-side email format validation
-      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-      if (!emailRegex.test(formData.email)) {
-        setSignupError('Invalid email format');
-        return;
-      }
-
-      const response = await axios.post('https://xcel-back.onrender.com/api/signup', formData);
-      console.log('Signup success');
-      setSignupSuccess('Signup successful!');
-    } catch (error) {
-      console.error('Signup error:', error.response.data.message);
-      setSignupError(error.response.message);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    // Client-side email format validation
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailRegex.test(formData.email)) {
+      setSignupError('Invalid email format');
+      return;
     }
-  };
+
+    const response = await axios.post('https://xcel-back.onrender.com/api/signup', formData);
+    console.log('Signup success');
+    setSignupSuccess('Signup successful!');
+  } catch (error) {
+    console.error('Signup error:', error.response.data.message);
+    setSignupError(error.response.message);
+  }
+};
+
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit}>
