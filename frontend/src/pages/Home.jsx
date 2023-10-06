@@ -56,42 +56,42 @@ function Home() {
           <Slider {...sliderSettings}>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a.webp"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/g.webp"
                 alt="Image 1"
                 className="w-full h-[300px]"
               />
             </div>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/b.webp"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/h.webp"
                 alt="Image 2"
                 className="w-full h-[300px]"
               />
             </div>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/c.webp"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/i.webp"
                 alt="Image 3"
                 className="w-full h-[300px]"
               />
             </div>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/d.webp"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/j.webp"
                 alt="Image 3"
                 className="w-full h-[300px]"
               />
             </div>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/e.webp"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/k.webp"
                 alt="Image 3"
                 className="w-full h-[300px]"
               />
             </div>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/f.webp"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/l.webp"
                 alt="Image 3"
                 className="w-full h-[300px]"
               />
