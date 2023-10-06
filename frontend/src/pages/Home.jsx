@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import CourseList from '../components/CourseList';
 import { Helmet } from 'react-helmet';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import { styles } from '../styles';
-import axios from 'axios'; // Import axios for making API requests
+import axios from 'axios';
 
 function Home() {
   const [courseData, setCourseData] = useState([]);
@@ -19,71 +22,115 @@ function Home() {
     }
 
     fetchCourses();
-  }, []); // Empty dependency array ensures the effect runs once after initial render
+  }, []);
 
-  // Function to generate CourseList items for structured data
-  function generateCourseListItems() {
-    return courseData.map((course, index) => {
-      return {
-        "@type": "ListItem",
-        "position": index + 1,
-        "url": `https://eduxcel.vercel.app/courses/${encodeURIComponent(course.title)}`,
-        "name": course.title,
-        "description": course.description,
-        "image": course.imageURL
-      };
-    });
-  }
+  const sliderSettings = {
+    dots: false,
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+  };
 
   return (
     <section className={`relative w-full min-h-screen mx-auto overflow-y-auto`}>
       <Helmet>
-        <title>EduXcel E-Learning Platform</title>
-        <meta name="description" content="EduXcel is a comprehensive e-learning platform aimed at enhancing the learning experience for both students and instructors. Explore our courses and enhance your skills with EduXcel." />
-        {/* Add structured data for Organization */}
+        <title>Eduxcel - Online Education Platform</title>
+        <meta
+          name="description"
+          content="Explore our courses and enhance your skills with Eduxcel. Find a wide range of online courses on various topics to boost your knowledge."
+        />
+        {/* Add structured data for CourseList */}
         <script type="application/ld+json">
           {JSON.stringify({
-            "@context": "http://schema.org",
-            "@type": "Organization",
-            "name": "EduXcel E-Learning Platform",
-            "description": "Comprehensive e-learning platform for high-quality courses and personalized learning experiences.",
-            "url": "https://eduxcel.vercel.app/",
-            "logo": "https://sanjaybasket.s3.ap-south-1.amazonaws.com/logo.png"
+            '@context': 'http://schema.org',
+            '@type': 'ItemList',
           })}
         </script>
       </Helmet>
 
-      <div className={`absolute inset-0 top-[120px] max-w-7xl mx-auto ${styles.paddingX} flex flex-row items-start gap-5`}>
-        <div>
-          <h1>Welcome to EduXcel E-Learning Platform</h1>
-          <p>We are thrilled to introduce you to our innovative project, designed to revolutionize online education.</p>
+      <div className={`relative top-[120px] max-w-7xl mx-auto ${styles.paddingX} flex flex-col items-center`}>
+        <div className="w-full max-w-2xl">
+          <Slider {...sliderSettings}>
+            <div>
+              <img
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a.webp"
+                alt="Image 1"
+                className="w-full h-[300px]"
+              />
+            </div>
+            <div>
+              <img
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/b.webp"
+                alt="Image 2"
+                className="w-full h-[300px]"
+              />
+            </div>
+            <div>
+              <img
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/c.webp"
+                alt="Image 3"
+                className="w-full h-[300px]"
+              />
+            </div>
+            <div>
+              <img
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/d.webp"
+                alt="Image 3"
+                className="w-full h-[300px]"
+              />
+            </div>
+            <div>
+              <img
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/e.webp"
+                alt="Image 3"
+                className="w-full h-[300px]"
+              />
+            </div>
+            <div>
+              <img
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/f.webp"
+                alt="Image 3"
+                className="w-full h-[300px]"
+              />
+            </div>
+            {/* Add more slides as needed */}
+          </Slider>
+        </div>
 
-          <section>
-            <h2>Purpose</h2>
-            <p>EduXcel is a comprehensive e-learning platform aimed at enhancing the learning experience for both students and instructors. Our primary goals are:</p>
-            <ul>
-              <li>To provide a diverse range of high-quality courses and educational content.</li>
-              <li>To create a seamless and secure environment for online education.</li>
-              <li>To offer personalized learning experiences tailored to individual needs.</li>
-            </ul>
-          </section>
+        <div className={`mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8`}>
+  {/* Additional Engaging Cards */}
+  <div className={`${styles.padding} bg-gradient-to-b from-blue-400 via-blue-500 to-blue-600 rounded-lg shadow-lg p-6 text-center text-white transform transition duration-300 hover:scale-105 hover:shadow-xl`}>
+    <h2 className="text-2xl font-semibold mb-4">Interactive Learning</h2>
+    <p className="text-gray-100">
+      Dive into interactive lessons, quizzes, and assignments tailored for an immersive learning experience.
+    </p>
+  </div>
+  <div className={`${styles.padding} bg-gradient-to-b from-purple-400 via-purple-500 to-purple-600 rounded-lg shadow-lg p-6 text-center text-white transform transition duration-300 hover:scale-105 hover:shadow-xl`}>
+    <h2 className="text-2xl font-semibold mb-4">Expert Instructors</h2>
+    <p className="text-gray-100">
+      Learn from industry luminaries and passionate instructors who excel in the art of teaching.
+    </p>
+  </div>
+  <div className={`${styles.padding} bg-gradient-to-b from-green-400 via-green-500 to-green-600 rounded-lg shadow-lg p-6 text-center text-white transform transition duration-300 hover:scale-105 hover:shadow-xl`}>
+    <h2 className="text-2xl font-semibold mb-4">Flexible Learning</h2>
+    <p className="text-gray-100">
+      Embrace flexibility in your learning journey with adaptable schedules and on-the-go access to course materials.
+    </p>
+  </div>
+</div>
 
-          <section>
-            <h2>User Experience</h2>
-            <p>At EduXcel, we prioritize user satisfaction. Here's what you can expect from our platform:</p>
-            <ul>
-              <li><strong>Secure Sign-Up:</strong> User data is protected with state-of-the-art security measures.</li>
-              <li><strong>Personalized Profiles:</strong> Users can create and customize profiles to track their progress.</li>
-              <li><strong>Tailored Recommendations:</strong> Our recommendation system suggests courses based on user preferences and learning history.</li>
-            </ul>
-          </section>
 
-          <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-            Explore our courses and enhance your skills
-          </p>
-          <div className='mt-10'>
-            <CourseList courseData={courseData} /> {/* Pass course data as a prop to CourseList component */}
-          </div>
+        <div className="mt-10">
+          <h2 className={`${styles.sectionHeadText} text-center mb-4`}>Featured Courses</h2>
+          <p className={`${styles.heroSubText} mt-8 text-white-100 text-center`}>
+          Explore our courses and enhance your skills
+        </p>
+        <div className="mt-10">
+          <CourseList courseData={courseData} />
+        </div>
         </div>
       </div>
     </section>
