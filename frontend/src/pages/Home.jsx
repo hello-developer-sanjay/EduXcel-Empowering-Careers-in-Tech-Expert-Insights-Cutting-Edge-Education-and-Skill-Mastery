@@ -6,6 +6,8 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { styles } from '../styles';
 import axios from 'axios';
+import "../styles/Home.css";
+import { FaChalkboardTeacher, FaUserGraduate, FaClock } from 'react-icons/fa'; 
 
 function Home() {
   const [courseData, setCourseData] = useState([]);
@@ -15,7 +17,7 @@ function Home() {
     async function fetchCourses() {
       try {
         const response = await axios.get('https://xcel-back.onrender.com/api/courses');
-        setCourseData(response.data); // Assuming your API response is an array of course objects
+        setCourseData(response.data); 
       } catch (error) {
         console.error('Error fetching courses:', error);
       }
@@ -56,42 +58,42 @@ function Home() {
           <Slider {...sliderSettings}>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/g.webp"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a.webp"
                 alt="Image 1"
                 className="w-full h-[300px]"
               />
             </div>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/h.webp"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/b.webp"
                 alt="Image 2"
                 className="w-full h-[300px]"
               />
             </div>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/i.webp"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/c.webp"
                 alt="Image 3"
                 className="w-full h-[300px]"
               />
             </div>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/j.webp"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/d.webp"
                 alt="Image 3"
                 className="w-full h-[300px]"
               />
             </div>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/k.webp"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/e.webp"
                 alt="Image 3"
                 className="w-full h-[300px]"
               />
             </div>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/l.webp"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/f.webp"
                 alt="Image 3"
                 className="w-full h-[300px]"
               />
@@ -99,24 +101,67 @@ function Home() {
             {/* Add more slides as needed */}
           </Slider>
         </div>
-
         <div className={`mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8`}>
-  {/* Additional Engaging Cards */}
-  <div className={`${styles.padding} bg-gradient-to-b from-blue-400 via-blue-500 to-blue-600 rounded-lg shadow-lg p-6 text-center text-white transform transition duration-300 hover:scale-105 hover:shadow-xl`}>
+  <div
+    style={{
+      border: '2px solid #3498db',
+      borderRadius: '10px',
+      padding: '20px',
+      boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.2)',
+      animation: 'slide-in-bounce 1s ease',
+      transition: 'transform 0.3s ease',
+      backgroundColor: '#3498db',
+      color: '#ffffff',
+    }}
+    className="card"
+  >
+    <div style={{ fontSize: '3rem', marginBottom: '10px' }}>
+      <FaChalkboardTeacher />
+    </div>
     <h2 className="text-2xl font-semibold mb-4">Interactive Learning</h2>
-    <p className="text-gray-100">
+    <p style={{ fontSize: '16px', color: '#ffffff' }}>
       Dive into interactive lessons, quizzes, and assignments tailored for an immersive learning experience.
     </p>
   </div>
-  <div className={`${styles.padding} bg-gradient-to-b from-purple-400 via-purple-500 to-purple-600 rounded-lg shadow-lg p-6 text-center text-white transform transition duration-300 hover:scale-105 hover:shadow-xl`}>
+  <div
+    style={{
+      border: '2px solid #9b59b6',
+      borderRadius: '10px',
+      padding: '20px',
+      boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.2)',
+      animation: 'slide-in-bounce 1s ease',
+      transition: 'transform 0.3s ease',
+      backgroundColor: '#9b59b6',
+      color: '#ffffff',
+    }}
+    className="card"
+  >
+    <div style={{ fontSize: '3rem', marginBottom: '10px' }}>
+      <FaUserGraduate />
+    </div>
     <h2 className="text-2xl font-semibold mb-4">Expert Instructors</h2>
-    <p className="text-gray-100">
+    <p style={{ fontSize: '16px' ,color: '#ffffff' }}>
       Learn from industry luminaries and passionate instructors who excel in the art of teaching.
     </p>
   </div>
-  <div className={`${styles.padding} bg-gradient-to-b from-green-400 via-green-500 to-green-600 rounded-lg shadow-lg p-6 text-center text-white transform transition duration-300 hover:scale-105 hover:shadow-xl`}>
+  <div
+    style={{
+      border: '2px solid #27ae60',
+      borderRadius: '10px',
+      padding: '20px',
+      boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.2)',
+      animation: 'slide-in-bounce 1s ease',
+      transition: 'transform 0.3s ease',
+      backgroundColor: '#27ae60',
+      color: '#ffffff',
+    }}
+    className="card"
+  >
+    <div style={{ fontSize: '3rem', marginBottom: '10px' }}>
+      <FaClock />
+    </div>
     <h2 className="text-2xl font-semibold mb-4">Flexible Learning</h2>
-    <p className="text-gray-100">
+    <p style={{ fontSize: '16px' , color: '#ffffff'}}>
       Embrace flexibility in your learning journey with adaptable schedules and on-the-go access to course materials.
     </p>
   </div>
