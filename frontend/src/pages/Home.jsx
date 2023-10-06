@@ -6,7 +6,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { styles } from '../styles';
 import axios from 'axios';
-import "../styles/Home.css";
+import "../styles/home.css";
 import { FaChalkboardTeacher, FaUserGraduate, FaClock } from 'react-icons/fa'; 
 
 function Home() {
