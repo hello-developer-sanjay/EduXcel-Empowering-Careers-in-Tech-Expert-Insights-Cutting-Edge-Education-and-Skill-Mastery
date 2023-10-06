@@ -1,0 +1,22 @@
+
+@keyframes slide-in-bounce {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.card:hover {
+  background-color: #2c3e50; /* Updated background color */
+  color: #241d1d; /* Updated text color */
+  transform: scale(1.1); /* Increased scale on hover */
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.6); /* Enhanced box shadow on hover */
+}
