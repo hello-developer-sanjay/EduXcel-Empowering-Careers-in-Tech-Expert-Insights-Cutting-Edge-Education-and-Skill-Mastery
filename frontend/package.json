@@ -29,7 +29,8 @@
     "react-typed": "^1.2.0",
     "react-helmet": "^6.1.0",
     "styled-components": "^6.0.7",
-    "validator": "^13.11.0"
+    "validator": "^13.11.0",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
