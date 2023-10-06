@@ -95,9 +95,11 @@ function Header() {
   return (
     <HeaderContainer>
       <HeaderContent>
-        <Logo>
-          <EduxcelText className="eduxcel-text">Eduxcel</EduxcelText>
-        </Logo>
+        <Link to="/">
+          <Logo>
+            <EduxcelText className="eduxcel-text">Eduxcel</EduxcelText>
+          </Logo>
+        </Link>
         <Typed
           strings={typedTexts}
           typeSpeed={40}
