@@ -6,7 +6,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { styles } from '../styles';
 import axios from 'axios';
-import "../styles/home.css";
+import "../styles/Home.css";
 import { FaChalkboardTeacher, FaUserGraduate, FaClock } from 'react-icons/fa'; 
 
 function Home() {
@@ -58,42 +58,42 @@ function Home() {
           <Slider {...sliderSettings}>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/g.webp"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a.webp"
                 alt="Image 1"
                 className="w-full h-[300px]"
               />
             </div>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/h.webp"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/b.webp"
                 alt="Image 2"
                 className="w-full h-[300px]"
               />
             </div>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/i.webp"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/c.webp"
                 alt="Image 3"
                 className="w-full h-[300px]"
               />
             </div>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/j.webp"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/d.webp"
                 alt="Image 3"
                 className="w-full h-[300px]"
               />
             </div>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/k.webp"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/e.webp"
                 alt="Image 3"
                 className="w-full h-[300px]"
               />
             </div>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/l.webp"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/f.webp"
                 alt="Image 3"
                 className="w-full h-[300px]"
               />
@@ -118,7 +118,7 @@ function Home() {
     <div style={{ fontSize: '3rem', marginBottom: '10px' }}>
       <FaChalkboardTeacher />
     </div>
-    <h2 className="text-2xl font-semibold mb-4">Interactive Learning</h2>
+    <h2 className="text-2xl font-semibold mb-4 " style={{ color: '#000000', textShadow: '1px 1px 2px #ffffff' }}>Interactive Learning</h2>
     <p style={{ fontSize: '16px', color: '#ffffff' }}>
       Dive into interactive lessons, quizzes, and assignments tailored for an immersive learning experience.
     </p>
@@ -139,7 +139,10 @@ function Home() {
     <div style={{ fontSize: '3rem', marginBottom: '10px' }}>
       <FaUserGraduate />
     </div>
-    <h2 className="text-2xl font-semibold mb-4">Expert Instructors</h2>
+    <h2 className="text-2xl font-semibold mb-4" style={{ color: '#000000', textShadow: '1px 1px 2px #ffffff' }}>
+  Expert Instructors
+</h2>
+
     <p style={{ fontSize: '16px' ,color: '#ffffff' }}>
       Learn from industry luminaries and passionate instructors who excel in the art of teaching.
     </p>
@@ -160,12 +163,16 @@ function Home() {
     <div style={{ fontSize: '3rem', marginBottom: '10px' }}>
       <FaClock />
     </div>
-    <h2 className="text-2xl font-semibold mb-4">Flexible Learning</h2>
+    <h2 className="text-2xl font-semibold mb-4" style={{ color: '#000000', textShadow: '1px 1px 2px #ffffff' }}>Flexible Learning</h2>
     <p style={{ fontSize: '16px' , color: '#ffffff'}}>
       Embrace flexibility in your learning journey with adaptable schedules and on-the-go access to course materials.
     </p>
   </div>
 </div>
+
+
+
+
 
 
         <div className="mt-10">
