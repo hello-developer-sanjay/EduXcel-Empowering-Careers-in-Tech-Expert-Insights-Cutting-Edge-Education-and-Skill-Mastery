@@ -1,18 +1,30 @@
-import React from 'react';
+import  { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Typed from 'react-typed';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faUserPlus, faNewspaper } from '@fortawesome/free-solid-svg-icons'; // Import FontAwesome icons
 
 const HeaderContainer = styled.header`
-  background-color: #333;
-  padding: 10px 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  background: linear-gradient(to right, #3498db, #2c3e50); /* Gradient background */
+  color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  padding: 0.5rem;
+    flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
+  border-bottom: 2px solid #2980b9; 
+
+
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+    background: linear-gradient(to right, #2c3e50, #3498db); /* Gradient background on hover */
+    
+  
 `;
 
 const HeaderContent = styled.div`
@@ -64,21 +76,49 @@ const NavList = styled.ul`
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 20px; /* Add margin between NavItems */
+  gap: 20px;
   flex-wrap: wrap;
 `;
 
 const NavItem = styled.li`
   white-space: nowrap;
 `;
-
 const NavLinkItem = styled(Link)`
   color: #fff;
   text-decoration: none;
-  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Increased gap for better spacing */
+  transition: all 0.3s ease;
+  padding: 10px;
+  border-radius: 10px;
 
   &:hover {
-    color: #00bfff;
+    
+
+    svg {
+      color: #67EB00 ; /* Change the color of SVG icons on hover */
+    }
+
+    img {
+      transform: scale(1.1); /* Scale the image on hover for a zoom effect */
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4); /* Stronger box shadow on hover */
+    }
+  }
+
+  svg {
+    font-size: 20px;
+    transition: all 0.3s ease; /* Add transition for smooth color change */
+  }
+
+  img {
+    width: 40px; /* Increased width for a larger profile image */
+    height: 40px; /* Increased height for a larger profile image */
+    border: 2px solid #fff; /* White border around the image */
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Subtle box shadow effect */
+    transition: all 0.3s ease; /* Add smooth transition effect */
+   
   }
 `;
 
@@ -91,6 +131,38 @@ function Header() {
     "Awaken Insight",
     "Brainwave Ballet"
   ];
+  const [profileImage, setProfileImage] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      fetch('https://xcel-back.onrender.com/api/profile', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Error fetching user profile');
+      })
+      .then(data => {
+        if (data.profileImage) {
+          setProfileImage(`https://xcel-back.onrender.com/${data.profileImage}?key=${Date.now()}`);
+        } else {
+          setProfileImage('https://sanjaybasket.s3.ap-south-1.amazonaws.com/image.webp');
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching user profile:', error);
+        setProfileImage('https://sanjaybasket.s3.ap-south-1.amazonaws.com/image.webp');
+      });
+    } else {
+      setProfileImage('https://sanjaybasket.s3.ap-south-1.amazonaws.com/image.webp');
+    }
+  }, []);
 
   return (
     <HeaderContainer>
@@ -110,16 +182,31 @@ function Header() {
       <Nav>
         <NavList>
           <NavItem>
-            <NavLinkItem to="/">Home</NavLinkItem>
+            <NavLinkItem to="/">
+              <FontAwesomeIcon icon={faHome} />
+         
+            </NavLinkItem>
           </NavItem>
           <NavItem>
-            <NavLinkItem to="/profile">Profile</NavLinkItem>
+            <NavLinkItem to="/profile">
+              {profileImage ? (
+                <img src={profileImage} alt="Profile" />
+              ) : (
+                'Profile'
+              )}
+            </NavLinkItem>
           </NavItem>
           <NavItem>
-            <NavLinkItem to="/signup">Signup</NavLinkItem>
+            <NavLinkItem to="/signup">
+              <FontAwesomeIcon icon={faUserPlus} />
+       
+            </NavLinkItem>
           </NavItem>
           <NavItem>
-            <NavLinkItem to="/blogs">Blogs</NavLinkItem>
+            <NavLinkItem to="/blogs">
+              <FontAwesomeIcon icon={faNewspaper} />
+          
+            </NavLinkItem>
           </NavItem>
           {/* Add more navigation links */}
         </NavList>
