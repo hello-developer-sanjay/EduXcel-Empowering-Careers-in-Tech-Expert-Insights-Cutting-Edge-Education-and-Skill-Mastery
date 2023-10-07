@@ -82,22 +82,23 @@ const NavList = styled.ul`
 
 const NavItem = styled.li`
   white-space: nowrap;
+  display: flex; /* Add this line to make the items flex containers */
+  align-items: center; /* Center items vertically within each NavItem */
 `;
+
 const NavLinkItem = styled(Link)`
   color: #fff;
   text-decoration: none;
   display: flex;
   align-items: center;
-  gap: 10px; /* Increased gap for better spacing */
+  gap: 5px; /* Decreased gap to align icons horizontally with text */
   transition: all 0.3s ease;
   padding: 10px;
   border-radius: 10px;
 
   &:hover {
-    
-
     svg {
-      color: #67EB00 ; /* Change the color of SVG icons on hover */
+      color: #67EB00; /* Change the color of SVG icons on hover */
     }
 
     img {
@@ -109,6 +110,7 @@ const NavLinkItem = styled(Link)`
   svg {
     font-size: 20px;
     transition: all 0.3s ease; /* Add transition for smooth color change */
+    margin-right: 5px; /* Add right margin to separate the icon from text */
   }
 
   img {
@@ -118,9 +120,30 @@ const NavLinkItem = styled(Link)`
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Subtle box shadow effect */
     transition: all 0.3s ease; /* Add smooth transition effect */
-   
+  }
+
+  /* Provide meaningful labels for accessibility */
+  &[aria-label='Home']::before {
+    content: 'Home';
+    display: none; /* Hide the label visually */
+  }
+
+  &[aria-label='Profile']::before {
+    content: 'Profile';
+    display: none; /* Hide the label visually */
+  }
+
+  &[aria-label='Sign Up']::before {
+    content: 'Sign Up';
+    display: none; /* Hide the label visually */
+  }
+
+  &[aria-label='Blogs']::before {
+    content: 'Blogs';
+    display: none; /* Hide the label visually */
   }
 `;
+
 
 function Header() {
   const typedTexts = [
@@ -182,13 +205,12 @@ function Header() {
       <Nav>
         <NavList>
           <NavItem>
-            <NavLinkItem to="/">
+            <NavLinkItem to="/" aria-label="Home">
               <FontAwesomeIcon icon={faHome} />
-         
             </NavLinkItem>
           </NavItem>
           <NavItem>
-            <NavLinkItem to="/profile">
+            <NavLinkItem to="/profile" aria-label="Profile">
               {profileImage ? (
                 <img src={profileImage} alt="Profile" />
               ) : (
@@ -197,15 +219,13 @@ function Header() {
             </NavLinkItem>
           </NavItem>
           <NavItem>
-            <NavLinkItem to="/signup">
+            <NavLinkItem to="/signup" aria-label="Sign Up">
               <FontAwesomeIcon icon={faUserPlus} />
-       
             </NavLinkItem>
           </NavItem>
           <NavItem>
-            <NavLinkItem to="/blogs">
+            <NavLinkItem to="/blogs" aria-label="Blogs">
               <FontAwesomeIcon icon={faNewspaper} />
-          
             </NavLinkItem>
           </NavItem>
           {/* Add more navigation links */}
