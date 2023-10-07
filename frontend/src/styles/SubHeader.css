@@ -2,7 +2,7 @@
 
 /* Container for the entire SubHeader */
 .subheader {
-  background-color: #c6bf7f;
+  background-color: #000000;
   padding: 20px;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -20,32 +20,63 @@
 /* Dropdown label */
 .dropdown-label {
   position: absolute;
-  top: -15px;
-  left: 10px;
-  background-color: #ffffff;
-  padding: 0 5px;
+  top: -20px;
+  left: 15px;
+  background-color: #4caf50; /* Background color */
+  color: white; /* Text color */
+  padding: 5px 10px; /* Padding around the text */
+  border-radius: 5px; /* Rounded corners */
   font-size: 14px;
-  color: #333;
+  font-weight: bold; /* Bold text */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  z-index: 1; /* Ensure it appears above other elements */
 }
 
+
 .courses-dropdown {
-  padding: 10px;
-  background-color: #85a6a8;
+  padding: 12px;
+  background-color: #f5f5f5; /* Light gray background color */
   color: #333;
-  font-size: 12px;
-  border: none;
-  border-radius: 4px;
+  font-size: 14px; /* Slightly larger font size */
+  border: 1px solid #ccc; /* Add a subtle border */
+  border-radius: 6px;
   cursor: pointer;
   width: 100%; /* Fill the container width */
   max-width: 200px; /* Limit the width of the select */
+  transition: all 0.3s ease; /* Add a smooth transition effect */
+
+  /* Style for when the dropdown is open */
+  &:focus,
+  &:hover {
+    background-color: #fff; /* White background color */
+    border-color: #00bfff; /* Blue border color */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+  }
+
+  /* Style for the dropdown arrow icon */
+  &::after {
+    content: '▼'; /* Unicode down arrow character */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+  }
+
+  /* Style for the selected option */
+  option:checked {
+    background-color: #00bfff; /* Blue background color for selected option */
+    color: #fff; /* White text color for selected option */
+  }
 }
 
 /* Dropdown options */
 .dropdown-option {
   padding: 10px;
-  background-color: #757289;
+  background-color: #82808c;
   color: #333;
   font-size: 12px;
+  font-weight: bold;
+  
   display: flex;
   transition: background-color 0.2s ease;
   white-space: nowrap;
