@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 const path = require('path');
 const session = require('express-session'); 
 const passport = require('passport'); 
-const { OpenAIAPI } = require('openai');
+const { ChatCompletion } = require('openai');
 
 dotenv.config();
 const signupRouter = require('./routes/signup');
@@ -18,8 +18,8 @@ const resetPasswordRouter = require('./routes/resetPassword');
 const app = express();
 
 const PORT = process.env.PORT || 5000;
-const OPENAI_API_KEY = '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'; 
-const openai = new OpenAIAPI({ key: OPENAI_API_KEY });
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+const openai = new ChatCompletion({ key: OPENAI_API_KEY });
 
 
 app.use(
@@ -168,7 +168,7 @@ app.get('/api/:collection', async (req, res) => {
 app.post('/api/chat', async (req, res) => {
   const { message } = req.body;
   try {
-    const response = await openai.ChatCompletion.create({
+    const response = await openai.create({
       messages: [{ role: 'system', content: 'You are a helpful assistant.' }, { role: 'user', content: message }],
     });
 
@@ -178,6 +178,7 @@ app.post('/api/chat', async (req, res) => {
     res.status(500).json({ error: 'Error generating chat response' });
   }
 });
+
 
 app.get('/api/courses/:title', async (req, res) => {
   try {
