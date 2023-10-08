@@ -167,15 +167,19 @@ app.get('/api/:collection', async (req, res) => {
 app.post('/api/chat', async (req, res) => {
   const { message } = req.body;
   try {
-    const response = await axios.post('https://api.openai.com/v1/engines/davinci-codex/completions', {
-      prompt: `You are a helpful assistant: ${message}`,
-      max_tokens: 150,
-    }, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OPENAI_API_KEY}`,
+    const response = await axios.post(
+      'https://api.openai.com/v1/engines/davinci-codex/completions',
+      {
+        prompt: `You are a helpful assistant: ${message}`,
+        max_tokens: 150,
       },
-    });
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${OPENAI_API_KEY}`,
+        },
+      }
+    );
 
     res.json({ reply: response.data.choices[0].text });
   } catch (error) {
@@ -183,7 +187,6 @@ app.post('/api/chat', async (req, res) => {
     res.status(500).json({ error: 'Error generating chat response' });
   }
 });
-
 app.get('/api/courses/:title', async (req, res) => {
   try {
     const courseTitle = req.params.title;
