@@ -23,7 +23,7 @@ const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
 app.use(
   session({
-    secret: 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA', // Replace with your secret key
+    secret: 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA',
     resave: false,
     saveUninitialized: false,
     // Add other session configuration options as needed
