@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 const path = require('path');
 const session = require('express-session'); 
 const passport = require('passport'); 
-const { ChatCompletion } = require('openai');
+const axios = require('axios'); 
 
 dotenv.config();
 const signupRouter = require('./routes/signup');
@@ -19,7 +19,6 @@ const app = express();
 
 const PORT = process.env.PORT || 5000;
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-const openai = new ChatCompletion({ key: OPENAI_API_KEY });
 
 
 app.use(
@@ -168,17 +167,22 @@ app.get('/api/:collection', async (req, res) => {
 app.post('/api/chat', async (req, res) => {
   const { message } = req.body;
   try {
-    const response = await openai.create({
-      messages: [{ role: 'system', content: 'You are a helpful assistant.' }, { role: 'user', content: message }],
+    const response = await axios.post('https://api.openai.com/v1/engines/davinci-codex/completions', {
+      prompt: `You are a helpful assistant: ${message}`,
+      max_tokens: 150,
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${OPENAI_API_KEY}`,
+      },
     });
 
-    res.json({ reply: response.choices[0].message.content });
+    res.json({ reply: response.data.choices[0].text });
   } catch (error) {
     console.error('Error generating chat response:', error);
     res.status(500).json({ error: 'Error generating chat response' });
   }
 });
-
 
 app.get('/api/courses/:title', async (req, res) => {
   try {
