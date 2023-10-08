@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const path = require('path');
 const session = require('express-session'); 
 const passport = require('passport'); 
+const { ChatGPT } = require('openai'); 
 
 dotenv.config();
 const signupRouter = require('./routes/signup');
@@ -17,6 +18,9 @@ const resetPasswordRouter = require('./routes/resetPassword');
 const app = express();
 
 const PORT = process.env.PORT || 5000;
+const chatgpt = new ChatGPT({
+  apiKey: 'sk-...BAsa', 
+});
 
 
 app.use(
@@ -158,6 +162,21 @@ app.get('/api/:collection', async (req, res) => {
   } catch (error) {
     console.error(`Error fetching data from ${collection} collection:`, error);
     res.status(500).json({ error: `Error fetching data from ${collection} collection` });
+  }
+});
+
+// ChatGPT API endpoint
+app.post('/api/chat', async (req, res) => {
+  const { message } = req.body;
+  try {
+    const response = await chatgpt.complete({
+      messages: [{ role: 'user', content: message }],
+    });
+
+    res.json({ reply: response.choices[0].message.content });
+  } catch (error) {
+    console.error('Error generating chat response:', error);
+    res.status(500).json({ error: 'Error generating chat response' });
   }
 });
 app.get('/api/courses/:title', async (req, res) => {
