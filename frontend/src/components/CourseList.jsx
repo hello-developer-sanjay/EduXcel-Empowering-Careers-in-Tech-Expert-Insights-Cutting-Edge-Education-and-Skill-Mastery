@@ -47,7 +47,7 @@ function CourseList() {
 
   return (
     <div className="course-list">
-      <h2>Available Courses</h2>
+     
       <div className="course-cards">
         {courses.map((course, index) => (
           <div
