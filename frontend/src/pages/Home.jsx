@@ -27,17 +27,50 @@ function Home() {
   }, []);
 
   const sliderSettings = {
-    dots: false,
+    dots: true, // Show pagination dots
     infinite: true,
     speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
+    fade: true, // Enable fade transition between slides
+    pauseOnHover: true, // Pause autoplay on hover
+    arrows: true, // Show navigation arrows
+    draggable: true, // Enable dragging the slider
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots: true,
+          arrows: false,
+        },
+      },
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          dots: true,
+          arrows: false,
+        },
+      },
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          dots: true,
+          arrows: false,
+        },
+      },
+    ],
   };
 
   return (
-    <section className={`relative w-full min-h-screen mx-auto overflow-y-auto`}>
+    <section className={`relative w-full min-h-screen mx-auto `}>
       <Helmet>
         <title>Eduxcel - Online Education Platform</title>
         <meta
@@ -53,7 +86,7 @@ function Home() {
         </script>
       </Helmet>
 
-      <div className={`relative top-[120px] max-w-7xl mx-auto ${styles.paddingX} flex flex-col items-center`}>
+      <div className={`relative top-[20px] max-w-7xl mx-auto ${styles.paddingX} flex flex-col items-center`}>
         <div className="w-full max-w-2xl">
           <Slider {...sliderSettings}>
             <div>
@@ -169,10 +202,6 @@ function Home() {
     </p>
   </div>
 </div>
-
-
-
-
 
 
         <div className="mt-10">
