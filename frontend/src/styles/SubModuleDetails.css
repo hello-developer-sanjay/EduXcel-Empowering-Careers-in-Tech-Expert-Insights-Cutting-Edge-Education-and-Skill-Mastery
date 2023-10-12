@@ -5,9 +5,9 @@
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;
-  max-width: 900px; /* Set a maximum width for the container */
-  margin: 0 auto; /* Center the container horizontally */
-  position: relative; /* Add relative positioning for pseudo-elements */
+  max-width: 1800px; 
+  margin: 0 auto; 
+  position: relative;
 }
 
 /* Pseudo-element for a creative decoration */
