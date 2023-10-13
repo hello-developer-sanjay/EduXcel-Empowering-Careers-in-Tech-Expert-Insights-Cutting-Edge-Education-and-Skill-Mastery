@@ -159,7 +159,7 @@ function Header() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      fetch('https://xcel-back.onrender.com/api/profile', {
+      fetch('https://backend-uxyx.onrender.com/api/profile', {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
