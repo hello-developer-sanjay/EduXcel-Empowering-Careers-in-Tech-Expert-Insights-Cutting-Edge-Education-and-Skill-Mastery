@@ -4,7 +4,7 @@ module.exports = function (app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'https://xcel-back.onrender.com',
+      target: 'https://backend-uxyx.onrender.com',
       changeOrigin: true,
     })
   );
