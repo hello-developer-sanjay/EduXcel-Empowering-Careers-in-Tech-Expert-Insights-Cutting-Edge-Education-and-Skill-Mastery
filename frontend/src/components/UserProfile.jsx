@@ -24,7 +24,7 @@ const UserProfile = () => {
           return;
         }
 
-        const response = await fetch('https://xcel-back.onrender.com/api/profile', {
+        const response = await fetch('https://backend-uxyx.onrender.com/api/profile', {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${token}`,
@@ -55,7 +55,7 @@ const UserProfile = () => {
   const handleUpdateProfile = async (updatedProfileData) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('https://xcel-back.onrender.com/api/profile', {
+      const response = await fetch('https://backend-uxyx.onrender.com/api/profile', {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -79,7 +79,7 @@ const UserProfile = () => {
   const handleLogout = async () => {
     try {
       // Send a request to the server to log the user out
-      await axios.post('https://xcel-back.onrender.com/api/logout');
+      await axios.post('https://backend-uxyx.onrender.com/api/logout');
       // Clear the token from local storage
       localStorage.removeItem('token');
       // Redirect the user to the login page using navigate
@@ -109,7 +109,7 @@ const UserProfile = () => {
   <div className="profile-info">
     <div className="profile-image-container">
       <motion.img
-        src={`https://xcel-back.onrender.com/${userProfile.profileImage}?key=${Date.now()}`}
+        src={`https://backend-uxyx.onrender.com/${userProfile.profileImage}?key=${Date.now()}`}
         alt="Profile"
         className="profile-image"
         whileHover={{ scale: 1.1 }}
