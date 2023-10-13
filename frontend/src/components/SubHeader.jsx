@@ -11,7 +11,7 @@ function SubHeader() {
   useEffect(() => {
     async function fetchCourses() {
       try {
-        const response = await axios.get('https://xcel-back.onrender.com/api/courses');
+        const response = await axios.get('https://backend-uxyx.onrender.com/api/courses');
         setCourses(response.data);
       } catch (error) {
         console.error('Error fetching courses:', error);
