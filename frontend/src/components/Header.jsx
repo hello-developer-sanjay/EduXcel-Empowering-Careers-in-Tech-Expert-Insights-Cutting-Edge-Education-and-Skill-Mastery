@@ -173,7 +173,7 @@ function Header() {
       })
       .then(data => {
         if (data.profileImage) {
-          setProfileImage(`https://xcel-back.onrender.com/${data.profileImage}?key=${Date.now()}`);
+          setProfileImage(`https://backend-uxyx.onrender.com/${data.profileImage}?key=${Date.now()}`);
         } else {
           setProfileImage('https://sanjaybasket.s3.ap-south-1.amazonaws.com/image.webp');
         }
