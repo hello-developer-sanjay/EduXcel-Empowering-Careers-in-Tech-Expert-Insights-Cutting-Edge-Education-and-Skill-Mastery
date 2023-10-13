@@ -35,7 +35,7 @@ const handleSubmit = async (e) => {
       return;
     }
 
-    const response = await axios.post('https://xcel-back.onrender.com/api/signup', formData);
+    const response = await axios.post('https://backend-uxyx.onrender.com/api/signup', formData);
     console.log('Signup success');
     setSignupSuccess('Signup successful!');
   } catch (error) {
