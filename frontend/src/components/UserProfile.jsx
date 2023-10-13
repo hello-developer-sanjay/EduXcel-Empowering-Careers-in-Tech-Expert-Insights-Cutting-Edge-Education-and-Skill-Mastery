@@ -109,7 +109,7 @@ const UserProfile = () => {
   <div className="profile-info">
     <div className="profile-image-container">
       <motion.img
-        src={`https://backend-uxyx.onrender.com${userProfile.profileImage}?key=${Date.now()}`}
+        src={`https://backend-uxyx.onrender.com/${userProfile.profileImage}?key=${Date.now()}`}
         alt="Profile"
         className="profile-image"
         whileHover={{ scale: 1.1 }}
