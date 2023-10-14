@@ -37,7 +37,7 @@ function Home() {
     autoplaySpeed: 2000,
     fade: true, // Enable fade transition between slides
     pauseOnHover: true, // Pause autoplay on hover
-    arrows: true, // Show navigation arrows
+    arrows: false, // Show navigation arrows
     draggable: true, // Enable dragging the slider
     responsive: [
       {
@@ -91,25 +91,27 @@ function Home() {
       <div className={`relative top-[20px] max-w-8xl mx-auto ${styles.paddingX} flex flex-col items-center`}>
         <div className="w-full max-w-4xl">
           <Slider {...sliderSettings}>
+            
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a2.webp"
-                alt="Image 1"
-                className="w-full h-[300px]"
-              />
-            </div>
-            <div>
-              <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a3.webp"
+                src="./src/assets/a2.png"
                 alt="Image 2"
-                className="w-full h-[300px]"
+                className="w-full h-[400px]"
               />
             </div>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a5.webp"
+                src="./src/assets/a3.png"
                 alt="Image 3"
-                className="w-full h-[300px]"
+                className="w-full h-[400px]"
+              />
+            </div>
+            
+            <div>
+              <img
+                src="./src/assets/a5.png"
+                alt="Image 3"
+                className="w-full h-[400px]"
               />
             </div>
            
@@ -118,43 +120,25 @@ function Home() {
         </div>
         <div className={`mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12`}>
   <div
-    style={{
-      border: '2px solid #3498db',
-      borderRadius: '10px',
-      padding: '20px',
-      boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.2)',
-      animation: 'slide-in-bounce 1s ease',
-      transition: 'transform 0.3s ease',
-      backgroundColor: '#3498db',
-      color: '#ffffff',
-    }}
+    
     className="card"
   >
     <div style={{ fontSize: '3rem', marginBottom: '10px' }}>
       <FaChalkboardTeacher />
     </div>
-    <h2 className="text-2xl font-semibold mb-4 " style={{ color: '#000000', textShadow: '1px 1px 2px #ffffff' }}>Interactive Learning</h2>
+    <h2 className="text-2xl font-semibold mb-4 " style={{ color: '#ffffff', textShadow: '1px 1px 2px #000000' }}>Interactive Learning</h2>
     <p style={{ fontSize: '16px', color: '#ffffff' }}>
       Dive into interactive lessons, quizzes, and assignments tailored for an immersive learning experience.
     </p>
   </div>
   <div
-    style={{
-      border: '2px solid #9b59b6',
-      borderRadius: '10px',
-      padding: '20px',
-      boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.2)',
-      animation: 'slide-in-bounce 1s ease',
-      transition: 'transform 0.3s ease',
-      backgroundColor: '#9b59b6',
-      color: '#ffffff',
-    }}
+    
     className="card"
   >
     <div style={{ fontSize: '3rem', marginBottom: '10px' }}>
       <FaUserGraduate />
     </div>
-    <h2 className="text-2xl font-semibold mb-4" style={{ color: '#000000', textShadow: '1px 1px 2px #ffffff' }}>
+    <h2 className="text-2xl font-semibold mb-4" style={{ color: '#ffffff', textShadow: '1px 1px 2px #000000' }}>
   Expert Instructors
 </h2>
 
@@ -163,22 +147,14 @@ function Home() {
     </p>
   </div>
   <div
-    style={{
-      border: '2px solid #27ae60',
-      borderRadius: '10px',
-      padding: '20px',
-      boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.2)',
-      animation: 'slide-in-bounce 1s ease',
-      transition: 'transform 0.3s ease',
-      backgroundColor: '#27ae60',
-      color: '#ffffff',
-    }}
+   
+    
     className="card"
   >
     <div style={{ fontSize: '3rem', marginBottom: '10px' }}>
       <FaClock />
     </div>
-    <h2 className="text-2xl font-semibold mb-4" style={{ color: '#000000', textShadow: '1px 1px 2px #ffffff' }}>Flexible Learning</h2>
+    <h2 className="text-2xl font-semibold mb-4" style={{ color: '#ffffff', textShadow: '1px 1px 2px #000000' }}>Flexible Learning</h2>
     <p style={{ fontSize: '16px' , color: '#ffffff'}}>
       Embrace flexibility in your learning journey with adaptable schedules and on-the-go access to course materials.
     </p>
