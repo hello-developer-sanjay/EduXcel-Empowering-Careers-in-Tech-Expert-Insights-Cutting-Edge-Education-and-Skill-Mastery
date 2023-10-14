@@ -8,7 +8,7 @@ function ResetPassword() {
   const [newPassword, setNewPassword] = useState('');
   const [token, setToken] = useState('');
   const [message, setMessage] = useState('');
-  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+  const [showPassword, setShowPassword] = useState(false); 
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
