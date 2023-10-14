@@ -13,7 +13,7 @@ function SubModuleDetails() {
     async function fetchSubModuleDetails() {
       try {
         const response = await axios.get(
-          `https://backend-uxyx.onrender.com/api/courses/${encodeURIComponent(title)}/modules/${encodeURIComponent(module)}/${encodeURIComponent(submodule)}`
+          `https://edu-backend-py90.onrender.com/api/courses/${encodeURIComponent(title)}/modules/${encodeURIComponent(module)}/${encodeURIComponent(submodule)}`
         );
 
         setSubModuleDetails(response.data);
