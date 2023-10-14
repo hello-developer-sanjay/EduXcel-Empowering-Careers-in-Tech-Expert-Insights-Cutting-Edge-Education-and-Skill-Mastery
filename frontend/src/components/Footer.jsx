@@ -285,7 +285,7 @@ const Footer = () => {
 
   const socialButtons = [
     { icon: <FaLinkedin />, color: "#0077B5", link: "#" },
-    { icon: <FaGithub />, color: "#181717", link: "https://github.com/sanjay-dev-patidar" },
+    { icon: <FaGithub />, color: "#181717", link: "https://github.com/hello-developer-sanjay" },
     { icon: <FaTwitter />, color: "#1DA1F2", link: "#" },
     { icon: <FaInstagram />, color: "#E1306C", link: "https://www.instagram.com/sanjay_patidar_mcmxcviii/" },
   ];
@@ -317,7 +317,7 @@ const handleFormSubmit = async (e) => {
       successMessage = "Query sent! Await our swift reply, tailored just for you.";
     }
 
-    const response = await fetch(`https://backend-uxyx.onrender.com/api/${endpoint}`, {
+    const response = await fetch(`https://edu-backend-py90.onrender.com/api/${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
