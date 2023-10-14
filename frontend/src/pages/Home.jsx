@@ -11,10 +11,10 @@ import StarsCanvas from '../components/Stars';
 import { FaChalkboardTeacher, FaUserGraduate, FaClock } from 'react-icons/fa'; 
 
 function Home() {
-  const [courseData, setCourseData] = useState([]);a
+  const [courseData, setCourseData] = useState([]);
 
   useEffect(() => {
-
+    // Fetch course data from your API endpoint
     async function fetchCourses() {
       try {
         const response = await axios.get('https://edu-backend-py90.onrender.com/api/courses');
