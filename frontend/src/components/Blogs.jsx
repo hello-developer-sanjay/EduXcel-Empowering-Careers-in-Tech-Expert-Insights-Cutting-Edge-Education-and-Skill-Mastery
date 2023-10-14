@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../styles/Blogs.css";
-import { SectionWrapper } from "../hoc";
+
 import {
   Box,
   Input,
@@ -43,7 +43,7 @@ const Blogs = () => {
   const fetchData = async (collection) => {
     try {
       const response = await fetch(
-        `https://backend-uxyx.onrender.com/api/${collection}`
+        `https://edu-backend-py90.onrender.com/api/${collection}`
       );
       const responseData = await response.json();
       setBlogsData((prevData) => ({
@@ -320,5 +320,5 @@ const renderMediaContent = (content) => {
   );
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
-export default SectionWrapper(Blogs, "blogs");
+
+export default Blogs;
