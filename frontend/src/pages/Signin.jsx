@@ -31,7 +31,7 @@ function Signin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://backend-uxyx.onrender.com/api/signin', formData);
+      const response = await axios.post('https://edu-backend-py90.onrender.com/api/signin', formData);
       console.log('Signin success');
 
       // Store the token in localStorage
