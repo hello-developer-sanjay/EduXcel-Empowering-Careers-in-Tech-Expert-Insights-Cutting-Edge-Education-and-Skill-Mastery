@@ -159,7 +159,7 @@ function Header() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      fetch('https://backend-uxyx.onrender.com/api/profile', {
+      fetch('https://edu-backend-py90.onrender.com/api/profile', {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -173,7 +173,7 @@ function Header() {
       })
       .then(data => {
         if (data.profileImage) {
-          setProfileImage(`https://backend-uxyx.onrender.com/${data.profileImage}?key=${Date.now()}`);
+          setProfileImage(`https://edu-backend-py90.onrender.com/${data.profileImage}?key=${Date.now()}`);
         } else {
           setProfileImage('https://sanjaybasket.s3.ap-south-1.amazonaws.com/image.webp');
         }
