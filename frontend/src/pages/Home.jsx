@@ -7,10 +7,11 @@ import 'slick-carousel/slick/slick-theme.css';
 import { styles } from '../styles';
 import axios from 'axios';
 import "../styles/home.css";
+import StarsCanvas from '../components/Stars'; 
 import { FaChalkboardTeacher, FaUserGraduate, FaClock } from 'react-icons/fa'; 
 
 function Home() {
-  const [courseData, setCourseData] = useState([]);
+  const [courseData, setCourseData] = useState([]);a
 
   useEffect(() => {
     // Fetch course data from your API endpoint
@@ -85,9 +86,10 @@ function Home() {
           })}
         </script>
       </Helmet>
+      <StarsCanvas />
 
-      <div className={`relative top-[20px] max-w-7xl mx-auto ${styles.paddingX} flex flex-col items-center`}>
-        <div className="w-full max-w-2xl">
+      <div className={`relative top-[20px] max-w-8xl mx-auto ${styles.paddingX} flex flex-col items-center`}>
+        <div className="w-full max-w-4xl">
           <Slider {...sliderSettings}>
             <div>
               <img
@@ -134,7 +136,7 @@ function Home() {
             {/* Add more slides as needed */}
           </Slider>
         </div>
-        <div className={`mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8`}>
+        <div className={`mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12`}>
   <div
     style={{
       border: '2px solid #3498db',
