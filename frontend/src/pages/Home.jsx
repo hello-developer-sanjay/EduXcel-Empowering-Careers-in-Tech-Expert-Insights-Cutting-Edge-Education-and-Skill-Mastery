@@ -14,7 +14,7 @@ function Home() {
   const [courseData, setCourseData] = useState([]);a
 
   useEffect(() => {
-    // Fetch course data from your API endpoint
+
     async function fetchCourses() {
       try {
         const response = await axios.get('https://edu-backend-py90.onrender.com/api/courses');
