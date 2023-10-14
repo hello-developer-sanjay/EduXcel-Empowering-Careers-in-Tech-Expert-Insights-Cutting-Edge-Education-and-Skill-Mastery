@@ -93,46 +93,26 @@ function Home() {
           <Slider {...sliderSettings}>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/g.webp"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a2.webp"
                 alt="Image 1"
                 className="w-full h-[300px]"
               />
             </div>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/h.webp"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a3.webp"
                 alt="Image 2"
                 className="w-full h-[300px]"
               />
             </div>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/i.webp"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a5.webp"
                 alt="Image 3"
                 className="w-full h-[300px]"
               />
             </div>
-            <div>
-              <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/j.webp"
-                alt="Image 3"
-                className="w-full h-[300px]"
-              />
-            </div>
-            <div>
-              <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/k.webp"
-                alt="Image 3"
-                className="w-full h-[300px]"
-              />
-            </div>
-            <div>
-              <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/l.webp"
-                alt="Image 3"
-                className="w-full h-[300px]"
-              />
-            </div>
+           
             {/* Add more slides as needed */}
           </Slider>
         </div>
