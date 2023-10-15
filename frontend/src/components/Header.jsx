@@ -244,12 +244,12 @@ function Header() {
       <HamburgerMenu isOpen={isOpen}>
         <NavList>
           <NavItem>
-            <NavLinkItem to="/" aria-label="Home">
+            <NavLinkItem to="/" aria-label="Home" onClick={toggleMenu}>
               <FontAwesomeIcon icon={faHome} /> 
             </NavLinkItem>
           </NavItem>
           <NavItem>
-            <NavLinkItem to="/profile" aria-label="Profile">
+            <NavLinkItem to="/profile" aria-label="Profile" onClick={toggleMenu}>
               {profileImage ? (
                 <img src={profileImage} alt="Profile" />
               ) : (
@@ -258,13 +258,13 @@ function Header() {
             </NavLinkItem>
           </NavItem>
           <NavItem>
-            <NavLinkItem to="/signup" aria-label="Sign Up">
+            <NavLinkItem to="/signup" aria-label="Sign Up" onClick={toggleMenu}>
               <FontAwesomeIcon icon={faUserPlus} /> 
             </NavLinkItem>
           </NavItem>
           <NavItem>
-            <NavLinkItem to="/blogs" aria-label="Blogs">
-              <FontAwesomeIcon icon={faNewspaper} />
+            <NavLinkItem to="/blogs" aria-label="Blogs" onClick={toggleMenu}>
+              <FontAwesomeIcon icon={faNewspaper} /> 
             </NavLinkItem>
           </NavItem>
           {/* Add more navigation links */}
