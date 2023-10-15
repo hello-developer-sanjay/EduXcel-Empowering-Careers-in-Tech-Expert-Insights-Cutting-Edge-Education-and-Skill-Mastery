@@ -71,6 +71,65 @@
   border-color: #ff9f43;
   color: #ff9f43;
 }
+.shining-ring-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.shining-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(170, 144, 224, 0.8) 10%, transparent 30%);
+  background-size: 150% 150%;
+  background-position: center;
+  animation: shine 3s ease-in-out infinite;
+  opacity: 0;
+  border-radius: 50%;
+  transform: scale(0.8);
+  animation-delay: 0.5s; /* Delay the animation for a staggered effect */
+  z-index: 0; /* Set z-index to 0 for the shining ring */
+}
+
+@keyframes shine {
+  0% {
+    background-size: 150% 150%;
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    background-size: 200% 200%;
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+  100% {
+    background-size: 250% 250%;
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
+
+@keyframes shine {
+  0% {
+    background-size: 150% 150%;
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    background-size: 200% 200%;
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+  100% {
+    background-size: 250% 250%;
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
 
 /* Add more styles and colors as needed */
 /* Styles for Why Us section */
@@ -85,10 +144,7 @@
 }
 
 .why-us-section img {
-  width: 100%;
-  max-width: 800px;
-  border-radius: 10px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform-style: preserve-3d;
 }
 
 .why-us-section .flex-container {
@@ -109,18 +165,25 @@
     margin-right: 2rem;
   }
 }
-
 .why-us-section h3 {
   font-size: 1.6rem;
   margin-bottom: 1.5rem;
-  color: #5d00ff; 
+  color: #5d00ff;
   text-transform: capitalize;
+  font-weight: bold; /* Add bold font weight */
+  text-align: center; /* Center align the text */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add text shadow for better visibility */
 }
 
 .why-us-section p {
-  font-size: 1.1rem; 
-  color: #f3f3f3; 
-  margin-bottom: 1.5rem; 
-  line-height: 1.4; 
+  font-size: 1.1rem;
+  color: #f3f3f3;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+  text-align: justify; /* Justify the text for better readability */
+  border-left: 4px solid #5d00ff; /* Add a left border for emphasis */
+  padding-left: 10px; /* Add some padding to the left of the paragraph */
+  background-color: rgba(93, 0, 255, 0.1); /* Add a subtle background color */
+  border-radius: 8px; /* Add rounded corners */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
 }
-
