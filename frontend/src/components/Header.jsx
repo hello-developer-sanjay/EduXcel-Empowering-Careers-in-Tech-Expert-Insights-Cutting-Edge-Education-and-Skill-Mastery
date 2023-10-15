@@ -11,6 +11,7 @@ const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
   padding: 0.5rem;
     flex-wrap: wrap;
   position: sticky;
@@ -65,11 +66,7 @@ const EduxcelText = styled.span`
   }
 `;
 
-const Nav = styled.nav`
-  display: flex;
-  align-items: center;
-  margin-right: 20px;
-`;
+
 
 const NavList = styled.ul`
   list-style-type: none;
@@ -78,6 +75,8 @@ const NavList = styled.ul`
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+
+  
 `;
 
 const NavItem = styled.li`
@@ -144,6 +143,38 @@ const NavLinkItem = styled(Link)`
   }
 `;
 
+const HamburgerIcon = styled.div`
+  display: none;
+  cursor: pointer;
+  font-size: 24px;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+`;
+const HamburgerMenu = styled.div`
+  @media (max-width: 768px) {
+    display: none; /* Hide the menu by default */
+
+    /* If isOpen is true, display the menu as a column */
+    ${({ isOpen }) => isOpen && `
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: #333;
+      padding: 10px;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      transform: translateY(0);
+      opacity: 1;
+    `}
+  }
+`;
+
+
 
 function Header() {
   const typedTexts = [
@@ -155,6 +186,11 @@ function Header() {
     "Brainwave Ballet"
   ];
   const [profileImage, setProfileImage] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -202,11 +238,14 @@ function Header() {
           loop
         />
       </HeaderContent>
-      <Nav>
+      <HamburgerIcon onClick={toggleMenu}>
+        ☰
+      </HamburgerIcon>
+      <HamburgerMenu isOpen={isOpen}>
         <NavList>
           <NavItem>
             <NavLinkItem to="/" aria-label="Home">
-              <FontAwesomeIcon icon={faHome} />
+              <FontAwesomeIcon icon={faHome} /> 
             </NavLinkItem>
           </NavItem>
           <NavItem>
@@ -220,7 +259,7 @@ function Header() {
           </NavItem>
           <NavItem>
             <NavLinkItem to="/signup" aria-label="Sign Up">
-              <FontAwesomeIcon icon={faUserPlus} />
+              <FontAwesomeIcon icon={faUserPlus} /> 
             </NavLinkItem>
           </NavItem>
           <NavItem>
@@ -230,7 +269,7 @@ function Header() {
           </NavItem>
           {/* Add more navigation links */}
         </NavList>
-      </Nav>
+      </HamburgerMenu>
     </HeaderContainer>
   );
 }
