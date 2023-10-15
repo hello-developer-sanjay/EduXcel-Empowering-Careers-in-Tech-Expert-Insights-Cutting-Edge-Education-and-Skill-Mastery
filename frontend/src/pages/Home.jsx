@@ -9,7 +9,7 @@ import axios from 'axios';
 import "../styles/home.css";
 import StarsCanvas from '../components/Stars'; 
 import { FaChalkboardTeacher, FaUserGraduate, FaClock } from 'react-icons/fa'; 
-
+import WhyUsImage from '../assets/why.webp'; 
 function Home() {
   const [courseData, setCourseData] = useState([]);
 
@@ -86,7 +86,7 @@ function Home() {
           })}
         </script>
       </Helmet>
-      <StarsCanvas />
+     
 
       <div className={`relative top-[20px] max-w-8xl mx-auto ${styles.paddingX} flex flex-col items-center`}>
         <div className="w-full max-w-4xl">
@@ -94,14 +94,14 @@ function Home() {
             
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a2.webp"
+                src="./src/assets/a2.png"
                 alt="Image 2"
                 className="w-full h-[400px]"
               />
             </div>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a5.webp"
+                src="./src/assets/a3.png"
                 alt="Image 3"
                 className="w-full h-[400px]"
               />
@@ -109,7 +109,7 @@ function Home() {
             
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a3.webp"
+                src="./src/assets/a5.png"
                 alt="Image 3"
                 className="w-full h-[400px]"
               />
@@ -118,7 +118,23 @@ function Home() {
             {/* Add more slides as needed */}
           </Slider>
         </div>
-        <div className={`mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12`}>
+ 
+
+
+
+        <div className="mt-10">
+          <h2 className={`${styles.sectionHeadText} text-center mb-4`}>Featured Courses</h2>
+          <p className={`${styles.heroSubText} mt-8 text-white-100 text-center`}>
+          Explore our courses and enhance your skills
+        </p>
+        
+        <div className="mt-10">
+          <CourseList courseData={courseData} />
+        </div>
+        </div>
+      </div>
+      <div className={`relative top-[20px] max-w-8xl mx-auto ${styles.paddingX} flex flex-col items-center`}>
+      <div className={`mt-0 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12`}>
   <div
     
     className="card"
@@ -160,19 +176,34 @@ function Home() {
     </p>
   </div>
 </div>
-
-
-        <div className="mt-10">
-          <h2 className={`${styles.sectionHeadText} text-center mb-4`}>Featured Courses</h2>
-          <p className={`${styles.heroSubText} mt-8 text-white-100 text-center`}>
-          Explore our courses and enhance your skills
+      <section className="why-us-section py-16 flex flex-col lg:flex-row items-center">
+  <div className="container mx-auto ">
+ 
+    <div className="flex flex-col lg:flex-row items-center mb-12">
+      <img src={WhyUsImage} alt="Why Choose Us" className="w-full lg:w-1/2 rounded-lg shadow-lg mb-6 lg:mb-0" />
+      <div className="lg:w-1/2 lg:pl-12">
+        <h3 className="text-2xl font-semibold mb-4">Interactive Learning Experiences</h3>
+        <p className="text-gray-700 mb-6">
+          Immerse yourself in interactive lessons, quizzes, and assignments designed to make learning engaging and enjoyable.
         </p>
-        <div className="mt-10">
-          <CourseList courseData={courseData} />
-        </div>
-        </div>
+        <h3 className="text-2xl font-semibold mb-4">Expert Instructors & Industry Leaders</h3>
+        <p className="text-gray-700 mb-6">
+          Learn from passionate instructors who are experts in their fields and gain insights from industry leaders.
+        </p>
+        <h3 className="text-2xl font-semibold mb-4">Flexible Learning at Your Fingertips</h3>
+        <p className="text-gray-700 mb-6">
+          Embrace flexibility with on-the-go access to course materials, allowing you to learn at your own pace and convenience.
+        </p>
+        {/* Add more points as needed */}
       </div>
+    </div>
+  </div>
+</section>
+
+      </div>
+      <StarsCanvas />
     </section>
+    
   );
 }
 
