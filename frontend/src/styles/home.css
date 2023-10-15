@@ -73,3 +73,54 @@
 }
 
 /* Add more styles and colors as needed */
+/* Styles for Why Us section */
+.why-us-section {
+  padding: 2px 0;
+}
+
+.why-us-section h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.why-us-section img {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.why-us-section .flex-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+  .why-us-section .flex-container {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .why-us-section .flex-container img {
+    margin-right: 2rem;
+  }
+}
+
+.why-us-section h3 {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  color: #5d00ff; 
+  text-transform: capitalize;
+}
+
+.why-us-section p {
+  font-size: 1.1rem; 
+  color: #f3f3f3; 
+  margin-bottom: 1.5rem; 
+  line-height: 1.4; 
+}
+
