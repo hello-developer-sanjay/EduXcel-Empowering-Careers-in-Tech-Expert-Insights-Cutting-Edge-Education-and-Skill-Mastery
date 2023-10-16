@@ -104,14 +104,14 @@ function Home() {
           <Slider {...sliderSettings}>
           <div>
               <img
-                src="./src/assets/a2.png"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a2.webp"
                 alt="Image 2"
                 className="w-full h-[400px]"
               />
             </div>
             <div>
               <img
-                src="./src/assets/a3.png"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a2.webp"
                 alt="Image 3"
                 className="w-full h-[400px]"
               />
@@ -119,7 +119,7 @@ function Home() {
             
             <div>
               <img
-                src="./src/assets/a5.png"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a2.webp"
                 alt="Image 3"
                 className="w-full h-[400px]"
               />
