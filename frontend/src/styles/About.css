@@ -1,0 +1,41 @@
+.about-section {
+    padding: 20px;
+    /* Add any other styles for your section */
+  }
+  
+  .card {
+    width: 100%;
+    max-width: 300px;
+    /* Add other card styles as needed */
+  }
+  
+  .image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    /* Add any other image styles */
+  }
+  
+  .list {
+    list-style: none;
+    max-width: 300px;
+    /* Add any other list styles */
+  }
+  
+  .list-item {
+    margin-bottom: 10px;
+    /* Add other list item styles as needed */
+  }
+  .creativity {
+    display: flex;
+    align-items: center;
+  }
+  
+  @media (max-width: 768px) {
+    .creativity {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+  
