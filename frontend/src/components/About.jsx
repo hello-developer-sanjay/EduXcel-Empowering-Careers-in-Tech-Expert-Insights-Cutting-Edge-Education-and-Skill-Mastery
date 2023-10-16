@@ -20,21 +20,22 @@ const About = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <motion.div className="flex flex-col items-center card" whileHover={{ scale: 1.05 }}>
-            <img src={responsiveImage} alt="Responsive Design" className="image" />
-            <h3 className="text-2xl font-semibold mb-4 text-blue-600">Responsive Learning Experience</h3>
-            <p className="text-purple-700 mb-6 text-center max-w-sm">
-              Access EduXcel on various devices, ensuring an optimal and user-friendly learning experience, from desktops to smartphones.
-            </p>
-          </motion.div>
-          <motion.div className="flex flex-col items-center card" whileHover={{ scale: 1.05 }}>
-            <img src={technologyImage} alt="Cutting-edge Technology" className="image" />
-            <h3 className="text-2xl font-semibold mb-4 text-blue-600">Cutting-edge Technology</h3>
-            <p className="text-purple-700 mb-6 text-center max-w-sm">
-              Built with Vite + React, MongoDB, Express.js, Node.js, and other advanced technologies for rapid development and secure learning environments.
-            </p>
-          </motion.div>
-        </div>
+  <motion.div className="flex flex-col items-center" style={{ width: "100%", maxWidth: "300px", border: "1px solid #ccc", borderRadius: "10px" }} whileHover={{ scale: 1.05 }}>
+    <img src={responsiveImage} alt="Responsive Design" className="image" />
+    <h3 className="text-2xl text-center font-semibold mb-4 text-blue-600">Responsive Learning Experience</h3>
+    <p className="text-purple-700 mb-6 text-center max-w-sm">
+      Access EduXcel on various devices, ensuring an optimal and user-friendly learning experience, from desktops to smartphones.
+    </p>
+  </motion.div>
+  <motion.div className="flex flex-col items-center" style={{ width: "100%", maxWidth: "300px", border: "1px solid #ccc", borderRadius: "10px" }} whileHover={{ scale: 1.05 }}>
+    <img src={technologyImage} alt="Cutting-edge Technology" className="image" />
+    <h3 className="text-2xl text-center font-semibold mb-4 text-blue-600">Cutting-edge Technology</h3>
+    <p className="text-purple-700 mb-6 text-center max-w-sm">
+      Built with Vite + React, MongoDB, Express.js, Node.js, and other advanced technologies for rapid development and secure learning environments.
+    </p>
+  </motion.div>
+</div>
+
 
         <div className="mt-12">
           <h3 className="text-3xl font-semibold mb-4 text-blue-600">Our Mission and Goals</h3>
