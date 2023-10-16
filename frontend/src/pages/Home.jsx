@@ -106,22 +106,22 @@ function Home() {
               <img
                 src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a2.webp"
                 alt="Image 2"
-                className="w-full h-[400px]"
+                className="w-full h-[350px]"
               />
             </div>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a2.webp"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a3.webp"
                 alt="Image 3"
-                className="w-full h-[400px]"
+                className="w-full h-[350px]"
               />
             </div>
             
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a2.webp"
+                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a5.webp"
                 alt="Image 3"
-                className="w-full h-[400px]"
+                className="w-full h-[350px]"
               />
             </div>
           </Slider>
