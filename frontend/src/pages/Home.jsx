@@ -104,14 +104,14 @@ function Home() {
           <Slider {...sliderSettings}>
           <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a2.webp"
+                src="./src/assets/a2.png"
                 alt="Image 2"
                 className="w-full h-[400px]"
               />
             </div>
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a3.webp"
+                src="./src/assets/a3.png"
                 alt="Image 3"
                 className="w-full h-[400px]"
               />
@@ -119,7 +119,7 @@ function Home() {
             
             <div>
               <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a5.webp"
+                src="./src/assets/a5.png"
                 alt="Image 3"
                 className="w-full h-[400px]"
               />
@@ -167,20 +167,23 @@ function Home() {
             </p>
           </div>
         </div>
-        <section className="why-us-section py-16 flex flex-col lg:flex-row items-center">
+        <div className="why-us-section py-16 flex flex-col lg:flex-row items-center">
   <div className="container mx-auto">
     <div className="flex flex-col lg:flex-row items-center mb-12">
       <div className="shining-ring-container">
-  <div className="shining-ring"></div>
+        <div className="shining-ring"></div>
+        <div className="flex-container">
   <motion.img
     src={WhyUsImage}
     alt="Why Choose Us"
-    className="w-full lg:w-1/2 rounded-lg shadow-lg mb-6 lg- mb-0"
+    className="w-full lg:w-full rounded-lg shadow-lg mb-6 lg-mb-0" // Adjust the width
     initial={{ scale: 0, opacity: 0 }}
     animate={controls}
   />
 
+</div>
 
+      </div>
       <div className="lg:w-1/2 lg:pl-12 why-us-content"> {/* New container div with a class */}
         <h3 className="text-2xl font-semibold mb-4">Interactive Learning Experiences</h3>
         <p className="text-gray-700 mb-6">
@@ -195,11 +198,13 @@ function Home() {
           Embrace flexibility with on-the-go access to course materials, allowing you to learn at your own pace and convenience.
         </p>
       </div>
-      </div>
     </div>
   </div>
-</section>
+</div>
+
+
       </div>
+      
     </section>
   );
 }
