@@ -71,9 +71,12 @@ const About = () => {
         <div className="mt-12 flex flex-wrap items-center">
   <div className="w-full md:w-1/2">
     <h3 className="text-3xl font-semibold mb-4 text-blue-600">What Sets Us Apart</h3>
-    <p className="text-purple-700">
-      EduXcel prioritizes user satisfaction. Here's what you can expect from our platform:
-    </p>
+   <p className="text-purple-700">
+  EduXcel prioritizes user satisfaction.
+  <br />
+  Here's what you can expect from our platform:
+</p>
+
     <ul className="list mt-4">
       <motion.li className="list-item" whileHover={{ scale: 1.1 }}>
         <FaCheckCircle className="text-green-500 mr-2" />
