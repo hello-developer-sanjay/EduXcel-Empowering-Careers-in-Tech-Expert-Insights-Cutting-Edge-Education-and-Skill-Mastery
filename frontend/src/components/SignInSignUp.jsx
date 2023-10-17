@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Signup from '../pages/Signup';
 import Signin from '../pages/Signin';
 import '../styles/SignInSignUp.css';
+import SecurityImage from '../assets/s1.webp'; // Import your image
 
 function SignInSignUp({ showCloseButton }) {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -25,6 +26,9 @@ function SignInSignUp({ showCloseButton }) {
         <div className="auth-content">
           <h2>{isSignUp ? 'Sign Up' : 'Sign In'}</h2>
           {isSignUp ? <Signup /> : <Signin />}
+        </div>
+        <div className="auth-image">
+          <img src={SecurityImage} alt="Security" />
         </div>
         <div className="auth-toggle">
           <p onClick={toggleForm} className="toggle-link">
