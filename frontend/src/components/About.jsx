@@ -55,9 +55,15 @@ const About = () => {
       </motion.li>
     </ul>
   </div>
-  <div className="w-full md:w-1/2 flex justify-center">
-    <img src={Courses} alt="Courses Image" className="max-w-full h-auto" />
-  </div>
+  <div className="w-full md:w-1/2 flex justify-center items-center">
+  <img
+    src={Courses}
+    alt="Courses Image"
+    className="max-w-full h-auto rounded-md shadow-lg  p-2"
+    style={{ maxHeight: '600px' }} // Set maximum height for the image if needed
+  />
+</div>
+
 </div>
 
 
@@ -83,9 +89,14 @@ const About = () => {
       </motion.li>
     </ul>
   </div>
-  <div className="w-full md:w-1/2 flex justify-center">
-    <img src={Security} alt="Security Image" className="max-w-full h-auto" />
-  </div>
+  <div className="w-full md:w-1/2 flex justify-center items-center">
+  <img
+    src={Security}
+    alt="Courses Image"
+    className="max-w-full h-auto rounded-md shadow-lg  p-2"
+    style={{ maxHeight: '600px' }} // Set maximum height for the image if needed
+  />
+</div>
 </div>
 
 
