@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Signup from '../pages/Signup';
 import Signin from '../pages/Signin';
 import '../styles/SignInSignUp.css';
-import SecurityImage from '../assets/s1.webp'; // Import your image
+import SecurityImage from '../assets/security.gif'; // Import your image
 
 function SignInSignUp({ showCloseButton }) {
   const [isSignUp, setIsSignUp] = useState(false);
