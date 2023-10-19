@@ -104,21 +104,21 @@ function Home() {
     <Slider {...sliderSettings}>
       <div className="w-full">
         <img
-          src="./src/assets/a2.png"
+          src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a2.webp"
           alt="Image 2"
           className="w-full h-auto object-cover"
         />
       </div>
       <div className="w-full">
         <img
-          src="./src/assets/a3.png"
+          src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a3.webp"
           alt="Image 3"
           className="w-full h-auto object-cover"
         />
       </div>
       <div className="w-full">
         <img
-          src="./src/assets/a5.png"
+          src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a5.webp"
           alt="Image 3"
           className="w-full h-auto object-cover"
         />
