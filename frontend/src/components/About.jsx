@@ -105,7 +105,7 @@ const About = () => {
       </motion.li>
     </ul>
   </div>
-  <div className="w-full md:w-1/2 flex justify-center items-center">
+  <div className="w-full md:w-1/2 flex justify-center items-center mt-6 md:mt-0"> 
   <img
     src={Security}
     alt="Courses Image"
@@ -131,7 +131,7 @@ const About = () => {
           
         </div>
         
-        <div className="w-full md:w-1/2 flex justify-center items-center">
+         <div className="w-full md:w-1/2 flex justify-center items-center mt-6 md:mt-0"> 
   <img
     src={Feature}
     alt="Feature Image"
