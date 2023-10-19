@@ -5,9 +5,21 @@ import CreaTeaImage from '../assets/tea.gif';
 import { motion } from 'framer-motion';
 import Security from '../assets/s1.webp';
 import Courses from '../assets/e.webp';
-import '../styles/About.css'; // Import your custom CSS for additional styling
+import Feature from '../assets/a6.webp';
+import '../styles/About.css';
 
 const About = () => {
+  
+  
+  const educationalFeatures = [
+    "User profile page: The user profile page enables users to view and modify their personal information, including their name, email address, and profile picture.",
+    "Course page: Users can easily access a list of available courses and enroll directly from the course page. Additionally, users can track their course progress.",
+    "Module page: Users can view module content and complete module activities directly from the module page, with progress tracking capabilities.",
+    "Submodule page: Similar to the module page, users can view and complete submodule content and activities, with progress tracking.",
+    "Quiz page: The application provides a dedicated quiz page where users can take quizzes to assess their learning, view their results, and review their answers."
+  ];
+  
+ 
   return (
     <motion.section className="about-section" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <div className="container mx-auto">
@@ -41,26 +53,27 @@ const About = () => {
   <div className="w-full md:w-1/2">
     <h3 className="text-3xl font-semibold mb-4 text-blue-600">Our Mission and Goals</h3>
     <ul className="list">
-      <motion.li className="list-item" whileHover={{ scale: 1.1 }}>
-        <FaCheckCircle className="text-green-500 mr-2" />
-        Provide a diverse range of high-quality courses and educational content.
-      </motion.li>
-      <motion.li className="list-item" whileHover={{ scale: 1.1 }}>
-        <FaCheckCircle className="text-green-500 mr-2" />
-        Create a seamless and secure environment for online education.
-      </motion.li>
-      <motion.li className="list-item" whileHover={{ scale: 1.1 }}>
-        <FaCheckCircle className="text-green-500 mr-2" />
-        Offer personalized learning experiences tailored to individual needs.
-      </motion.li>
-    </ul>
+  <motion.li className="list-item" whileHover={{ scale: 1.1 }}>
+    <FaCheckCircle className="text-green-500 mr-2" />
+    Provide a diverse range of high-quality courses and educational content, spanning various subjects and skill levels to cater to a wide audience.
+  </motion.li>
+  <motion.li className="list-item" whileHover={{ scale: 1.1 }}>
+    <FaCheckCircle className="text-green-500 mr-2" />
+    Create a seamless and secure environment for online education by implementing robust security measures, ensuring the safety of user data and interactions.
+  </motion.li>
+  <motion.li className="list-item" whileHover={{ scale: 1.1 }}>
+    <FaCheckCircle className="text-green-500 mr-2" />
+    Offer personalized learning experiences tailored to individual needs, including customized course recommendations and adaptive learning paths.
+  </motion.li>
+</ul>
+
   </div>
   <div className="w-full md:w-1/2 flex justify-center items-center">
   <img
     src={Courses}
     alt="Courses Image"
-    className="max-w-full h-auto rounded-md shadow-lg  p-2"
-    style={{ maxHeight: '600px' }} // Set maximum height for the image if needed
+    className="max-w-full h-auto rounded-md shadow-lg p-2 "
+    style={{ maxHeight: '600px' }} 
   />
 </div>
 
@@ -71,7 +84,7 @@ const About = () => {
         <div className="mt-12 flex flex-wrap items-center">
   <div className="w-full md:w-1/2">
     <h3 className="text-3xl font-semibold mb-4 text-blue-600">What Sets Us Apart</h3>
-   <p className="text-purple-700">
+    <p className="text-purple-700">
   EduXcel prioritizes user satisfaction.
   <br />
   Here's what you can expect from our platform:
@@ -96,13 +109,38 @@ const About = () => {
   <img
     src={Security}
     alt="Courses Image"
-    className="max-w-full h-auto rounded-md shadow-lg  p-2"
-    style={{ maxHeight: '600px' }} // Set maximum height for the image if needed
+    className="max-w-full h-auto rounded-md shadow-lg p-2 shining-border"
+    style={{ maxHeight: '600px' }} 
   />
 </div>
 </div>
 
+        {/* Educational Features */}
+        <div className="mt-12 flex flex-wrap items-center ">
+        <div className="w-full md:w-1/2">
+          <h3 className="text-3xl font-semibold mb-4 text-blue-600">Educational Features</h3>
+          <ul className="list mt-4">
+            {/* Iterate through educational features and display them */}
+            {educationalFeatures.map((feature, index) => (
+              <motion.li className="list-item" whileHover={{ scale: 1.1 }} key={index}>
+                <FaCheckCircle className="text-green-500 mr-2" />
+                {feature}
+              </motion.li>
+            ))}
+          </ul>
+          
+        </div>
+        
+        <div className="w-full md:w-1/2 flex justify-center items-center">
+  <img
+    src={Feature}
+    alt="Feature Image"
+    className={`max-w-full h-auto rounded-md shadow-lg p-2 shining-border`}
+    style={{ maxHeight: '600px' }} 
+  />
+</div>
 
+        </div>
         <div className="flex justify-center items-center my-12">
   <h2 className="text-2xl font-semibold text-blue-600 mr-4">Made With</h2>
   <h2 className="text-4xl font-semibold text-blue-600 flex items-center creativity">
@@ -112,7 +150,11 @@ const About = () => {
   </h2>
 </div>
 
+ 
 
+       
+
+        
 
 
       </div>
