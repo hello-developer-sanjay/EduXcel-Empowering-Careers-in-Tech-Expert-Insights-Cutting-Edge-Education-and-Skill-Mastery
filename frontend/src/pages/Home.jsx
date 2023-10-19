@@ -99,37 +99,37 @@ function Home() {
       </Helmet>
       <StarsCanvas />
 
-      <div className={`relative top-[20px] max-w-8xl mx-auto ${styles.paddingX} flex flex-col items-center`}>
-        <div className="w-full max-w-4xl">
-          <Slider {...sliderSettings}>
-          <div>
-              <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a2.webp"
-                alt="Image 2"
-                className="w-full h-[350px]"
-              />
-            </div>
-            <div>
-              <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a3.webp"
-                alt="Image 3"
-                className="w-full h-[350px]"
-              />
-            </div>
-            
-            <div>
-              <img
-                src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a5.webp"
-                alt="Image 3"
-                className="w-full h-[350px]"
-              />
-            </div>
-          </Slider>
-        </div>
-        <div className={`${styles.sectionHeadText} text-center mb-4`}>Featured Courses</div>
-        <p className={`${styles.heroSubText} mt-8 text-white-100 text-center`}>Explore our courses and enhance your skills</p>
-        <CourseList courseData={courseData} />
+     <div className={`relative top-[10px] max-w-8xl mx-auto ${styles.paddingX} flex flex-col items-center`}>
+  <div className="w-full max-w-4xl">
+    <Slider {...sliderSettings}>
+      <div className="w-full">
+        <img
+          src="./src/assets/a2.png"
+          alt="Image 2"
+          className="w-full h-auto object-cover"
+        />
       </div>
+      <div className="w-full">
+        <img
+          src="./src/assets/a3.png"
+          alt="Image 3"
+          className="w-full h-auto object-cover"
+        />
+      </div>
+      <div className="w-full">
+        <img
+          src="./src/assets/a5.png"
+          alt="Image 3"
+          className="w-full h-auto object-cover"
+        />
+      </div>
+    </Slider>
+  </div>
+  <div className={`${styles.sectionHeadText} text-center mb-4`}>Featured Courses</div>
+  <p className={`${styles.heroSubText} mt-8 text-white-100 text-center`}>Explore our courses and enhance your skills</p>
+  <CourseList courseData={courseData} />
+</div>
+
 
       <div className={`relative top-[20px] max-w-8xl mx-auto ${styles.paddingX} flex flex-col items-center`}>
         <div className={`mt-0 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12`}>
