@@ -7,7 +7,7 @@ import Security from '../assets/s1.webp';
 import Courses from '../assets/e.webp';
 import Feature from '../assets/a6.webp';
 import '../styles/About.css';
-
+import DuckImage from "../assets/duck4.gif";
 const About = () => {
   
   
@@ -141,17 +141,26 @@ const About = () => {
 </div>
 
         </div>
-        <div className="flex justify-center items-center my-12">
-  <h2 className="text-2xl font-semibold text-blue-600 mr-4">Made With</h2>
+        <div className="flex justify-center items-center  mt-4">
+  <h2 className="text-2xl font-semibold text-green-600 mr-4 ">Made With</h2>
   <h2 className="text-4xl font-semibold text-blue-600 flex items-center creativity">
-    <span className="text-green-600">Crea</span>
-    <img src={CreaTeaImage} alt="CreaTea" className="w-16 h-16 mx-2" />
+    <span className="text-yellow-600">Crea</span>
+    <img src={CreaTeaImage} alt="CreaTea" className="w-12 h-12 mx-2" />
     <span className="text-green-600">vity</span>
   </h2>
 </div>
+ <div className="flex justify-center items-center ">
+  <h2 className='text-2x1 font-semibold text-green-600 mr-4 '>
+  Innovation enhances
+  </h2>
+ <h2 className="text-4xl font-semibold text-blue-600 flex items-center creativity">
+<span className="text-yellow-600">Pro</span>
+<img src={DuckImage} alt='DuckImage' className='w-12 h-11 mx-2'/>
+  <span className='text-green-600'>tivity</span>
+</h2>
 
- 
 
+</div>
        
 
         
