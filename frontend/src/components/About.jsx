@@ -110,7 +110,7 @@ const About = () => {
     src={Security}
     alt="Courses Image"
     className="max-w-full h-auto rounded-md shadow-lg p-2 shining-border"
-    style={{ maxHeight: '600px' }} 
+    style={{ maxHeight: '400px' }} 
   />
 </div>
 </div>
@@ -136,7 +136,7 @@ const About = () => {
     src={Feature}
     alt="Feature Image"
     className={`max-w-full h-auto rounded-md shadow-lg p-2 shining-border`}
-    style={{ maxHeight: '600px' }} 
+    style={{ maxHeight: '400px' }} 
   />
 </div>
 
