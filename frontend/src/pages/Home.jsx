@@ -12,6 +12,7 @@ import StarsCanvas from '../components/Stars';
 import { FaChalkboardTeacher, FaUserGraduate, FaClock } from 'react-icons/fa';
 import WhyUsImage from '../assets/why.webp';
 import About from '../components/About';
+import Faq from '../components/Faq';
 function Home() {
   const [courseData, setCourseData] = useState([]);
   const controls = useAnimation();
@@ -205,6 +206,7 @@ function Home() {
 
       </div>
        <About/>
+      <Faq/>
     </section>
   );
 }
