@@ -8,7 +8,7 @@
     transform: scale(1);
   }
   50% {
-    box-shadow: 0 0 30px 10px #ffeb3b;
+    box-shadow: 0 0 15px 10px #ffeb3b;
     transform: scale(1.1);
   }
   100% {
@@ -16,7 +16,6 @@
     transform: scale(1);
   }
 }
-
 
 
 
