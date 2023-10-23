@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
+const UserProfile = require('../models/UserProfile');
 const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer'); 
+const passport = require('passport');
+const nodemailer = require('nodemailer'); // Import nodemailer for sending emails
 require('dotenv').config();
 
 // Function to send a welcome email
@@ -124,6 +126,44 @@ const sendWelcomeEmail = async (email, userName) => {
   await transporter.sendMail(mailOptions);
 };
 
+router.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/signin' }),
+  async (req, res) => {
+    try {
+      // Check if the user exists or create a new user (similar to your local authentication)
+      const user = await User.findOne({ googleId: req.user.googleId });
+
+      if (!user) {
+        const newUser = new User({
+          username: req.user.displayName,
+          email: req.user.emails[0].value,
+          googleId: req.user.googleId,
+        });
+        await newUser.save();
+
+        // Create a user profile for the new user
+        const newUserProfile = new UserProfile({
+          user: newUser._id,
+          username: newUser.username,
+          email: newUser.email, // Use the email from the newly created user
+        });
+        await newUserProfile.save();
+      }
+
+      // Generate a JWT token for the user
+      const token = jwt.sign({ userId: user._id }, 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA', { expiresIn: '1h' });
+
+      // Redirect or respond with the token as needed
+      res.redirect(`/profile?token=${token}`);
+    } catch (error) {
+      console.error('Google OAuth callback error:', error);
+      res.redirect('/signin');
+    }
+  }
+);
+
+
+
 router.post('/', async (req, res) => {
   const { email, password } = req.body;
 
@@ -138,7 +178,7 @@ router.post('/', async (req, res) => {
       return res.status(401).json({ message: 'Authentication failed: Invalid password' });
     }
 
-  
+    // Sign a token as before
     const token = jwt.sign({ userId: user._id }, 'fRwD8ZcX#k5H*J!yN&2G@pQbS9v6E$tA');
 
     // Send a welcome email to the user
