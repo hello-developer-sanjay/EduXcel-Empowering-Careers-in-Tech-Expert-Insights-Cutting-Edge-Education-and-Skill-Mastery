@@ -125,6 +125,7 @@ const sendWelcomeEmail = async (email, userName) => {
 
   await transporter.sendMail(mailOptions);
 };
+router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 router.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/signin' }),
