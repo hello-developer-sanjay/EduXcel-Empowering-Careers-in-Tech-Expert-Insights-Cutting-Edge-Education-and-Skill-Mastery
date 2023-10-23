@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/AuthForms.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -14,7 +14,7 @@ function Signin() {
   const [signinError, setSigninError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
 
-  const navigate = useNavigate(); // Use the useNavigate hook for navigation
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,22 +28,35 @@ function Signin() {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('https://edu-backend-py90.onrender.com/api/signin', formData);
-      console.log('Signin success');
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await axios.post('https://edu-backend-py90.onrender.com/api/signin', formData);
+    console.log('Signin success');
+    localStorage.setItem('token', response.data.token);
 
-      // Store the token in localStorage
-      localStorage.setItem('token', response.data.token);
+    // Fetch the user profile data here
+    const profileResponse = await axios.get('https://edu-backend-py90.onrender.com/api/profile', {
+      headers: {
+        Authorization: `Bearer ${response.data.token}`,
+      },
+    });
 
-      // Navigate to the Profile page after successful sign-in
-      navigate('/profile');
-    } catch (error) {
-      console.error('Signin error:', error.response.data.message);
-      setSigninError(error.response.data.message);
-    }
-  };
+    const userProfileData = profileResponse.data;
+    // Set the user profile data in your state here
+
+    navigate('/profile');
+  } catch (error) {
+    console.error('Signin error:', error.response.data.message);
+    setSigninError(error.response.data.message);
+  }
+};
+
+
+
+
+  // Google OAuth2 URL
+  const googleAuthUrl = 'https://edu-backend-py90.onrender.com/auth/google';
 
   return (
     <div className="form-container">
@@ -74,6 +87,11 @@ function Signin() {
         <Link to="/forgot-password">Forgot Password</Link>
       </form>
       {signinError && <p className="error-message">{signinError}</p>}
+      
+      {/* Google Authentication Button */}
+      <a href={googleAuthUrl} className="google-auth-button">
+        Sign In with Google
+      </a>
     </div>
   );
 }
