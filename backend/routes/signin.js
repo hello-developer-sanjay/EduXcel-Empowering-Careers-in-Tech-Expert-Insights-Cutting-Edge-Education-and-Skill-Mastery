@@ -5,7 +5,7 @@ const User = require('../models/User');
 const UserProfile = require('../models/UserProfile');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
-const nodemailer = require('nodemailer'); // Import nodemailer for sending emails
+const nodemailer = require('nodemailer'); 
 require('dotenv').config();
 
 // Function to send a welcome email
