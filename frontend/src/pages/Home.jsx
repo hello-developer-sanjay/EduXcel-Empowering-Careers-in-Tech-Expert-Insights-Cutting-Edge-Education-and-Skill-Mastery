@@ -21,7 +21,7 @@ function Home() {
     // Fetch course data from your API endpoint
     async function fetchCourses() {
       try {
-        const response = await axios.get('https://edu-backend-py90.onrender.com/api/courses');
+        const response = await axios.get('https://eduxcel-backend.onrender.com/api/courses');
         setCourseData(response.data);
       } catch (error) {
         console.error('Error fetching courses:', error);
