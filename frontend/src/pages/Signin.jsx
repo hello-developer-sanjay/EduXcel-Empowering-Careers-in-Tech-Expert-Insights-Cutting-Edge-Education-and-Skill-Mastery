@@ -31,12 +31,12 @@ function Signin() {
 const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-    const response = await axios.post('https://edu-backend-py90.onrender.com/api/signin', formData);
+    const response = await axios.post('https://eduxcel-backend.onrender.com/api/signin', formData);
     console.log('Signin success');
     localStorage.setItem('token', response.data.token);
 
     // Fetch the user profile data here
-    const profileResponse = await axios.get('https://edu-backend-py90.onrender.com/api/profile', {
+    const profileResponse = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
       headers: {
         Authorization: `Bearer ${response.data.token}`,
       },
@@ -56,7 +56,7 @@ const handleSubmit = async (e) => {
 
 
   // Google OAuth2 URL
-  const googleAuthUrl = 'https://edu-backend-py90.onrender.com/auth/google';
+  const googleAuthUrl = 'https://eduxcel-backend.onrender.com/auth/google';
 
   return (
     <div className="form-container">
