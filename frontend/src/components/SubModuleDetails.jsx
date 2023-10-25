@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import '../styles/SubModuleDetails.css'; // Import the CSS file for styling
@@ -13,7 +13,7 @@ function SubModuleDetails() {
     async function fetchSubModuleDetails() {
       try {
         const response = await axios.get(
-          `https://edu-backend-py90.onrender.com/api/courses/${encodeURIComponent(title)}/modules/${encodeURIComponent(module)}/${encodeURIComponent(submodule)}`
+          `https://eduxcel-backend.onrender.com/api/courses/${encodeURIComponent(title)}/modules/${encodeURIComponent(module)}/${encodeURIComponent(submodule)}`
         );
 
         setSubModuleDetails(response.data);
