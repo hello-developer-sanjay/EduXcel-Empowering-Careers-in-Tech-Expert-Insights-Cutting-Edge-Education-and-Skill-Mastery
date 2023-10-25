@@ -35,7 +35,7 @@ const handleSubmit = async (e) => {
       return;
     }
 
-    const response = await axios.post('https://edu-backend-py90.onrender.com/api/signup', formData);
+    const response = await axios.post('https://eduxcel-backend.onrender.com/api/signup', formData);
     console.log('Signup success');
     setSignupSuccess('Signup successful!');
   } catch (error) {
