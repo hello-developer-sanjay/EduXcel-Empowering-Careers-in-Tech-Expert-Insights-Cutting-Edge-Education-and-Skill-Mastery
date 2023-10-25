@@ -1,5 +1,5 @@
 // ResetPassword.jsx
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import '../styles/ResetPassword.css'; // Import the CSS file for styling
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -19,7 +19,7 @@ function ResetPassword() {
 
     try {
       // Send a POST request to your server with the newPassword and token
-      const response = await fetch('https://edu-backend-py90.onrender.com/api/reset-password', {
+      const response = await fetch('https://eduxcel-backend.onrender.com/api/reset-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ newPassword, token }),
