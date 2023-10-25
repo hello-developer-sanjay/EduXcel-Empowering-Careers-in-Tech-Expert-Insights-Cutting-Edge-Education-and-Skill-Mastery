@@ -14,7 +14,7 @@ function CourseList() {
   useEffect(() => {
     async function fetchCourses() {
       try {
-        const response = await axios.get('https://edu-backend-py90.onrender.com/api/courses');
+        const response = await axios.get('https://eduxcel-backend.onrender.com/api/courses');
         setCourses(response.data);
       } catch (error) {
         console.error('Error fetching courses:', error);
