@@ -43,7 +43,7 @@ const Blogs = () => {
   const fetchData = async (collection) => {
     try {
       const response = await fetch(
-        `https://edu-backend-py90.onrender.com/api/${collection}`
+        `https://eduxcel-backend.onrender.com/api/${collection}`
       );
       const responseData = await response.json();
       setBlogsData((prevData) => ({
