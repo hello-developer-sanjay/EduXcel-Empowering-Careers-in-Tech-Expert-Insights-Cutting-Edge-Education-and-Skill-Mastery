@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../styles/SubHeader.css'; // Import your CSS file for styling
@@ -11,7 +11,7 @@ function SubHeader() {
   useEffect(() => {
     async function fetchCourses() {
       try {
-        const response = await axios.get('https://edu-backend-py90.onrender.com/api/courses');
+        const response = await axios.get('https://eduxcel-backend.onrender.com/api/courses');
         setCourses(response.data);
       } catch (error) {
         console.error('Error fetching courses:', error);
