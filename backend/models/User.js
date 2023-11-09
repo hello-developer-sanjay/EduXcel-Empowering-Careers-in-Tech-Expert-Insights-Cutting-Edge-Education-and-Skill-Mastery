@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true },
   googleId: String, // Store Google ID for Google-authenticated users
   resetToken: String,
+  password: { type: String, required: true },
   resetTokenExpiration: Date,
 });
 
