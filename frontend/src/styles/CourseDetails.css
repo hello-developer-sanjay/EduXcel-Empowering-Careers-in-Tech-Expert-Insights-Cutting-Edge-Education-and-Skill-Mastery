@@ -47,22 +47,20 @@ html, body {
   margin-bottom: 10px;
 }
 
-/* Add text styles for titles and descriptions */
 h2 {
   color: #333;
   font-size: 24px;
   margin-bottom: 10px;
+  font-family: 'Lugrasimo', cursive;
 }
 
 p {
   color: #666;
   font-size: 16px;
   margin-bottom: 10px;
+  font-weight: bold;
+  font-family: 'Lugrasimo', cursive;
 }
-
-/* Style the links */
-/* CourseDetails.css */
-/* ... (existing styles) */
 
 /* Style for the module link */
 .module-link {
