@@ -144,7 +144,7 @@ router.post('/', async (req, res) => {
                 <li>Bookmark your favorite courses for easy access.</li>
                 <li>Track your progress and achievements.</li>
               </ul>
-              <p>If you have any questions or need assistance, please feel free to <a href="mailto:support@eduxcel.com" class="button">Contact Us</a>. Our dedicated support team is here to help you succeed.</p>
+              <p>If you have any questions or need assistance, please feel free to <a href="mailto:patidar.developersanjay@gmail.com" class="button">Contact Us</a>. Our dedicated support team is here to help you succeed.</p>
               <p>Stay curious, stay motivated, and keep learning!</p>
               <p class="signature">Sanjay Patidar</p>
               <p>Founder, Eduxcel</p>
