@@ -15,29 +15,31 @@ const UserProfile = () => {
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
 
-  useEffect(() => {
+ useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const token = localStorage.getItem('token');
-        console.log('Token:', token); // Log the token for debugging
+        const idToken = localStorage.getItem('idToken'); // Replace 'idToken' with the key you use
+        console.log('ID Token:', idToken);
 
-        if (!token) {
+        if (!idToken) {
           navigate('/signin');
           return;
         }
 
-        const response = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
+        const response = await fetch('https://eduxcel-backend.onrender.com/api/profile', {
+          method: 'GET',
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${idToken}`,
+            'Content-Type': 'application/json',
           },
         });
 
-        if (!response.data) {
-          throw new Error('Error fetching user profile');
+        if (!response.ok) {
+          throw new Error(`Error fetching user profile: ${response.status}`);
         }
 
-        const data = response.data;
-        console.log('Fetched user profile data:', data); // Log the fetched data for debugging
+        const data = await response.json();
+        console.log('Fetched user profile data:', data);
         setUserProfile(data);
         setLoading(false);
         setError(null);
