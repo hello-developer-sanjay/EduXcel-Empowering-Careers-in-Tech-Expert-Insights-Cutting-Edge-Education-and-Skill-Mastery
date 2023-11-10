@@ -30,6 +30,7 @@ const UserProfile = () => {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json', // Add this line to set the content type
           },
         });
 
