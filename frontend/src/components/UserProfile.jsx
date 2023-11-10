@@ -50,7 +50,7 @@ const UserProfile = () => {
 
     fetchUserProfile();
   }, [navigate]);
-s
+
   const handleEditProfile = () => {
     setIsEditing(true);
   };
