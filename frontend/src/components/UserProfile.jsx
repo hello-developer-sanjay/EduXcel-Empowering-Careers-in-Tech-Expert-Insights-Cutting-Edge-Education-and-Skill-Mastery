@@ -26,19 +26,17 @@ const UserProfile = () => {
           return;
         }
 
-        const response = await fetch('https://eduxcel-backend.onrender.com/api/profile', {
-          method: 'GET',
+        const response = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
           headers: {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json', // Add this line to set the content type
           },
         });
 
-        if (!response.ok) {
-          throw new Error(`Error fetching user profile: ${response.status}`);
+        if (!response.data) {
+          throw new Error('Error fetching user profile');
         }
 
-        const data = await response.json();
+        const data = response.data;
         console.log('Fetched user profile data:', data); // Log the fetched data for debugging
         setUserProfile(data);
         setLoading(false);
@@ -52,7 +50,7 @@ const UserProfile = () => {
 
     fetchUserProfile();
   }, [navigate]);
-
+s
   const handleEditProfile = () => {
     setIsEditing(true);
   };
