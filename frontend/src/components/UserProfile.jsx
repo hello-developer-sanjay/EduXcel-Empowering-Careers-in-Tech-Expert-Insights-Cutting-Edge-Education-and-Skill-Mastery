@@ -53,15 +53,28 @@ const UserProfile = () => {
   };
 
   const handleUpdateProfile = async (updatedProfileData) => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await fetch('https://eduxcel-backend.onrender.com/api/profile', {
-        method: 'PUT',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: updatedProfileData,
-      });
+  try {
+    const token = localStorage.getItem('token');
+    const formData = new FormData();
+
+    // Append the fields to the FormData
+    formData.append('firstName', updatedProfileData.firstName);
+    formData.append('lastName', updatedProfileData.lastName);
+    formData.append('bio', updatedProfileData.bio);
+    
+    // Append the file if it exists
+    if (updatedProfileData.profileImage) {
+      formData.append('profileImage', updatedProfileData.profileImage);
+    }
+
+    const response = await fetch('https://eduxcel-backend.onrender.com/api/profile', {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
 
       if (!response.ok) {
         throw new Error(`Error updating user profile: ${response.status}`);
