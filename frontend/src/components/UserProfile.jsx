@@ -51,16 +51,15 @@ useEffect(() => {
     setIsEditing(true);
   };
 
-  // Update handleUpdateProfile function
 const handleUpdateProfile = async (updatedProfileData) => {
   try {
     const token = localStorage.getItem('token');
     const formData = new FormData();
 
-    // Append the fields to the FormData
-    formData.append('firstName', updatedProfileData.firstName || '');
-    formData.append('lastName', updatedProfileData.lastName || '');
-    formData.append('bio', updatedProfileData.bio || '');
+    // Append the fields to the FormData, but append null if the value is undefined
+    formData.append('firstName', updatedProfileData.firstName || null);
+    formData.append('lastName', updatedProfileData.lastName || null);
+    formData.append('bio', updatedProfileData.bio || null);
 
     // Append the file if it exists
     if (updatedProfileData.profileImage) {
@@ -87,7 +86,6 @@ const handleUpdateProfile = async (updatedProfileData) => {
     setError(error.message);
   }
 };
-
   const handleLogout = async () => {
     try {
       // Send a request to the server to log the user out
