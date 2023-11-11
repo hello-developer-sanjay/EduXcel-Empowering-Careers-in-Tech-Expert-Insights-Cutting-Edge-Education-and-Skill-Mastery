@@ -66,29 +66,32 @@ function Signin() {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('https://eduxcel-backend.onrender.com/api/signin', formData);
-      console.log('Signin success');
-      localStorage.setItem('token', response.data.token);
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await axios.post('https://eduxcel-backend.onrender.com/api/signin', formData);
+    console.log('Signin success');
+    const token = response.data.token;
 
-      // Fetch the user profile data here
-      const profileResponse = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
-        headers: {
-          Authorization: `Bearer ${response.data.token}`,
-        },
-      });
+    // Store the token in local storage
+    localStorage.setItem('token', token);
 
-      const userProfileData = profileResponse.data;
-      // Set the user profile data in your state here
+    // Fetch the user profile data here
+    const profileResponse = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-      navigate('/profile');
-    } catch (error) {
-      console.error('Signin error:', error.response.data.message);
-      setSigninError(error.response.data.message);
-    }
-  };
+    const userProfileData = profileResponse.data;
+    // Set the user profile data in your state here
+
+    navigate('/profile');
+  } catch (error) {
+    console.error('Signin error:', error.response.data.message);
+    setSigninError(error.response.data.message);
+  }
+};
 
   return (
     <div className="form-container">
