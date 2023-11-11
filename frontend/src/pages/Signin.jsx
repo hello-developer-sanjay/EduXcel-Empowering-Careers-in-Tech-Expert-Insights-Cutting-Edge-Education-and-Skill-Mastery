@@ -44,6 +44,7 @@ const handleSubmit = async (e) => {
 
     const userProfileData = profileResponse.data;
     // Set the user profile data in your state here
+    setUserProfileData(userProfileData); // Add this line
 
     navigate('/profile');
   } catch (error) {
@@ -51,6 +52,7 @@ const handleSubmit = async (e) => {
     setSigninError(error.response.data.message);
   }
 };
+
 
 
 
