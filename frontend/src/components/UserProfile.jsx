@@ -19,8 +19,6 @@ useEffect(() => {
     const fetchUserProfile = async () => {
       try {
         const token = localStorage.getItem('token');
-        console.log('Token:', token); // Log the token for debugging
-
         if (!token) {
           navigate('/signin');
           return;
@@ -38,12 +36,10 @@ useEffect(() => {
         }
 
         const data = await response.json();
-        console.log('Fetched user profile data:', data); // Log the fetched data for debugging
         setUserProfile(data);
         setLoading(false);
         setError(null);
       } catch (error) {
-        console.error('Error fetching user profile:', error);
         setError(error.message);
         setLoading(false);
       }
