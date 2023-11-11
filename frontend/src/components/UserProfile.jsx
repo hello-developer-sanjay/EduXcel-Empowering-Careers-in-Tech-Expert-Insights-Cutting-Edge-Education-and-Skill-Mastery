@@ -85,6 +85,7 @@ useEffect(() => {
     } catch (error) {
       console.error('Error updating user profile:', error);
       setError(error.message);
+     console.log('Response:', response);
     }
   };
 
