@@ -59,8 +59,7 @@ const handleSubmit = async (e) => {
 
 
   // Google OAuth2 URL
-  const googleAuthUrl = 'https://eduxcel-backend.onrender.com/auth/google';
-
+ const googleAuthUrl = 'https://eduxcel-backend.onrender.com/auth/googleToken';
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit}>
