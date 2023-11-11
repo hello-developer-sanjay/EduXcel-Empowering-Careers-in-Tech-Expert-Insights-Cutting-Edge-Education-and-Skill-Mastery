@@ -51,16 +51,17 @@ useEffect(() => {
     setIsEditing(true);
   };
 
-  const handleUpdateProfile = async (updatedProfileData) => {
+  // Update handleUpdateProfile function
+const handleUpdateProfile = async (updatedProfileData) => {
   try {
     const token = localStorage.getItem('token');
     const formData = new FormData();
 
     // Append the fields to the FormData
-    formData.append('firstName', updatedProfileData.firstName);
-    formData.append('lastName', updatedProfileData.lastName);
-    formData.append('bio', updatedProfileData.bio);
-    
+    formData.append('firstName', updatedProfileData.firstName || '');
+    formData.append('lastName', updatedProfileData.lastName || '');
+    formData.append('bio', updatedProfileData.bio || '');
+
     // Append the file if it exists
     if (updatedProfileData.profileImage) {
       formData.append('profileImage', updatedProfileData.profileImage);
@@ -74,20 +75,18 @@ useEffect(() => {
       body: formData,
     });
 
-
-      if (!response.ok) {
-        throw new Error(`Error updating user profile: ${response.status}`);
-      }
-
-      const updatedProfile = await response.json();
-      setUserProfile(updatedProfile);
-      setIsEditing(false);
-    } catch (error) {
-      console.error('Error updating user profile:', error);
-      setError(error.message);
-     console.log('Response:', response);
+    if (!response.ok) {
+      throw new Error(`Error updating user profile: ${response.status}`);
     }
-  };
+
+    const updatedProfile = await response.json();
+    setUserProfile(updatedProfile);
+    setIsEditing(false);
+  } catch (error) {
+    console.error('Error updating user profile:', error);
+    setError(error.message);
+  }
+};
 
   const handleLogout = async () => {
     try {
