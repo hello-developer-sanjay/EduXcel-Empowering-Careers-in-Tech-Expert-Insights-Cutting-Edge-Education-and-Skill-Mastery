@@ -15,38 +15,37 @@ const UserProfile = () => {
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
 
-useEffect(() => {
-  const fetchUserProfile = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        navigate('/signin');
-        return;
+ useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          navigate('/signin');
+          return;
+        }
+
+        const response = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Error fetching user profile: ${response.status}`);
+        }
+
+        const data = response.data;
+        setUserProfile(data);
+        setLoading(false);
+        setError(null);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
       }
+    };
 
-      const response = await fetch('https://eduxcel-backend.onrender.com/api/profile', {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`Error fetching user profile: ${response.status}`);
-      }
-
-      const data = await response.json();
-      setUserProfile(data);
-      setLoading(false);
-      setError(null);
-    } catch (error) {
-      setError(error.message);
-      setLoading(false);
-    }
-  };
-
-  fetchUserProfile();
-}, [navigate]);
+    fetchUserProfile();
+  }, [navigate]);
   const handleEditProfile = () => {
     setIsEditing(true);
   };
