@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import EditProfile from './EditProfile';
 import '../styles/UserProfile.css';
@@ -15,84 +15,78 @@ const UserProfile = () => {
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
 
- useEffect(() => {
+  useEffect(() => {
     const fetchUserProfile = async () => {
-  try {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      navigate('/signin');
-      return;
-    }
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          navigate('/signin');
+          return;
+        }
 
-    const response = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+        const response = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-    if (response.status !== 200) {
-      throw new Error(`Error fetching user profile: ${response.status}`);
-    }
+        if (response.status !== 200) {
+          throw new Error(`Error fetching user profile: ${response.status}`);
+        }
 
-    const data = response.data;
-    setUserProfile(data);
-    setLoading(false);
-    setError(null);
-  } catch (error) {
-    setError(error.message);
-    setLoading(false);
-  }
-};
+        const data = response.data;
+        setUserProfile(data);
+        setLoading(false);
+        setError(null);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
 
     fetchUserProfile();
   }, [navigate]);
+
   const handleEditProfile = () => {
     setIsEditing(true);
   };
 
   const handleUpdateProfile = async (updatedProfileData) => {
-  try {
-    const token = localStorage.getItem('token');
-    const formData = new FormData();
+    try {
+      const token = localStorage.getItem('token');
+      const formData = new FormData();
 
-    // Append the fields to the FormData
-    formData.append('firstName', updatedProfileData.firstName);
-    formData.append('lastName', updatedProfileData.lastName);
-    formData.append('bio', updatedProfileData.bio);
+      // Append the fields to the FormData
+      formData.append('firstName', updatedProfileData.firstName || userProfile.firstName);
+      formData.append('lastName', updatedProfileData.lastName || userProfile.lastName);
+      formData.append('bio', updatedProfileData.bio || userProfile.bio);
 
-    // Append the file if it exists
-    if (updatedProfileData.profileImage) {
-      formData.append('profileImage', updatedProfileData.profileImage);
-    }
+      // Append the file if it exists
+      if (updatedProfileData.profileImage) {
+        formData.append('profileImage', updatedProfileData.profileImage);
+      }
 
-    const response = await fetch('https://eduxcel-backend.onrender.com/api/profile', {
-      method: 'PUT',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: formData,
-    });
+      const response = await fetch('https://eduxcel-backend.onrender.com/api/profile', {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
 
-    if (!response.ok) {
-      throw new Error(`Error updating user profile: ${response.status}`);
-    }
+      if (!response.ok) {
+        throw new Error(`Error updating user profile: ${response.status}`);
+      }
 
-    // Parse the JSON response
-    const updatedProfile = await response.json();
-
-    // Check if the response contains the expected fields
-    if ('username' in updatedProfile && 'email' in updatedProfile) {
+      const updatedProfile = await response.json();
       setUserProfile(updatedProfile);
       setIsEditing(false);
-    } else {
-      throw new Error('Invalid response format');
+    } catch (error) {
+      console.error('Error updating user profile:', error);
+      setError(error.message);
+      console.log('Response:', error.response);
     }
-  } catch (error) {
-    console.error('Error updating user profile:', error);
-    setError(error.message);
-    console.log('Response:', error.response); // Use error.response instead of response
-  }
-};
+  };
 
   const handleLogout = async () => {
     try {
@@ -123,20 +117,20 @@ const UserProfile = () => {
         </motion.div>
       )}
       {error && <p className="error-message">Error: {error}</p>}
-     {!loading && !error && userProfile && (
-  <div className="profile-info">
-    <div className="profile-image-container">
-      <motion.img
-        src={`https://eduxcel-backend.onrender.com/${userProfile.profileImage}?key=${Date.now()}`}
-        alt="Profile"
-        className="profile-image"
-        whileHover={{ scale: 1.1 }}
-        onError={(e) => {
-          e.target.onerror = null; // Prevent infinite error loop
-          e.target.src = 'https://sanjaybasket.s3.ap-south-1.amazonaws.com/image.webp'; // Display a default image on error
-        }}
-      />
-    </div>
+      {!loading && !error && userProfile && (
+        <div className="profile-info">
+          <div className="profile-image-container">
+            <motion.img
+              src={`https://eduxcel-backend.onrender.com/${userProfile.profileImage}?key=${Date.now()}`}
+              alt="Profile"
+              className="profile-image"
+              whileHover={{ scale: 1.1 }}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = 'https://sanjaybasket.s3.ap-south-1.amazonaws.com/image.webp';
+              }}
+            />
+          </div>
           <p>Username: {userProfile.username}</p>
           <p>Email: {userProfile.email}</p>
           <p>First Name: {userProfile.firstName}</p>
