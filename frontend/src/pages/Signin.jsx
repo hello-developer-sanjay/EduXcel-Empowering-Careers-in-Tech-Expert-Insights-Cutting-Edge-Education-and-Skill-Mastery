@@ -5,7 +5,7 @@ import '../styles/AuthForms.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
-function SignIn() {
+function Signin() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
