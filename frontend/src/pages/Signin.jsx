@@ -29,42 +29,42 @@ function Signin() {
   };
 
   const handleGoogleAuth = async () => {
-    try {
-      const googleAuthUrl = 'https://eduxcel-backend.onrender.com/auth/google';
+  try {
+    const googleAuthUrl = 'https://eduxcel-backend.onrender.com/auth/google';
 
-      // Open a new window to initiate Google authentication
-      const popup = window.open(googleAuthUrl, '_blank', 'width=600,height=600');
+    // Open a new window to initiate Google authentication
+    const popup = window.open(googleAuthUrl, '_blank', 'width=600,height=600');
 
-      // Listen for messages from the popup window
-      window.addEventListener('message', async (event) => {
-        if (event.origin === 'https://eduxcel-backend.onrender.com' && event.data.token) {
-          // Token received from the popup window
-          const token = event.data.token;
+    // Listen for messages from the popup window
+    window.addEventListener('message', async (event) => {
+      if (event.origin === 'https://eduxcel-backend.onrender.com' && event.data.token) {
+        // Token received from the popup window
+        const token = event.data.token;
 
-          // Store the token in local storage
-          localStorage.setItem('token', token);
+        // Store the token in local storage
+        localStorage.setItem('token', token);
 
-          // Fetch the user profile data using the token
-          const profileResponse = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
+        // Fetch the user profile data using the token
+        const profileResponse = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-          const userProfileData = profileResponse.data;
-          // Set the user profile data in your state here
+        const userProfileData = profileResponse.data;
+        // Set the user profile data in your state or context here
 
-          // Close the popup window
-          popup.close();
+        // Close the popup window
+        popup.close();
 
-          // Navigate to the profile page
-          navigate('/profile');
-        }
-      });
-    } catch (error) {
-      console.error('Google authentication error:', error);
-    }
-  };
+        // Navigate to the profile page
+        navigate('/profile');
+      }
+    });
+  } catch (error) {
+    console.error('Google authentication error:', error);
+  }
+};
 
  const handleSubmit = async (e) => {
   e.preventDefault();
