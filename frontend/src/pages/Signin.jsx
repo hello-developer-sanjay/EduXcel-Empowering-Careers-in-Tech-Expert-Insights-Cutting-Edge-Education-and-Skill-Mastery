@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/AuthForms.css';
@@ -28,38 +28,68 @@ function Signin() {
     setShowPassword(!showPassword);
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const response = await axios.post('https://eduxcel-backend.onrender.com/api/signin', formData);
-    console.log('Signin success');
-    localStorage.setItem('token', response.data.token);
+  const handleGoogleAuth = async () => {
+    try {
+      const googleAuthUrl = 'https://eduxcel-backend.onrender.com/auth/google';
 
-    // Fetch the user profile data here
-    const profileResponse = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
-      headers: {
-        Authorization: `Bearer ${response.data.token}`,
-      },
-    });
+      // Open a new window to initiate Google authentication
+      const popup = window.open(googleAuthUrl, '_blank', 'width=600,height=600');
 
-    const userProfileData = profileResponse.data;
-    // Set the user profile data in your state here
+      // Listen for messages from the popup window
+      window.addEventListener('message', async (event) => {
+        if (event.origin === 'https://eduxcel-backend.onrender.com' && event.data.token) {
+          // Token received from the popup window
+          const token = event.data.token;
 
-    navigate('/profile');
-  } catch (error) {
-    console.error('Signin error:', error.response.data.message);
-    setSigninError(error.response.data.message);
-  }
-};
+          // Store the token in local storage
+          localStorage.setItem('token', token);
 
+          // Fetch the user profile data using the token
+          const profileResponse = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
 
+          const userProfileData = profileResponse.data;
+          // Set the user profile data in your state here
 
+          // Close the popup window
+          popup.close();
 
+          // Navigate to the profile page
+          navigate('/profile');
+        }
+      });
+    } catch (error) {
+      console.error('Google authentication error:', error);
+    }
+  };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('https://eduxcel-backend.onrender.com/api/signin', formData);
+      console.log('Signin success');
+      localStorage.setItem('token', response.data.token);
 
+      // Fetch the user profile data here
+      const profileResponse = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
+        headers: {
+          Authorization: `Bearer ${response.data.token}`,
+        },
+      });
 
-  // Google OAuth2 URL
- const googleAuthUrl = 'https://eduxcel-backend.onrender.com/auth/googleToken';
+      const userProfileData = profileResponse.data;
+      // Set the user profile data in your state here
+
+      navigate('/profile');
+    } catch (error) {
+      console.error('Signin error:', error.response.data.message);
+      setSigninError(error.response.data.message);
+    }
+  };
+
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit}>
@@ -89,11 +119,11 @@ const handleSubmit = async (e) => {
         <Link to="/forgot-password">Forgot Password</Link>
       </form>
       {signinError && <p className="error-message">{signinError}</p>}
-      
+
       {/* Google Authentication Button */}
-      <a href={googleAuthUrl} className="google-auth-button">
+      <button type="button" onClick={handleGoogleAuth} className="google-auth-button">
         Sign In with Google
-      </a>
+      </button>
     </div>
   );
 }
