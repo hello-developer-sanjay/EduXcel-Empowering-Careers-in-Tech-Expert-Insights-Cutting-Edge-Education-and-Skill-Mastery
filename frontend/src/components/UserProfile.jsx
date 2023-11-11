@@ -77,13 +77,19 @@ const UserProfile = () => {
       throw new Error(`Error updating user profile: ${response.status}`);
     }
 
+    // Parse the JSON response
     const updatedProfile = await response.json();
-    setUserProfile(updatedProfile);
-    setIsEditing(false);
+
+    // Check if the response contains the expected fields
+    if ('username' in updatedProfile && 'email' in updatedProfile) {
+      setUserProfile(updatedProfile);
+      setIsEditing(false);
+    } else {
+      throw new Error('Invalid response format');
+    }
   } catch (error) {
     console.error('Error updating user profile:', error);
     setError(error.message);
-    // Move the console.log('Response:', response); inside the catch block
     console.log('Response:', error.response); // Use error.response instead of response
   }
 };
