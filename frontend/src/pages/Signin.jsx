@@ -35,7 +35,15 @@ const handleSubmit = async (e) => {
     console.log('Signin success');
     localStorage.setItem('token', response.data.token);
 
-    // You don't need to fetch the user profile here because the middleware does it on subsequent requests.
+    // Fetch the user profile data here
+    const profileResponse = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
+      headers: {
+        Authorization: `Bearer ${response.data.token}`,
+      },
+    });
+
+    const userProfileData = profileResponse.data;
+    // Set the user profile data in your state here
 
     navigate('/profile');
   } catch (error) {
@@ -43,6 +51,8 @@ const handleSubmit = async (e) => {
     setSigninError(error.response.data.message);
   }
 };
+
+
 
 
 
