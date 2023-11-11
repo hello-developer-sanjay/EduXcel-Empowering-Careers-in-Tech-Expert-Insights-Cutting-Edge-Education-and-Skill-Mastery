@@ -17,32 +17,32 @@ const UserProfile = () => {
 
  useEffect(() => {
     const fetchUserProfile = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        if (!token) {
-          navigate('/signin');
-          return;
-        }
+  try {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/signin');
+      return;
+    }
 
-        const response = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+    const response = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-        if (!response.ok) {
-          throw new Error(`Error fetching user profile: ${response.status}`);
-        }
+    if (response.status !== 200) {
+      throw new Error(`Error fetching user profile: ${response.status}`);
+    }
 
-        const data = response.data;
-        setUserProfile(data);
-        setLoading(false);
-        setError(null);
-      } catch (error) {
-        setError(error.message);
-        setLoading(false);
-      }
-    };
+    const data = response.data;
+    setUserProfile(data);
+    setLoading(false);
+    setError(null);
+  } catch (error) {
+    setError(error.message);
+    setLoading(false);
+  }
+};
 
     fetchUserProfile();
   }, [navigate]);
