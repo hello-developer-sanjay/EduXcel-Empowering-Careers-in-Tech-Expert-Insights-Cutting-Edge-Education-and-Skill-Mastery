@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import EditProfile from './EditProfile';
 import '../styles/UserProfile.css';
@@ -15,12 +15,12 @@ const UserProfile = () => {
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
 
-useEffect(() => {
+  useEffect(() => {
     const fetchUserProfile = async () => {
       try {
         const token = localStorage.getItem('token');
         if (!token) {
-          navigate('/signin');
+          navigate('/signin'); // Redirect the user to the login page
           return;
         }
 
@@ -47,45 +47,35 @@ useEffect(() => {
 
     fetchUserProfile();
   }, [navigate]);
+
   const handleEditProfile = () => {
     setIsEditing(true);
   };
 
-const handleUpdateProfile = async (updatedProfileData) => {
-  try {
-    const token = localStorage.getItem('token');
-    const formData = new FormData();
+  const handleUpdateProfile = async (updatedProfileData) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('https://eduxcel-backend.onrender.com/api/profile', {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: updatedProfileData,
+      });
 
-    // Append the fields to the FormData, but append null if the value is undefined
-    formData.append('firstName', updatedProfileData.firstName || null);
-    formData.append('lastName', updatedProfileData.lastName || null);
-    formData.append('bio', updatedProfileData.bio || null);
+      if (!response.ok) {
+        throw new Error(`Error updating user profile: ${response.status}`);
+      }
 
-    // Append the file if it exists
-    if (updatedProfileData.profileImage) {
-      formData.append('profileImage', updatedProfileData.profileImage);
+      const updatedProfile = await response.json();
+      setUserProfile(updatedProfile);
+      setIsEditing(false);
+    } catch (error) {
+      console.error('Error updating user profile:', error);
+      setError(error.message);
     }
+  };
 
-    const response = await fetch('https://eduxcel-backend.onrender.com/api/profile', {
-      method: 'PUT',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: formData,
-    });
-
-    if (!response.ok) {
-      throw new Error(`Error updating user profile: ${response.status}`);
-    }
-
-    const updatedProfile = await response.json();
-    setUserProfile(updatedProfile);
-    setIsEditing(false);
-  } catch (error) {
-    console.error('Error updating user profile:', error);
-    setError(error.message);
-  }
-};
   const handleLogout = async () => {
     try {
       // Send a request to the server to log the user out
