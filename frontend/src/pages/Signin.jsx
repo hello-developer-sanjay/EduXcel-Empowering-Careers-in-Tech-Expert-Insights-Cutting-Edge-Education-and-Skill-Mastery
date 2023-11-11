@@ -5,7 +5,7 @@ import '../styles/AuthForms.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
-function Signin() {
+function SignIn() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -32,19 +32,14 @@ function Signin() {
     try {
       const googleAuthUrl = 'https://eduxcel-backend.onrender.com/auth/google';
 
-      // Open a new window to initiate Google authentication
       const popup = window.open(googleAuthUrl, '_blank', 'width=600,height=600');
 
-      // Listen for messages from the popup window
       window.addEventListener('message', async (event) => {
         if (event.origin === 'https://eduxcel-backend.onrender.com' && event.data.token) {
-          // Token received from the popup window
           const token = event.data.token;
 
-          // Store the token in local storage
           localStorage.setItem('token', token);
 
-          // Fetch the user profile data using the token
           const profileResponse = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -52,12 +47,10 @@ function Signin() {
           });
 
           const userProfileData = profileResponse.data;
-          // Set the user profile data in your state here
+          // Set the user profile data in your state or context here
 
-          // Close the popup window
           popup.close();
 
-          // Navigate to the profile page
           navigate('/profile');
         }
       });
@@ -66,32 +59,29 @@ function Signin() {
     }
   };
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const response = await axios.post('https://eduxcel-backend.onrender.com/api/signin', formData);
-    console.log('Signin success');
-    const token = response.data.token;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('https://eduxcel-backend.onrender.com/api/signin', formData);
+      const token = response.data.token;
 
-    // Store the token in local storage
-    localStorage.setItem('token', token);
+      localStorage.setItem('token', token);
 
-    // Fetch the user profile data here
-    const profileResponse = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+      const profileResponse = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-    const userProfileData = profileResponse.data;
-    // Set the user profile data in your state here
+      const userProfileData = profileResponse.data;
+      // Set the user profile data in your state or context here
 
-    navigate('/profile');
-  } catch (error) {
-    console.error('Signin error:', error.response.data.message);
-    setSigninError(error.response.data.message);
-  }
-};
+      navigate('/profile');
+    } catch (error) {
+      console.error('Signin error:', error.response.data.message);
+      setSigninError(error.response.data.message);
+    }
+  };
 
   return (
     <div className="form-container">
@@ -132,3 +122,4 @@ function Signin() {
 }
 
 export default Signin;
+
