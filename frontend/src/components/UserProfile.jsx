@@ -59,7 +59,7 @@ const UserProfile = () => {
     formData.append('firstName', updatedProfileData.firstName);
     formData.append('lastName', updatedProfileData.lastName);
     formData.append('bio', updatedProfileData.bio);
-    
+
     // Append the file if it exists
     if (updatedProfileData.profileImage) {
       formData.append('profileImage', updatedProfileData.profileImage);
@@ -73,20 +73,20 @@ const UserProfile = () => {
       body: formData,
     });
 
-
-      if (!response.ok) {
-        throw new Error(`Error updating user profile: ${response.status}`);
-      }
-
-      const updatedProfile = await response.json();
-      setUserProfile(updatedProfile);
-      setIsEditing(false);
-    } catch (error) {
-      console.error('Error updating user profile:', error);
-      setError(error.message);
-     console.log('Response:', response);
+    if (!response.ok) {
+      throw new Error(`Error updating user profile: ${response.status}`);
     }
-  };
+
+    const updatedProfile = await response.json();
+    setUserProfile(updatedProfile);
+    setIsEditing(false);
+  } catch (error) {
+    console.error('Error updating user profile:', error);
+    setError(error.message);
+    // Move the console.log('Response:', response); inside the catch block
+    console.log('Response:', error.response); // Use error.response instead of response
+  }
+};
 
   const handleLogout = async () => {
     try {
