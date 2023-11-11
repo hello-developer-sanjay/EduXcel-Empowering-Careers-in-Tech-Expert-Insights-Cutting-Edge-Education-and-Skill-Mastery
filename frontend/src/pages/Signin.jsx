@@ -44,20 +44,7 @@ function Signin() {
         // Store the token in local storage
         localStorage.setItem('token', token);
 
-        // Fetch the user profile data using the token
-        const profileResponse = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        const userProfileData = profileResponse.data;
-        // Set the user profile data in your state or context here
-
-        // Close the popup window
-        popup.close();
-
-        // Navigate to the profile page
+        // Redirect to the profile page
         navigate('/profile');
       }
     });
