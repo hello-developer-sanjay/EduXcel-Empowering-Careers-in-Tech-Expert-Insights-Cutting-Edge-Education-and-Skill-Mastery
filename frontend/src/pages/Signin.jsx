@@ -54,21 +54,14 @@ const handleGoogleAuth = async () => {
 
           const userProfileData = profileResponse.data;
 
-          // Check if the user profile data is present and valid
-          if (userProfileData && userProfileData.email) {
-            // Set the user profile data in your state here
-            setUserProfile(userProfileData);
+          // Set the user profile data in your state here
+          setUserProfile(userProfileData); // Set the state with fetched user profile data
 
-            // Close the popup window
-            popup.close();
+          // Close the popup window
+          popup.close();
 
-            // Navigate to the profile page
-            navigate('/profile');
-          } else {
-            // Handle the case when user profile data is not valid
-            console.error('Invalid user profile data:', userProfileData);
-            // You may redirect the user to an error page or handle it as needed
-          }
+          // Navigate to the profile page
+          navigate('/profile');
         } catch (error) {
           console.error('Error fetching user profile:', error);
         }
@@ -78,6 +71,7 @@ const handleGoogleAuth = async () => {
     console.error('Google authentication error:', error);
   }
 };
+
 
  const handleSubmit = async (e) => {
   e.preventDefault();
