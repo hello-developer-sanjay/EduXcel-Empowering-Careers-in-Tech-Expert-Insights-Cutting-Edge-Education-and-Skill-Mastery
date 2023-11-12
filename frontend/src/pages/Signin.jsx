@@ -28,7 +28,7 @@ function Signin() {
     setShowPassword(!showPassword);
   };
 
- const handleGoogleAuth = async () => {
+const handleGoogleAuth = async () => {
   try {
     const googleAuthUrl = 'https://eduxcel-backend.onrender.com/auth/google';
 
@@ -54,14 +54,21 @@ function Signin() {
 
           const userProfileData = profileResponse.data;
 
-          // Set the user profile data in your state here
-          setUserProfile(userProfileData); // Set the state with fetched user profile data
+          // Check if the user profile data is present and valid
+          if (userProfileData && userProfileData.email) {
+            // Set the user profile data in your state here
+            setUserProfile(userProfileData);
 
-          // Close the popup window
-          popup.close();
+            // Close the popup window
+            popup.close();
 
-          // Navigate to the profile page
-          navigate('/profile');
+            // Navigate to the profile page
+            navigate('/profile');
+          } else {
+            // Handle the case when user profile data is not valid
+            console.error('Invalid user profile data:', userProfileData);
+            // You may redirect the user to an error page or handle it as needed
+          }
         } catch (error) {
           console.error('Error fetching user profile:', error);
         }
