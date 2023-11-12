@@ -28,22 +28,23 @@ function Signin() {
     setShowPassword(!showPassword);
   };
 
-  const handleGoogleAuth = async () => {
-    try {
-      const googleAuthUrl = 'https://eduxcel-backend.onrender.com/auth/google';
+ const handleGoogleAuth = async () => {
+  try {
+    const googleAuthUrl = 'https://eduxcel-backend.onrender.com/auth/google';
 
-      // Open a new window to initiate Google authentication
-      const popup = window.open(googleAuthUrl, '_blank', 'width=600,height=600');
+    // Open a new window to initiate Google authentication
+    const popup = window.open(googleAuthUrl, '_blank', 'width=600,height=600');
 
-      // Listen for messages from the popup window
-      window.addEventListener('message', async (event) => {
-        if (event.origin === 'https://eduxcel-backend.onrender.com' && event.data.token) {
-          // Token received from the popup window
-          const token = event.data.token;
+    // Listen for messages from the popup window
+    window.addEventListener('message', async (event) => {
+      if (event.origin === 'https://eduxcel-backend.onrender.com' && event.data.token) {
+        // Token received from the popup window
+        const token = event.data.token;
 
-          // Store the token in local storage
-          localStorage.setItem('token', token);
+        // Store the token in local storage
+        localStorage.setItem('token', token);
 
+        try {
           // Fetch the user profile data using the token
           const profileResponse = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
             headers: {
@@ -52,19 +53,24 @@ function Signin() {
           });
 
           const userProfileData = profileResponse.data;
+
           // Set the user profile data in your state here
+          setUserProfile(userProfileData); // Set the state with fetched user profile data
 
           // Close the popup window
           popup.close();
 
           // Navigate to the profile page
           navigate('/profile');
+        } catch (error) {
+          console.error('Error fetching user profile:', error);
         }
-      });
-    } catch (error) {
-      console.error('Google authentication error:', error);
-    }
-  };
+      }
+    });
+  } catch (error) {
+    console.error('Google authentication error:', error);
+  }
+};
 
  const handleSubmit = async (e) => {
   e.preventDefault();
