@@ -56,29 +56,28 @@ useEffect(() => {
   };
 
  const handleUpdateProfile = async (updatedProfileData) => {
-  try {
-    const token = localStorage.getItem('token');
-    const response = await fetch('https://eduxcel-backend.onrender.com/api/profile', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(updatedProfileData),
-    });
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('https://eduxcel-backend.onrender.com/api/profile', {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: updatedProfileData,
+      });
 
-    if (!response.ok) {
-      throw new Error(`Error updating user profile: ${response.status}`);
+      if (!response.ok) {
+        throw new Error(`Error updating user profile: ${response.status}`);
+      }
+
+      const updatedProfile = await response.json();
+      setUserProfile(updatedProfile);
+      setIsEditing(false);
+    } catch (error) {
+      console.error('Error updating user profile:', error);
+      setError(error.message);
     }
-
-    const updatedProfile = await response.json();
-    setUserProfile(updatedProfile);
-    setIsEditing(false);
-  } catch (error) {
-    console.error('Error updating user profile:', error);
-    setError(error.message);
-  }
-};
+  };
 
 
   const handleLogout = async () => {
