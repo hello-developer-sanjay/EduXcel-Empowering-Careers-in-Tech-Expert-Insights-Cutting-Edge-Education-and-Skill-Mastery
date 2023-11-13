@@ -104,7 +104,7 @@ const handleGoogleAuth = async () => {
 };
 
 
- const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault();
   try {
     const response = await axios.post('https://eduxcel-backend.onrender.com/api/signin', formData);
@@ -122,8 +122,9 @@ const handleGoogleAuth = async () => {
     });
 
     const userProfileData = profileResponse.data;
+
     // Set the user profile data in your state here
-    setUserProfile(userProfileData);
+    setUserProfile(userProfileData); // Add this line to set the user profile in the state
 
     navigate('/profile');
   } catch (error) {
