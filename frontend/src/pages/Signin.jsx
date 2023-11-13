@@ -10,7 +10,7 @@ function Signin() {
     email: '',
     password: '',
   });
-
+const [userProfile, setUserProfile] = useState(null);
   const [signinError, setSigninError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -27,8 +27,83 @@ function Signin() {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+ const handleGoogleAuth = async () => {
+    try {
+      const token = localStorage.getItem('token');
 
-const handleGoogleAuth = async () => {
+      if (token) {
+        // Token is present, the user is already authenticated
+        try {
+          // Fetch the user profile data using the token
+          console.log('Fetching user profile...');
+          const profileResponse = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          const userProfileData = profileResponse.data;
+          console.log('Received user profile data:', userProfileData);
+
+          // Set the user profile data in your state here
+          setUserProfile(userProfileData); // Set the state with fetched user profile data
+
+          // Navigate to the profile page
+          navigate('/profile');
+        } catch (error) {
+          console.error('Error fetching user profile:', error);
+        }
+      } else {
+        // Token is not present, initiate Google sign-in
+        const googleAuthUrl = 'https://eduxcel-backend.onrender.com/auth/google';
+
+        // Open a new window to initiate Google authentication
+        const popup = window.open(googleAuthUrl, '_blank', 'width=600,height=600');
+
+        // Listen for messages from the popup window
+        window.addEventListener('message', async (event) => {
+          console.log('Received message from popup:', event);
+
+          if (event.origin === 'https://eduxcel-backend.onrender.com' && event.data.token) {
+            // Token received from the popup window
+            const newToken = event.data.token;
+            console.log('Received token:', newToken);
+
+            // Store the token in local storage
+            localStorage.setItem('token', newToken);
+
+            try {
+              // Fetch the user profile data using the token
+              console.log('Fetching user profile...');
+              const profileResponse = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
+                headers: {
+                  Authorization: `Bearer ${newToken}`,
+                },
+              });
+
+              const userProfileData = profileResponse.data;
+              console.log('Received user profile data:', userProfileData);
+
+              // Set the user profile data in your state here
+              setUserProfile(userProfileData); // Set the state with fetched user profile data
+
+              // Close the popup window
+              popup.close();
+
+              // Navigate to the profile page
+              navigate('/profile');
+            } catch (error) {
+              console.error('Error fetching user profile:', error);
+            }
+          }
+        });
+      }
+    } catch (error) {
+      console.error('Google authentication error:', error);
+    }
+  };
+
+  const handleGoogleAuth = async () => {
   try {
     const token = localStorage.getItem('token');
 
