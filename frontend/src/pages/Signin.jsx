@@ -104,7 +104,7 @@ const handleGoogleAuth = async () => {
 };
 
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
   e.preventDefault();
   try {
     const response = await axios.post('https://eduxcel-backend.onrender.com/api/signin', formData);
@@ -123,6 +123,7 @@ const handleGoogleAuth = async () => {
 
     const userProfileData = profileResponse.data;
     // Set the user profile data in your state here
+    setUserProfile(userProfileData);
 
     navigate('/profile');
   } catch (error) {
@@ -130,6 +131,7 @@ const handleGoogleAuth = async () => {
     setSigninError(error.response.data.message);
   }
 };
+
 
   return (
     <div className="form-container">
