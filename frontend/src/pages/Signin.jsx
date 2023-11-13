@@ -28,7 +28,7 @@ function Signin() {
     setShowPassword(!showPassword);
   };
 
-  const handleGoogleAuth = async () => {
+ const handleGoogleAuth = async () => {
   try {
     const googleAuthUrl = 'https://eduxcel-backend.onrender.com/auth/google';
 
@@ -76,6 +76,7 @@ function Signin() {
     console.error('Google authentication error:', error);
   }
 };
+
  const handleSubmit = async (e) => {
   e.preventDefault();
   try {
