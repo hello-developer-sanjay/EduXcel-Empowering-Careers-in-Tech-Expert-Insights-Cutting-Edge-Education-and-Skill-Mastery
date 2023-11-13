@@ -90,7 +90,7 @@ const handleGoogleAuth = async () => {
             // Close the popup window
             popup.close();
 
-            // Navigate to the profile page
+            // Redirect to the profile page
             navigate('/profile');
           } catch (error) {
             console.error('Error fetching user profile:', error);
