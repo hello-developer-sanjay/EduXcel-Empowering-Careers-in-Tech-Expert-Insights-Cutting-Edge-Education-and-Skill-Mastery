@@ -103,8 +103,7 @@ const handleGoogleAuth = async () => {
     console.error('Google authentication error:', error);
   }
 };
-
- const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
   e.preventDefault();
   try {
     const response = await axios.post('https://eduxcel-backend.onrender.com/api/signin', formData);
