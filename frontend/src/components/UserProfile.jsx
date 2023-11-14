@@ -38,10 +38,15 @@ useEffect(() => {
       const data = await response.json();
       
       // Set the user profile data in your state here
-      setUserProfile(data); // Set the state with fetched user profile data
+    setUserProfile(data); // Set the state with fetched user profile data
 
       setLoading(false);
       setError(null);
+
+      // Only navigate if userProfile is not empty
+      if (data && Object.keys(data).length > 0) {
+        navigate('/profile');
+      }
     } catch (error) {
       setError(error.message);
       setLoading(false);
@@ -50,7 +55,6 @@ useEffect(() => {
 
   fetchUserProfile();
 }, [navigate]);
-
   const handleEditProfile = () => {
     setIsEditing(true);
   };
