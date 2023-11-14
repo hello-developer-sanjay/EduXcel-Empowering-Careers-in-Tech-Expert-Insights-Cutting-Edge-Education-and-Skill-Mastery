@@ -14,7 +14,6 @@ const UserProfile = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-
 useEffect(() => {
   const fetchUserProfile = async () => {
     try {
@@ -36,12 +35,20 @@ useEffect(() => {
       }
 
       const data = await response.json();
-      
-      // Set the user profile data in your state here
-      setUserProfile(data); // Set the state with fetched user profile data
 
-      setLoading(false);
-      setError(null);
+      if (data && Object.keys(data).length > 0) {
+        // Set the user profile data in your state here
+        setUserProfile(data);
+        setLoading(false);
+        setError(null);
+
+        // Navigate to the profile page
+        navigate('/profile');
+      } else {
+        // UserProfile is empty, handle accordingly
+        setLoading(false);
+        setError('User profile is empty');
+      }
     } catch (error) {
       setError(error.message);
       setLoading(false);
