@@ -15,60 +15,66 @@ const UserProfile = () => {
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
 
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        if (!token) {
-          // Redirect to login only if the user is not authenticated
-          setLoading(false);
-          return;
-        }
-
-        const response = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`Error fetching user profile: ${response.status}`);
-        }
-
-        const data = await response.data;
-
-        // Set the user profile data in your state here
-        setUserProfile(data); // Set the state with fetched user profile data
-
-        setLoading(false);
-        setError(null);
-      } catch (error) {
-        setError(error.message);
-        setLoading(false);
-      }
-    };
-
-    fetchUserProfile();
-  }, []);
-
-  const handleEditProfile = () => {
-    setIsEditing(true);
-  };
-
-  const handleUpdateProfile = async (updatedProfileData) => {
+useEffect(() => {
+  const fetchUserProfile = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.put('https://eduxcel-backend.onrender.com/api/profile', updatedProfileData, {
+      if (!token) {
+        navigate('/signin'); // Redirect the user to the login page
+        return;
+      }
+
+      const response = await fetch('https://eduxcel-backend.onrender.com/api/profile', {
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
 
       if (!response.ok) {
+        throw new Error(`Error fetching user profile: ${response.status}`);
+      }
+
+      const data = await response.json();
+      
+      // Set the user profile data in your state here
+    setUserProfile(data); // Set the state with fetched user profile data
+
+      setLoading(false);
+      setError(null);
+
+      // Only navigate if userProfile is not empty
+      if (data && Object.keys(data).length > 0) {
+        navigate('/profile');
+      }
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
+
+  fetchUserProfile();
+}, [navigate]);
+  const handleEditProfile = () => {
+    setIsEditing(true);
+  };
+
+ const handleUpdateProfile = async (updatedProfileData) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('https://eduxcel-backend.onrender.com/api/profile', {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: updatedProfileData,
+      });
+
+      if (!response.ok) {
         throw new Error(`Error updating user profile: ${response.status}`);
       }
 
-      const updatedProfile = await response.data;
+      const updatedProfile = await response.json();
       setUserProfile(updatedProfile);
       setIsEditing(false);
     } catch (error) {
@@ -76,6 +82,7 @@ const UserProfile = () => {
       setError(error.message);
     }
   };
+
 
   const handleLogout = async () => {
     try {
@@ -106,20 +113,20 @@ const UserProfile = () => {
         </motion.div>
       )}
       {error && <p className="error-message">Error: {error}</p>}
-      {!loading && !error && Object.keys(userProfile).length > 0 && (
-        <div className="profile-info">
-          <div className="profile-image-container">
-            <motion.img
-              src={`https://eduxcel-backend.onrender.com/${userProfile.profileImage}?key=${Date.now()}`}
-              alt="Profile"
-              className="profile-image"
-              whileHover={{ scale: 1.1 }}
-              onError={(e) => {
-                e.target.onerror = null; // Prevent infinite error loop
-                e.target.src = 'https://sanjaybasket.s3.ap-south-1.amazonaws.com/image.webp'; // Display a default image on error
-              }}
-            />
-          </div>
+     {!loading && !error && userProfile && (
+  <div className="profile-info">
+    <div className="profile-image-container">
+      <motion.img
+        src={`https://eduxcel-backend.onrender.com/${userProfile.profileImage}?key=${Date.now()}`}
+        alt="Profile"
+        className="profile-image"
+        whileHover={{ scale: 1.1 }}
+        onError={(e) => {
+          e.target.onerror = null; // Prevent infinite error loop
+          e.target.src = 'https://sanjaybasket.s3.ap-south-1.amazonaws.com/image.webp'; // Display a default image on error
+        }}
+      />
+    </div>
           <p>Username: {userProfile.username}</p>
           <p>Email: {userProfile.email}</p>
           <p>First Name: {userProfile.firstName}</p>
@@ -134,7 +141,10 @@ const UserProfile = () => {
         </div>
       )}
       {isEditing && (
-        <EditProfile userProfile={userProfile} onUpdateProfile={handleUpdateProfile} />
+        <EditProfile
+          userProfile={userProfile}
+          onUpdateProfile={handleUpdateProfile}
+        />
       )}
     </div>
   );
