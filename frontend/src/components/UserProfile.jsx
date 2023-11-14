@@ -36,18 +36,15 @@ useEffect(() => {
 
       const data = await response.json();
 
-      if (data && Object.keys(data).length > 0) {
-        // Set the user profile data in your state here
-        setUserProfile(data);
-        setLoading(false);
-        setError(null);
+      // Set the user profile data in your state here
+      setUserProfile(data); // Set the state with fetched user profile data
 
-        // Navigate to the profile page
+      setLoading(false);
+      setError(null);
+
+      // Only navigate if userProfile is not empty
+      if (data && Object.keys(data).length > 0) {
         navigate('/profile');
-      } else {
-        // UserProfile is empty, handle accordingly
-        setLoading(false);
-        setError('User profile is empty');
       }
     } catch (error) {
       setError(error.message);
