@@ -18,10 +18,6 @@ useEffect(() => {
   const fetchUserProfile = async () => {
     try {
       const token = localStorage.getItem('token');
-      if (!token) {
-        navigate('/signin'); // Redirect the user to the login page if token is not present
-        return;
-      }
 
       const response = await fetch('https://eduxcel-backend.onrender.com/api/profile', {
         method: 'GET',
@@ -41,8 +37,6 @@ useEffect(() => {
 
       setLoading(false);
       setError(null);
-
-      // Remove the navigate call here
     } catch (error) {
       setError(error.message);
       setLoading(false);
@@ -50,8 +44,7 @@ useEffect(() => {
   };
 
   fetchUserProfile();
-}, []);  // Removed navigate from the dependency array
-
+}, []);
   const handleEditProfile = () => {
     setIsEditing(true);
   };
