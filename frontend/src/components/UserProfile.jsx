@@ -19,7 +19,7 @@ useEffect(() => {
     try {
       const token = localStorage.getItem('token');
       if (!token) {
-        navigate('/signin'); // Redirect the user to the login page
+        navigate('/signin'); // Redirect the user to the login page if token is not present
         return;
       }
 
@@ -42,10 +42,7 @@ useEffect(() => {
       setLoading(false);
       setError(null);
 
-      // Only navigate if userProfile is not empty
-      if (data && Object.keys(data).length > 0) {
-        navigate('/profile');
-      }
+      // Remove the navigate call here
     } catch (error) {
       setError(error.message);
       setLoading(false);
@@ -53,7 +50,8 @@ useEffect(() => {
   };
 
   fetchUserProfile();
-}, [navigate]);
+}, []);  // Removed navigate from the dependency array
+
   const handleEditProfile = () => {
     setIsEditing(true);
   };
