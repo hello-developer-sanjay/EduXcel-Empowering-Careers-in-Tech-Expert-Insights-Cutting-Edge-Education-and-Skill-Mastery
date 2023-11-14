@@ -102,7 +102,6 @@ const handleGoogleAuth = async () => {
     console.error('Google authentication error:', error);
   }
 };
-
 const handleSubmit = async (e) => {
   e.preventDefault();
   try {
@@ -131,6 +130,7 @@ const handleSubmit = async (e) => {
     setSigninError(error.response.data.message);
   }
 };
+
 
 
 
