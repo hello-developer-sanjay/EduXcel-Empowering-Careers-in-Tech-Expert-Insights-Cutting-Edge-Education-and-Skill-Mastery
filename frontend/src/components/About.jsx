@@ -1,6 +1,5 @@
 import { FaCheckCircle } from 'react-icons/fa';
-import responsiveImage from '../assets/b2.gif';
-import technologyImage from '../assets/b1.gif';
+
 import CreaTeaImage from '../assets/tea.gif';
 import { motion } from 'framer-motion';
 import Security from '../assets/s1.webp';
@@ -70,7 +69,7 @@ const About = () => {
   </div>
   <div className="w-full md:w-1/2 flex justify-center items-center">
   <img
-    src={Courses}
+    src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/e.webp"
     alt="Courses Image"
     className="max-w-full h-auto rounded-md shadow-lg p-2 "
     style={{ maxHeight: '600px' }} 
@@ -107,7 +106,7 @@ const About = () => {
   </div>
   <div className="w-full md:w-1/2 flex justify-center items-center mt-6 md:mt-0"> 
   <img
-    src={Security}
+    src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/s1.webp"
     alt="Courses Image"
     className="max-w-full h-auto rounded-md shadow-lg p-2 shining-border"
     style={{ maxHeight: '400px' }} 
@@ -133,7 +132,7 @@ const About = () => {
         
          <div className="w-full md:w-1/2 flex justify-center items-center mt-6 md:mt-0"> 
   <img
-    src={Feature}
+    src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/a6.webp"
     alt="Feature Image"
     className={`max-w-full h-auto rounded-md shadow-lg p-2 shining-border`}
     style={{ maxHeight: '400px' }} 
