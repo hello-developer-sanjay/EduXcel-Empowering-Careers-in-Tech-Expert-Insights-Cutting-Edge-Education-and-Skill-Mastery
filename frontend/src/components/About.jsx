@@ -33,14 +33,14 @@ const About = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
   <motion.div className="flex flex-col items-center" style={{ width: "100%", maxWidth: "400px", border: "1px solid #ccc", borderRadius: "10px"  , overflow: "hidden"  }} whileHover={{ scale: 1.05 }}>
-    <img src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/v2.mp4" alt="Responsive Design" className="image" />
+    <img src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/b2.mp4" alt="Responsive Design" className="image" />
     <h3 className="text-2xl text-center font-semibold mb-4 text-blue-600">Responsive Learning Experience</h3>
     <p className="text-purple-700 mb-6 text-center max-w-sm">
       Access EduXcel on various devices, ensuring an optimal and user-friendly learning experience, from desktops to smartphones.
     </p>
   </motion.div>
   <motion.div className="flex flex-col items-center" style={{ width: "100%", maxWidth: "400px", border: "1px solid #ccc", borderRadius: "10px" , overflow: "hidden"  }} whileHover={{ scale: 1.05 }}>
-    <img src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/v1.mp4" alt="Cutting-edge Technology" className="image" />
+    <img src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/b1.mp4" alt="Cutting-edge Technology" className="image" />
     <h3 className="text-2xl text-center font-semibold mb-4 text-blue-600">Cutting-edge Technology</h3>
     <p className="text-purple-700 mb-6 text-center max-w-sm">
       Built with Vite + React, MongoDB, Express.js, Node.js, and other advanced technologies for rapid development and secure learning environments.
