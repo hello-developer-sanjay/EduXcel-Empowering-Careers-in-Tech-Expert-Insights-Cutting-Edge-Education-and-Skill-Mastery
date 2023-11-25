@@ -195,7 +195,7 @@ function Header() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      fetch('https://eduxcel-backend.onrender.com/api/profile', {
+      fetch('https://edu-back-j3mz.onrender.com/api/profile', {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -209,7 +209,7 @@ function Header() {
       })
       .then(data => {
         if (data.profileImage) {
-          setProfileImage(`https://eduxcel-backend.onrender.com/${data.profileImage}?key=${Date.now()}`);
+          setProfileImage(`https://edu-back-j3mz.onrender.com/${data.profileImage}?key=${Date.now()}`);
         } else {
           setProfileImage('https://sanjaybasket.s3.ap-south-1.amazonaws.com/image.webp');
         }
