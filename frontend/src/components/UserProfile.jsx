@@ -24,7 +24,7 @@ useEffect(() => {
         return;
       }
 
-      const response = await fetch('https://eduxcel-backend.onrender.com/api/profile', {
+      const response = await fetch('https://edu-back-j3mz.onrender.com/api/profile', {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -62,7 +62,7 @@ useEffect(() => {
  const handleUpdateProfile = async (updatedProfileData) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('https://eduxcel-backend.onrender.com/api/profile', {
+      const response = await fetch('https://edu-back-j3mz.onrender.com/api/profile', {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -87,7 +87,7 @@ useEffect(() => {
   const handleLogout = async () => {
     try {
       // Send a request to the server to log the user out
-      await axios.post('https://eduxcel-backend.onrender.com/api/logout');
+      await axios.post('https://edu-back-j3mz.onrender.com/api/logout');
       // Clear the token from local storage
       localStorage.removeItem('token');
       // Redirect the user to the login page using navigate
@@ -117,7 +117,7 @@ useEffect(() => {
   <div className="profile-info">
     <div className="profile-image-container">
       <motion.img
-        src={`https://eduxcel-backend.onrender.com/${userProfile.profileImage}?key=${Date.now()}`}
+        src={`https://edu-back-j3mz.onrender.com/${userProfile.profileImage}?key=${Date.now()}`}
         alt="Profile"
         className="profile-image"
         whileHover={{ scale: 1.1 }}
