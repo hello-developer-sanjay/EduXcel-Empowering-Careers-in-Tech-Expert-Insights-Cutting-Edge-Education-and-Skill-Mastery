@@ -13,7 +13,7 @@ function CourseDetails() {
   useEffect(() => {
     async function fetchCourseDetails() {
       try {
-        const response = await axios.get(`https://eduxcel-backend.onrender.com/api/courses/${encodeURIComponent(title)}`);
+        const response = await axios.get(`https://edu-back-j3mz.onrender.com/api/courses/${encodeURIComponent(title)}`);
         setCourse(response.data);
         setLoading(false);
       } catch (error) {
