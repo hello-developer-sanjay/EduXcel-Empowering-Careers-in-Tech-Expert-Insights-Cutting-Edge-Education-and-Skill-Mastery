@@ -14,7 +14,7 @@ function ForgotPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://edu-backend-py90.onrender.com/api/forgotpassword', { email });
+      const response = await axios.post('https://edu-back-j3mz.onrender.com/api/forgotpassword', { email });
       setMessage(response.data.message);
     } catch (error) {
       console.error('Forgot password error:', error.response.data.message);
