@@ -36,7 +36,7 @@ const handleGoogleAuth = async () => {
       try {
         // Fetch the user profile data using the token
         console.log('Fetching user profile...');
-        const profileResponse = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
+        const profileResponse = await axios.get('https://edu-back-j3mz.onrender.com/api/profile', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -55,7 +55,7 @@ const handleGoogleAuth = async () => {
       }
     } else {
       // Token is not present, initiate Google sign-in
-      const googleAuthUrl = 'https://eduxcel-backend.onrender.com/auth/google';
+      const googleAuthUrl = 'https://edu-back-j3mz.onrender.com/auth/google';
 
       // Open a new window to initiate Google authentication
       const popup = window.open(googleAuthUrl, '_blank', 'width=600,height=600');
@@ -64,7 +64,7 @@ const handleGoogleAuth = async () => {
       window.addEventListener('message', async (event) => {
         console.log('Received message from popup:', event);
 
-        if (event.origin === 'https://eduxcel-backend.onrender.com' && event.data.token) {
+        if (event.origin === 'https://edu-back-j3mz.onrender.com' && event.data.token) {
           // Token received from the popup window
           const newToken = event.data.token;
           console.log('Received token:', newToken);
@@ -75,7 +75,7 @@ const handleGoogleAuth = async () => {
           try {
             // Fetch the user profile data using the token
             console.log('Fetching user profile...');
-            const profileResponse = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
+            const profileResponse = await axios.get('https://edu-back-j3mz.onrender.com/api/profile', {
               headers: {
                 Authorization: `Bearer ${newToken}`,
               },
@@ -107,7 +107,7 @@ const handleGoogleAuth = async () => {
 const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-    const response = await axios.post('https://eduxcel-backend.onrender.com/api/signin', formData);
+    const response = await axios.post('https://edu-back-j3mz.onrender.com/api/signin', formData);
     console.log('Signin success');
     const token = response.data.token;
 
@@ -115,7 +115,7 @@ const handleSubmit = async (e) => {
     localStorage.setItem('token', token);
 
     // Fetch the user profile data here
-    const profileResponse = await axios.get('https://eduxcel-backend.onrender.com/api/profile', {
+    const profileResponse = await axios.get('https://edu-back-j3mz.onrender.com/api/profile', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
