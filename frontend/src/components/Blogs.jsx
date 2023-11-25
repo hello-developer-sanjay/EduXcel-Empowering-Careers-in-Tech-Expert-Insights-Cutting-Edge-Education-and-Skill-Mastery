@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import  { useState, useEffect, useRef } from "react";
 import "../styles/Blogs.css";
 
 import {
@@ -43,7 +43,7 @@ const Blogs = () => {
   const fetchData = async (collection) => {
     try {
       const response = await fetch(
-        `https://eduxcel-backend.onrender.com/api/${collection}`
+        `https://edu-back-j3mz.onrender.com/api/${collection}`
       );
       const responseData = await response.json();
       setBlogsData((prevData) => ({
