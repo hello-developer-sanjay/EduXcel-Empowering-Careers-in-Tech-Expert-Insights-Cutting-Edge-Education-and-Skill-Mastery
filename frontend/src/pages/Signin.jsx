@@ -57,7 +57,7 @@ const handleGoogleAuth = async () => {
       // Token is not present, initiate Google sign-in
       const googleAuthUrl = 'https://edu-back-j3mz.onrender.com/auth/google';
 
-      // Open a new window to initiate Google authentication
+      
       const popup = window.open(googleAuthUrl, '_blank', 'width=600,height=600');
 
       // Listen for messages from the popup window
