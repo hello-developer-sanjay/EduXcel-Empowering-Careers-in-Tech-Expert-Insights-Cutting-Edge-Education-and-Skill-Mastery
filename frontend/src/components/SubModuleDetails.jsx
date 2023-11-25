@@ -13,7 +13,7 @@ function SubModuleDetails() {
     async function fetchSubModuleDetails() {
       try {
         const response = await axios.get(
-          `https://eduxcel-backend.onrender.com/api/courses/${encodeURIComponent(title)}/modules/${encodeURIComponent(module)}/${encodeURIComponent(submodule)}`
+          `https://edu-back-j3mz.onrender.com/api/courses/${encodeURIComponent(title)}/modules/${encodeURIComponent(module)}/${encodeURIComponent(submodule)}`
         );
 
         setSubModuleDetails(response.data);
