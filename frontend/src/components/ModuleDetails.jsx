@@ -14,7 +14,7 @@ function ModuleDetails() {
     async function fetchModuleDetails() {
       try {
         const response = await axios.get(
-          `https://eduxcel-backend.onrender.com/api/courses/${encodeURIComponent(title)}/modules/${encodeURIComponent(module)}`
+          `https://edu-back-j3mz.onrender.com/api/courses/${encodeURIComponent(title)}/modules/${encodeURIComponent(module)}`
         );
 
         setModuleDetails(response.data);
