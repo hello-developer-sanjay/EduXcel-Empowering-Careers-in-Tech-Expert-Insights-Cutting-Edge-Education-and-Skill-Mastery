@@ -4,7 +4,7 @@ module.exports = function (app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'https://eduxcel-backend.onrender.com',
+      target: 'https://edu-back-j3mz.onrender.com',
       changeOrigin: true,
     })
   );
