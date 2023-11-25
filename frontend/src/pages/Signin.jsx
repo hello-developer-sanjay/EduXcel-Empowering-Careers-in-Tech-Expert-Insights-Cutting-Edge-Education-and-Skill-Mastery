@@ -32,7 +32,7 @@ const handleGoogleAuth = async () => {
     const token = localStorage.getItem('token');
 
     if (token) {
-      // Token is present, the user is already authenticated
+     
       try {
         // Fetch the user profile data using the token
         console.log('Fetching user profile...');
