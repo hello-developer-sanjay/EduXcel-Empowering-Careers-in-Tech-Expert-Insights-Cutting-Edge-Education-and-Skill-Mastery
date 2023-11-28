@@ -37,6 +37,12 @@ function Home() {
       opacity: 1,
       transition: { duration: 2 },
     });
+       // Dynamically update meta description
+    const metaDescriptionTag = document.querySelector('meta[name="description"]');
+    if (metaDescriptionTag) {
+      metaDescriptionTag.content = "Explore our courses and enhance your skills with Eduxcel. Find a wide range of online courses on various topics to boost your knowledge.";
+    }
+    
   }, [controls]);
 
   const sliderSettings = {
