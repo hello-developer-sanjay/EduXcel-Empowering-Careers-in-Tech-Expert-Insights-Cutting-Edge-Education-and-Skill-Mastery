@@ -27,15 +27,16 @@ function SignInSignUp({ showCloseButton }) {
           <h2>{isSignUp ? 'Sign Up' : 'Sign In'}</h2>
           {isSignUp ? <Signup /> : <Signin />}
         </div>
-        <div className="auth-image">
-          <img src={SecurityImage} alt="Security" />
-        </div>
+      
         <div className="auth-toggle">
           <p onClick={toggleForm} className="toggle-link">
             {isSignUp
               ? 'Already have an account? Sign in'
               : "Don't have an account? Sign up"}
           </p>
+        </div>
+          <div className="auth-image">
+          <img src={SecurityImage} alt="Security" />
         </div>
       </div>
     </div>
