@@ -12,6 +12,16 @@ import Footer from './components/Footer';
 import SignInSignUp from './components/SignInSignUp'; // Import the SignInSignUp component
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page when the route changes.
+  }, [pathname]);
+
+  return null; // This component doesn't render anything.
+};
+
 function App() {
   return (
     <Router>
@@ -19,6 +29,7 @@ function App() {
         <div className='bg-hero-pattern bg-cover bg-no-repeat bg-center'>
           <Header />
     <SubHeader/>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<UserProfile />} />
