@@ -1,5 +1,6 @@
+import  { useEffect } from "react";
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route  , useLocation} from 'react-router-dom';
 import Header from './components/Header';
  import SubHeader from './components/SubHeader';
 import Home from './pages/Home';
@@ -12,7 +13,15 @@ import Footer from './components/Footer';
 import SignInSignUp from './components/SignInSignUp'; // Import the SignInSignUp component
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
 
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page when the route changes.
+  }, [pathname]);
+
+  return null; // This component doesn't render anything.
+};
 
 function App() {
   return (
@@ -21,6 +30,7 @@ function App() {
         <div className='bg-hero-pattern bg-cover bg-no-repeat bg-center'>
           <Header />
     <SubHeader/>
+          <ScrollToTop />
        
           <Routes>
             <Route path="/" element={<Home />} />
