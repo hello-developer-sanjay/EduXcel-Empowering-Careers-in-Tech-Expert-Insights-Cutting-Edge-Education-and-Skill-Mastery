@@ -15,7 +15,33 @@ const [userProfile, setUserProfile] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
+ useEffect(() => {
+    // Function to get user location
+    const getUserLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+            // Include latitude and longitude in the form data
+            setFormData((prevData) => ({
+              ...prevData,
+              latitude,
+              longitude,
+            }));
+          },
+          (error) => {
+            console.error('Error getting location:', error.message);
+          }
+        );
+      } else {
+        console.error('Geolocation is not supported by this browser.');
+      }
+    };
 
+    // Call the function to get user location when the component mounts
+    getUserLocation();
+  }, []); // Run this effect only once on component mount
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
