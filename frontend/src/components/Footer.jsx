@@ -8,9 +8,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 const FooterContainer = styled(motion.footer)`
   position: relative;
-  background: linear-gradient(to right, #333333, #111111);
-  color: white;
+background: linear-gradient(to right, #ffb6c1, #87cefa);  color: white;
   padding: 2rem;
+  color: black;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,11 +23,23 @@ const FooterContainer = styled(motion.footer)`
 const BorderLineTop = styled(motion.div)`
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  height: 2px;
+
+  transform: translateX(0%);
+  
+  min-width: 100%;
+  height: 4px;
   background: linear-gradient(to right, #ffbb00, #e85d04);
+  background-size: 200% 100%;
+  box-shadow: 0 0 10px rgba(232, 93, 4, 0.8);
+  animation: gradientAnimation 2s linear infinite;
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: -100% 0;
+    }
+  }
 `;
 
 const BorderLineBottom = styled(BorderLineTop)`
