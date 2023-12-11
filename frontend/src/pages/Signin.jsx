@@ -10,17 +10,16 @@ function Signin() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
+    latitude: null,
+    longitude: null,
   });
 const [userProfile, setUserProfile] = useState(null);
   const [signinError, setSigninError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
- useEffect(() => {
-    // Function to get user location
-   const getUserLocation = () => {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
+useEffect(() => {
+    const watchId = navigator.geolocation.watchPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
         console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
@@ -34,15 +33,13 @@ const [userProfile, setUserProfile] = useState(null);
       (error) => {
         console.error('Error getting location:', error.message);
       },
-      { enableHighAccuracy: true } // Enable high accuracy mode
+      { enableHighAccuracy: true }
     );
-  } else {
-    console.error('Geolocation is not supported by this browser.');
-  }
-};
 
-    // Call the function to get user location when the component mounts
-    getUserLocation();
+    // To stop watching the position when the component unmounts:
+    return () => {
+      navigator.geolocation.clearWatch(watchId);
+    };
   }, []); // Run this effect only once on component mount
   const handleChange = (e) => {
     const { name, value } = e.target;
