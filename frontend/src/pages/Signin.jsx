@@ -18,27 +18,28 @@ const [userProfile, setUserProfile] = useState(null);
   const navigate = useNavigate();
  useEffect(() => {
     // Function to get user location
-    const getUserLocation = () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
-            // Include latitude and longitude in the form data
-            setFormData((prevData) => ({
-              ...prevData,
-              latitude,
-              longitude,
-            }));
-          },
-          (error) => {
-            console.error('Error getting location:', error.message);
-          }
-        );
-      } else {
-        console.error('Geolocation is not supported by this browser.');
-      }
-    };
+   const getUserLocation = () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+        // Include latitude and longitude in the form data
+        setFormData((prevData) => ({
+          ...prevData,
+          latitude,
+          longitude,
+        }));
+      },
+      (error) => {
+        console.error('Error getting location:', error.message);
+      },
+      { enableHighAccuracy: true } // Enable high accuracy mode
+    );
+  } else {
+    console.error('Geolocation is not supported by this browser.');
+  }
+};
 
     // Call the function to get user location when the component mounts
     getUserLocation();
