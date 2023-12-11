@@ -1,3 +1,4 @@
+
 import { useState ,useEffect} from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
@@ -191,9 +192,7 @@ const handleSubmit = async (e) => {
       {signinError && <p className="error-message">{signinError}</p>}
 
       {/* Google Authentication Button */}
-      <button type="button" onClick={handleGoogleAuth} className="google-auth-button">
-        Sign In with Google
-      </button>
+      
     </div>
   );
 }
