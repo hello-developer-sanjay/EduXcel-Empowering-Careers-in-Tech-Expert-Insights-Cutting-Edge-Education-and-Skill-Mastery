@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import { FaLinkedin, FaTwitter, FaInstagram, FaGithub,FaComment, FaUsers, FaTimes } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
-import "../styles/Sidebar.css";
 import "react-toastify/dist/ReactToastify.css";
 
 const FooterContainer = styled(motion.footer)`
