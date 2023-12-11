@@ -66,7 +66,7 @@ const SocialIcon = styled(motion.a)`
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
-  background: ${props => props.color || '#3498db'};
+  background: ${props => props.color || '#ff6347'};
   cursor: pointer;
   overflow: hidden;
   position: relative;
@@ -75,7 +75,7 @@ const SocialIcon = styled(motion.a)`
 
   &:hover {
     transform: scale(1.2) rotate(360deg);
-    background: ${props => props.color || '#2980b9'};
+    background: ${props => props.color || '#e74c3c'};
   }
 
   @media (max-width: 768px) {
