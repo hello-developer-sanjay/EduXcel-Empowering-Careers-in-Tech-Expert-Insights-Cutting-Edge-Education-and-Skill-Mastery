@@ -1,15 +1,14 @@
-import  { useState } from "react";
+
 import styled from "styled-components";
-import { motion, AnimatePresence, useAnimation } from "framer-motion";
-import { FaLinkedin, FaTwitter, FaInstagram, FaGithub,FaComment, FaUsers, FaTimes } from "react-icons/fa";
+import { motion, AnimatePresence,  } from "framer-motion";
+import { FaLinkedin, FaTwitter, FaInstagram, FaGithub, FaUsers } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const FooterContainer = styled(motion.footer)`
   position: relative;
   background: linear-gradient(to right, #ffb6c1, #87cefa);
-
-color: black;
+  color: black;
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -52,7 +51,6 @@ const CatchyMessage = styled(motion.p)`
   margin-top: 1rem;
   word-wrap: break-word;
 `;
-
 const SocialIconsContainer = styled(motion.div)`
   display: flex;
   justify-content: center;
@@ -106,7 +104,9 @@ const SocialIcon = styled(motion.a)`
   &:hover:before {
     transform: translateY(0);
   }
-`;const FooterButton = styled(motion.button)`
+`;
+
+const FooterButton = styled(motion.button)`
   padding: 0.5rem 1rem;
   background-color: #ff4d4d;
   border: none;
