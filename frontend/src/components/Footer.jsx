@@ -57,36 +57,56 @@ const SocialIconsContainer = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
-  margin-top: 1rem;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 100%);
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  gap: 1.5rem;
+  margin-top: 2rem;
 `;
 
 const SocialIcon = styled(motion.a)`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 4rem;
+  height: 4rem;
   border-radius: 50%;
   background: ${props => props.color || '#3498db'};
   cursor: pointer;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    background 0.3s ease;
 
   &:hover {
-    transform: translateY(-5px) scale(1.1);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    transform: scale(1.2) rotate(360deg);
+    background: ${props => props.color || '#2980b9'};
   }
-  
+
   @media (max-width: 768px) {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 3.5rem;
+    height: 3.5rem;
   }
-`;
-const FooterButton = styled(motion.button)`
+
+  &:not(:last-child) {
+    margin-right: 1rem;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0)
+    );
+    transform: translateY(100%);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  &:hover:before {
+    transform: translateY(0);
+  }
+`;const FooterButton = styled(motion.button)`
   padding: 0.5rem 1rem;
   background-color: #ff4d4d;
   border: none;
