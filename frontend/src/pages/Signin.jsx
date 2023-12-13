@@ -185,7 +185,10 @@ const handleSubmit = async (e) => {
         <button type="submit" className="form-button">
           Sign In
         </button>
-        <Link to="/forgot-password">Forgot Password</Link>
+                <Link to="/forgot-password" className="forgot-password-link">
+          Forgot Password
+        </Link>
+
       </form>
       {signinError && <p className="error-message">{signinError}</p>}
 
