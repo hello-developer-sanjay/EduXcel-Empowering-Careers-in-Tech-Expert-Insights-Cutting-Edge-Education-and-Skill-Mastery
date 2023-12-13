@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import EditProfile from './EditProfile';
 import '../styles/UserProfile.css';
@@ -6,7 +7,21 @@ import CreativeSpinner from './CreativeSpinner';
 import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
-
+const LogoutConfirmationModal = ({ onCancel, onConfirm }) => {
+  return (
+    <div className="logout-confirmation-modal">
+      <p className="confirmation-message">Are you sure you want to log out?</p>
+      <div className="button-container">
+        <button className="logout-button" onClick={onConfirm}>
+          Yes, Log Out
+        </button>
+        <button className="cancel-button" onClick={onCancel}>
+          Cancel
+        </button>
+      </div>
+    </div>
+  );
+};
 const UserProfile = () => {
   const navigate = useNavigate();
 
@@ -14,6 +29,8 @@ const UserProfile = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
 
 useEffect(() => {
   const fetchUserProfile = async () => {
@@ -83,8 +100,11 @@ useEffect(() => {
     }
   };
 
-
   const handleLogout = async () => {
+    // Show the logout confirmation modal
+    setShowLogoutModal(true);
+  };
+  const confirmLogout = async () => {
     try {
       // Send a request to the server to log the user out
       await axios.post('https://edu-back-j3mz.onrender.com/api/logout');
@@ -94,8 +114,18 @@ useEffect(() => {
       navigate('/signin');
     } catch (error) {
       console.error('Logout error:', error);
+    } finally {
+      // Close the modal after logout, whether successful or not
+      setShowLogoutModal(false);
     }
   };
+
+  const cancelLogout = () => {
+    // Close the logout confirmation modal
+    setShowLogoutModal(false);
+  };
+
+  
 
   return (
     <div className="user-profile-container">
@@ -144,6 +174,12 @@ useEffect(() => {
         <EditProfile
           userProfile={userProfile}
           onUpdateProfile={handleUpdateProfile}
+        />
+      )}
+            {showLogoutModal && (
+        <LogoutConfirmationModal
+          onConfirm={confirmLogout}
+          onCancel={cancelLogout}
         />
       )}
     </div>
