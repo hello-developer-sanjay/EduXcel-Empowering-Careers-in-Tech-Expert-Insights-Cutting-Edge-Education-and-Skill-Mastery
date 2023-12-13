@@ -147,3 +147,57 @@ button.logout-button:focus {
   transform: scale(1.02);
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
 }
+.logout-confirmation-modal {
+  background-color: #ffffff;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.confirmation-message {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #333333;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logout-button,
+.cancel-button {
+  background-color: #3498db;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+
+  &:hover {
+    background-color: #2c81ba;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(52, 152, 219, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+}
+
+.cancel-button {
+  background-color: #e74c3c;
+  color: #ffffff;
+
+  &:hover {
+    background-color: #c04131;
+  }
+}
+
