@@ -171,11 +171,13 @@ useEffect(() => {
         </div>
       )}
       {isEditing && (
-        <EditProfile
-          userProfile={userProfile}
-          onUpdateProfile={handleUpdateProfile}
-        />
-      )}
+  <EditProfile
+    userProfile={userProfile}
+    onUpdateProfile={handleUpdateProfile}
+    onCancel={() => setIsEditing(false)} // Pass the onCancel function
+  />
+)}
+
             {showLogoutModal && (
         <LogoutConfirmationModal
           onConfirm={confirmLogout}
