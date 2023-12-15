@@ -306,11 +306,11 @@ const Footer = () => {
     }
 
     try {
-      let endpoint = "feedbacks";
+let endpoint = "submit-feedback";
       let successMessage = "Feedback submitted successfully! Thank you for your feedback.";
 
       if (query) {
-        endpoint = "queries";
+        endpoint = "submit-query";
         successMessage = "Query sent! Await our swift reply, tailored just for you.";
       }
 
