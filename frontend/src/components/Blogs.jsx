@@ -37,7 +37,6 @@ const Blogs = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [remainingProgress, setRemainingProgress] = useState(100);
 
-  const navigate = useNavigate();
   const location = useLocation();
 
   const handleSearchChange = (event) => {
