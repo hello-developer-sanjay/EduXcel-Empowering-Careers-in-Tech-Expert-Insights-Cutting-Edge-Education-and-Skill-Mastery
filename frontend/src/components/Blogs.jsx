@@ -13,7 +13,7 @@ import {
 import { FaArrowCircleUp } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, Link,useLocation } from "react-router-dom";
 import ReactPlayer from "react-player";
 
 
@@ -23,6 +23,12 @@ const Blogs = () => {
     tools: [],
     working: [],
   });
+  const navigate = useNavigate();
+
+  const handleTitleClick = (title) => {
+    const encodedTitle = encodeURIComponent(title);
+    navigate(`/blogs/${encodedTitle}`);
+  };
 
   const observer = useRef();
   const isFetchingMore = useRef(false);
@@ -298,27 +304,29 @@ const renderMediaContent = (content) => {
                 }
               >
                 <VStack align="start" spacing={2}>
-             <Text fontSize="lg" fontWeight="semibold">
-  {renderMediaContent([blog.title])}
-</Text>
+                  {/* Wrap the title in a Link */}
+                  <Link
+                    to={`/blogs/${encodeURIComponent(blog.title)}`}
+                    onClick={() => handleTitleClick(blog.title)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <Text fontSize="lg" fontWeight="semibold">
+                      {renderMediaContent([blog.title])}
+                    </Text>
+                  </Link>
 
-                 <VStack spacing={2}>{renderMediaContent(blog.overview)}</VStack>
-<VStack spacing={2}>{renderMediaContent(blog.what)}</VStack>
-<VStack spacing={2}>{renderMediaContent(blog.feature)}</VStack>
-                 
+                  <VStack spacing={2}>{renderMediaContent(blog.overview)}</VStack>
+                  <VStack spacing={2}>{renderMediaContent(blog.what)}</VStack>
+                  <VStack spacing={2}>{renderMediaContent(blog.feature)}</VStack>
                 </VStack>
-                 <VStack spacing={2}>{renderMediaContent(blog.setting)}</VStack>
-                
+                <VStack spacing={2}>{renderMediaContent(blog.setting)}</VStack>
               </motion.div>
             ))}
           </Box>
         ))}
       </Box>
-     
     </Box>
-
   );
 };
-
 
 export default Blogs;
