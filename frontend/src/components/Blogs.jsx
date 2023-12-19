@@ -1,23 +1,20 @@
-import  { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import "../styles/Blogs.css";
 
 import {
   Box,
   Input,
-  VStack, 
+  VStack,
   Text,
   Image,
   IconButton,
-  
 } from "@chakra-ui/react";
 import { FaArrowCircleUp } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-import { useNavigate, Link, useLocation, useParams } from "react-router-dom";
+import { useNavigate, Link, useLocation, Route } from "react-router-dom";
 import ReactPlayer from "react-player";
 
-
-// eslint-disable-next-line react-refresh/only-export-components
 const Blogs = () => {
   const [blogsData, setBlogsData] = useState({
     tools: [],
@@ -25,13 +22,11 @@ const Blogs = () => {
   });
   const navigate = useNavigate();
 
-
- const params = useParams(); // Get route parameters
-
   const handleTitleClick = (title) => {
     const encodedTitle = encodeURIComponent(title);
     navigate(`/blogs/${encodedTitle}`);
   };
+
   const observer = useRef();
   const isFetchingMore = useRef(false);
 
@@ -160,92 +155,104 @@ const Blogs = () => {
     fontSize: "24px",
   };
 
-const renderMediaContent = (content) => {
-  if (!content) {
-    return null;
-  }
-
-  return content.map((item, index) => {
-    if (Array.isArray(item)) {
-      return (
-        <VStack key={index} align="start" spacing={2} mt={2}>
-          {renderMediaContent(item)}
-        </VStack>
-      );
+  const renderMediaContent = (content) => {
+    if (!content) {
+      return null;
     }
 
-    let element;
+    return content.map((item, index) => {
+      if (Array.isArray(item)) {
+        return (
+          <VStack key={index} align="start" spacing={2} mt={2}>
+            {renderMediaContent(item)}
+          </VStack>
+        );
+      }
 
-    if (typeof item === "string") {
-      if (item.startsWith("*") && item.endsWith("*")) {
-        const styledText = item.substring(1, item.length - 1);
-        element = (
-          <Text key={index} fontWeight="bold" textColor="gold" fontStyle="italic">
-            {styledText}
-          </Text>
-        );
-      } else if (item.startsWith("$") && item.endsWith("$")) {
-        const styledText = item.substring(1, item.length - 1);
-        element = (
-          <Text key={index} fontWeight="bold" textColor="red" fontStyle="bold">
-            {styledText}
-          </Text>
-        );
-      } else if (item.startsWith("~") && item.endsWith("~")) {
-        const styledText = item.substring(1, item.length - 1);
-        element = (
-          <Text key={index} fontWeight="bold" textColor="lime" fontStyle="bold">
-            {styledText}
-          </Text>
-        );
-      } else if (item.startsWith("http")) {
-        if (item.match(/\.(jpeg|jpg|gif|png)$/)) {
+      let element;
+
+      if (typeof item === "string") {
+        if (item.startsWith("*") && item.endsWith("*")) {
+          const styledText = item.substring(1, item.length - 1);
           element = (
-            <Image
+            <Text
               key={index}
-              src={item}
-              alt={`Image ${index}`}
-              maxW="100%"
-              h="auto"
-            />
-          );
-        } else if (item.match(/\.(mp4|webm|mkv)$/)) {
-          element = (
-            <Box
-              key={index}
-              position="relative"
-              paddingTop="56.25%"
-              width="100%"
+              fontWeight="bold"
+              textColor="gold"
+              fontStyle="italic"
             >
-              <ReactPlayer
-                url={item}
-                controls
-                width="100%"
-                height="100%"
-                style={{ position: "absolute", top: 0, left: 0 }}
-              />
-            </Box>
+              {styledText}
+            </Text>
           );
+        } else if (item.startsWith("$") && item.endsWith("$")) {
+          const styledText = item.substring(1, item.length - 1);
+          element = (
+            <Text
+              key={index}
+              fontWeight="bold"
+              textColor="red"
+              fontStyle="bold"
+            >
+              {styledText}
+            </Text>
+          );
+        } else if (item.startsWith("~") && item.endsWith("~")) {
+          const styledText = item.substring(1, item.length - 1);
+          element = (
+            <Text
+              key={index}
+              fontWeight="bold"
+              textColor="lime"
+              fontStyle="bold"
+            >
+              {styledText}
+            </Text>
+          );
+        } else if (item.startsWith("http")) {
+          if (item.match(/\.(jpeg|jpg|gif|png)$/)) {
+            element = (
+              <Image
+                key={index}
+                src={item}
+                alt={`Image ${index}`}
+                maxW="100%"
+                h="auto"
+              />
+            );
+          } else if (item.match(/\.(mp4|webm|mkv)$/)) {
+            element = (
+              <Box
+                key={index}
+                position="relative"
+                paddingTop="56.25%"
+                width="100%"
+              >
+                <ReactPlayer
+                  url={item}
+                  controls
+                  width="100%"
+                  height="100%"
+                  style={{ position: "absolute", top: 0, left: 0 }}
+                />
+              </Box>
+            );
+          } else {
+            element = <Text key={index}>{item}</Text>;
+          }
         } else {
           element = <Text key={index}>{item}</Text>;
         }
-      } else {
-        element = <Text key={index}>{item}</Text>;
       }
-    }
 
-    return <Box key={index} mb={2}>{element}</Box>;
-  });
-};
+      return <Box key={index} mb={2}>{element}</Box>;
+    });
+  };
 
-  
-  const navbarHeight = document.querySelector(".navbar")?.clientHeight || 0;
+  const navbarHeight =
+    document.querySelector(".navbar")?.clientHeight || 0;
   return (
-   
-    
     <Box
-
-    style={{ marginTop: `${navbarHeight}px`, paddingTop: "20px" }}
+      style={{ marginTop: `${navbarHeight}px`, paddingTop: "20px" }}
       w="full"
       minH="100vh"
       mx="auto"
@@ -316,16 +323,15 @@ const renderMediaContent = (content) => {
                     </Text>
                   </Link>
 
-                  {/* Check if the current blog matches the route parameter */}
-                  {params.title === encodeURIComponent(blog.title) && (
-                    <VStack spacing={2}>
-                      {renderMediaContent(blog.overview)}
-                      {renderMediaContent(blog.what)}
-                      {renderMediaContent(blog.feature)}
-                      {renderMediaContent(blog.setting)}
-                    </VStack>
-                  )}
+                  <VStack spacing={2}>
+                    {renderMediaContent(blog.overview)}
+                  </VStack>
+                  <VStack spacing={2}>{renderMediaContent(blog.what)}</VStack>
+                  <VStack spacing={2}>
+                    {renderMediaContent(blog.feature)}
+                  </VStack>
                 </VStack>
+                <VStack spacing={2}>{renderMediaContent(blog.setting)}</VStack>
               </motion.div>
             ))}
           </Box>
