@@ -13,7 +13,7 @@ import {
 import { FaArrowCircleUp } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-import { useNavigate, Link,useLocation } from "react-router-dom";
+import { useNavigate, Link, useLocation, useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
 
 
@@ -25,11 +25,13 @@ const Blogs = () => {
   });
   const navigate = useNavigate();
 
+
+ const params = useParams(); // Get route parameters
+
   const handleTitleClick = (title) => {
     const encodedTitle = encodeURIComponent(title);
     navigate(`/blogs/${encodedTitle}`);
   };
-
   const observer = useRef();
   const isFetchingMore = useRef(false);
 
@@ -314,11 +316,16 @@ const renderMediaContent = (content) => {
                     </Text>
                   </Link>
 
-                  <VStack spacing={2}>{renderMediaContent(blog.overview)}</VStack>
-                  <VStack spacing={2}>{renderMediaContent(blog.what)}</VStack>
-                  <VStack spacing={2}>{renderMediaContent(blog.feature)}</VStack>
+                  {/* Check if the current blog matches the route parameter */}
+                  {params.title === encodeURIComponent(blog.title) && (
+                    <VStack spacing={2}>
+                      {renderMediaContent(blog.overview)}
+                      {renderMediaContent(blog.what)}
+                      {renderMediaContent(blog.feature)}
+                      {renderMediaContent(blog.setting)}
+                    </VStack>
+                  )}
                 </VStack>
-                <VStack spacing={2}>{renderMediaContent(blog.setting)}</VStack>
               </motion.div>
             ))}
           </Box>
