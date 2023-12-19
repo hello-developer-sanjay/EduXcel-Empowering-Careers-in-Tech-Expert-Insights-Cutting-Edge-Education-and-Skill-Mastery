@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import "../styles/Blogs.css";
-
 import {
   Box,
   Input,
@@ -11,9 +10,16 @@ import {
 } from "@chakra-ui/react";
 import { FaArrowCircleUp } from "react-icons/fa";
 import { motion } from "framer-motion";
-
-import { useNavigate, Link, useLocation, Route } from "react-router-dom";
+import { useNavigate, Link, useLocation, Routes, Route } from "react-router-dom";
 import ReactPlayer from "react-player";
+
+const BlogTitle = ({ title, onClick }) => (
+  <Link to={`/blogs/${encodeURIComponent(title)}`} onClick={onClick}>
+    <Text fontSize="lg" fontWeight="semibold">
+      {title}
+    </Text>
+  </Link>
+);
 
 const Blogs = () => {
   const [blogsData, setBlogsData] = useState({
@@ -175,36 +181,21 @@ const Blogs = () => {
         if (item.startsWith("*") && item.endsWith("*")) {
           const styledText = item.substring(1, item.length - 1);
           element = (
-            <Text
-              key={index}
-              fontWeight="bold"
-              textColor="gold"
-              fontStyle="italic"
-            >
+            <Text key={index} fontWeight="bold" textColor="gold" fontStyle="italic">
               {styledText}
             </Text>
           );
         } else if (item.startsWith("$") && item.endsWith("$")) {
           const styledText = item.substring(1, item.length - 1);
           element = (
-            <Text
-              key={index}
-              fontWeight="bold"
-              textColor="red"
-              fontStyle="bold"
-            >
+            <Text key={index} fontWeight="bold" textColor="red" fontStyle="bold">
               {styledText}
             </Text>
           );
         } else if (item.startsWith("~") && item.endsWith("~")) {
           const styledText = item.substring(1, item.length - 1);
           element = (
-            <Text
-              key={index}
-              fontWeight="bold"
-              textColor="lime"
-              fontStyle="bold"
-            >
+            <Text key={index} fontWeight="bold" textColor="lime" fontStyle="bold">
               {styledText}
             </Text>
           );
@@ -232,7 +223,7 @@ const Blogs = () => {
                   controls
                   width="100%"
                   height="100%"
-                  style={{ position: "absolute", top: 0, left: 0 }}
+                  style={{ position:absolute", top: 0, left: 0 }}
                 />
               </Box>
             );
@@ -248,8 +239,8 @@ const Blogs = () => {
     });
   };
 
-  const navbarHeight =
-    document.querySelector(".navbar")?.clientHeight || 0;
+  const navbarHeight = document.querySelector(".navbar")?.clientHeight || 0;
+
   return (
     <Box
       style={{ marginTop: `${navbarHeight}px`, paddingTop: "20px" }}
@@ -312,24 +303,10 @@ const Blogs = () => {
                 }
               >
                 <VStack align="start" spacing={2}>
-                  {/* Wrap the title in a Link */}
-                  <Link
-                    to={`/blogs/${encodeURIComponent(blog.title)}`}
-                    onClick={() => handleTitleClick(blog.title)}
-                    style={{ cursor: "pointer" }}
-                  >
-                    <Text fontSize="lg" fontWeight="semibold">
-                      {renderMediaContent([blog.title])}
-                    </Text>
-                  </Link>
-
-                  <VStack spacing={2}>
-                    {renderMediaContent(blog.overview)}
-                  </VStack>
+                  <BlogTitle title={blog.title} onClick={() => handleTitleClick(blog.title)} />
+                  <VStack spacing={2}>{renderMediaContent(blog.overview)}</VStack>
                   <VStack spacing={2}>{renderMediaContent(blog.what)}</VStack>
-                  <VStack spacing={2}>
-                    {renderMediaContent(blog.feature)}
-                  </VStack>
+                  <VStack spacing={2}>{renderMediaContent(blog.feature)}</VStack>
                 </VStack>
                 <VStack spacing={2}>{renderMediaContent(blog.setting)}</VStack>
               </motion.div>
@@ -342,3 +319,4 @@ const Blogs = () => {
 };
 
 export default Blogs;
+
