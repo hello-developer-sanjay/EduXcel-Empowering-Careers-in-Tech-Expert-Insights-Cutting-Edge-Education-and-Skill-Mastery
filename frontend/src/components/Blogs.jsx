@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from "react";
-import "../styles/Blogs.css";
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
+import React, { useState, useEffect, useRef } from "react";
 import {
   Box,
   Input,
@@ -7,19 +8,28 @@ import {
   Text,
   Image,
   IconButton,
+ 
+  useDisclosure,
+  Collapse,
+  Button,
 } from "@chakra-ui/react";
-import { FaArrowCircleUp } from "react-icons/fa";
+import { FaArrowCircleUp, FaBars, FaTimes } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { useNavigate, Link, useLocation, Routes, Route } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import ReactPlayer from "react-player";
+import "../styles/Blogs.css";
 
-const BlogTitle = ({ title, onClick }) => (
-  <Link to={`/blogs/${encodeURIComponent(title)}`} onClick={onClick}>
-    <Text fontSize="lg" fontWeight="semibold">
-      {title}
-    </Text>
-  </Link>
-);
+const BlogTitle = React.forwardRef(({ title, onClick }, ref) => (
+  <Text
+    fontSize="lg"
+    fontWeight="semibold"
+    cursor="pointer"
+    onClick={() => onClick(title)}
+    ref={ref}
+  >
+    {title}
+  </Text>
+));
 
 const Blogs = () => {
   const [blogsData, setBlogsData] = useState({
@@ -27,14 +37,27 @@ const Blogs = () => {
     working: [],
   });
   const navigate = useNavigate();
+  const titleRefs = useRef({});
+  const { isOpen, onToggle } = useDisclosure();
+
+  const scrollToTitle = (title) => {
+    const titleRef = titleRefs.current[title];
+    if (titleRef) {
+      titleRef.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
 
   const handleTitleClick = (title) => {
     const encodedTitle = encodeURIComponent(title);
     navigate(`/blogs/${encodedTitle}`);
+    // Scroll to the clicked title
+    scrollToTitle(title);
   };
 
   const observer = useRef();
-  const isFetchingMore = useRef(false);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -161,6 +184,37 @@ const Blogs = () => {
     fontSize: "24px",
   };
 
+  const sidebarStyle = {
+    position: "fixed",
+    top: "100px",
+    left: 0,
+    height: "100%",
+    width: "250px",
+    backgroundColor: "white",
+    borderRight: "1px solid lightgray",
+    padding: "20px",
+    zIndex: 2,
+    transition: "left 0.3s",
+    overflowX: "hidden",
+  };
+
+  const toggleButtonStyle = {
+    position: "fixed",
+    top: "100px",
+    left: isOpen ? "230px" : "20px",
+    zIndex: 2,
+    background: "green",
+    color: "white",
+    borderRadius: "50%",
+    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.2)",
+    padding: "8px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    cursor: "pointer",
+    transition: "left 0.3s",
+  };
+
   const renderMediaContent = (content) => {
     if (!content) {
       return null;
@@ -223,7 +277,7 @@ const Blogs = () => {
                   controls
                   width="100%"
                   height="100%"
-style={{ position: "absolute", top: 0, left: 0 }}
+                  style={{ position: "absolute", top: 0, left: 0 }}
                 />
               </Box>
             );
@@ -243,13 +297,11 @@ style={{ position: "absolute", top: 0, left: 0 }}
 
   return (
     <Box
-      style={{ marginTop: `${navbarHeight}px`, paddingTop: "20px" }}
       w="full"
       minH="100vh"
       mx="auto"
       d="flex"
-      marginTop="100px" // Add a top margin to push content below Navbar
-      padding={`calc(100px + 2rem) 2rem 2rem 2rem`} // Set padding to Navbar height + extra padding
+      padding={`calc(${navbarHeight}px + 2rem) 2rem 2rem 2rem`}
       flexDir="column"
       alignItems="center"
       justifyContent="flex-start"
@@ -260,33 +312,67 @@ style={{ position: "absolute", top: 0, left: 0 }}
       overflowX="hidden"
       boxShadow="0px 4px 8px rgba(0, 0, 0, 0.1)"
       onScroll={handleScroll}
-      mt="100px"
+      mt="0px"
     >
-      <Box style={headerStyle}>
-        <VStack spacing={0} align="start" w="100%" marginTop="0">
-          <Input
-            type="text"
-            placeholder="Search for blogs"
-            value={searchQuery}
-            onChange={handleSearchChange}
-            p={2}
-            borderWidth="1px"
-            rounded="md"
-            bg="white"
-            color="black"
-            mb={2}
+      {/* Toggle Button */}
+      <Button
+        style={toggleButtonStyle}
+        onClick={onToggle}
+        leftIcon={isOpen ? <FaTimes /> : <FaBars />}
+      >
+        {isOpen ? "Close" : "Open"}
+      </Button>
+
+      {/* Sidebar */}
+      <Collapse in={isOpen}>
+        <Box style={sidebarStyle}>
+          <VStack align="start" spacing={2}>
+            {Object.keys(blogsData).map((collection) => (
+              <VStack key={collection} align="start" spacing={2}>
+                <Text fontSize="md" fontWeight="semibold" mb={2}>
+                  {`${collection.charAt(0).toUpperCase()}${collection.slice(1)}`}
+                </Text>
+                {filteredBlogs(collection).map((blog) => (
+                  <BlogTitle
+                    key={blog.title}
+                    title={blog.title}
+                    onClick={() => handleTitleClick(blog.title)}
+                    ref={(el) => (titleRefs.current[blog.title] = el)}
+                  />
+                ))}
+              </VStack>
+            ))}
+          </VStack>
+        </Box>
+      </Collapse>
+
+      {/* Main Content */}
+      <Box mt={8} p={4} ml={isOpen ? "250px" : "0"}>
+        <Box style={headerStyle}>
+          <VStack spacing={0} align="start" w="100%" marginTop="0">
+            <Input
+              type="text"
+              placeholder="Search for blogs"
+              value={searchQuery}
+              onChange={handleSearchChange}
+              p={2}
+              borderWidth="1px"
+              rounded="md"
+              bg="white"
+              color="black"
+              mb={2}
+            />
+            <Box style={progressBarStyle} />
+            <Box style={remainingBarStyle} />
+          </VStack>
+          <IconButton
+            icon={<FaArrowCircleUp />}
+            aria-label="Scroll to Top"
+            onClick={scrollToTop}
+            style={scrollToTopButtonStyle}
           />
-          <Box style={progressBarStyle} />
-          <Box style={remainingBarStyle} />
-        </VStack>
-        <IconButton
-          icon={<FaArrowCircleUp />}
-          aria-label="Scroll to Top"
-          onClick={scrollToTop}
-          style={scrollToTopButtonStyle}
-        />
-      </Box>
-      <Box mt={8} p={4}>
+        </Box>
+
         {Object.keys(blogsData).map((collection) => (
           <Box key={collection} w="full" mt={8}>
             <Text fontSize="xl" fontWeight="bold" mb={2}>
@@ -302,13 +388,27 @@ style={{ position: "absolute", top: 0, left: 0 }}
                     : null
                 }
               >
-                <VStack align="start" spacing={2}>
-                  <BlogTitle title={blog.title} onClick={() => handleTitleClick(blog.title)} />
-                  <VStack spacing={2}>{renderMediaContent(blog.overview)}</VStack>
-                  <VStack spacing={2}>{renderMediaContent(blog.what)}</VStack>
-                  <VStack spacing={2}>{renderMediaContent(blog.feature)}</VStack>
+                {/* Add 'id' attribute to the title section */}
+                <VStack align="start" spacing={2} id={`title-${blog.title}`} ref={(el) => (titleRefs.current[blog.title] = el)}>
+                  <BlogTitle
+                    key={blog.title}
+                    title={blog.title}
+                    onClick={() => handleTitleClick(blog.title)}
+                  />
                 </VStack>
-                <VStack spacing={2}>{renderMediaContent(blog.setting)}</VStack>
+                {/* Add 'id' attribute to the content section */}
+                <VStack spacing={2} id={`content-${blog.title}`}>
+                  {renderMediaContent(blog.overview)}
+                </VStack>
+                <VStack spacing={2} id={`content-${blog.title}`}>
+                  {renderMediaContent(blog.what)}
+                </VStack>
+                <VStack spacing={2} id={`content-${blog.title}`}>
+                  {renderMediaContent(blog.feature)}
+                </VStack>
+                <VStack spacing={2} id={`content-${blog.title}`}>
+                  {renderMediaContent(blog.setting)}
+                </VStack>
               </motion.div>
             ))}
           </Box>
@@ -319,4 +419,3 @@ style={{ position: "absolute", top: 0, left: 0 }}
 };
 
 export default Blogs;
-
