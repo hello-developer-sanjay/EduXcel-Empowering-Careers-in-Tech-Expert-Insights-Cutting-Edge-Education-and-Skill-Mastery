@@ -186,34 +186,65 @@ const Blogs = () => {
 
   const sidebarStyle = {
     position: "fixed",
-    top: "100px",
+    top: "165px",
     left: 0,
     height: "100%",
-    width: "250px",
-    backgroundColor: "white",
+    width: "220px",
+    backgroundColor: "yellow",
     borderRight: "1px solid lightgray",
     padding: "20px",
     zIndex: 2,
     transition: "left 0.3s",
     overflowX: "hidden",
   };
-
-  const toggleButtonStyle = {
-    position: "fixed",
-    top: "155px",
-    left: isOpen ? "230px" : "20px",
-    zIndex: 2,
-    background: "green",
-    color: "white",
-    borderRadius: "50%",
-    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.2)",
-    padding: "8px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    cursor: "pointer",
-    transition: "left 0.3s",
-  };
+   const toggleButtonStyle = {
+      position: "fixed",
+      top: "25%",
+      transform: "translateY(-50%)",
+      left: isOpen ? "240px" : "20px",
+      zIndex: 2,
+      background: isOpen ? "#e74c3c" : "#2ecc71", // Red when open, green when closed
+      color: "white",
+      borderRadius: "50%",
+      boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.3)",
+      padding: "12px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      cursor: "pointer",
+      transition: "left 0.3s, background 0.3s",
+      border: "2px solid #fff", // White border
+      fontSize: "12px",
+    };
+    
+    // Rotating animation on toggle
+    toggleButtonStyle.rotate = {
+      transform: isOpen ? "rotate(180deg)" : "rotate(0)",
+      transition: "transform 0.3s",
+    };
+    
+    // Hover effect
+    toggleButtonStyle["&:hover"] = {
+      background: isOpen ? "#c0392b" : "#27ae60", // Darker red when open, darker green when closed
+    };
+    
+    // Pulse animation on hover
+    toggleButtonStyle["&:hover"].pulse = {
+      animation: "pulse 0.5s infinite",
+    };
+    
+    // Keyframe animation for pulse
+    toggleButtonStyle["@keyframes pulse"] = {
+      "0%": {
+        transform: "scale(1)",
+      },
+      "50%": {
+        transform: "scale(1.2)",
+      },
+      "100%": {
+        transform: "scale(1)",
+      },
+    };
 
   const renderMediaContent = (content) => {
     if (!content) {
