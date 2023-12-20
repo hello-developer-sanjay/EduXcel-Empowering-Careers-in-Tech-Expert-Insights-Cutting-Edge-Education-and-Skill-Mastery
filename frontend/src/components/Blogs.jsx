@@ -200,7 +200,7 @@ const Blogs = () => {
 
   const toggleButtonStyle = {
     position: "fixed",
-    top: "100px",
+    top: "155px",
     left: isOpen ? "230px" : "20px",
     zIndex: 2,
     background: "green",
