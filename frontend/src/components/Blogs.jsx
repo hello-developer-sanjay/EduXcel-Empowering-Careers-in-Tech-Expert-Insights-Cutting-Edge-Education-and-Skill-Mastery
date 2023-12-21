@@ -50,12 +50,7 @@ const Blogs = () => {
     }
   };
 
-  const handleTitleClick = (title) => {
-    const encodedTitle = encodeURIComponent(title);
-    navigate(`/blogs/${encodedTitle}`);
-    // Scroll to the clicked title
-    scrollToTitle(title);
-  };
+
 
   const observer = useRef();
 
@@ -64,7 +59,13 @@ const Blogs = () => {
   const [remainingProgress, setRemainingProgress] = useState(100);
 
   const location = useLocation();
+  const [clickedTitle, setClickedTitle] = useState(null);
 
+  const handleTitleClick = (title) => {
+    setClickedTitle(title);
+    const encodedTitle = encodeURIComponent(title);
+    navigate(`/blogs/${encodedTitle}`);
+  };
   const handleSearchChange = (event) => {
     const newQuery = event.target.value;
     setSearchQuery(newQuery);
