@@ -132,8 +132,41 @@ const Blogs = () => {
     setSearchQuery(decodeURIComponent(query));
     fetchData("tools");
     fetchData("working");
-  }, [location.pathname]);
-
+  
+    if (clickedTitle) {
+      // Scroll to the clicked title
+      const titleRef = titleRefs.current[clickedTitle];
+      if (titleRef) {
+        titleRef.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+      setClickedTitle(null); // Reset the clicked title state
+    }
+  
+    // Check for title in URL and scroll to it
+    const urlTitleMatch = location.pathname.match(/\/blogs\/(.*)/);
+    if (urlTitleMatch) {
+      const urlTitle = decodeURIComponent(urlTitleMatch[1]);
+      const matchingTitle = Object.keys(blogsData)
+        .flatMap((collection) => blogsData[collection])
+        .find((blog) => blog.title === urlTitle);
+  
+      if (matchingTitle) {
+        const titleRef = titleRefs.current[matchingTitle.title];
+        if (titleRef) {
+          // Scroll to the matched title almost instantly
+          setTimeout(() => {
+            titleRef.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }, 100);
+        }
+      }
+    }
+  }, [location.pathname, clickedTitle, blogsData]);
   const filteredBlogs = (collection) => {
     const blogsCollection = blogsData[collection] || [];
     return blogsCollection.filter((blog) =>
