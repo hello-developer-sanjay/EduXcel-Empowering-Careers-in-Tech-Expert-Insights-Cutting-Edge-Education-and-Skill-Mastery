@@ -8,7 +8,6 @@ import {
   Text,
   Image,
   IconButton,
- 
   useDisclosure,
   Collapse,
   Button,
@@ -20,16 +19,34 @@ import ReactPlayer from "react-player";
 import "../styles/Blogs.css";
 
 const BlogTitle = React.forwardRef(({ title, onClick }, ref) => (
-  <Text
-    fontSize="lg"
-    fontWeight="semibold"
-    cursor="pointer"
-    onClick={() => onClick(title)}
-    ref={ref}
+  <motion.div
+    whileHover={{ textDecoration: "underline", boxShadow: "0px 2px 4px rgba(255, 255, 255, 0.3)" }}
+    whileTap={{ scale: 0.95 }}
+    transition={{ duration: 0.2 }}
   >
-    {title}
-  </Text>
+    <Text
+      fontSize={{ base: "xl", md: "2xl" }}
+      fontWeight="bold"
+      cursor="pointer"
+      onClick={() => onClick(title)}
+      ref={ref}
+      _hover={{ textDecoration: "none" }}
+      color="#ffffff" // White text color
+      fontFamily="Quicksand, sans-serif" // Clean sans-serif font
+      textAlign="center"
+      p={2}
+    >
+      <a
+        href={`https://eduxcel.vercel.app/blogs/${encodeURIComponent(title)}`}
+        style={{ color: "inherit" }}
+      >
+        {title}
+      </a>
+    </Text>
+  </motion.div>
 ));
+
+
 
 const Blogs = () => {
   const [blogsData, setBlogsData] = useState({
@@ -50,8 +67,6 @@ const Blogs = () => {
     }
   };
 
-
-
   const observer = useRef();
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -66,6 +81,7 @@ const Blogs = () => {
     const encodedTitle = encodeURIComponent(title);
     navigate(`/blogs/${encodedTitle}`);
   };
+
   const handleSearchChange = (event) => {
     const newQuery = event.target.value;
     setSearchQuery(newQuery);
@@ -133,7 +149,7 @@ const Blogs = () => {
     setSearchQuery(decodeURIComponent(query));
     fetchData("tools");
     fetchData("working");
-  
+
     if (clickedTitle) {
       // Scroll to the clicked title
       const titleRef = titleRefs.current[clickedTitle];
@@ -145,7 +161,7 @@ const Blogs = () => {
       }
       setClickedTitle(null); // Reset the clicked title state
     }
-  
+
     // Check for title in URL and scroll to it
     const urlTitleMatch = location.pathname.match(/\/blogs\/(.*)/);
     if (urlTitleMatch) {
@@ -153,7 +169,7 @@ const Blogs = () => {
       const matchingTitle = Object.keys(blogsData)
         .flatMap((collection) => blogsData[collection])
         .find((blog) => blog.title === urlTitle);
-  
+
       if (matchingTitle) {
         const titleRef = titleRefs.current[matchingTitle.title];
         if (titleRef) {
@@ -168,6 +184,7 @@ const Blogs = () => {
       }
     }
   }, [location.pathname, clickedTitle, blogsData]);
+
   const filteredBlogs = (collection) => {
     const blogsCollection = blogsData[collection] || [];
     return blogsCollection.filter((blog) =>
@@ -175,15 +192,22 @@ const Blogs = () => {
     );
   };
 
-  const headerStyle = {
-    position: "sticky",
-    top: -20,
-    zIndex: 1,
-    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
-    padding: "1rem",
-    backdropFilter: "blur(10px)",
-    background: "white",
-  };
+const headerStyle = {
+  position: "sticky",
+  top:0,
+  zIndex: 1,
+  boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
+  padding: "1rem",
+  backdropFilter: "blur(10px)",
+  background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+  borderRadius: "0 0 20px 20px", // Adds rounded corners at the bottom
+  color: "#fff", // Text color
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  fontFamily: "Poppins, sans-serif", // Modern sans-serif font
+};
+
 
   const progressBarStyle = {
     width: `${scrollProgress}%`,
@@ -202,7 +226,7 @@ const Blogs = () => {
 
   const scrollToTopButtonStyle = {
     position: "fixed",
-    bottom: "20px",
+    bottom: "40px",
     right: "20px",
     zIndex: 2,
     background: "green",
@@ -218,67 +242,85 @@ const Blogs = () => {
     fontSize: "24px",
   };
 
+  const contentSectionStyle = {
+    // Enhanced styles for content sections
+    margin: "20px 0",
+    padding: "20px",
+    borderRadius: "12px",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+    border: "1px solid #e0e0e0",
+    color: "red", // Dark gray text color
+    textAlign: "left !important", // Align text to the left
+  
+    // Add the following style to ensure left text alignment
+    "& p, & h1, & h2, & h3, & a": {
+      textAlign: "left !important",
+    },
+  };
+  
+  
   const sidebarStyle = {
     position: "fixed",
     top: "165px",
     left: 0,
     height: "100%",
     width: "220px",
-    backgroundColor: "yellow",
+    backgroundColor: "black",
     borderRight: "1px solid lightgray",
     padding: "20px",
     zIndex: 2,
     transition: "left 0.3s",
     overflowX: "hidden",
   };
-   const toggleButtonStyle = {
-      position: "fixed",
-      top: "25%",
-      transform: "translateY(-50%)",
-      left: isOpen ? "240px" : "20px",
-      zIndex: 2,
-      background: isOpen ? "#e74c3c" : "#2ecc71", // Red when open, green when closed
-      color: "white",
-      borderRadius: "50%",
-      boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.3)",
-      padding: "12px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      cursor: "pointer",
-      transition: "left 0.3s, background 0.3s",
-      border: "2px solid #fff", // White border
-      fontSize: "12px",
-    };
-    
-    // Rotating animation on toggle
-    toggleButtonStyle.rotate = {
-      transform: isOpen ? "rotate(180deg)" : "rotate(0)",
-      transition: "transform 0.3s",
-    };
-    
-    // Hover effect
-    toggleButtonStyle["&:hover"] = {
-      background: isOpen ? "#c0392b" : "#27ae60", // Darker red when open, darker green when closed
-    };
-    
-    // Pulse animation on hover
-    toggleButtonStyle["&:hover"].pulse = {
-      animation: "pulse 0.5s infinite",
-    };
-    
-    // Keyframe animation for pulse
-    toggleButtonStyle["@keyframes pulse"] = {
-      "0%": {
-        transform: "scale(1)",
-      },
-      "50%": {
-        transform: "scale(1.2)",
-      },
-      "100%": {
-        transform: "scale(1)",
-      },
-    };
+
+  const toggleButtonStyle = {
+    position: "fixed",
+    top: "15%",
+    transform: "translateY(-50%)",
+    left: isOpen ? "240px" : "20px",
+    zIndex: 2,
+    background: isOpen ? "#e74c3c" : "#2ecc71", // Red when open, green when closed
+    color: "white",
+    borderRadius: "50%",
+    boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.3)",
+    padding: "10px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    cursor: "pointer",
+    transition: "left 0.3s, background 0.3s",
+    border: "2px solid #fff", // White border
+    fontSize: "12px",
+  };
+
+  // Rotating animation on toggle
+  toggleButtonStyle.rotate = {
+    transform: isOpen ? "rotate(180deg)" : "rotate(0)",
+    transition: "transform 0.3s",
+  };
+
+  // Hover effect
+  toggleButtonStyle["&:hover"] = {
+    background: isOpen ? "#c0392b" : "#27ae60", // Darker red when open, darker green when closed
+  };
+
+  // Pulse animation on hover
+  toggleButtonStyle["&:hover"].pulse = {
+    animation: "pulse 0.5s infinite",
+  };
+
+  // Keyframe animation for pulse
+  toggleButtonStyle["@keyframes pulse"] = {
+    "0%": {
+      transform: "scale(1)",
+    },
+    "50%": {
+      transform: "scale(1.2)",
+    },
+    "100%": {
+      transform: "scale(1)",
+    },
+  };
 
   const renderMediaContent = (content) => {
     if (!content) {
@@ -300,7 +342,7 @@ const Blogs = () => {
         if (item.startsWith("*") && item.endsWith("*")) {
           const styledText = item.substring(1, item.length - 1);
           element = (
-            <Text key={index} fontWeight="bold" textColor="gold" fontStyle="italic">
+            <Text key={index} fontWeight="bold" textColor="gold" fontStyle="italic"> 
               {styledText}
             </Text>
           );
@@ -368,10 +410,11 @@ const Blogs = () => {
       d="flex"
       padding={`calc(${navbarHeight}px + 2rem) 2rem 2rem 2rem`}
       flexDir="column"
-      alignItems="center"
+      alignItems="start"
       justifyContent="flex-start"
       id="blogs-section"
       overflowY="scroll"
+      backgroundColor={"black"}
       maxHeight="calc(100vh - 100px)"
       height="auto"
       overflowX="hidden"
@@ -412,7 +455,7 @@ const Blogs = () => {
       </Collapse>
 
       {/* Main Content */}
-      <Box mt={8} p={4} ml={isOpen ? "250px" : "0"}>
+      <Box mt={0} p={0} ml={isOpen ? "250px" : "0"}>
         <Box style={headerStyle}>
           <VStack spacing={0} align="start" w="100%" marginTop="0">
             <Input
@@ -461,20 +504,19 @@ const Blogs = () => {
                     onClick={() => handleTitleClick(blog.title)}
                   />
                 </VStack>
-                {/* Add 'id' attribute to the content section */}
-                <VStack spacing={2} id={`content-${blog.title}`}>
-                  {renderMediaContent(blog.overview)}
-                </VStack>
-                <VStack spacing={2} id={`content-${blog.title}`}>
-                  {renderMediaContent(blog.what)}
-                </VStack>
-                <VStack spacing={2} id={`content-${blog.title}`}>
-                  {renderMediaContent(blog.feature)}
-                </VStack>
-                <VStack spacing={2} id={`content-${blog.title}`}>
-                  {renderMediaContent(blog.setting)}
-                </VStack>
-              </motion.div>
+                <VStack spacing={2} id={`content-${blog.title}`} style={contentSectionStyle}>
+                {renderMediaContent(blog.overview, blog.title)}
+              </VStack>
+              <VStack spacing={2} id={`content-${blog.title}`} style={contentSectionStyle}>
+                {renderMediaContent(blog.what, blog.title)}
+              </VStack>
+              <VStack spacing={2} id={`content-${blog.title}`} style={contentSectionStyle}>
+                {renderMediaContent(blog.feature, blog.title)}
+              </VStack>
+              <VStack spacing={2} id={`content-${blog.title}`} style={contentSectionStyle}>
+                {renderMediaContent(blog.setting, blog.title)}
+              </VStack>
+            </motion.div>
             ))}
           </Box>
         ))}
