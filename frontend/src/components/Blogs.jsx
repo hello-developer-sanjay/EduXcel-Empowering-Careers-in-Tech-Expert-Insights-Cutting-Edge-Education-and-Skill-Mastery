@@ -71,7 +71,7 @@ const Blogs = () => {
 
   const location = useLocation();
   const [clickedTitle, setClickedTitle] = useState(null);
-  const handleTitleClick = (title) => {
+   const handleTitleClick = (title) => {
     const decodedTitle = decodeURIComponent(title);
     const matchingBlog = Object.keys(blogsData)
       .flatMap((collection) => blogsData[collection])
@@ -84,7 +84,9 @@ const Blogs = () => {
       );
       setCurrentPage(page);
       setClickedTitle(decodedTitle);
-      const encodedTitle = encodeURIComponent(decodedTitle);
+
+      // Use the matched blog title instead of the original title
+      const encodedTitle = encodeURIComponent(matchingBlog.title);
       navigate(`/blogs/${encodedTitle}`);
     }
   };
