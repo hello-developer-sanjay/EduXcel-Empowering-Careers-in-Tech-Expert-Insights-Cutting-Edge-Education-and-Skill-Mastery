@@ -2,6 +2,12 @@
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Blogs -->
+   <url>
+    <loc>https://eduxcel.vercel.app/blogs</loc>
+    <lastmod>2023-01-02</lastmod>
+  </url>
+
+
   <url>
     <loc>https://eduxcel.vercel.app/blogs/tools/Introduction%20to%20Visual%20Studio%20Code%20(VS%20Code)</loc>
     <lastmod>2023-01-01</lastmod>
@@ -36,4 +42,45 @@
     <loc>https://eduxcel.vercel.app/courses/Full%20Stack%20Web%20Development%20Bootcamp/Frontend%20Development/submodules/HTML%20Basics</loc>
     <lastmod>2023-01-08</lastmod>
   </url>
+
+  <url>
+    <loc>https://eduxcel.vercel.app/courses/Data%20Science%20Fundamentals</loc>
+    <lastmod>2023-01-02</lastmod>
+  </url>
+
+    <url>
+    <loc>https://eduxcel.vercel.app/courses/Data%20Science%20Fundamentals/Introduction%20to%20Data%20Science</loc>
+    <lastmod>2023-01-02</lastmod>
+  </url>
+
+    <url>
+    <loc>https://eduxcel.vercel.app/courses/Machine%20Learning%20for%20Beginners</loc>
+    <lastmod>2023-01-02</lastmod>
+  </url>
+
+
+     <url>
+    <loc>https://eduxcel.vercel.app/courses/Machine%20Learning%20for%20Beginners/Machine%20Learning%20Basics</loc>
+    <lastmod>2023-01-02</lastmod>
+  </url>
+
+
+
+     <url>
+    <loc>https://eduxcel.vercel.app/signup</loc>
+    <lastmod>2023-01-02</lastmod>
+  </url>
+
+
+
+    
+
+     <url>
+    <loc>https://eduxcel.vercel.app/profile</loc>
+    <lastmod>2023-01-02</lastmod>
+  </url>
+
+
+
+  
 </urlset>
