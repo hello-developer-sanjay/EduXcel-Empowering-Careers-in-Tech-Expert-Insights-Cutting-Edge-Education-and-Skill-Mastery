@@ -70,37 +70,20 @@
       const [remainingProgress, setRemainingProgress] = useState(100);
 
       const location = useLocation();
-      
-      const handleTitleClick = async (title) => {
+      const [clickedTitle, setClickedTitle] = useState(null);
+      const handleTitleClick = (title, collection) => {
         const decodedTitle = decodeURIComponent(title);
-        const matchingBlog = Object.keys(blogsData)
-          .flatMap((collection) => blogsData[collection])
-          .find((blog) => blog.title === decodedTitle);
-    
+        const matchingBlog = blogsData[collection].find((blog) => blog.title === decodedTitle);
+      
         if (matchingBlog) {
-          const page = Math.ceil(
-            (filteredBlogs(matchingBlog.collection).indexOf(matchingBlog) + 1) /
-              postsPerPage
-          );
-          setCurrentPage(page);
-    
-          // Fetch the data for the matching blog's section
-          await fetchData(matchingBlog.collection);
-    
-          // Scroll to the clicked title
-          const titleRef = titleRefs.current[decodedTitle];
-          if (titleRef) {
-            titleRef.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          }
-    
-          // Update the URL
+          const pageIndex = Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
+          setCurrentPage(pageIndex);
+          setClickedTitle(decodedTitle);
           const encodedTitle = encodeURIComponent(decodedTitle);
-          navigate(`/blogs/${encodedTitle}`);
+          navigate(`/blogs/${collection}/${encodedTitle}`);
         }
       };
+      
       const handleSearchChange = (event) => {
         const newQuery = event.target.value;
         setSearchQuery(newQuery);
@@ -167,12 +150,47 @@
           blog.title.toLowerCase().includes(searchQuery.toLowerCase())
         );
       };  
-      useEffect(() => {
+    useEffect(() => {
         const query = location.pathname.split("/blogs/search/")[1] || "";
         setSearchQuery(decodeURIComponent(query));
         fetchData("tools");
         fetchData("working");
-      }, [location.pathname]);
+  
+        if (clickedTitle) {
+          // Scroll to the clicked title
+          const [collection, title] = clickedTitle.split("-");
+          const titleRef = titleRefs.current[`${collection}-${title}`];
+          if (titleRef) {
+            titleRef.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+          setClickedTitle(null); // Reset the clicked title state
+        }
+
+        // Check for title in URL and scroll to it
+        const urlTitleMatch = location.pathname.match(/\/blogs\/(.*)/);
+        if (urlTitleMatch) {
+          const urlTitle = decodeURIComponent(urlTitleMatch[1]);
+          const matchingBlog = Object.keys(blogsData)
+            .flatMap((collection) => blogsData[collection])
+            .find((blog) => blog.title === urlTitle);
+
+          if (matchingBlog) {
+            const titleRef = titleRefs.current[matchingBlog.title];
+            if (titleRef) {
+              // Scroll to the matched title almost instantly
+              setTimeout(() => {
+                titleRef.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              }, 100);
+            }
+          }
+        }
+      }, [location.pathname, clickedTitle, blogsData]);
 
 
       const indexOfLastPost = currentPage * postsPerPage;
@@ -424,21 +442,22 @@
           <Collapse in={isOpen}>
             <Box style={sidebarStyle}>
               <VStack align="start" spacing={2}>
-                {Object.keys(blogsData).map((collection) => (
-                  <VStack key={collection} align="start" spacing={2}>
-                    <Text fontSize="md" fontWeight="semibold" mb={2}>
-                      {`${collection.charAt(0).toUpperCase()}${collection.slice(1)}`}
-                    </Text>
-                    {filteredBlogs(collection).map((blog) => (
+              {Object.keys(blogsData).map((collection) => (
+  <VStack key={collection} align="start" spacing={2}>
+    <Text fontSize="md" fontWeight="semibold" mb={2}>
+      {`${collection.charAt(0).toUpperCase()}${collection.slice(1)}`}
+    </Text>
+    {filteredBlogs(collection).map((blog) => (
       <BlogTitle
         key={blog.title}
         title={blog.title}
-        onClick={() => handleTitleClick(blog.title)}
-        ref={(el) => (titleRefs.current[blog.title] = el)}
+        collection={collection}
+        onClick={() => handleTitleClick(blog.title, collection)}
+        ref={(el) => (titleRefs.current[`${collection}-${blog.title}`] = el)}
       />
     ))}
-                </VStack>
-                ))}
+  </VStack>
+))}
               </VStack>
             </Box>
           </Collapse>
