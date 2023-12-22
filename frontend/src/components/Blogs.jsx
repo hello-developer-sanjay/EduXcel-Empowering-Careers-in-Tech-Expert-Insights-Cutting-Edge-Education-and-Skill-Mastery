@@ -53,20 +53,16 @@ const Blogs = () => {
     tools: [],
     working: [],
   });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(1); 
   const navigate = useNavigate();
   const titleRefs = useRef({});
   const { isOpen, onToggle } = useDisclosure();
 
-  const scrollToTitle = (title) => {
-    const titleRef = titleRefs.current[title];
-    if (titleRef) {
-      titleRef.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  };
-
+ 
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };  
   const observer = useRef();
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -87,7 +83,6 @@ const Blogs = () => {
     setSearchQuery(newQuery);
     navigate(`/blogs/search/${encodeURIComponent(newQuery)}`);
   };
-
   const fetchData = async (collection) => {
     try {
       const response = await fetch(
@@ -143,7 +138,12 @@ const Blogs = () => {
       });
     }
   };
-
+  const filteredBlogs = (collection) => {
+    const blogsCollection = blogsData[collection] || [];
+    return blogsCollection.filter((blog) =>
+      blog.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  };  
   useEffect(() => {
     const query = location.pathname.split("/blogs/search/")[1] || "";
     setSearchQuery(decodeURIComponent(query));
@@ -184,13 +184,11 @@ const Blogs = () => {
       }
     }
   }, [location.pathname, clickedTitle, blogsData]);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filteredBlogs("tools").slice(indexOfFirstPost, indexOfLastPost);
 
-  const filteredBlogs = (collection) => {
-    const blogsCollection = blogsData[collection] || [];
-    return blogsCollection.filter((blog) =>
-      blog.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  };
+ 
 
 const headerStyle = {
   position: "sticky",
@@ -456,7 +454,9 @@ const headerStyle = {
 
       {/* Main Content */}
       <Box mt={0} p={0} ml={isOpen ? "250px" : "0"}>
-        <Box style={headerStyle}>
+        <Box
+          style={headerStyle}
+        >
           <VStack spacing={0} align="start" w="100%" marginTop="0">
             <Input
               type="text"
@@ -481,45 +481,53 @@ const headerStyle = {
           />
         </Box>
 
-        {Object.keys(blogsData).map((collection) => (
-          <Box key={collection} w="full" mt={8}>
-            <Text fontSize="xl" fontWeight="bold" mb={2}>
-              {`${collection.charAt(0).toUpperCase()}${collection.slice(1)} Blog`}
-            </Text>
-
-            {filteredBlogs(collection).map((blog, index) => (
-              <motion.div
-                key={index}
-                ref={
-                  index === filteredBlogs(collection).length - 1
-                    ? (node) => observeLastBlog(collection, node)
-                    : null
-                }
-              >
-                {/* Add 'id' attribute to the title section */}
-                <VStack align="start" spacing={2} id={`title-${blog.title}`} ref={(el) => (titleRefs.current[blog.title] = el)}>
-                  <BlogTitle
-                    key={blog.title}
-                    title={blog.title}
-                    onClick={() => handleTitleClick(blog.title)}
-                  />
-                </VStack>
-                <VStack spacing={2} id={`content-${blog.title}`} style={contentSectionStyle}>
-                {renderMediaContent(blog.overview, blog.title)}
-              </VStack>
-              <VStack spacing={2} id={`content-${blog.title}`} style={contentSectionStyle}>
-                {renderMediaContent(blog.what, blog.title)}
-              </VStack>
-              <VStack spacing={2} id={`content-${blog.title}`} style={contentSectionStyle}>
-                {renderMediaContent(blog.feature, blog.title)}
-              </VStack>
-              <VStack spacing={2} id={`content-${blog.title}`} style={contentSectionStyle}>
-                {renderMediaContent(blog.setting, blog.title)}
-              </VStack>
-            </motion.div>
-            ))}
-          </Box>
+        {currentPosts.map((blog, index) => (
+          <motion.div
+            key={index}
+            ref={
+              index === currentPosts.length - 1
+                ? (node) => observeLastBlog("tools", node)
+                : null
+            }
+          >
+            <VStack align="start" spacing={2} id={`title-${blog.title}`} ref={(el) => (titleRefs.current[blog.title] = el)}>
+              <BlogTitle
+                key={blog.title}
+                title={blog.title}
+                onClick={() => handleTitleClick(blog.title)}
+              />
+            </VStack>
+            <VStack spacing={2} id={`content-${blog.title}`} style={contentSectionStyle}>
+              {renderMediaContent(blog.overview, blog.title)}
+            </VStack>
+            <VStack spacing={2} id={`content-${blog.title}`} style={contentSectionStyle}>
+              {renderMediaContent(blog.what, blog.title)}
+            </VStack>
+            <VStack spacing={2} id={`content-${blog.title}`} style={contentSectionStyle}>
+              {renderMediaContent(blog.feature, blog.title)}
+            </VStack>
+            <VStack spacing={2} id={`content-${blog.title}`} style={contentSectionStyle}>
+              {renderMediaContent(blog.setting, blog.title)}
+            </VStack>
+            
+            {/* Add more sections as needed */}
+          </motion.div>
         ))}
+
+        {/* Pagination */}
+        <Box mt={4}>
+          {Array.from({ length: Math.ceil(filteredBlogs("tools").length / postsPerPage) }, (_, index) => (
+            <Button
+              key={index}
+              onClick={() => handlePageChange(index + 1)}
+              bg={currentPage === index + 1 ? "green" : "gray"}
+              color="white"
+              _hover={{ bg: "darkgreen" }}
+            >
+              {index + 1}
+            </Button>
+          ))}
+        </Box>
       </Box>
     </Box>
   );
