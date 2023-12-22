@@ -72,12 +72,21 @@ const Blogs = () => {
   const location = useLocation();
   const [clickedTitle, setClickedTitle] = useState(null);
 
-  const handleTitleClick = (title) => {
-  const decodedTitle = decodeURIComponent(title); // Decode the URI
-  setClickedTitle(decodedTitle);
-  const encodedTitle = encodeURIComponent(decodedTitle);
-  navigate(`/blogs/${encodedTitle}`);
+ const handleTitleClick = async (title) => {
+  const decodedTitle = decodeURIComponent(title);
+
+  try {
+    // Fetch the data for all collections
+    await Promise.all(Object.keys(blogsData).map((collection) => fetchData(collection)));
+
+    setClickedTitle(decodedTitle);
+    const encodedTitle = encodeURIComponent(decodedTitle);
+    navigate(`/blogs/${encodedTitle}`);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
 };
+
 
   
 
