@@ -70,20 +70,37 @@
       const [remainingProgress, setRemainingProgress] = useState(100);
 
       const location = useLocation();
-      const [clickedTitle, setClickedTitle] = useState(null);
-      const handleTitleClick = (title) => {
+      
+      const handleTitleClick = async (title) => {
         const decodedTitle = decodeURIComponent(title);
         const matchingBlog = Object.keys(blogsData)
           .flatMap((collection) => blogsData[collection])
           .find((blog) => blog.title === decodedTitle);
     
         if (matchingBlog) {
-          setClickedTitle(decodedTitle);
+          const page = Math.ceil(
+            (filteredBlogs(matchingBlog.collection).indexOf(matchingBlog) + 1) /
+              postsPerPage
+          );
+          setCurrentPage(page);
+    
+          // Fetch the data for the matching blog's section
+          await fetchData(matchingBlog.collection);
+    
+          // Scroll to the clicked title
+          const titleRef = titleRefs.current[decodedTitle];
+          if (titleRef) {
+            titleRef.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+    
+          // Update the URL
           const encodedTitle = encodeURIComponent(decodedTitle);
           navigate(`/blogs/${encodedTitle}`);
         }
       };
-
       const handleSearchChange = (event) => {
         const newQuery = event.target.value;
         setSearchQuery(newQuery);
@@ -156,25 +173,6 @@
         fetchData("tools");
         fetchData("working");
       }, [location.pathname]);
-    
-  
-    
-      useEffect(() => {
-        if (clickedTitle) {
-          const matchingBlog = Object.keys(blogsData)
-            .flatMap((collection) => blogsData[collection])
-            .find((blog) => blog.title === clickedTitle);
-    
-          if (matchingBlog) {
-            const page = Math.ceil(
-              (filteredBlogs(matchingBlog.collection).indexOf(matchingBlog) + 1) /
-                postsPerPage
-            );
-            setCurrentPage(page);
-            setClickedTitle(null);
-          }
-        }
-      }, [clickedTitle, blogsData, postsPerPage]);
 
 
       const indexOfLastPost = currentPage * postsPerPage;
