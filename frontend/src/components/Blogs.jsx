@@ -71,8 +71,7 @@
 
       const location = useLocation();
       const [clickedTitle, setClickedTitle] = useState(null);
-    const handleTitleClick = (event, title, collection) => {
-  event.preventDefault();
+   const handleTitleClick = (title, collection) => {
   const decodedTitle = decodeURIComponent(title);
   const matchingBlog = blogsData[collection].find((blog) => blog.title === decodedTitle);
 
@@ -80,8 +79,9 @@
     const pageIndex = Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
     setCurrentPage(pageIndex);
     setClickedTitle(decodedTitle);
-    const encodedTitle = encodeURIComponent(decodedTitle);
-    navigate(`/blogs/${collection}/${encodedTitle}`);
+
+    // Prevent the default behavior of the anchor tag
+    navigate(`/blogs/${collection}/${encodeURIComponent(decodedTitle)}`, { replace: true });
   }
 };
 
