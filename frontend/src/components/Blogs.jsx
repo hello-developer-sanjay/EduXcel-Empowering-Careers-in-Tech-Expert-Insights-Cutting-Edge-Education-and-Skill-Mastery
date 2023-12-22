@@ -71,9 +71,8 @@
 
       const location = useLocation();
       const [clickedTitle, setClickedTitle] = useState(null);
-      const handleTitleClick = (event, title, collection) => {
-  event.preventDefault(); // Prevent the default navigation behavior
-
+    const handleTitleClick = (event, title, collection) => {
+  event.preventDefault();
   const decodedTitle = decodeURIComponent(title);
   const matchingBlog = blogsData[collection].find((blog) => blog.title === decodedTitle);
 
@@ -85,6 +84,7 @@
     navigate(`/blogs/${collection}/${encodedTitle}`);
   }
 };
+
 
       const handleSearchChange = (event) => {
         const newQuery = event.target.value;
