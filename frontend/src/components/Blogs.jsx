@@ -14,16 +14,16 @@
     } from "@chakra-ui/react";
     import { FaArrowCircleUp, FaBars, FaTimes } from "react-icons/fa";
     import { motion } from "framer-motion";
-    import { useNavigate, useLocation } from "react-router-dom";
+    import { useNavigate, useLocation, Link } from "react-router-dom";
     import ReactPlayer from "react-player";
     import "../styles/Blogs.css";
 
-   const BlogTitle = React.forwardRef(({ title, onClick }, ref) => (
+const BlogTitle = React.forwardRef(({ title, collection, onClick }, ref) => (
   <motion.div
     whileHover={{ textDecoration: "underline", boxShadow: "0px 2px 4px rgba(255, 255, 255, 0.3)" }}
     whileTap={{ scale: 0.95 }}
     transition={{ duration: 0.2 }}
-    onClick={() => onClick(title)}
+    onClick={() => onClick(title, collection)}
     ref={ref}
     style={{ cursor: "pointer" }}
   >
@@ -36,11 +36,15 @@
       textAlign="center"
       p={2}
     >
-      {title}
+      <Link
+        to={`/blogs/${collection}/${encodeURIComponent(title)}`}
+        style={{ color: "inherit", textDecoration: "none" }}
+      >
+        {title}
+      </Link>
     </Text>
   </motion.div>
 ));
-
 
     const Blogs = () => {
       const [blogsData, setBlogsData] = useState({
