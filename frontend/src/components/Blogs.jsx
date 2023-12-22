@@ -73,23 +73,20 @@ const Blogs = () => {
   const [clickedTitle, setClickedTitle] = useState(null);
 
   const handleTitleClick = (title) => {
-    const decodedTitle = decodeURIComponent(title); // Decode the URI
-    const matchingBlog = Object.keys(blogsData).flatMap(
-      (collection) => blogsData[collection]
-    ).find((blog) => blog.title === decodedTitle);
+    const decodedTitle = decodeURIComponent(title);
+    setClickedTitle(decodedTitle);
+
+    // Find the matching blog
+    const matchingBlog = Object.keys(blogsData)
+      .flatMap((collection) => blogsData[collection])
+      .find((blog) => blog.title === decodedTitle);
 
     if (matchingBlog) {
-      const page = Math.ceil(
-        (filteredBlogs(matchingBlog.collection).indexOf(matchingBlog) + 1) /
-          postsPerPage
-      );
-      setCurrentPage(page);
-      setClickedTitle(decodedTitle);
+      // Navigate to the URL of the matching blog
       const encodedTitle = encodeURIComponent(decodedTitle);
       navigate(`/blogs/${encodedTitle}`);
     }
   };
-
   
   
 
@@ -181,29 +178,22 @@ const Blogs = () => {
     const urlTitleMatch = location.pathname.match(/\/blogs\/(.*)/);
     if (urlTitleMatch) {
       const urlTitle = decodeURIComponent(urlTitleMatch[1]);
-      const matchingBlog = Object.keys(blogsData).flatMap(
-        (collection) => blogsData[collection]
-      ).find((blog) => blog.title === urlTitle);
+      const matchingBlog = Object.keys(blogsData)
+        .flatMap((collection) => blogsData[collection])
+        .find((blog) => blog.title === urlTitle);
 
       if (matchingBlog) {
-        const page = Math.ceil(
-          (filteredBlogs(matchingBlog.collection).indexOf(matchingBlog) + 1) /
-            postsPerPage
-        );
-        setCurrentPage(page);
+        // Scroll to the matched title
         const titleRef = titleRefs.current[matchingBlog.title];
         if (titleRef) {
-          // Scroll to the matched title almost instantly
-          setTimeout(() => {
-            titleRef.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          }, 100);
+          titleRef.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
         }
       }
     }
-  }, [location.pathname, clickedTitle, blogsData]);
+  }, [location.pathname, blogsData]);
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
