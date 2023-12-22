@@ -73,10 +73,12 @@ const Blogs = () => {
   const [clickedTitle, setClickedTitle] = useState(null);
 
   const handleTitleClick = (title) => {
-    setClickedTitle(title);
-    const encodedTitle = encodeURIComponent(title);
-    navigate(`/blogs/${encodedTitle}`);
-  };
+  const decodedTitle = decodeURIComponent(title); // Decode the URI
+  setClickedTitle(decodedTitle);
+  const encodedTitle = encodeURIComponent(decodedTitle);
+  navigate(`/blogs/${encodedTitle}`);
+};
+
   
 
   const handleSearchChange = (event) => {
