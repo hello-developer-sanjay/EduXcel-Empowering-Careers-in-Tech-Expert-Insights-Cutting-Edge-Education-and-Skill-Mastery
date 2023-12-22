@@ -1,0 +1,39 @@
+<!-- sitemap.xml -->
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Blogs -->
+  <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/Introduction%20to%20Visual%20Studio%20Code%20(VS%20Code)</loc>
+    <lastmod>2023-01-01</lastmod>
+  </url>
+  <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/Introduction%20to%20Another%20Tool</loc>
+    <lastmod>2023-01-02</lastmod>
+  </url>
+  <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/Introduction%20to%20Tool%203</loc>
+    <lastmod>2023-01-03</lastmod>
+  </url>
+  <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/Introduction%20to%20Tool%204</loc>
+    <lastmod>2023-01-04</lastmod>
+  </url>
+  <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/Introduction%20to%20Tool%205</loc>
+    <lastmod>2023-01-05</lastmod>
+  </url>
+
+  <!-- Courses -->
+  <url>
+    <loc>https://eduxcel.vercel.app/courses/Full%20Stack%20Web%20Development%20Bootcamp</loc>
+    <lastmod>2023-01-06</lastmod>
+  </url>
+  <url>
+    <loc>https://eduxcel.vercel.app/courses/Full%20Stack%20Web%20Development%20Bootcamp/Frontend%20Development</loc>
+    <lastmod>2023-01-07</lastmod>
+  </url>
+  <url>
+    <loc>https://eduxcel.vercel.app/courses/Full%20Stack%20Web%20Development%20Bootcamp/Frontend%20Development/submodules/HTML%20Basics</loc>
+    <lastmod>2023-01-08</lastmod>
+  </url>
+</urlset>
