@@ -72,22 +72,25 @@ const Blogs = () => {
   const location = useLocation();
   const [clickedTitle, setClickedTitle] = useState(null);
 
- const handleTitleClick = async (title) => {
-  const decodedTitle = decodeURIComponent(title);
+  const handleTitleClick = (title) => {
+    const decodedTitle = decodeURIComponent(title); // Decode the URI
+    const matchingBlog = Object.keys(blogsData).flatMap(
+      (collection) => blogsData[collection]
+    ).find((blog) => blog.title === decodedTitle);
 
-  try {
-    // Fetch the data for all collections
-    await Promise.all(Object.keys(blogsData).map((collection) => fetchData(collection)));
+    if (matchingBlog) {
+      const page = Math.ceil(
+        (filteredBlogs(matchingBlog.collection).indexOf(matchingBlog) + 1) /
+          postsPerPage
+      );
+      setCurrentPage(page);
+      setClickedTitle(decodedTitle);
+      const encodedTitle = encodeURIComponent(decodedTitle);
+      navigate(`/blogs/${encodedTitle}`);
+    }
+  };
 
-    setClickedTitle(decodedTitle);
-    const encodedTitle = encodeURIComponent(decodedTitle);
-    navigate(`/blogs/${encodedTitle}`);
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
-};
-
-
+  
   
 
   const handleSearchChange = (event) => {
@@ -178,12 +181,17 @@ const Blogs = () => {
     const urlTitleMatch = location.pathname.match(/\/blogs\/(.*)/);
     if (urlTitleMatch) {
       const urlTitle = decodeURIComponent(urlTitleMatch[1]);
-      const matchingTitle = Object.keys(blogsData)
-        .flatMap((collection) => blogsData[collection])
-        .find((blog) => blog.title === urlTitle);
+      const matchingBlog = Object.keys(blogsData).flatMap(
+        (collection) => blogsData[collection]
+      ).find((blog) => blog.title === urlTitle);
 
-      if (matchingTitle) {
-        const titleRef = titleRefs.current[matchingTitle.title];
+      if (matchingBlog) {
+        const page = Math.ceil(
+          (filteredBlogs(matchingBlog.collection).indexOf(matchingBlog) + 1) /
+            postsPerPage
+        );
+        setCurrentPage(page);
+        const titleRef = titleRefs.current[matchingBlog.title];
         if (titleRef) {
           // Scroll to the matched title almost instantly
           setTimeout(() => {
@@ -196,6 +204,7 @@ const Blogs = () => {
       }
     }
   }, [location.pathname, clickedTitle, blogsData]);
+
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredBlogs("tools").slice(indexOfFirstPost, indexOfLastPost);
