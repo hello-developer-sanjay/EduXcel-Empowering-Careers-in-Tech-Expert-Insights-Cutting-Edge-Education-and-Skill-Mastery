@@ -18,14 +18,14 @@
     import ReactPlayer from "react-player";
     import "../styles/Blogs.css";
 
-    const BlogTitle = React.forwardRef(({ title, onClick }, ref) => (
+   const BlogTitle = React.forwardRef(({ title, onClick }, ref) => (
   <motion.div
     whileHover={{ textDecoration: "underline", boxShadow: "0px 2px 4px rgba(255, 255, 255, 0.3)" }}
     whileTap={{ scale: 0.95 }}
     transition={{ duration: 0.2 }}
     onClick={() => onClick(title)}
     ref={ref}
-    cursor="pointer"
+    style={{ cursor: "pointer" }}
   >
     <Text
       fontSize={{ base: "xl", md: "2xl" }}
