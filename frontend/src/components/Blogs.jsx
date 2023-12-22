@@ -19,33 +19,27 @@
     import "../styles/Blogs.css";
 
     const BlogTitle = React.forwardRef(({ title, onClick }, ref) => (
-      <motion.div
-        whileHover={{ textDecoration: "underline", boxShadow: "0px 2px 4px rgba(255, 255, 255, 0.3)" }}
-        whileTap={{ scale: 0.95 }}
-        transition={{ duration: 0.2 }}
-      >
-        <Text
-          fontSize={{ base: "xl", md: "2xl" }}
-          fontWeight="bold"
-          cursor="pointer"
-          onClick={() => onClick(title)}
-          ref={ref}
-          _hover={{ textDecoration: "none" }}
-          color="#ffffff" // White text color
-          fontFamily="Quicksand, sans-serif" // Clean sans-serif font
-          textAlign="center"
-          p={2}
-        >
-          <a
-            href={`https://eduxcel.vercel.app/blogs/${encodeURIComponent(title)}`}
-            style={{ color: "inherit" }}
-          >
-            {title}
-          </a>
-        </Text>
-      </motion.div>
-    ));
-
+  <motion.div
+    whileHover={{ textDecoration: "underline", boxShadow: "0px 2px 4px rgba(255, 255, 255, 0.3)" }}
+    whileTap={{ scale: 0.95 }}
+    transition={{ duration: 0.2 }}
+    onClick={() => onClick(title)}
+    ref={ref}
+    cursor="pointer"
+  >
+    <Text
+      fontSize={{ base: "xl", md: "2xl" }}
+      fontWeight="bold"
+      _hover={{ textDecoration: "none" }}
+      color="#ffffff" // White text color
+      fontFamily="Quicksand, sans-serif" // Clean sans-serif font
+      textAlign="center"
+      p={2}
+    >
+      {title}
+    </Text>
+  </motion.div>
+));
 
 
     const Blogs = () => {
