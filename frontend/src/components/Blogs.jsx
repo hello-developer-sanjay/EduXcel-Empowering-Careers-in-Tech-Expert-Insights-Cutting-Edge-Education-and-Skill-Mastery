@@ -77,6 +77,7 @@ const Blogs = () => {
     const encodedTitle = encodeURIComponent(title);
     navigate(`/blogs/${encodedTitle}`);
   };
+  
 
   const handleSearchChange = (event) => {
     const newQuery = event.target.value;
@@ -439,14 +440,14 @@ const headerStyle = {
                   {`${collection.charAt(0).toUpperCase()}${collection.slice(1)}`}
                 </Text>
                 {filteredBlogs(collection).map((blog) => (
-                  <BlogTitle
-                    key={blog.title}
-                    title={blog.title}
-                    onClick={() => handleTitleClick(blog.title)}
-                    ref={(el) => (titleRefs.current[blog.title] = el)}
-                  />
-                ))}
-              </VStack>
+  <BlogTitle
+    key={blog.title}
+    title={blog.title}
+    onClick={() => handleTitleClick(blog.title)}
+    ref={(el) => (titleRefs.current[blog.title] = el)}
+  />
+))}
+             </VStack>
             ))}
           </VStack>
         </Box>
