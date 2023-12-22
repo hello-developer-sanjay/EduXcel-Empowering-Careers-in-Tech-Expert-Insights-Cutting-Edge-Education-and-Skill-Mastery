@@ -71,19 +71,21 @@
 
       const location = useLocation();
       const [clickedTitle, setClickedTitle] = useState(null);
-      const handleTitleClick = (title, collection) => {
-        const decodedTitle = decodeURIComponent(title);
-        const matchingBlog = blogsData[collection].find((blog) => blog.title === decodedTitle);
-      
-        if (matchingBlog) {
-          const pageIndex = Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
-          setCurrentPage(pageIndex);
-          setClickedTitle(decodedTitle);
-          const encodedTitle = encodeURIComponent(decodedTitle);
-          navigate(`/blogs/${collection}/${encodedTitle}`);
-        }
-      };
-      
+      const handleTitleClick = (event, title, collection) => {
+  event.preventDefault(); // Prevent the default navigation behavior
+
+  const decodedTitle = decodeURIComponent(title);
+  const matchingBlog = blogsData[collection].find((blog) => blog.title === decodedTitle);
+
+  if (matchingBlog) {
+    const pageIndex = Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
+    setCurrentPage(pageIndex);
+    setClickedTitle(decodedTitle);
+    const encodedTitle = encodeURIComponent(decodedTitle);
+    navigate(`/blogs/${collection}/${encodedTitle}`);
+  }
+};
+
       const handleSearchChange = (event) => {
         const newQuery = event.target.value;
         setSearchQuery(newQuery);
@@ -447,15 +449,16 @@
     <Text fontSize="md" fontWeight="semibold" mb={2}>
       {`${collection.charAt(0).toUpperCase()}${collection.slice(1)}`}
     </Text>
-    {filteredBlogs(collection).map((blog) => (
-      <BlogTitle
-        key={blog.title}
-        title={blog.title}
-        collection={collection}
-        onClick={() => handleTitleClick(blog.title, collection)}
-        ref={(el) => (titleRefs.current[`${collection}-${blog.title}`] = el)}
-      />
-    ))}
+   {filteredBlogs(collection).map((blog) => (
+  <BlogTitle
+    key={blog.title}
+    title={blog.title}
+    collection={collection}
+    onClick={(event) => handleTitleClick(event, blog.title, collection)}
+    ref={(el) => (titleRefs.current[`${collection}-${blog.title}`] = el)}
+  />
+))}
+
   </VStack>
 ))}
               </VStack>
