@@ -73,21 +73,11 @@ const Blogs = () => {
   const [clickedTitle, setClickedTitle] = useState(null);
 
   const handleTitleClick = (title) => {
-    const decodedTitle = decodeURIComponent(title);
+    const decodedTitle = decodeURIComponent(title); // Decode the URI
     setClickedTitle(decodedTitle);
-
-    // Find the matching blog
-    const matchingBlog = Object.keys(blogsData)
-      .flatMap((collection) => blogsData[collection])
-      .find((blog) => blog.title === decodedTitle);
-
-    if (matchingBlog) {
-      // Navigate to the URL of the matching blog
-      const encodedTitle = encodeURIComponent(decodedTitle);
-      navigate(`/blogs/${encodedTitle}`);
-    }
+    navigate(`/blogs/${encodeURIComponent(decodedTitle)}`);
   };
-  
+
   
 
   const handleSearchChange = (event) => {
@@ -95,20 +85,7 @@ const Blogs = () => {
     setSearchQuery(newQuery);
     navigate(`/blogs/search/${encodeURIComponent(newQuery)}`);
   };
-  const fetchData = async (collection) => {
-    try {
-      const response = await fetch(
-        `https://edu-back-j3mz.onrender.com/api/${collection}`
-      );
-      const responseData = await response.json();
-      setBlogsData((prevData) => ({
-        ...prevData,
-        [collection]: responseData,
-      }));
-    } catch (error) {
-      console.error(`Error fetching ${collection} data:`, error);
-    }
-  };
+ 
 
   const observeLastBlog = (collection, node) => {
     if (observer.current) {
@@ -157,43 +134,51 @@ const Blogs = () => {
     );
   };  
   useEffect(() => {
-    const query = location.pathname.split("/blogs/search/")[1] || "";
-    setSearchQuery(decodeURIComponent(query));
-    fetchData("tools");
-    fetchData("working");
-
-    if (clickedTitle) {
-      // Scroll to the clicked title
-      const titleRef = titleRefs.current[clickedTitle];
-      if (titleRef) {
-        titleRef.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
+    const fetchData = async (collection) => {
+      try {
+        const response = await fetch(
+          `https://edu-back-j3mz.onrender.com/api/${collection}`
+        );
+        const responseData = await response.json();
+        setBlogsData((prevData) => ({
+          ...prevData,
+          [collection]: responseData,
+        }));
+      } catch (error) {
+        console.error(`Error fetching ${collection} data:`, error);
       }
-      setClickedTitle(null); // Reset the clicked title state
-    }
+    };
 
-    // Check for title in URL and scroll to it
+    const fetchDataForAllCollections = async () => {
+      await fetchData("tools");
+      await fetchData("working");
+    };
+
+    fetchDataForAllCollections();
+  }, []);
+
+  
+
+  useEffect(() => {
     const urlTitleMatch = location.pathname.match(/\/blogs\/(.*)/);
     if (urlTitleMatch) {
       const urlTitle = decodeURIComponent(urlTitleMatch[1]);
-      const matchingBlog = Object.keys(blogsData)
-        .flatMap((collection) => blogsData[collection])
-        .find((blog) => blog.title === urlTitle);
-
-      if (matchingBlog) {
-        // Scroll to the matched title
-        const titleRef = titleRefs.current[matchingBlog.title];
-        if (titleRef) {
-          titleRef.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-        }
-      }
+      setClickedTitle(urlTitle);
     }
-  }, [location.pathname, blogsData]);
+  }, [location.pathname]);
+
+
+
+  useEffect(() => {
+    const titleRef = titleRefs.current[clickedTitle];
+    if (titleRef) {
+      titleRef.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [clickedTitle]);
+
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
