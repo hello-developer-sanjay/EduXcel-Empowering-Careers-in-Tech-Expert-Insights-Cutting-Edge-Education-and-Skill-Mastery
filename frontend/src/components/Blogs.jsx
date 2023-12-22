@@ -444,21 +444,20 @@
           <Collapse in={isOpen}>
             <Box style={sidebarStyle}>
               <VStack align="start" spacing={2}>
-              {Object.keys(blogsData).map((collection) => (
+           {Object.keys(blogsData).map((collection) => (
   <VStack key={collection} align="start" spacing={2}>
     <Text fontSize="md" fontWeight="semibold" mb={2}>
       {`${collection.charAt(0).toUpperCase()}${collection.slice(1)}`}
     </Text>
-   {filteredBlogs(collection).map((blog) => (
-  <BlogTitle
-    key={blog.title}
-    title={blog.title}
-    collection={collection}
-    onClick={(event) => handleTitleClick(event, blog.title, collection)}
-    ref={(el) => (titleRefs.current[`${collection}-${blog.title}`] = el)}
-  />
-))}
-
+    {filteredBlogs(collection).map((blog) => (
+      <BlogTitle
+        key={blog.title}
+        title={blog.title}
+        collection={collection}
+        onClick={() => handleTitleClick(blog.title, collection)}
+        ref={(el) => (titleRefs.current[`${collection}-${blog.title}`] = el)}
+      />
+    ))}
   </VStack>
 ))}
               </VStack>
