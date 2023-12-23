@@ -3,9 +3,10 @@
 /* Container for the entire SubHeader */
 .subheader {
   background-color: #000000;
-  padding: 20px;
+  padding: 15px;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
   display: flex;
+  
   justify-content: center;
 }
 
@@ -14,14 +15,14 @@
 .dropdown-container {
   position: relative;
   display: inline-block;
-  width: auto; /* Adjust the width as needed */
+  width: 200px; /* Adjust the width as needed */
 }
 
 /* Dropdown label */
 .dropdown-label {
   position: absolute;
   top: -20px;
-  left: 15px;
+  left: 30px;
   background-color: #090e0a; /* Background color */
   color: white; /* Text color */
   padding: 5px 10px; /* Padding around the text */
@@ -35,11 +36,12 @@
 
 .courses-dropdown {
   padding: 12px;
-  background-color: #f5f5f5; /* Light gray background color */
+  background-color: #c2b03a; /* Light gray background color */
   color: #333;
   font-size: 14px; /* Slightly larger font size */
   border: 1px solid #ccc; /* Add a subtle border */
-  border-radius: 6px;
+  border-radius: 20px;
+  
   cursor: pointer;
   width: 100%; /* Fill the container width */
   max-width: 200px; /* Limit the width of the select */
@@ -50,6 +52,7 @@
   &:hover {
     background-color: #fff; /* White background color */
     border-color: #00bfff; /* Blue border color */
+    
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
   }
 
@@ -74,7 +77,7 @@
   padding: 10px;
   background-color: #82808c;
   color: #333;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   
   display: flex;
