@@ -41,12 +41,12 @@
           textAlign="center"
           p={2}
         >
-        <Link
-  to={`/blogs/${collection}/${encodeURIComponent(title)}#overview-${encodeURIComponent(title)}`}
-  style={{ color: "inherit", textDecoration: "none" }}
->
-  {title}
-</Link>
+       <Link
+            to={`/blogs/${collection}/${encodeURIComponent(title)}`}
+            style={{ color: "inherit", textDecoration: "none" }}
+          >
+            {title}
+          </Link>
 
         </Text>
       </motion.div>
