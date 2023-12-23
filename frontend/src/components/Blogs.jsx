@@ -537,10 +537,6 @@ if (urlTitleMatch) {
 <VStack spacing={2} id={`content-${blog.title}-setting`} style={contentSectionStyle}>
   {renderMediaContent(blog.setting, blog.title)}
 </VStack>
-
-
-                
-                {/* Add more sections as needed */}
               </motion.div>
             ))}
 
