@@ -41,12 +41,13 @@
           textAlign="center"
           p={2}
         >
-          <Link
-            to={`/blogs/${collection}/${encodeURIComponent(title)}`}
-            style={{ color: "inherit", textDecoration: "none" }}
-          >
-            {title}
-          </Link>
+        <Link
+  to={`/blogs/${collection}/${encodeURIComponent(title)}#overview-${encodeURIComponent(title)}`}
+  style={{ color: "inherit", textDecoration: "none" }}
+>
+  {title}
+</Link>
+
         </Text>
       </motion.div>
     ));
@@ -524,19 +525,14 @@ if (urlTitleMatch) {
   onClick={() => handleTitleClick(blog.title, "tools")}
 />
 
-                </VStack>
-                <VStack spacing={2} id={`content-${blog.title}`} style={contentSectionStyle}>
-                  {renderMediaContent(blog.overview, blog.title)}
-                </VStack>
-                <VStack spacing={2} id={`content-${blog.title}`} style={contentSectionStyle}>
-                  {renderMediaContent(blog.what, blog.title)}
-                </VStack>
-                <VStack spacing={2} id={`content-${blog.title}`} style={contentSectionStyle}>
-                  {renderMediaContent(blog.feature, blog.title)}
-                </VStack>
-                <VStack spacing={2} id={`content-${blog.title}`} style={contentSectionStyle}>
-                  {renderMediaContent(blog.setting, blog.title)}
-                </VStack>
+            <VStack spacing={2} id={`overview-${blog.title}`} style={contentSectionStyle}>
+  {renderMediaContent(blog.overview, blog.title)}
+</VStack>
+<VStack spacing={2} id={`what-${blog.title}`} style={contentSectionStyle}>
+  {renderMediaContent(blog.what, blog.title)}
+</VStack>
+<!-- Repeat for other sections -->
+
                 
                 {/* Add more sections as needed */}
               </motion.div>
