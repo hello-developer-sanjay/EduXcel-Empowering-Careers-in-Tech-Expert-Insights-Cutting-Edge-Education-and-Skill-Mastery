@@ -524,6 +524,7 @@ if (urlTitleMatch) {
   collection="tools"
   onClick={() => handleTitleClick(blog.title, "tools")}
 />
+                  </VStack>
 
       <VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
   {renderMediaContent(blog.overview, blog.title)}
