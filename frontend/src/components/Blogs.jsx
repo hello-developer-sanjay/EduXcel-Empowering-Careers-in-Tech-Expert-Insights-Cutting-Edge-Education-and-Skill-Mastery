@@ -166,49 +166,46 @@
         );
       };  
 useEffect(() => {
-  const query = location.pathname.split("/blogs/search/")[1] || "";
-  setSearchQuery(decodeURIComponent(query));
-  fetchData("tools");
-  fetchData("working");
+    const query = location.pathname.split("/blogs/search/")[1] || "";
+    setSearchQuery(decodeURIComponent(query));
+    fetchData("tools");
+    fetchData("working");
 
-  if (clickedTitle) {
-    // Scroll to the clicked title
-    const [collection, title] = clickedTitle.split("-");
-    const titleRef = titleRefs.current[`${collection}-${title}`];
-    if (titleRef) {
-      titleRef.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-    setClickedTitle(null); // Reset the clicked title state
-  }
-
-  // Check for title in URL and display the content directly
-  const urlTitleMatch = location.pathname.match(/\/blogs\/(.+?)\/(.+)/);
-  if (urlTitleMatch) {
-    const collection = urlTitleMatch[1];
-    const urlTitle = decodeURIComponent(urlTitleMatch[2]);
-
-    const matchingBlog = blogsData[collection]?.find(
-      (blog) => blog.title === urlTitle
-    );
-
-    if (matchingBlog) {
-      // Render the content of the matched blog directly
-      const contentSection = document.getElementById(
-        `content-${matchingBlog.title}`
-      );
-      if (contentSection) {
-        contentSection.scrollIntoView({
-          behavior: "auto",
+    if (clickedTitle) {
+      // Scroll to the clicked title
+      const [collection, title] = clickedTitle.split("-");
+      const titleRef = titleRefs.current[`${collection}-${title}`];
+      if (titleRef) {
+        titleRef.scrollIntoView({
+          behavior: "smooth",
           block: "start",
         });
       }
+      setClickedTitle(null); // Reset the clicked title state
+    }
+
+ // Check for title in URL and display the content directly
+const urlTitleMatch = location.pathname.match(/\/blogs\/(.+?)\/(.+)/);
+if (urlTitleMatch) {
+  const [, collection, encodedTitle] = urlTitleMatch;
+  const urlTitle = decodeURIComponent(encodedTitle);
+  const matchingBlog = blogsData[collection]?.find(
+    (blog) => blog.title === urlTitle
+  );
+
+  if (matchingBlog) {
+    // Render the content of the matched blog directly
+    const contentSection = document.getElementById(`content-${matchingBlog.title}`);
+    if (contentSection) {
+      contentSection.scrollIntoView({
+        behavior: "auto",
+        block: "start",
+      });
     }
   }
-}, [location.pathname, clickedTitle, blogsData]);
+}
 
+  }, [location.pathname, clickedTitle, blogsData]);
 
       const indexOfLastPost = currentPage * postsPerPage;
       const indexOfFirstPost = indexOfLastPost - postsPerPage;
