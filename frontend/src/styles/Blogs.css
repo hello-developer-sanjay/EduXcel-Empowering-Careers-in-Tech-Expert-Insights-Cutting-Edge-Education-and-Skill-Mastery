@@ -76,6 +76,22 @@
     transform: scale(1.01);
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
   }
-  
+  .image-container {
+  display: flex;
+  justify-content: left;
+  align-items:  left;
+}
+
+.custom-modal-image {
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  width: 50%; /* Set width to 100% initially to display images in small size */
+}
+
+.custom-modal-image:hover {
+  transform: scale(1.01);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
   /* Footer styles */
   /* Add your Footer styles here */
