@@ -165,43 +165,46 @@
           blog.title.toLowerCase().includes(searchQuery.toLowerCase())
         );
       };  
-   useEffect(() => {
-  const query = location.pathname.split("/blogs/search/")[1] || "";
-  setSearchQuery(decodeURIComponent(query));
-  fetchData("tools");
-  fetchData("working");
+  useEffect(() => {
+    const query = location.pathname.split("/blogs/search/")[1] || "";
+    setSearchQuery(decodeURIComponent(query));
+    fetchData("tools");
+    fetchData("working");
 
-  if (clickedTitle) {
-    // Scroll to the clicked title
-    const [collection, title] = clickedTitle.split("-");
-    const titleRef = titleRefs.current[`${collection}-${title}`];
-    if (titleRef) {
-      titleRef.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+    if (clickedTitle) {
+      // Scroll to the clicked title
+      const [collection, title] = clickedTitle.split("-");
+      const titleRef = titleRefs.current[`${collection}-${title}`];
+      if (titleRef) {
+        titleRef.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+      setClickedTitle(null); // Reset the clicked title state
     }
-    setClickedTitle(null); // Reset the clicked title state
-  }
 
-  // Check for title in URL and scroll to it
-  const urlTitleMatch = location.pathname.match(/\/blogs\/(.*)/);
-  if (urlTitleMatch) {
-    const urlTitle = decodeURIComponent(urlTitleMatch[1]);
-    const matchingBlog = Object.keys(blogsData)
-      .flatMap((collection) => blogsData[collection])
-      .find((blog) => blog.title === urlTitle);
+    // Check for title in URL and display the content directly
+    const urlTitleMatch = location.pathname.match(/\/blogs\/(.*)/);
+    if (urlTitleMatch) {
+      const urlTitle = decodeURIComponent(urlTitleMatch[1]);
+      const matchingBlog = Object.keys(blogsData)
+        .flatMap((collection) => blogsData[collection])
+        .find((blog) => blog.title === urlTitle);
 
-    if (matchingBlog) {
-      // Display the matched title content without scrolling
-      setClickedTitle(urlTitle);
-      setCurrentPage(1); // Reset the page to 1 or adjust as needed
-      navigate(`/blogs/${matchingBlog.collection}/${encodeURIComponent(urlTitle)}`, {
-        replace: true,
-      });
+      if (matchingBlog) {
+        // Render the content of the matched blog directly
+        const contentSection = document.getElementById(`content-${matchingBlog.title}`);
+        if (contentSection) {
+          contentSection.scrollIntoView({
+            behavior: "auto",
+            block: "start",
+          });
+        }
+      }
     }
-  }
-}, [location.pathname, clickedTitle, blogsData]);
+  }, [location.pathname, clickedTitle, blogsData]);
+
 
 
 
