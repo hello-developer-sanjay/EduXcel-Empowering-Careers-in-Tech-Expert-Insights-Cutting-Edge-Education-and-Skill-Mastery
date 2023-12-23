@@ -6,7 +6,7 @@
       Input,
       VStack,
       Text,
-      Image,
+ 
       IconButton,
       useDisclosure,
       Collapse,
@@ -14,6 +14,7 @@
     } from "@chakra-ui/react";
 
     import { motion } from "framer-motion";
+    import ModalImage from "react-modal-image"; 
 
     import { FaArrowCircleUp, FaBars, FaTimes } from "react-icons/fa";
    
@@ -214,6 +215,7 @@
             }
           }
         }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [location.pathname, clickedTitle, blogsData]);
       
 
@@ -393,15 +395,16 @@
               );
             } else if (item.startsWith("http")) {
               if (item.match(/\.(jpeg|jpg|gif|png)$/)) {
-                element = (
-                  <Image
-                    key={index}
-                    src={item}
-                    alt={`Image ${index}`}
-                    maxW="100%"
-                    h="auto"
-                  />
-                );
+               element = (
+            <Box key={index} mb={2} className="image-container">
+              <ModalImage
+                small={item}
+                large={item}
+                alt={`Image ${index}`}
+                className="custom-modal-image"
+              />
+            </Box>
+          );
               } else if (item.match(/\.(mp4|webm|mkv)$/)) {
                 element = (
                   <Box
