@@ -525,11 +525,17 @@ if (urlTitleMatch) {
   onClick={() => handleTitleClick(blog.title, "tools")}
 />
 
-            <VStack spacing={2} id={`overview-${blog.title}`} style={contentSectionStyle}>
+      <VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
   {renderMediaContent(blog.overview, blog.title)}
 </VStack>
-<VStack spacing={2} id={`what-${blog.title}`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-what`} style={contentSectionStyle}>
   {renderMediaContent(blog.what, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-feature`} style={contentSectionStyle}>
+  {renderMediaContent(blog.feature, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-setting`} style={contentSectionStyle}>
+  {renderMediaContent(blog.setting, blog.title)}
 </VStack>
 
 
