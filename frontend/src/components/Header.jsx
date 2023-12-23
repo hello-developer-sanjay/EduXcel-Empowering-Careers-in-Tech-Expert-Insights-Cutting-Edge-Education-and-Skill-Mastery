@@ -12,7 +12,7 @@ const HeaderContainer = styled.header`
   justify-content: space-between;
   align-items: center;
   
-  padding: 0.5rem;
+  padding: 0rem;
     flex-wrap: wrap;
   position: sticky;
   top: 0;
