@@ -165,47 +165,44 @@
           blog.title.toLowerCase().includes(searchQuery.toLowerCase())
         );
       };  
-    useEffect(() => {
-        const query = location.pathname.split("/blogs/search/")[1] || "";
-        setSearchQuery(decodeURIComponent(query));
-        fetchData("tools");
-        fetchData("working");
-  
-        if (clickedTitle) {
-          // Scroll to the clicked title
-          const [collection, title] = clickedTitle.split("-");
-          const titleRef = titleRefs.current[`${collection}-${title}`];
-          if (titleRef) {
-            titleRef.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          }
-          setClickedTitle(null); // Reset the clicked title state
-        }
+   useEffect(() => {
+  const query = location.pathname.split("/blogs/search/")[1] || "";
+  setSearchQuery(decodeURIComponent(query));
+  fetchData("tools");
+  fetchData("working");
 
-        // Check for title in URL and scroll to it
-        const urlTitleMatch = location.pathname.match(/\/blogs\/(.*)/);
-        if (urlTitleMatch) {
-          const urlTitle = decodeURIComponent(urlTitleMatch[1]);
-          const matchingBlog = Object.keys(blogsData)
-            .flatMap((collection) => blogsData[collection])
-            .find((blog) => blog.title === urlTitle);
+  if (clickedTitle) {
+    // Scroll to the clicked title
+    const [collection, title] = clickedTitle.split("-");
+    const titleRef = titleRefs.current[`${collection}-${title}`];
+    if (titleRef) {
+      titleRef.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+    setClickedTitle(null); // Reset the clicked title state
+  }
 
-          if (matchingBlog) {
-            const titleRef = titleRefs.current[matchingBlog.title];
-            if (titleRef) {
-              // Scroll to the matched title almost instantly
-              setTimeout(() => {
-                titleRef.scrollIntoView({
-                  behavior: "smooth",
-                  block: "start",
-                });
-              }, 100);
-            }
-          }
-        }
-      }, [location.pathname, clickedTitle, blogsData]);
+  // Check for title in URL and scroll to it
+  const urlTitleMatch = location.pathname.match(/\/blogs\/(.*)/);
+  if (urlTitleMatch) {
+    const urlTitle = decodeURIComponent(urlTitleMatch[1]);
+    const matchingBlog = Object.keys(blogsData)
+      .flatMap((collection) => blogsData[collection])
+      .find((blog) => blog.title === urlTitle);
+
+    if (matchingBlog) {
+      // Display the matched title content without scrolling
+      setClickedTitle(urlTitle);
+      setCurrentPage(1); // Reset the page to 1 or adjust as needed
+      navigate(`/blogs/${matchingBlog.collection}/${encodeURIComponent(urlTitle)}`, {
+        replace: true,
+      });
+    }
+  }
+}, [location.pathname, clickedTitle, blogsData]);
+
 
 
       const indexOfLastPost = currentPage * postsPerPage;
