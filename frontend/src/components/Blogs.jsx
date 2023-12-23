@@ -1,4 +1,4 @@
-    /* eslint-disable react/prop-types */
+  /* eslint-disable react/prop-types */
     /* eslint-disable react/display-name */
     import React, { useState, useEffect, useRef } from "react";
     import {
@@ -14,37 +14,44 @@
     } from "@chakra-ui/react";
     import { FaArrowCircleUp, FaBars, FaTimes } from "react-icons/fa";
     import { motion } from "framer-motion";
-    import { useNavigate, useLocation, Link } from "react-router-dom";
+    import { useNavigate, useLocation } from "react-router-dom";
     import ReactPlayer from "react-player";
     import "../styles/Blogs.css";
 
-const BlogTitle = React.forwardRef(({ title, collection, onClick }, ref) => (
-  <motion.div
-    whileHover={{ textDecoration: "underline", boxShadow: "0px 2px 4px rgba(255, 255, 255, 0.3)" }}
-    whileTap={{ scale: 0.95 }}
-    transition={{ duration: 0.2 }}
-    onClick={() => onClick(title, collection)}
-    ref={ref}
-    style={{ cursor: "pointer" }}
-  >
-    <Text
-      fontSize={{ base: "xl", md: "2xl" }}
-      fontWeight="bold"
-      _hover={{ textDecoration: "none" }}
-      color="#ffffff" // White text color
-      fontFamily="Quicksand, sans-serif" // Clean sans-serif font
-      textAlign="center"
-      p={2}
-    >
-      <Link
-        to={`/blogs/${collection}/${encodeURIComponent(title)}`}
-        style={{ color: "inherit", textDecoration: "none" }}
+    import { Link } from "react-router-dom";
+
+    const BlogTitle = React.forwardRef(({ title, collection, onClick }, ref) => (
+      <motion.div
+        whileHover={{
+          textDecoration: "underline",
+          boxShadow: "0px 2px 4px rgba(255, 255, 255, 0.3)",
+        }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ duration: 0.2 }}
+        onClick={() => onClick(title, collection)}
+        ref={ref}
+        style={{ cursor: "pointer" }}
       >
-        {title}
-      </Link>
-    </Text>
-  </motion.div>
-));
+        <Text
+          fontSize={{ base: "xl", md: "2xl" }}
+          fontWeight="bold"
+          _hover={{ textDecoration: "none" }}
+          color="#ffffff" // White text color
+          fontFamily="Quicksand, sans-serif" // Clean sans-serif font
+          textAlign="center"
+          p={2}
+        >
+          <Link
+            to={`/blogs/${collection}/${encodeURIComponent(title)}`}
+            style={{ color: "inherit", textDecoration: "none" }}
+          >
+            {title}
+          </Link>
+        </Text>
+      </motion.div>
+    ));
+    
+
 
     const Blogs = () => {
       const [blogsData, setBlogsData] = useState({
@@ -69,19 +76,27 @@ const BlogTitle = React.forwardRef(({ title, collection, onClick }, ref) => (
 
       const location = useLocation();
       const [clickedTitle, setClickedTitle] = useState(null);
-   const handleTitleClick = (title, collection) => {
-  const decodedTitle = decodeURIComponent(title);
-  const matchingBlog = blogsData[collection].find((blog) => blog.title === decodedTitle);
-
-  if (matchingBlog) {
-    const pageIndex = Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
-    setCurrentPage(pageIndex);
-    setClickedTitle(decodedTitle);
-
-    // Prevent the default behavior of the anchor tag
-    navigate(`/blogs/${collection}/${encodeURIComponent(decodedTitle)}`, { replace: true });
-  }
-};
+      const handleTitleClick = (title, collection) => {
+        const decodedTitle = decodeURIComponent(title);
+        const matchingBlog = blogsData[collection].find(
+          (blog) => blog.title === decodedTitle
+        );
+      
+        if (matchingBlog) {
+          const pageIndex =
+            Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
+          setCurrentPage(pageIndex);
+          setClickedTitle(decodedTitle);
+      
+          // Update the URL based on the collection
+          navigate(`/blogs/${collection}/${encodeURIComponent(decodedTitle)}`, {
+            replace: true,
+          });
+        }
+      };
+      
+      
+    
 
 
       const handleSearchChange = (event) => {
@@ -442,7 +457,8 @@ const BlogTitle = React.forwardRef(({ title, collection, onClick }, ref) => (
           <Collapse in={isOpen}>
             <Box style={sidebarStyle}>
               <VStack align="start" spacing={2}>
-           {Object.keys(blogsData).map((collection) => (
+              
+{Object.keys(blogsData).map((collection) => (
   <VStack key={collection} align="start" spacing={2}>
     <Text fontSize="md" fontWeight="semibold" mb={2}>
       {`${collection.charAt(0).toUpperCase()}${collection.slice(1)}`}
@@ -452,12 +468,13 @@ const BlogTitle = React.forwardRef(({ title, collection, onClick }, ref) => (
         key={blog.title}
         title={blog.title}
         collection={collection}
-        onClick={() => handleTitleClick(blog.title, collection)}
+        onClick={(title, collection) => handleTitleClick(title, collection)}
         ref={(el) => (titleRefs.current[`${collection}-${blog.title}`] = el)}
       />
     ))}
   </VStack>
 ))}
+
               </VStack>
             </Box>
           </Collapse>
@@ -501,11 +518,13 @@ const BlogTitle = React.forwardRef(({ title, collection, onClick }, ref) => (
                 }
               >
                 <VStack align="start" spacing={2} id={`title-${blog.title}`} ref={(el) => (titleRefs.current[blog.title] = el)}>
-                  <BlogTitle
-                    key={blog.title}
-                    title={blog.title}
-                    onClick={() => handleTitleClick(blog.title)}
-                  />
+                <BlogTitle
+  key={blog.title}
+  title={blog.title}
+  collection="tools"
+  onClick={() => handleTitleClick(blog.title, "tools")}
+/>
+
                 </VStack>
                 <VStack spacing={2} id={`content-${blog.title}`} style={contentSectionStyle}>
                   {renderMediaContent(blog.overview, blog.title)}
