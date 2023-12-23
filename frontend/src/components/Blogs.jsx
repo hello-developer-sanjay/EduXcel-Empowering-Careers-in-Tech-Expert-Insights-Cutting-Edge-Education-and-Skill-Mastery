@@ -77,25 +77,25 @@
 
       const location = useLocation();
       const [clickedTitle, setClickedTitle] = useState(null);
-      const handleTitleClick = (title, collection) => {
-        const decodedTitle = decodeURIComponent(title);
-        const matchingBlog = blogsData[collection].find(
-          (blog) => blog.title === decodedTitle
-        );
-      
-        if (matchingBlog) {
-          const pageIndex =
-            Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
-          setCurrentPage(pageIndex);
-          setClickedTitle(decodedTitle);
-      
-          // Update the URL based on the collection
-          navigate(`/blogs/${collection}/${encodeURIComponent(decodedTitle)}`, {
-            replace: true,
-          });
-        }
-      };
-      
+  const handleTitleClick = (title, collection) => {
+  const decodedTitle = decodeURIComponent(title);
+  const matchingBlog = blogsData[collection].find(
+    (blog) => blog.title === decodedTitle
+  );
+
+  if (matchingBlog) {
+    const pageIndex =
+      Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
+    setCurrentPage(pageIndex);
+    setClickedTitle(decodedTitle);
+
+    // Update the URL based on the collection
+    navigate(`/blogs/${collection}/${encodeURIComponent(title)}`, {
+      replace: true,
+    });
+  }
+};
+
       
     
 
