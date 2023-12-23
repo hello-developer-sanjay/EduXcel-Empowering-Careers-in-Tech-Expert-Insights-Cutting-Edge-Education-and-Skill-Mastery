@@ -12,8 +12,11 @@
       Collapse,
       Button,
     } from "@chakra-ui/react";
-    import { FaArrowCircleUp, FaBars, FaTimes } from "react-icons/fa";
+
     import { motion } from "framer-motion";
+
+    import { FaArrowCircleUp, FaBars, FaTimes } from "react-icons/fa";
+   
     import { useNavigate, useLocation } from "react-router-dom";
     import ReactPlayer from "react-player";
     import "../styles/Blogs.css";
@@ -77,24 +80,25 @@
 
       const location = useLocation();
       const [clickedTitle, setClickedTitle] = useState(null);
-  const handleTitleClick = (title, collection) => {
-  const decodedTitle = decodeURIComponent(title);
-  const matchingBlog = blogsData[collection].find(
-    (blog) => blog.title === decodedTitle
-  );
-
-  if (matchingBlog) {
-    const pageIndex =
-      Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
-    setCurrentPage(pageIndex);
-    setClickedTitle(decodedTitle);
-
-    // Update the URL based on the collection
-    navigate(`/blogs/${collection}/${encodeURIComponent(title)}`, {
-      replace: true,
-    });
-  }
-};
+      const handleTitleClick = (title, collection) => {
+        const encodedTitle = encodeURIComponent(title);
+        const matchingBlog = blogsData[collection].find(
+          (blog) => blog.title === title
+        );
+      
+        if (matchingBlog) {
+          const pageIndex =
+            Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
+          setCurrentPage(pageIndex);
+          setClickedTitle(title);
+      
+          // Update the URL based on the collection
+          navigate(`/blogs/${collection}/${encodedTitle}`, {
+            replace: true,
+          });
+        }
+      };
+        
 
       
     
@@ -166,47 +170,52 @@
           blog.title.toLowerCase().includes(searchQuery.toLowerCase())
         );
       };  
-useEffect(() => {
-    const query = location.pathname.split("/blogs/search/")[1] || "";
-    setSearchQuery(decodeURIComponent(query));
-    fetchData("tools");
-    fetchData("working");
-
-    if (clickedTitle) {
-      // Scroll to the clicked title
-      const [collection, title] = clickedTitle.split("-");
-      const titleRef = titleRefs.current[`${collection}-${title}`];
-      if (titleRef) {
-        titleRef.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-      setClickedTitle(null); // Reset the clicked title state
-    }
-
- // Check for title in URL and display the content directly
-const urlTitleMatch = location.pathname.match(/\/blogs\/(.+?)\/(.+)/);
-if (urlTitleMatch) {
-  const [, collection, encodedTitle] = urlTitleMatch;
-  const urlTitle = decodeURIComponent(encodedTitle);
-  const matchingBlog = blogsData[collection]?.find(
-    (blog) => blog.title === urlTitle
-  );
-
-  if (matchingBlog) {
-    // Render the content of the matched blog directly
-    const contentSection = document.getElementById(`content-${matchingBlog.title}`);
-    if (contentSection) {
-      contentSection.scrollIntoView({
-        behavior: "auto",
-        block: "start",
-      });
-    }
-  }
-}
-
-  }, [location.pathname, clickedTitle, blogsData]);
+      useEffect(() => {
+        const query = location.pathname.split("/blogs/search/")[1] || "";
+        setSearchQuery(decodeURIComponent(query));
+        fetchData("tools");
+        fetchData("working");
+      
+        if (clickedTitle) {
+          // Scroll to the clicked title
+          const [collection, title] = clickedTitle.split("-");
+          const titleRef = titleRefs.current[`${collection}-${title}`];
+          if (titleRef) {
+            titleRef.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+          setClickedTitle(null); // Reset the clicked title state
+        }
+      
+        // Check for title in URL and display the content directly
+        const urlTitleMatch = location.pathname.match(/\/blogs\/(.+?)\/(.+)/);
+        if (urlTitleMatch) {
+          const [, collection, encodedTitle] = urlTitleMatch;
+          const urlTitle = decodeURIComponent(encodedTitle);
+          const matchingBlog = blogsData[collection]?.find(
+            (blog) => blog.title === urlTitle
+          );
+      
+          if (matchingBlog) {
+            // Set the current page to the matched blog's page
+            const pageIndex =
+              Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
+            setCurrentPage(pageIndex);
+      
+            // Render the content of the matched blog directly
+            const contentSection = document.getElementById(`content-${matchingBlog.title}`);
+            if (contentSection) {
+              contentSection.scrollIntoView({
+                behavior: "auto",
+                block: "start",
+              });
+            }
+          }
+        }
+      }, [location.pathname, clickedTitle, blogsData]);
+      
 
       const indexOfLastPost = currentPage * postsPerPage;
       const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -541,20 +550,61 @@ if (urlTitleMatch) {
               </motion.div>
             ))}
 
-            {/* Pagination */}
-            <Box mt={4}>
-              {Array.from({ length: Math.ceil(filteredBlogs("tools").length / postsPerPage) }, (_, index) => (
-                <Button
-                  key={index}
-                  onClick={() => handlePageChange(index + 1)}
-                  bg={currentPage === index + 1 ? "green" : "gray"}
-                  color="white"
-                  _hover={{ bg: "darkgreen" }}
-                >
-                  {index + 1}
-                </Button>
-              ))}
-            </Box>
+{/* Pagination */}
+<Box mt={8} display="flex" justifyContent="center">
+  {Array.from({ length: Math.ceil(filteredBlogs("tools").length / postsPerPage) }, (_, index) => (
+    <motion.div
+      key={index}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      transition={{ type: "spring", stiffness: 300 }}
+    >
+      <Button
+        onClick={() => handlePageChange(index + 1)}
+        mx={4} // Add some margin between the buttons
+        borderRadius="full" // Make the buttons circular
+        fontWeight="bold"
+        fontSize="xl" // Increase the font size
+        padding="1rem 2rem" // Increase padding for larger buttons
+        _focus={{ outline: "none" }} // Remove the default focus outline
+        colorScheme={currentPage === index + 1 ? "green" : "gray"} // Use Chakra UI color schemes
+        variant="solid"
+        size="lg" // Larger button size
+        position="relative"
+        overflow="hidden"
+      >
+        {index + 1}
+        <Box
+          position="absolute"
+          top="-2px"
+          left="-2px"
+          right="-2px"
+          bottom="-2px"
+          borderWidth="2px"
+          borderColor="white"
+          opacity={0.5}
+          borderRadius="full"
+        />
+        <Box
+          position="absolute"
+          top="-2px"
+          left="-2px"
+          right="-2px"
+          bottom="-2px"
+          borderWidth="2px"
+          borderColor="white"
+          opacity={0.5}
+          borderRadius="full"
+          transform="rotate(45deg)"
+        />
+      </Button>
+    </motion.div>
+  ))}
+</Box>
+
+
+
+
           </Box>
         </Box>
       );
