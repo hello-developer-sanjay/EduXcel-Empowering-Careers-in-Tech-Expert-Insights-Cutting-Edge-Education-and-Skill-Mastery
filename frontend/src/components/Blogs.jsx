@@ -281,13 +281,8 @@
         padding: "10px",
         borderRadius: "12px",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-        color: "red", // Dark gray text color
-        textAlign: "left !important", // Align text to the left
-      
-        // Add the following style to ensure left text alignment
-        "& p, & h1, & h2, & h3, & a": {
-          textAlign: "left !important",
-        },
+        justifyContent:"start",
+       alignItems:"start",
       };
       
       
