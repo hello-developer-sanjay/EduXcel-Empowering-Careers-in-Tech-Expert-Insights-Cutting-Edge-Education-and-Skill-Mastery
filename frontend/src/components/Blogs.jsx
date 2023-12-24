@@ -294,7 +294,7 @@
       
       const sidebarStyle = {
         position: "fixed",
-        top: "165px",
+        top: "200px",
         left: 0,
         height: "100%",
         width: "220px",
@@ -304,11 +304,13 @@
         zIndex: 2,
         transition: "left 0.3s",
         overflowX: "hidden",
+        overflowY: "auto", 
+  maxHeight: "calc(100% - 200px)", 
       };
-
+      
       const toggleButtonStyle = {
         position: "fixed",
-        top: "15%",
+        top: "170px",
         transform: "translateY(-50%)",
         left: isOpen ? "240px" : "20px",
         zIndex: 2,
@@ -325,7 +327,6 @@
         border: "2px solid #fff", // White border
         fontSize: "12px",
       };
-
       // Rotating animation on toggle
       toggleButtonStyle.rotate = {
         transform: isOpen ? "rotate(180deg)" : "rotate(0)",
@@ -454,7 +455,7 @@
           overflowX="hidden"
           boxShadow="0px 4px 8px rgba(0, 0, 0, 0.1)"
           onScroll={handleScroll}
-          mt="0px"
+          mt="50px"
         >
           {/* Toggle Button */}
           <Button
