@@ -18,7 +18,22 @@
 }
 
 
+/* Container styles */
+.container {
 
+    width: 100%;
+  min-height: 100vh;
+  display: flex;
+
+  flex-direction: column;
+ align-items: center;
+  justify-content: space-between;
+
+ /* Replace with your background image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  }
 
 .about-section {
     padding: 50px;
