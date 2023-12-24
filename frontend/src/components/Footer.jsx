@@ -49,7 +49,31 @@ const CatchyMessage = styled(motion.p)`
   font-size: 1.5rem;
   font-weight: bold;
   margin-top: 1rem;
+  color: black;
   word-wrap: break-word;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out;
+
+
+  @media (max-width: 600px) {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+  }
+
+  /* Add a little bounce animation */
+  animation: bounce 1s infinite;
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+  }
 `;
 const SocialIconsContainer = styled(motion.div)`
   display: flex;
@@ -63,8 +87,8 @@ const SocialIcon = styled(motion.a)`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 4rem;
-  height: 4rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
   background: ${props => props.color || '#ff6347'};
   cursor: pointer;
@@ -99,13 +123,25 @@ const SocialIcon = styled(motion.a)`
     );
     transform: translateY(100%);
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 50%;
   }
 
   &:hover:before {
     transform: translateY(0);
   }
-`;
 
+  /* Add a heartbeat animation for extra flair */
+  animation: heartbeat 1.5s infinite;
+
+  @keyframes heartbeat {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+`;
 const FooterButton = styled(motion.button)`
   padding: 0.5rem 1rem;
   background-color: #ff4d4d;
