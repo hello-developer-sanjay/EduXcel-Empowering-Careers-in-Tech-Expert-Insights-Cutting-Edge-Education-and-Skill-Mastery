@@ -91,7 +91,7 @@ function Home() {
   return (
     <section className={`relative w-full min-h-screen mx-auto`}>
        <Helmet>
-        <title>Eduxcel - Online Education Platform</title>
+        <title>EduXcel - Nurturing Excellence through Online Education</title>
         <meta
           name="description"
           content="Explore our courses and enhance your skills with Eduxcel. Find a wide range of online courses on various topics to boost your knowledge."
