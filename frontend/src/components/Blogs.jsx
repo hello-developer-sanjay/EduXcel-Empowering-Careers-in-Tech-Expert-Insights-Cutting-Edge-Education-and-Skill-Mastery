@@ -28,7 +28,7 @@
       <motion.div
         whileHover={{
           textDecoration: "underline",
-          boxShadow: "0px 2px 4px rgba(255, 255, 255, 0.3)",
+          
         }}
         whileTap={{ scale: 0.95 }}
         transition={{ duration: 0.2 }}
@@ -42,7 +42,7 @@
           _hover={{ textDecoration: "none" }}
           color="#ffffff" // White text color
           fontFamily="Quicksand, sans-serif" // Clean sans-serif font
-          textAlign="center"
+          textAlign="left"
           p={2}
         >
        <Link
