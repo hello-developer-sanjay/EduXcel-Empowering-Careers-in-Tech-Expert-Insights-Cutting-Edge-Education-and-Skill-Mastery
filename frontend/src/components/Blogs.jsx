@@ -259,8 +259,8 @@
 
       const scrollToTopButtonStyle = {
         position: "fixed",
-        bottom: "40px",
-        right: "20px",
+        bottom: "30px",
+        right: "1px",
         zIndex: 2,
         background: "green",
         color: "white",
