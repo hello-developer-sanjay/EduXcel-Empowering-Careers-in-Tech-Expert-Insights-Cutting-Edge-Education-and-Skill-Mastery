@@ -278,10 +278,9 @@
       const contentSectionStyle = {
         // Enhanced styles for content sections
         margin: "20px 0",
-        padding: "20px",
+        padding: "10px",
         borderRadius: "12px",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-        border: "1px solid #e0e0e0",
         color: "red", // Dark gray text color
         textAlign: "left !important", // Align text to the left
       
@@ -307,7 +306,7 @@
         overflowY: "auto", 
   maxHeight: "calc(100% - 200px)", 
       };
-      
+
       const toggleButtonStyle = {
         position: "fixed",
         top: "170px",
@@ -327,6 +326,7 @@
         border: "2px solid #fff", // White border
         fontSize: "12px",
       };
+
       // Rotating animation on toggle
       toggleButtonStyle.rotate = {
         transform: isOpen ? "rotate(180deg)" : "rotate(0)",
@@ -493,7 +493,7 @@
           </Collapse>
 
           {/* Main Content */}
-          <Box mt={0} p={0} ml={isOpen ? "250px" : "0"}>
+          <Box mt={0} p={0} ml={isOpen ? "200px" : "0"}>
             <Box
               style={headerStyle}
             >
@@ -503,12 +503,13 @@
                   placeholder="Search for blogs"
                   value={searchQuery}
                   onChange={handleSearchChange}
-                  p={2}
-                  borderWidth="1px"
+                  p={0}
+                  marginTop={0}
+                  borderWidth="5px"
                   rounded="md"
                   bg="white"
                   color="black"
-                  mb={2}
+                  mb={0}
                 />
                 <Box style={progressBarStyle} />
                 <Box style={remainingBarStyle} />
@@ -548,8 +549,12 @@
 <VStack spacing={2} id={`content-${blog.title}-feature`} style={contentSectionStyle}>
   {renderMediaContent(blog.feature, blog.title)}
 </VStack>
-<VStack spacing={2} id={`content-${blog.title}-setting`} style={contentSectionStyle}>
-  {renderMediaContent(blog.setting, blog.title)}
+
+<VStack spacing={2} id={`content-${blog.title}-steps`} style={contentSectionStyle}>
+  {renderMediaContent(blog.steps, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.issues, blog.title)}
 </VStack>
               </motion.div>
             ))}
