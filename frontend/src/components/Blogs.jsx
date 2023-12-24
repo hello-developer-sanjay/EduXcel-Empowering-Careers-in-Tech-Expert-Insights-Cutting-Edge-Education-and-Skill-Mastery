@@ -276,22 +276,19 @@
       };
 
       const contentSectionStyle = {
-        // Enhanced styles for content sections
-        margin: "20px 0",
-        padding: "10px",
         borderRadius: "12px",
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-        justifyContent:"start",
+        
+       justifyContent:"start",
        alignItems:"start",
       };
       
       
       const sidebarStyle = {
         position: "fixed",
-        top: "200px",
+        top: "190px",
         left: 0,
         height: "100%",
-        width: "220px",
+        width: "200px",
         backgroundColor: "black",
         borderRight: "1px solid lightgray",
         padding: "20px",
