@@ -9,7 +9,7 @@ const FooterContainer = styled(motion.footer)`
   position: relative;
   background: linear-gradient(135deg, #6a1b9a, #2c3e50);
   color: white;
-  padding: 4rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
