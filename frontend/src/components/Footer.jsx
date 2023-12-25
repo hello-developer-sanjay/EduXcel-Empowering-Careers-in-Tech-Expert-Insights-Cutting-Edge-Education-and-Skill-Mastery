@@ -7,9 +7,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 const FooterContainer = styled(motion.footer)`
   position: relative;
-  background: linear-gradient(to right, #ffb6c1, #87cefa);
-  color: black;
-  padding: 2rem;
+  background: linear-gradient(135deg, #6a1b9a, #2c3e50);
+  color: white;
+  padding: 4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,8 +17,17 @@ const FooterContainer = styled(motion.footer)`
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
-`;
 
+  /* Create a complex and artistic background pattern */
+  background: 
+    radial-gradient(ellipse at center, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(90deg, #f39c12, #2c3e50);
+  
+  /* Optional: Add animation or transition properties for a dynamic effect */
+  transition: background 0.3s ease-in-out;
+
+
+`;
 const BorderLineTop = styled(motion.div)`
   position: absolute;
   top: 0;
@@ -45,6 +54,38 @@ const BorderLineBottom = styled(BorderLineTop)`
   bottom: 0;
 `;
 
+const bounceAnimation = keyframes`
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+`;
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const neonGlow = keyframes`
+  0%, 100% {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                0 0 20px rgba(255, 255, 255, 0.8),
+                0 0 30px rgba(255, 255, 255, 0.8);
+  }
+`;
+
 const CatchyMessage = styled(motion.p)`
   font-size: 1.5rem;
   font-weight: bold;
@@ -54,26 +95,22 @@ const CatchyMessage = styled(motion.p)`
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease-in-out;
 
-
   @media (max-width: 600px) {
     font-size: 1.2rem;
     margin-top: 0.5rem;
   }
 
   /* Add a little bounce animation */
-  animation: bounce 1s infinite;
+  animation: ${bounceAnimation} 1s infinite;
 
-  @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-      transform: translateY(0);
-    }
-    40% {
-      transform: translateY(-10px);
-    }
-    60% {
-      transform: translateY(-5px);
-    }
-  }
+  /* Add fadeIn animation */
+  animation: ${fadeIn} 1s ease-in-out;
+
+  /* Add a neon glow effect */
+  animation: ${neonGlow} 1s infinite;
+
+  /* Combine animations */
+  animation: ${bounceAnimation} 1s infinite, ${fadeIn} 1s ease-in-out, ${neonGlow} 1s infinite;
 `;
 const SocialIconsContainer = styled(motion.div)`
   display: flex;
