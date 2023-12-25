@@ -1,5 +1,5 @@
 
-import styled from "styled-components";
+import styled, { keyframes } from 'styled-components';
 import { motion, AnimatePresence,  } from "framer-motion";
 import { FaLinkedin, FaTwitter, FaInstagram, FaGithub, FaUsers } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
