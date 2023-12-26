@@ -532,7 +532,7 @@
 />
                   </VStack>
 
-      <VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
+          <VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
   {renderMediaContent(blog.overview, blog.title)}
 </VStack>
 <VStack spacing={2} id={`content-${blog.title}-what`} style={contentSectionStyle}>
@@ -547,6 +547,107 @@
 </VStack>
 <VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
   {renderMediaContent(blog.issues, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.what_jvm, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.feature_jvm, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.setting, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.ideas, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.shortcuts, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.tips, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.tools, blog.title)}
+</VStack>
+
+
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.features, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.getting_started, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.profiling, blog.title)}
+</VStack>
+
+
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.collaboration, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.customization, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.environments, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.packages, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.data_manipulation, blog.title)}
+</VStack>
+
+
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.data_analysis, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.machine_learning, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.data_visualization, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.optimization, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.best_practices, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.troubleshooting, blog.title)}
 </VStack>
               </motion.div>
             ))}
