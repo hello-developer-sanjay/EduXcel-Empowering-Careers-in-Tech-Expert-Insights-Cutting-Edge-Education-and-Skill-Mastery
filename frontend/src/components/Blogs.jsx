@@ -348,11 +348,11 @@
         },
       };
 
-      const renderMediaContent = (content) => {
+     const renderMediaContent = (content) => {
         if (!content) {
           return null;
         }
-
+      
         return content.map((item, index) => {
           if (Array.isArray(item)) {
             return (
@@ -361,14 +361,14 @@
               </VStack>
             );
           }
-
+      
           let element;
-
+      
           if (typeof item === "string") {
             if (item.startsWith("*") && item.endsWith("*")) {
               const styledText = item.substring(1, item.length - 1);
               element = (
-                <Text key={index} fontWeight="bold" textColor="gold" fontStyle="italic"> 
+                <Text key={index} fontWeight="bold" textColor="gold" fontStyle="italic">
                   {styledText}
                 </Text>
               );
@@ -386,47 +386,70 @@
                   {styledText}
                 </Text>
               );
-            } else if (item.startsWith("http")) {
-              if (item.match(/\.(jpeg|jpg|gif|png)$/)) {
-               element = (
-            <Box key={index} mb={2} className="image-container">
-              <ModalImage
-                small={item}
-                large={item}
-                alt={`Image ${index}`}
-                className="custom-modal-image"
-              />
-            </Box>
-          );
-              } else if (item.match(/\.(mp4|webm|mkv)$/)) {
+            } else {
+              // Check for links
+              const linkRegex = /@([^@]+)@/;
+              const match = item.match(linkRegex);
+      
+              if (match) {
+                const link = match[1];
+                const textBeforeLink = item.split(match[0])[0];
+                const textAfterLink = item.split(match[0])[1];
+      
                 element = (
-                  <Box
-                    key={index}
-                    position="relative"
-                    paddingTop="56.25%"
-                    width="100%"
-                  >
-                    <ReactPlayer
-                      url={item}
-                      controls
-                      width="100%"
-                      height="100%"
-                      style={{ position: "absolute", top: 0, left: 0 }}
-                    />
-                  </Box>
+                  <Text key={index}>
+                    {textBeforeLink}
+                    <span
+                      style={{ color: "yellow", textDecoration: "underline", cursor: "pointer" }}
+                      onClick={() => window.open(link, "_blank")}
+                    >
+                      {link}
+                    </span>
+                    {textAfterLink}
+                  </Text>
                 );
+              } else if (item.startsWith("http")) {
+                if (item.match(/\.(jpeg|jpg|gif|png)$/)) {
+                  element = (
+                    <Box key={index} mb={2} className="image-container">
+                      <ModalImage
+                        small={item}
+                        large={item}
+                        alt={`Image ${index}`}
+                        className="custom-modal-image"
+                      />
+                    </Box>
+                  );
+                } else if (item.match(/\.(mp4|webm|mkv)$/)) {
+                  element = (
+                    <Box
+                      key={index}
+                      position="relative"
+                      paddingTop="56.25%"
+                      width="100%"
+                    >
+                      <ReactPlayer
+                        url={item}
+                        controls
+                        width="100%"
+                        height="100%"
+                        style={{ position: "absolute", top: 0, left: 0 }}
+                      />
+                    </Box>
+                  );
+                } else {
+                  element = <Text key={index}>{item}</Text>;
+                }
               } else {
                 element = <Text key={index}>{item}</Text>;
               }
-            } else {
-              element = <Text key={index}>{item}</Text>;
             }
           }
-
+      
           return <Box key={index} mb={2}>{element}</Box>;
         });
       };
-
+      
       const navbarHeight = document.querySelector(".navbar")?.clientHeight || 0;
 
       return (
@@ -532,7 +555,7 @@
 />
                   </VStack>
 
-          <VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
+        <VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
   {renderMediaContent(blog.overview, blog.title)}
 </VStack>
 <VStack spacing={2} id={`content-${blog.title}-what`} style={contentSectionStyle}>
@@ -549,122 +572,125 @@
   {renderMediaContent(blog.issues, blog.title)}
 </VStack>
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-what_jvm`} style={contentSectionStyle}>
   {renderMediaContent(blog.what_jvm, blog.title)}
 </VStack>
 
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-feature_jvm`} style={contentSectionStyle}>
   {renderMediaContent(blog.feature_jvm, blog.title)}
 </VStack>
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-setting`} style={contentSectionStyle}>
   {renderMediaContent(blog.setting, blog.title)}
 </VStack>
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-ideas`} style={contentSectionStyle}>
   {renderMediaContent(blog.ideas, blog.title)}
 </VStack>
 
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-shortcuts`} style={contentSectionStyle}>
   {renderMediaContent(blog.shortcuts, blog.title)}
 </VStack>
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-tips`} style={contentSectionStyle}>
   {renderMediaContent(blog.tips, blog.title)}
 </VStack>
 
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-tools`} style={contentSectionStyle}>
   {renderMediaContent(blog.tools, blog.title)}
 </VStack>
 
 
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-features`} style={contentSectionStyle}>
   {renderMediaContent(blog.features, blog.title)}
 </VStack>
 
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-getting_started`} style={contentSectionStyle}>
   {renderMediaContent(blog.getting_started, blog.title)}
 </VStack>
 
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-profiling`} style={contentSectionStyle}>
   {renderMediaContent(blog.profiling, blog.title)}
 </VStack>
 
 
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-collaboration`} style={contentSectionStyle}>
   {renderMediaContent(blog.collaboration, blog.title)}
 </VStack>
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-customization`} style={contentSectionStyle}>
   {renderMediaContent(blog.customization, blog.title)}
 </VStack>
 
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-environments`} style={contentSectionStyle}>
   {renderMediaContent(blog.environments, blog.title)}
 </VStack>
 
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-packages`} style={contentSectionStyle}>
   {renderMediaContent(blog.packages, blog.title)}
 </VStack>
 
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-data_manipulation`} style={contentSectionStyle}>
   {renderMediaContent(blog.data_manipulation, blog.title)}
 </VStack>
 
 
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-data_analysis`} style={contentSectionStyle}>
   {renderMediaContent(blog.data_analysis, blog.title)}
 </VStack>
 
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-machine_learning`} style={contentSectionStyle}>
   {renderMediaContent(blog.machine_learning, blog.title)}
 </VStack>
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-data_visualization`} style={contentSectionStyle}>
   {renderMediaContent(blog.data_visualization, blog.title)}
 </VStack>
 
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-optimization`} style={contentSectionStyle}>
   {renderMediaContent(blog.optimization, blog.title)}
 </VStack>
 
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-best_practices`} style={contentSectionStyle}>
   {renderMediaContent(blog.best_practices, blog.title)}
 </VStack>
 
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-troubleshooting`} style={contentSectionStyle}>
   {renderMediaContent(blog.troubleshooting, blog.title)}
 </VStack>
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+
+
+<VStack spacing={2} id={`content-${blog.title}-code_analysis`} style={contentSectionStyle}>
   {renderMediaContent(blog.code_analysis, blog.title)}
 </VStack>
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-database_tools`} style={contentSectionStyle}>
   {renderMediaContent(blog.database_tools, blog.title)}
 </VStack>
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-build_tools`} style={contentSectionStyle}>
   {renderMediaContent(blog.build_tools, blog.title)}
 </VStack>
 
-<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-spring_support`} style={contentSectionStyle}>
   {renderMediaContent(blog.spring_support, blog.title)}
 </VStack>
+
 
                 
               </motion.div>
