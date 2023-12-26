@@ -649,6 +649,24 @@
 <VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
   {renderMediaContent(blog.troubleshooting, blog.title)}
 </VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.code_analysis, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.database_tools, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.build_tools, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.spring_support, blog.title)}
+</VStack>
+
+                
               </motion.div>
             ))}
 
