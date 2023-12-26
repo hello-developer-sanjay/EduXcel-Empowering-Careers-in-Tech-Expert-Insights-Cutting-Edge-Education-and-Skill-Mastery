@@ -4,72 +4,166 @@
   <!-- Blogs -->
    <url>
     <loc>https://eduxcel.vercel.app/blogs</loc>
-    <lastmod>2023-01-02</lastmod>
+    <lastmod>2023-12-26</lastmod>
   </url>
 
 
   <url>
     <loc>https://eduxcel.vercel.app/blogs/tools/Introduction%20to%20Visual%20Studio%20Code%20(VS%20Code)</loc>
-    <lastmod>2023-01-01</lastmod>
+<lastmod>2023-12-26</lastmod>
   </url>
   <url>
-    <loc>https://eduxcel.vercel.app/blogs/tools/Introduction%20to%20Another%20Tool</loc>
-    <lastmod>2023-01-02</lastmod>
+    <loc>https://eduxcel.vercel.app/blogs/tools/Getting%20Started%20with%20VS%20Code%20Extensions</loc>
+      <lastmod>2023-12-26</lastmod>
   </url>
   <url>
-    <loc>https://eduxcel.vercel.app/blogs/tools/Introduction%20to%20Tool%203</loc>
-    <lastmod>2023-01-03</lastmod>
+    <loc>https://eduxcel.vercel.app/blogs/tools/How%20to%20Customize%20VS%20Code%20Settings</loc>
+  <lastmod>2023-12-26</lastmod>
   </url>
   <url>
-    <loc>https://eduxcel.vercel.app/blogs/tools/Introduction%20to%20Tool%204</loc>
-    <lastmod>2023-01-04</lastmod>
+    <loc>https://eduxcel.vercel.app/blogs/tools/How%20to%20Download%20and%20Install%20VS%20Code%20on%20Windows</loc>
+  <lastmod>2023-12-26</lastmod>
   </url>
   <url>
-    <loc>https://eduxcel.vercel.app/blogs/tools/Introduction%20to%20Tool%205</loc>
+    <loc>https://eduxcel.vercel.app/blogs/tools/What%20is%20VS%20Code%3F</loc>
+  <lastmod>2023-12-26</lastmod>  </url>
+
+
+  
+  <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/What%20is%20VS%20Code%3F</loc>
+  <lastmod>2023-12-26</lastmod>  </url>
+  
+
+
+
+    <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/Troubleshooting%20Common%20Issues%20in%20VS%20Code</loc>
+  <lastmod>2023-12-26</lastmod>  </url>
+
+  
+    <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/Introduction%20to%20Java%20Development%20Kit%20(JDK)%20and%20Java%20Virtual%20Machine%20(JVM)</loc>
+  <lastmod>2023-12-26</lastmod>  </url>
+
+
+  
+    <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/Java%20IDEs%20and%20Development%20Tools</loc>
+  <lastmod>2023-12-26</lastmod>  </url>
+
+
+  
+    <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/Java%20Spring%20Framework%20Overview</loc>
+  <lastmod>2023-12-26</lastmod>  </url>
+
+  
+    <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/Getting%20Started%20with%20Java%20Programming</loc>
     <lastmod>2023-01-05</lastmod>
   </url>
 
+  
+    <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/Getting%20Started%20with%20Eclipse%20IDE</loc>
+  <lastmod>2023-12-26</lastmod>  </url>
+
+  
+    <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/Advanced%20Eclipse%20IDE%20Features</loc>
+  <lastmod>2023-12-26</lastmod>  </url>
+
+  
+    <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/Introduction%20to%20Eclipse%20IDE</loc>
+  <lastmod>2023-12-26</lastmod>  </url>
+
+  
+    <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/Eclipse%20Shortcuts%20and%20Productivity%20Tips</loc>
+  <lastmod>2023-12-26</lastmod>  </url>
+
+
+  
+    <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/Getting%20Started%20with%20Jupyter%20Notebooks</loc>
+  <lastmod>2023-12-26</lastmod>  </url>
+
+
+  
+    <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/Conda%3A%20Managing%20Environments%20and%20Packages</loc>
+  <lastmod>2023-12-26</lastmod>  </url>
+  
+    <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/Data%20Science%20with%20Anaconda%3A%20A%20Comprehensive%20Guide</loc>
+  <lastmod>2023-12-26</lastmod>  </url>
+  
+    <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/Introduction%20to%20Anaconda</loc>
+  <lastmod>2023-12-26</lastmod>  </url>
+  
+    <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/Advanced%20Anaconda%20Usage%3A%20Optimization%20and%20Best%20Practices</loc>
+  <lastmod>2023-12-26</lastmod>  </url>
+
+  
+    <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/Getting%20Started%20with%20IntelliJ%20IDEA</loc>
+  <lastmod>2023-12-26</lastmod>  </url>
+
+  
+    <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/IntelliJ%20IDEA%20Shortcuts%20and%20Productivity%20Tips</loc>
+  <lastmod>2023-12-26</lastmod>  </url>
+
+  
+    <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/Advanced%20IntelliJ%20IDEA%20Features</loc>
+  <lastmod>2023-12-26</lastmod>  </url>
+
+  
+    <url>
+    <loc>https://eduxcel.vercel.app/blogs/tools/IntelliJ%20IDEA%20for%20Java%20Spring%20Development</loc>
+  <lastmod>2023-12-26</lastmod>  </url>
+
+ 
+
+  
   <!-- Courses -->
   <url>
     <loc>https://eduxcel.vercel.app/courses/Full%20Stack%20Web%20Development%20Bootcamp</loc>
-    <lastmod>2023-01-06</lastmod>
-  </url>
+  <lastmod>2023-12-26</lastmod>  </url>
   <url>
     <loc>https://eduxcel.vercel.app/courses/Full%20Stack%20Web%20Development%20Bootcamp/Frontend%20Development</loc>
-    <lastmod>2023-01-07</lastmod>
-  </url>
+  <lastmod>2023-12-26</lastmod>  </url>
   <url>
     <loc>https://eduxcel.vercel.app/courses/Full%20Stack%20Web%20Development%20Bootcamp/Frontend%20Development/submodules/HTML%20Basics</loc>
-    <lastmod>2023-01-08</lastmod>
-  </url>
+  <lastmod>2023-12-26</lastmod>  </url>
 
   <url>
     <loc>https://eduxcel.vercel.app/courses/Data%20Science%20Fundamentals</loc>
-    <lastmod>2023-01-02</lastmod>
-  </url>
+  <lastmod>2023-12-26</lastmod>  </url>
 
     <url>
     <loc>https://eduxcel.vercel.app/courses/Data%20Science%20Fundamentals/Introduction%20to%20Data%20Science</loc>
-    <lastmod>2023-01-02</lastmod>
-  </url>
+  <lastmod>2023-12-26</lastmod>  </url>
 
     <url>
     <loc>https://eduxcel.vercel.app/courses/Machine%20Learning%20for%20Beginners</loc>
-    <lastmod>2023-01-02</lastmod>
-  </url>
+  <lastmod>2023-12-26</lastmod>  </url>
 
 
      <url>
     <loc>https://eduxcel.vercel.app/courses/Machine%20Learning%20for%20Beginners/Machine%20Learning%20Basics</loc>
-    <lastmod>2023-01-02</lastmod>
-  </url>
+  <lastmod>2023-12-26</lastmod>  </url>
 
 
 
      <url>
     <loc>https://eduxcel.vercel.app/signup</loc>
-    <lastmod>2023-01-02</lastmod>
-  </url>
+  <lastmod>2023-12-26</lastmod>  </url>
 
 
 
@@ -77,8 +171,7 @@
 
      <url>
     <loc>https://eduxcel.vercel.app/profile</loc>
-    <lastmod>2023-01-02</lastmod>
-  </url>
+  <lastmod>2023-12-26</lastmod>  </url>
 
 
 
