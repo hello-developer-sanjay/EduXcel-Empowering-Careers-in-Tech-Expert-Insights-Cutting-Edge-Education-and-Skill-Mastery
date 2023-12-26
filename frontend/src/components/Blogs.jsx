@@ -671,58 +671,57 @@
             ))}
 
 {/* Pagination */}
-<Box mt={8} display="flex" justifyContent="center">
-  {Array.from({ length: Math.ceil(filteredBlogs("tools").length / postsPerPage) }, (_, index) => (
-    <motion.div
-      key={index}
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.9 }}
-      transition={{ type: "spring", stiffness: 300 }}
-    >
-      <Button
-        onClick={() => handlePageChange(index + 1)}
-        mx={4} // Add some margin between the buttons
-        borderRadius="full" // Make the buttons circular
-        fontWeight="bold"
-        fontSize="xl" // Increase the font size
-        padding="1rem 2rem" // Increase padding for larger buttons
-        _focus={{ outline: "none" }} // Remove the default focus outline
-        colorScheme={currentPage === index + 1 ? "green" : "gray"} // Use Chakra UI color schemes
-        variant="solid"
-        size="lg" // Larger button size
-        position="relative"
-        overflow="hidden"
-      >
-        {index + 1}
-        <Box
-          position="absolute"
-          top="-2px"
-          left="-2px"
-          right="-2px"
-          bottom="-2px"
-          borderWidth="2px"
-          borderColor="white"
-          opacity={0.5}
-          borderRadius="full"
-        />
-        <Box
-          position="absolute"
-          top="-2px"
-          left="-2px"
-          right="-2px"
-          bottom="-2px"
-          borderWidth="2px"
-          borderColor="white"
-          opacity={0.5}
-          borderRadius="full"
-          transform="rotate(45deg)"
-        />
-      </Button>
-    </motion.div>
-  ))}
-</Box>
-
-
+<Box mt={8} display="flex" justifyContent="center" flexWrap="wrap">
+      {Array.from({ length: Math.ceil(filteredBlogs("tools").length / postsPerPage) }, (_, index) => (
+        <motion.div
+          key={index}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
+          <Button
+            onClick={() => handlePageChange(index + 1)}
+            mx={2} // Adjust margin based on your preference
+            my={2} // Adjust margin based on your preference
+            borderRadius="full"
+            fontWeight="bold"
+            fontSize={{ base: "sm", md: "xl" }} // Responsive font size
+            padding={{ base: "0.5rem 1rem", md: "1rem 2rem" }} // Responsive padding
+            _focus={{ outline: "none" }}
+            colorScheme={currentPage === index + 1 ? "green" : "gray"}
+            variant="solid"
+            size="lg"
+            position="relative"
+            overflow="hidden"
+          >
+            {index + 1}
+            <Box
+              position="absolute"
+              top="-2px"
+              left="-2px"
+              right="-2px"
+              bottom="-2px"
+              borderWidth="2px"
+              borderColor="white"
+              opacity={0.5}
+              borderRadius="full"
+            />
+            <Box
+              position="absolute"
+              top="-2px"
+              left="-2px"
+              right="-2px"
+              bottom="-2px"
+              borderWidth="2px"
+              borderColor="white"
+              opacity={0.5}
+              borderRadius="full"
+              transform="rotate(45deg)"
+            />
+          </Button>
+        </motion.div>
+      ))}
+    </Box>
 
 
           </Box>
