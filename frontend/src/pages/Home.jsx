@@ -13,10 +13,14 @@ import { FaChalkboardTeacher, FaUserGraduate, FaClock } from 'react-icons/fa';
 import WhyUsImage from '../assets/why.webp';
 import About from '../components/About';
 import Faq from '../components/Faq';
+import { useInView } from 'react-intersection-observer'; // Import react-intersection-observer
+
 function Home() {
   const [courseData, setCourseData] = useState([]);
-  const controls = useAnimation();
-
+  const controlsImage = useAnimation();
+  const controlsContent = useAnimation();
+  const [refImage, inViewImage] = useInView();
+  const [refContent, inViewContent] = useInView();
   useEffect(() => {
     // Fetch course data from your API endpoint
     async function fetchCourses() {
@@ -29,21 +33,46 @@ function Home() {
     }
 
     fetchCourses();
+  // Animate the "why.png" image when it comes into view
+if (inViewImage) {
+  controlsImage.start({
+    scale: [0.8, 1.2, 1], // Scale down, then overshoot, and settle
+    rotateY: [0, 360], // Spin the image around the Y-axis
+    opacity: [0, 1], // Fade in
+    transition: {
+      duration: 2,
+      ease: 'easeInOut',
+      bounce: 0.5, // Add a bounce effect for some playfulness
+    },
+  });
+}
 
-    // Animate the "why.png" image
-    controls.start({
-      scale: 1,
-      rotateY: 360,
-      opacity: 1,
-      transition: { duration: 2 },
-    });
-       // Dynamically update meta description
-    const metaDescriptionTag = document.querySelector('meta[name="description"]');
-    if (metaDescriptionTag) {
-      metaDescriptionTag.content = "Explore our courses and enhance your skills with Eduxcel. Find a wide range of online courses on various topics to boost your knowledge.";
+
+
+
+    // Animate the content when it comes into view with staggered animation
+    if (inViewContent) {
+      controlsContent.start((index) => ({
+        y: 0,
+        opacity: 1,
+        transition: { duration: 1, delay: index * 0.2 }, // Staggered delay for each content block
+      }));
     }
-    
-  }, [controls]);
+  }, [controlsImage, inViewImage, controlsContent, inViewContent]);
+  const contentBlocks = [
+    {
+      title: 'Interactive Learning Experiences',
+      description: 'Immerse yourself in interactive lessons, quizzes, and assignments designed to make learning engaging and enjoyable.',
+    },
+    {
+      title: 'Expert Instructors & Industry Leaders',
+      description: 'Learn from passionate instructors who are experts in their fields and gain insights from industry leaders.',
+    },
+    {
+      title: 'Flexible Learning at Your Fingertips',
+      description: 'Embrace flexibility with on-the-go access to course materials, allowing you to learn at your own pace and convenience.',
+    },
+  ];
 
   const sliderSettings = {
     dots: true,
@@ -104,7 +133,7 @@ function Home() {
           })}
         </script>
       </Helmet>
-      <StarsCanvas />
+      
 
      <div className={`relative top-[10px] max-w-8xl mx-auto ${styles.paddingX} flex flex-col items-center`}>
   <div className="w-full max-w-4xl">
@@ -175,46 +204,52 @@ function Home() {
           </div>
         </div>
         <div className="why-us-section py-16 flex flex-col lg:flex-row items-center">
-  <div className="container mx-auto">
-    <div className="flex flex-col lg:flex-row items-center mb-12">
-      <div className="shining-ring-container">
-        <div className="shining-ring"></div>
-        <div className="flex-container">
-  <motion.img
-    src={WhyUsImage}
-    alt="Why Choose Us"
-    className="w-full lg:w-full rounded-lg shadow-lg mb-6 lg-mb-0" // Adjust the width
-    initial={{ scale: 0, opacity: 0 }}
-    animate={controls}
-  />
-
-</div>
-
+        <div className="container mx-auto">
+          <div className="flex flex-col lg:flex-row items-center mb-12">
+            <div className="shining-ring-container">
+              <div className="shining-ring"></div>
+              <div className="flex-container">
+              <motion.img
+                  ref={refImage}
+                  src={WhyUsImage}
+                  alt="Why Choose Us"
+                  className="w-full lg:w-full rounded-lg shadow-lg mb-6 lg-mb-0"
+                  initial={{ scale: 0, rotateY: 0, opacity: 0 }}
+                  animate={controlsImage}
+                />
+              </div>
+            </div>
+            <div className="lg:w-1/2 lg:pl-12 why-us-content">
+              {contentBlocks.map((block, index) => (
+                <motion.div
+                  key={index}
+                  ref={refContent}
+                  custom={index}
+                  className="mb-8"
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={controlsContent}
+                >
+                  <motion.h3 className="text-3xl font-bold mb-4 text-purple-500">
+                    {block.title}
+                  </motion.h3>
+                  <motion.p className="text-gray-800 mb-6 text-lg">
+                    {block.description}
+                  </motion.p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="lg:w-1/2 lg:pl-12 why-us-content"> {/* New container div with a class */}
-        <h3 className="text-2xl font-semibold mb-4">Interactive Learning Experiences</h3>
-        <p className="text-gray-700 mb-6">
-          Immerse yourself in interactive lessons, quizzes, and assignments designed to make learning engaging and enjoyable.
-        </p>
-        <h3 className="text-2xl font-semibold mb-4">Expert Instructors & Industry Leaders</h3>
-        <p className="text-gray-700 mb-6">
-          Learn from passionate instructors who are experts in their fields and gain insights from industry leaders.
-        </p>
-        <h3 className="text-2xl font-semibold mb-4">Flexible Learning at Your Fingertips</h3>
-        <p className="text-gray-700 mb-6">
-          Embrace flexibility with on-the-go access to course materials, allowing you to learn at your own pace and convenience.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
 
 
       </div>
        <About/>
       <Faq/>
+      <StarsCanvas />
     </section>
   );
 }
+
 
 export default Home;
