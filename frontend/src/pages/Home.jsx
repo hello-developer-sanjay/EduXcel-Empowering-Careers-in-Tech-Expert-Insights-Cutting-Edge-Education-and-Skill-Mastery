@@ -49,15 +49,21 @@ if (inViewImage) {
 
 
 
+ // Animate the content when it comes into view with a magical and floating animation
+if (inViewContent) {
+  controlsContent.start((index) => ({
+    y: 0,
+    opacity: 1,
+    rotate: [0, (index % 2 === 0 ? 360 : -360)], // Rotate clockwise or counterclockwise
+    transition: {
+      duration: 1.5,
+      delay: index * 0.2, // Staggered delay for each content block
+      type: 'spring', // Use spring animation for a more fluid movement
+      stiffness: 100,
+    },
+  }));
+}
 
-    // Animate the content when it comes into view with staggered animation
-    if (inViewContent) {
-      controlsContent.start((index) => ({
-        y: 0,
-        opacity: 1,
-        transition: { duration: 1, delay: index * 0.2 }, // Staggered delay for each content block
-      }));
-    }
   }, [controlsImage, inViewImage, controlsContent, inViewContent]);
   const contentBlocks = [
     {
