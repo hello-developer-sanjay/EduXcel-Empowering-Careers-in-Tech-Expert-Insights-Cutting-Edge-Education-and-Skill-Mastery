@@ -199,6 +199,25 @@ const HamburgerIcon = styled.div`
     transform: rotate(360deg) scale(1.2);
   }
 
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 6px;
+    background-color: #fff;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+
+  &::before {
+    transform: translateY(-12px);
+  }
+
+  &::after {
+    transform: translateY(12px);
+  }
+
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
@@ -206,29 +225,25 @@ const HamburgerIcon = styled.div`
     height: 40px;
     width: 40px;
 
-    div {
-      height: 6px;
+    &::before,
+    &::after {
       width: 40px;
+      height: 6px;
       background-color: #fff;
       border-radius: 8px;
       transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
       margin: 6px 0;
     }
 
-    &.open div:first-child {
+    &.open::before {
       transform: translateY(6px) rotate(-45deg);
     }
 
-    &.open div:nth-child(2) {
-      transform: scaleX(0);
-    }
-
-    &.open div:last-child {
+    &.open::after {
       transform: translateY(-6px) rotate(45deg);
     }
   }
 `;
-
 const HamburgerMenu = styled.div`
   @media (max-width: 768px) {
     display: none;
