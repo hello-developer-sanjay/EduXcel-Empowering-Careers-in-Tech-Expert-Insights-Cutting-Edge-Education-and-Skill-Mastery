@@ -62,6 +62,19 @@ const EduxcelText = styled.span`
   }
 `;
 
+const LargeScreenText = styled(EduxcelText)`
+  display: none;
+
+  @media (min-width: 769px) {
+    display: inline-block;
+  }
+`;
+
+const SmallScreenText = styled(EduxcelText)`
+  @media (min-width: 769px) {
+    display: none;
+  }
+`;
 const NavList = styled.ul`
   list-style-type: none;
   margin: 0;
@@ -283,8 +296,9 @@ function Header() {
     <HeaderContainer>
       <HeaderContent>
         <Link to="/">
-          <Logo>
-            <EduxcelText className="eduxcel-text">Eduxcel</EduxcelText>
+        <Logo>
+            <LargeScreenText className="eduxcel-text">Eduxcel - Online Education Platform</LargeScreenText>
+            <SmallScreenText className="eduxcel-text">Eduxcel</SmallScreenText>
           </Logo>
         </Link>
         <Typed strings={typedTexts} typeSpeed={40} backSpeed={40} loop />
