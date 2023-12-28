@@ -332,7 +332,7 @@ function Header() {
       <HeaderContent>
         <Link to="/">
         <Logo>
-            <LargeScreenText className="eduxcel-text">Eduxcel - Online Education Platform</LargeScreenText>
+            <LargeScreenText className="eduxcel-text">Eduxcel Mastery: Your Journey to Academic Brilliance</LargeScreenText>
             <SmallScreenText className="eduxcel-text">Eduxcel</SmallScreenText>
           </Logo>
         </Link>
