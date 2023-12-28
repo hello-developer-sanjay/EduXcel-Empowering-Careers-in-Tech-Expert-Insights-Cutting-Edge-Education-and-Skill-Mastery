@@ -135,13 +135,16 @@ const NavLinkItem = styled(Link)`
   display: flex;
   align-items: center;
   gap: 10px;
-  transition: all 0.3s ease;
   padding: 10px;
   border-radius: 10px;
+  position: relative;
+  overflow: hidden;
 
   &:hover {
-    svg {
-      color: #67EB00;
+    color: #67EB00;
+
+    &::before {
+      transform: scaleX(1) translateX(0%);
     }
   }
 
@@ -157,27 +160,20 @@ const NavLinkItem = styled(Link)`
     border: 2px solid #fff;
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, border-color 0.3s ease;
   }
 
-  &[aria-label='Home']::before {
-    content: 'Home';
-    display: none;
-  }
-
-  &[aria-label='Profile']::before {
-    content: 'Profile';
-    display: none;
-  }
-
-  &[aria-label='Sign Up']::before {
-    content: 'Sign Up';
-    display: none;
-  }
-
-  &[aria-label='Blogs']::before {
-    content: 'Blogs';
-    display: none;
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, #67EB00, #FFD700, #67EB00);
+    transform: scaleX(0) translateX(-100%);
+    transform-origin: left;
+    transition: transform 0.3s ease;
   }
 
   @media (max-width: 768px) {
