@@ -38,30 +38,65 @@ const Logo = styled.h1`
 
 const EduxcelText = styled.span`
   font-size: 25px;
-  font-weight: bold;
-  color: #ff9900;
+  color: #51D5FF;
+  font-family: 'Playfair Display', serif;
+
   text-transform: uppercase;
   letter-spacing: 1px;
   position: relative;
-  transition: color 0.3s ease;
   cursor: pointer;
+  display: inline-block;
+  transition: color 0.3s ease, transform 0.3s ease;
 
   &:hover {
-    color: #00bfff;
+    color: #FF9585;
+    transform: translateY(-3px);
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(45deg, #3498db, #2ecc71);
+    clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
+    z-index: -1;
+    transition: transform 0.3s ease-in-out;
   }
 
   &::before {
-    content: "E";
-    position: absolute;
-    top: 50%;
-    left: -5px;
-    transform: translateY(-50%);
-    font-size: 35px;
-    color: #00bfff;
-    text-shadow: 0 0 10px rgba(0, 191, 255, 0.8);
+    top: 0;
+    left: 0;
+    transform-origin: top left;
+  }
+
+  &::after {
+    bottom: 0;
+    right: 0;
+    transform-origin: bottom right;
+  }
+
+  &:hover::before,
+  &:hover::after {
+    transform: scaleX(0);
+  }
+
+  & span {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(45deg, #fff, #eee);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease-in-out;
+  }
+
+  &:hover span {
+    background: linear-gradient(45deg, #e74c3c, #c0392b);
   }
 `;
-
 const LargeScreenText = styled(EduxcelText)`
   display: none;
 
