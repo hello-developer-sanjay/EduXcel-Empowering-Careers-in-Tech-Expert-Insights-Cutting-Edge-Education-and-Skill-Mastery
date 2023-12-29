@@ -247,15 +247,22 @@ const HamburgerMenu = styled.div`
     ${({ isOpen }) =>
       isOpen &&
       `
-        display: flex;
+display: flex;
         flex-direction: column;
         align-items: center;
         position: absolute;
         top: 100%;
         left: 0;
         width: 100%;
-        background: linear-gradient(to right, #5d4157, #a8caba);
-        padding: 20px;
+        box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+
+        /* Create a complex and artistic background pattern */
+        background: 
+          radial-gradient(ellipse at center, rgba(173, 216, 230, 0.3) 0%, rgba(173, 216, 230, 0) 30%, rgba(173, 216, 230, 0.6) 50%, rgba(173, 216, 230, 0) 70%, rgba(173, 216, 230, 0.3) 100%),
+          linear-gradient(90deg, #3498db, #2c3e50);
+      
+        /* Optional: Add animation or transition properties for a dynamic effect */
+        transition: background 0.3s ease-in-out;        padding: 20px;
         transform-origin: top;
         animation: rollAndFold 0.5s ease-in-out;
         opacity: 1;
