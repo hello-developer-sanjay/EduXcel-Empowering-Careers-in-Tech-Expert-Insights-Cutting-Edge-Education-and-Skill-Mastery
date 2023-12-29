@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 const FooterContainer = styled(motion.footer)`
   position: relative;
-  background: linear-gradient(135deg, #6a1b9a, #2c3e50);
   color: white;
   padding: 1rem;
   display: flex;
@@ -20,13 +19,11 @@ const FooterContainer = styled(motion.footer)`
 
   /* Create a complex and artistic background pattern */
   background: 
-    radial-gradient(ellipse at center, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 0) 100%),
-    linear-gradient(90deg, #f39c12, #2c3e50);
-  
+    radial-gradient(ellipse at center, rgba(173, 216, 230, 0.3) 0%, rgba(173, 216, 230, 0) 30%, rgba(173, 216, 230, 0.6) 50%, rgba(173, 216, 230, 0) 70%, rgba(173, 216, 230, 0.3) 100%),
+    linear-gradient(90deg, #3498db, #2c3e50);
+
   /* Optional: Add animation or transition properties for a dynamic effect */
   transition: background 0.3s ease-in-out;
-
-
 `;
 const BorderLineTop = styled(motion.div)`
   position: absolute;
