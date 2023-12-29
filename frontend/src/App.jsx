@@ -14,7 +14,7 @@ import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 
 const ScrollToTop = () => {
-  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const unlisten = navigate(() => {
@@ -22,7 +22,7 @@ const ScrollToTop = () => {
     });
 
     return () => {}; // Use an empty function as the cleanup
-  }, [navigate]);
+  }, [pathname]);
 
   return null;
 };
