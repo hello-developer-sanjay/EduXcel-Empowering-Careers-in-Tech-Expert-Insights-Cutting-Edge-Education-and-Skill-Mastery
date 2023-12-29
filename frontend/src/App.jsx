@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import SubHeader from './components/SubHeader';
 import Home from './pages/Home';
@@ -14,15 +14,17 @@ import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 
 const ScrollToTop = () => {
+  const navigate = useNavigate();
   const { pathname } = useLocation();
 
   useEffect(() => {
     const unlisten = navigate(() => {
       window.scrollTo(0, 0);
+      window.location.reload(); // Refresh the page
     });
 
-    return () => {}; // Use an empty function as the cleanup
-  }, [pathname]);
+    return () => unlisten(); // Cleanup the listener
+  }, [navigate, pathname]);
 
   return null;
 };
