@@ -691,6 +691,131 @@
   {renderMediaContent(blog.spring_support, blog.title)}
 </VStack>
 
+<VStack spacing={2} id={`content-${blog.title}-modules`} style={contentSectionStyle}>
+  {renderMediaContent(blog.modules, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-package_management`} style={contentSectionStyle}>
+  {renderMediaContent(blog.package_management, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-routing`} style={contentSectionStyle}>
+  {renderMediaContent(blog.routing, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-middleware`} style={contentSectionStyle}>
+  {renderMediaContent(blog.middleware, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-templating_engines`} style={contentSectionStyle}>
+  {renderMediaContent(blog.templating_engines, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-restful_apis`} style={contentSectionStyle}>
+  {renderMediaContent(blog.restful_apis, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-callbacks`} style={contentSectionStyle}>
+  {renderMediaContent(blog.callbacks, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-promises`} style={contentSectionStyle}>
+  {renderMediaContent(blog.promises, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-async_await`} style={contentSectionStyle}>
+  {renderMediaContent(blog.async_await, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-event_emitters`} style={contentSectionStyle}>
+  {renderMediaContent(blog.event_emitters, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-deployment_strategies`} style={contentSectionStyle}>
+  {renderMediaContent(blog.deployment_strategies, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-scaling`} style={contentSectionStyle}>
+  {renderMediaContent(blog.scaling, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-installing_nodejs`} style={contentSectionStyle}>
+  {renderMediaContent(blog.installing_nodejs, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-configuring_npm`} style={contentSectionStyle}>
+  {renderMediaContent(blog.configuring_npm, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-basic_project_setup`} style={contentSectionStyle}>
+  {renderMediaContent(blog.basic_project_setup, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-installing_git`} style={contentSectionStyle}>
+  {renderMediaContent(blog.installing_git, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-configuring_git`} style={contentSectionStyle}>
+  {renderMediaContent(blog.configuring_git, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-git_commands`} style={contentSectionStyle}>
+  {renderMediaContent(blog.git_commands, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-typical_workflow`} style={contentSectionStyle}>
+  {renderMediaContent(blog.typical_workflow, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-best_practices`} style={contentSectionStyle}>
+  {renderMediaContent(blog.best_practices, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-branching_strategies`} style={contentSectionStyle}>
+  {renderMediaContent(blog.branching_strategies, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-git_hooks`} style={contentSectionStyle}>
+  {renderMediaContent(blog.git_hooks, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-optimizing_workflow`} style={contentSectionStyle}>
+  {renderMediaContent(blog.optimizing_workflow, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-collaborative_platforms`} style={contentSectionStyle}>
+  {renderMediaContent(blog.collaborative_platforms, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-collaborative_workflows`} style={contentSectionStyle}>
+  {renderMediaContent(blog.collaborative_workflows, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-setting_up_repository`} style={contentSectionStyle}>
+  {renderMediaContent(blog.setting_up_repository, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-collaborative_workflow `} style={contentSectionStyle}>
+  {renderMediaContent(blog.collaborative_workflow, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-github_actions`} style={contentSectionStyle}>
+  {renderMediaContent(blog.github_actions, blog.title)}
+</VStack>
+
 
                 
               </motion.div>
