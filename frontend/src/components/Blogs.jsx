@@ -105,7 +105,7 @@
           });
       
           // Scroll to the clicked title only if it's a child title
-          if (matchingBlog.extension1) {
+          if (matchingBlog.parentTitle) {
             scrollToTitle(title, collection);
       
             // Render the content of the matched blog directly
@@ -118,8 +118,7 @@
             }
           }
         }
-      };
-      
+      }; 
       
       
       
@@ -195,29 +194,22 @@
           blog.title.toLowerCase().includes(searchQuery.toLowerCase())
         );
       };  
-      useEffect(() => {
+           useEffect(() => {
         const query = location.pathname.split("/blogs/search/")[1] || "";
         setSearchQuery(decodeURIComponent(query));
         fetchData("tools");
         fetchData("working");
       
         if (clickedTitle) {
-          // Scroll to the clicked title only if it's a child title
+          // Scroll to the clicked title
           const [collection, title] = clickedTitle.split("-");
-          const matchingBlog = blogsData[collection]?.find(
-            (blog) => blog.title === title || (blog.extension1 && blog.extension1.title === title)
-          );
-      
-          if (matchingBlog && matchingBlog.extension1) {
-            const titleRef = titleRefs.current[`${collection}-${title}`];
-            if (titleRef) {
-              titleRef.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-              });
-            }
+          const titleRef = titleRefs.current[`${collection}-${title}`];
+          if (titleRef) {
+            titleRef.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
           }
-      
           setClickedTitle(null); // Reset the clicked title state
         }
       
@@ -227,10 +219,25 @@
           const [, collection, encodedTitle] = urlTitleMatch;
           const urlTitle = decodeURIComponent(encodedTitle);
           const matchingBlog = blogsData[collection]?.find(
-            (blog) => blog.title === urlTitle || (blog.extension1 && blog.extension1.title === urlTitle)
+            (blog) =>
+              blog.title === urlTitle ||
+              (blog.parentTitle && blog.parentTitle.title === urlTitle) ||
+              (blog.extension1 && blog.extension1.title === urlTitle) ||
+              (blog.extension2 && blog.extension2.title === urlTitle) ||
+              (blog.extension3 && blog.extension3.title === urlTitle) ||
+              (blog.extension4 && blog.extension4.title === urlTitle) ||
+              (blog.extension5 && blog.extension5.title === urlTitle) ||
+              (blog.needForAdvancedTechniques && blog.needForAdvancedTechniques.title === urlTitle) ||
+              (blog.dask && blog.dask.title === urlTitle) ||
+              (blog.vaex && blog.vaex.title === urlTitle) ||
+              (blog.optimizationStrategies && blog.optimizationStrategies.title === urlTitle) ||
+              (blog.parallelComputing && blog.parallelComputing.title === urlTitle) ||
+              // Add more checks for other extensions as needed
+              // ...
+              false
           );
       
-          if (matchingBlog && matchingBlog.extension1) {
+          if (matchingBlog) {
             // Set the current page to the matched blog's page
             const pageIndex =
               Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
@@ -247,7 +254,7 @@
           }
         }
       }, [location.pathname, clickedTitle, blogsData]);
-      
+ 
       
 
       const indexOfLastPost = currentPage * postsPerPage;
