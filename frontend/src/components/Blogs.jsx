@@ -642,6 +642,9 @@
   {renderMediaContent(blog.extension2, blog.title)}
 </VStack>
 
+<VStack spacing={2} id={`content-${blog.title}-ides`} style={contentSectionStyle}>
+  {renderMediaContent(blog.ides, blog.title)}
+</VStack>
 <VStack spacing={2} id={`content-${blog.title}-extension3`} style={contentSectionStyle}>
   {renderMediaContent(blog.extension3, blog.title)}
 </VStack>
@@ -678,9 +681,6 @@
 
 
 
-<VStack spacing={2} id={`content-${blog.title}-needForAdvancedTechniques`} style={contentSectionStyle}>
-  {renderMediaContent(blog.needForAdvancedTechniques, blog.title)}
-</VStack>
 
 <VStack spacing={2} id={`content-${blog.title}-needForAdvancedTechniques`} style={contentSectionStyle}>
   {renderMediaContent(blog.needForAdvancedTechniques, blog.title)}
