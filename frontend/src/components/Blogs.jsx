@@ -80,24 +80,49 @@
 
       const location = useLocation();
       const [clickedTitle, setClickedTitle] = useState(null);
+      const scrollToTitle = (title, collection, isChildTitle) => {
+        const titleRef = titleRefs.current[`${collection}-${title}`];
+        if (titleRef) {
+          titleRef.scrollIntoView({
+            behavior: "smooth",
+            block: isChildTitle ? "center" : "start",
+          });
+        }
+      };
+      
       const handleTitleClick = (title, collection) => {
         const encodedTitle = encodeURIComponent(title);
-        const matchingBlog = blogsData[collection].find(
-          (blog) => blog.title === title
-        );
+        const matchingBlog = blogsData[collection].find((blog) => blog.title === title);
       
         if (matchingBlog) {
           const pageIndex =
             Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
           setCurrentPage(pageIndex);
-          setClickedTitle(title);
       
-          // Update the URL based on the collection
+          // Update the URL based on the collection and title
           navigate(`/blogs/${collection}/${encodedTitle}`, {
             replace: true,
           });
+      
+          // Scroll to the clicked title only if it's a child title
+          if (matchingBlog.extension1) {
+            scrollToTitle(title, collection);
+      
+            // Render the content of the matched blog directly
+            const contentSection = document.getElementById(`content-${matchingBlog.title}-overview`);
+            if (contentSection) {
+              contentSection.scrollIntoView({
+                behavior: "auto",
+                block: "start",
+              });
+            }
+          }
         }
       };
+      
+      
+      
+      
         
 
       
@@ -112,7 +137,7 @@
       const fetchData = async (collection) => {
         try {
           const response = await fetch(
-            `http://localhost:5000/api/${collection}`
+            `https://edu-back-j3mz.onrender.com/api/${collection}`
           );
           const responseData = await response.json();
           setBlogsData((prevData) => ({
@@ -177,15 +202,22 @@
         fetchData("working");
       
         if (clickedTitle) {
-          // Scroll to the clicked title
+          // Scroll to the clicked title only if it's a child title
           const [collection, title] = clickedTitle.split("-");
-          const titleRef = titleRefs.current[`${collection}-${title}`];
-          if (titleRef) {
-            titleRef.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
+          const matchingBlog = blogsData[collection]?.find(
+            (blog) => blog.title === title || (blog.extension1 && blog.extension1.title === title)
+          );
+      
+          if (matchingBlog && matchingBlog.extension1) {
+            const titleRef = titleRefs.current[`${collection}-${title}`];
+            if (titleRef) {
+              titleRef.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }
           }
+      
           setClickedTitle(null); // Reset the clicked title state
         }
       
@@ -195,17 +227,17 @@
           const [, collection, encodedTitle] = urlTitleMatch;
           const urlTitle = decodeURIComponent(encodedTitle);
           const matchingBlog = blogsData[collection]?.find(
-            (blog) => blog.title === urlTitle
+            (blog) => blog.title === urlTitle || (blog.extension1 && blog.extension1.title === urlTitle)
           );
       
-          if (matchingBlog) {
+          if (matchingBlog && matchingBlog.extension1) {
             // Set the current page to the matched blog's page
             const pageIndex =
               Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
             setCurrentPage(pageIndex);
       
             // Render the content of the matched blog directly
-            const contentSection = document.getElementById(`content-${matchingBlog.title}`);
+            const contentSection = document.getElementById(`content-${matchingBlog.title}-overview`);
             if (contentSection) {
               contentSection.scrollIntoView({
                 behavior: "auto",
@@ -214,8 +246,8 @@
             }
           }
         }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [location.pathname, clickedTitle, blogsData]);
+      
       
 
       const indexOfLastPost = currentPage * postsPerPage;
@@ -379,6 +411,10 @@
                   onClick={() => handleTitleClick(item.title, "tools")}
                 />
                           {renderMediaContent(item.description, title)}
+                          {renderMediaContent(item.installation, title)}
+
+                          {renderMediaContent(item.content, title)}
+
 
               </VStack>
               
@@ -597,6 +633,59 @@
 <VStack spacing={2} id={`content-${blog.title}-steps`} style={contentSectionStyle}>
   {renderMediaContent(blog.steps, blog.title)}
 </VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-extension1`} style={contentSectionStyle}>
+  {renderMediaContent(blog.extension1, blog.title)}
+</VStack>
+{/* new  */}
+<VStack spacing={2} id={`content-${blog.title}-extension2`} style={contentSectionStyle}>
+  {renderMediaContent(blog.extension2, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-extension3`} style={contentSectionStyle}>
+  {renderMediaContent(blog.extension3, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-extension4`} style={contentSectionStyle}>
+  {renderMediaContent(blog.extension4, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-extension5`} style={contentSectionStyle}>
+  {renderMediaContent(blog.extension5, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-slow_performance`} style={contentSectionStyle}>
+  {renderMediaContent(blog.slow_performance, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-intellisense_not_working`} style={contentSectionStyle}>
+  {renderMediaContent(blog.intellisense_not_working, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-debugging_issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.debugging_issues, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-installation_problems`} style={contentSectionStyle}>
+  {renderMediaContent(blog.installation_problems, blog.title)}
+</VStack><VStack spacing={2} id={`content-${blog.title}-extension_compatibility`} style={contentSectionStyle}>
+  {renderMediaContent(blog.extension_compatibility, blog.title)}
+</VStack><VStack spacing={2} id={`content-${blog.title}-workspace_configuration`} style={contentSectionStyle}>
+  {renderMediaContent(blog.workspace_configuration, blog.title)}
+</VStack><VStack spacing={2} id={`content-${blog.title}-content`} style={contentSectionStyle}>
+  {renderMediaContent(blog.content, blog.title)}
+</VStack>
+
+
+
+
+<VStack spacing={2} id={`content-${blog.title}-needForAdvancedTechniques`} style={contentSectionStyle}>
+  {renderMediaContent(blog.needForAdvancedTechniques, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-needForAdvancedTechniques`} style={contentSectionStyle}>
+  {renderMediaContent(blog.needForAdvancedTechniques, blog.title)}
+</VStack>
+
 <VStack spacing={2} id={`content-${blog.title}-issues`} style={contentSectionStyle}>
   {renderMediaContent(blog.issues, blog.title)}
 </VStack>
@@ -846,20 +935,24 @@
 <VStack spacing={2} id={`content-${blog.title}-github_actions`} style={contentSectionStyle}>
   {renderMediaContent(blog.github_actions, blog.title)}
 </VStack>
-<VStack spacing={2} id={`content-${blog.title}-extension1`} style={contentSectionStyle}>
-  {renderMediaContent(blog.extension1, blog.title)}
+
+
+<VStack spacing={2} id={`content-${blog.title}-dask`} style={contentSectionStyle}>
+  {renderMediaContent(blog.dask, blog.title)}
 </VStack>
 
 
-
-
-
-
-
-<VStack spacing={2} id={`content-${blog.title}-needForAdvancedTechniques`} style={contentSectionStyle}>
-  {renderMediaContent(blog.needForAdvancedTechniques, blog.title)}
+<VStack spacing={2} id={`content-${blog.title}-vaex`} style={contentSectionStyle}>
+  {renderMediaContent(blog.vaex, blog.title)}
 </VStack>
 
+
+<VStack spacing={2} id={`content-${blog.title}-optimizationStrategies`} style={contentSectionStyle}>
+  {renderMediaContent(blog.optimizationStrategies, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-parallelComputing`} style={contentSectionStyle}>
+  {renderMediaContent(blog.parallelComputing , blog.title)}
+</VStack>
 
 
               </motion.div>
