@@ -6,7 +6,7 @@
       Input,
       VStack,
       Text,
- 
+      
       IconButton,
       useDisclosure,
       Collapse,
@@ -17,7 +17,7 @@
     import ModalImage from "react-modal-image"; 
 
     import { FaArrowCircleUp, FaBars, FaTimes } from "react-icons/fa";
-   
+
     import { useNavigate, useLocation } from "react-router-dom";
     import ReactPlayer from "react-player";
     import "../styles/Blogs.css";
@@ -28,7 +28,6 @@
       <motion.div
         whileHover={{
           textDecoration: "underline",
-          
         }}
         whileTap={{ scale: 0.95 }}
         transition={{ duration: 0.2 }}
@@ -113,7 +112,7 @@
       const fetchData = async (collection) => {
         try {
           const response = await fetch(
-            `https://edu-back-j3mz.onrender.com/api/${collection}`
+            `http://localhost:5000/api/${collection}`
           );
           const responseData = await response.json();
           setBlogsData((prevData) => ({
@@ -348,22 +347,43 @@
         },
       };
 
-     const renderMediaContent = (content) => {
+      const renderMediaContent = (content, title) => {
         if (!content) {
           return null;
+        }
+      
+        if (!Array.isArray(content)) {
+          // If content is not an array, wrap it in an array to handle it uniformly
+          content = [content];
         }
       
         return content.map((item, index) => {
           if (Array.isArray(item)) {
             return (
               <VStack key={index} align="start" spacing={2} mt={2}>
-                {renderMediaContent(item)}
+                {renderMediaContent(item, title)}
               </VStack>
             );
           }
       
-          let element;
       
+          let element;
+    
+          if (typeof item === "object" && item.title) {
+            // Display object field titles on the same page as the parent title
+            element = (
+              <VStack key={index} align="start" spacing={2} mt={2}>
+                <BlogTitle
+                  title={item.title}
+                  collection="tools"
+                  onClick={() => handleTitleClick(item.title, "tools")}
+                />
+                          {renderMediaContent(item.description, title)}
+
+              </VStack>
+              
+            );
+            }
           if (typeof item === "string") {
             if (item.startsWith("*") && item.endsWith("*")) {
               const styledText = item.substring(1, item.length - 1);
@@ -450,6 +470,10 @@
         });
       };
       
+      
+      
+
+
       const navbarHeight = document.querySelector(".navbar")?.clientHeight || 0;
 
       return (
@@ -464,9 +488,10 @@
           justifyContent="flex-start"
           id="blogs-section"
           overflowY="scroll"
-          backgroundColor={"black"}
+          textAlign={"left"}
           maxHeight="calc(100vh - 100px)"
           height="auto"
+
           overflowX="hidden"
           boxShadow="0px 4px 8px rgba(0, 0, 0, 0.1)"
           onScroll={handleScroll}
@@ -539,7 +564,7 @@
 
             {currentPosts.map((blog, index) => (
               <motion.div
-                key={index}
+                key={blog.title}
                 ref={
                   index === currentPosts.length - 1
                     ? (node) => observeLastBlog("tools", node)
@@ -555,8 +580,12 @@
 />
                   </VStack>
 
-        <VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
+      <VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
   {renderMediaContent(blog.overview, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-description`} style={contentSectionStyle}>
+  {renderMediaContent(blog.description, blog.title)}
 </VStack>
 <VStack spacing={2} id={`content-${blog.title}-what`} style={contentSectionStyle}>
   {renderMediaContent(blog.what, blog.title)}
@@ -691,6 +720,8 @@
   {renderMediaContent(blog.spring_support, blog.title)}
 </VStack>
 
+{/* new  */}
+
 <VStack spacing={2} id={`content-${blog.title}-modules`} style={contentSectionStyle}>
   {renderMediaContent(blog.modules, blog.title)}
 </VStack>
@@ -815,9 +846,22 @@
 <VStack spacing={2} id={`content-${blog.title}-github_actions`} style={contentSectionStyle}>
   {renderMediaContent(blog.github_actions, blog.title)}
 </VStack>
+<VStack spacing={2} id={`content-${blog.title}-extension1`} style={contentSectionStyle}>
+  {renderMediaContent(blog.extension1, blog.title)}
+</VStack>
 
 
-                
+
+
+
+
+
+<VStack spacing={2} id={`content-${blog.title}-needForAdvancedTechniques`} style={contentSectionStyle}>
+  {renderMediaContent(blog.needForAdvancedTechniques, blog.title)}
+</VStack>
+
+
+
               </motion.div>
             ))}
 
@@ -873,6 +917,8 @@
         </motion.div>
       ))}
     </Box>
+
+
 
 
           </Box>
