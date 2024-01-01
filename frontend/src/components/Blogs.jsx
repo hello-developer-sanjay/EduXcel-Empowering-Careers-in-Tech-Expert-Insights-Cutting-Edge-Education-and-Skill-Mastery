@@ -1,6 +1,6 @@
   /* eslint-disable react/prop-types */
     /* eslint-disable react/display-name */
-    import React, { useState, useEffect, useRef } from "react";
+    import React, { useState,useMemo, useEffect, useRef, useCallback } from "react";
     import {
       Box,
       Input,
@@ -62,13 +62,23 @@
         tools: [],
         working: [],
       });
+      
       const [currentPage, setCurrentPage] = useState(1);
       const [postsPerPage] = useState(1); 
       const navigate = useNavigate();
       const titleRefs = useRef({});
       const { isOpen, onToggle } = useDisclosure();
 
-    
+      const debounce = (func, delay) => {
+        let timeoutId;
+        return (...args) => {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(() => {
+            func(...args);
+          }, delay);
+        };
+      };
+      
       const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
       };  
@@ -89,8 +99,19 @@
           });
         }
       };
+    
       
-   
+      
+      
+      
+      
+      
+      
+        
+
+      
+    
+
 
       const handleSearchChange = (event) => {
         const newQuery = event.target.value;
@@ -112,22 +133,53 @@
         }
       };
 
-      const observeLastBlog = (collection, node) => {
-        if (observer.current) {
-          observer.current.disconnect();
-        }
-
-        observer.current = new IntersectionObserver((entries) => {
-          if (entries[0].isIntersecting) {
-            // Implement your logic here if needed
-          }
-        });
-
-        if (node) {
-          observer.current.observe(node);
-        }
+      const fetchDataForAllCollections = async () => {
+        const collections = ["tools", "working"];
+        const promises = collections.map((collection) => fetchData(collection));
+        await Promise.all(promises);
       };
-
+      const filteredBlogs = (collection) => {
+        const blogsCollection = blogsData[collection] || [];
+        return blogsCollection.filter((blog) =>
+          blog.title.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      }; 
+      useEffect(() => {
+        fetchDataForAllCollections();
+      }, []);
+    
+      const debouncedSearchChange = useCallback(debounce(handleSearchChange, 500), []);
+    
+      useEffect(() => {
+        debouncedSearchChange(searchQuery);
+      }, [debouncedSearchChange, searchQuery]);
+    
+      const filteredBlogsMemoized = useMemo(() => {
+        return Object.keys(blogsData).reduce((acc, collection) => {
+          acc[collection] = filteredBlogs(collection);
+          return acc;
+        }, {});
+      }, [blogsData]);
+    
+      const observeLastBlog = useCallback(
+        (collection, node) => {
+          if (observer.current) {
+            observer.current.disconnect();
+          }
+    
+          observer.current = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+              // Implement your logic here if needed
+            }
+          });
+    
+          if (node) {
+            observer.current.observe(node);
+          }
+        },
+        [observer]
+      );
+    
       const handleScroll = (e) => {
         const container = e.target;
         const scrollTop = container.scrollTop;
@@ -152,73 +204,65 @@
           });
         }
       };
-      const filteredBlogs = (collection) => {
-        const blogsCollection = blogsData[collection] || [];
-        return blogsCollection.filter((blog) =>
-          blog.title.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-      };  
-          const handleTitleClick = (title, collection) => {
-  const encodedTitle = encodeURIComponent(title);
-  const matchingBlog = blogsData[collection].find((blog) => blog.title === title);
-
-  if (matchingBlog) {
-    const pageIndex =
-      Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
-
-    // Update the URL based on the collection and title
-    navigate(`/blogs/${collection}/${encodedTitle}`, {
-      replace: true,
-    });
-
-    setCurrentPage(pageIndex);
-  }
-};
-
-useEffect(() => {
-  const query = location.pathname.split("/blogs/search/")[1] || "";
-  setSearchQuery(decodeURIComponent(query));
-  fetchData("tools");
-  fetchData("working");
-
-  if (clickedTitle) {
-    // Reset the clicked title state
-    setClickedTitle(null);
-  }
-
-  // Check for title in URL and display the content directly
-  const urlTitleMatch = location.pathname.match(/\/blogs\/(.+?)\/(.+)/);
-  if (urlTitleMatch) {
-    const [, collection, encodedTitle] = urlTitleMatch;
-    const urlTitle = decodeURIComponent(encodedTitle);
-    const matchingBlog = blogsData[collection]?.find(
-      (blog) =>
-        blog.title === urlTitle ||
-      (blog.parentTitle && blog.parentTitle.title === urlTitle) ||
-              (blog.extension1 && blog.extension1.title === urlTitle) ||
-              (blog.extension2 && blog.extension2.title === urlTitle) ||
-              (blog.extension3 && blog.extension3.title === urlTitle) ||
-              (blog.extension4 && blog.extension4.title === urlTitle) ||
-              (blog.extension5 && blog.extension5.title === urlTitle) ||
-              (blog.needForAdvancedTechniques && blog.needForAdvancedTechniques.title === urlTitle) ||
-              (blog.dask && blog.dask.title === urlTitle) ||
-              (blog.vaex && blog.vaex.title === urlTitle) ||
-              (blog.optimizationStrategies && blog.optimizationStrategies.title === urlTitle) ||
-              (blog.parallelComputing && blog.parallelComputing.title === urlTitle) ||
-              // Add more checks for other extensions as needed
-              // ...
-              false    );
+       
+   const handleTitleClick = useCallback((title, collection) => {
+    const encodedTitle = encodeURIComponent(title);
+    const matchingBlog = blogsData[collection].find((blog) => blog.title === title);
 
     if (matchingBlog) {
-      // Set the current page to the matched blog's page
       const pageIndex =
         Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
+
+      navigate(`/blogs/${collection}/${encodedTitle}`, {
+        replace: true,
+      });
+
       setCurrentPage(pageIndex);
     }
-  }
-}, [location.pathname, clickedTitle, blogsData]);
+  }, [blogsData, navigate, postsPerPage]);
 
-      
+  useEffect(() => {
+    const query = location.pathname.split("/blogs/search/")[1] || "";
+    setSearchQuery(decodeURIComponent(query));
+    fetchDataForAllCollections();
+
+    if (clickedTitle) {
+      // Reset the clicked title state
+      setClickedTitle(null);
+    }
+
+    // Check for title in URL and display the content directly
+    const urlTitleMatch = location.pathname.match(/\/blogs\/(.+?)\/(.+)/);
+    if (urlTitleMatch) {
+      const [, collection, encodedTitle] = urlTitleMatch;
+      const urlTitle = decodeURIComponent(encodedTitle);
+      const matchingBlog = blogsData[collection]?.find(
+        (blog) =>
+          blog.title === urlTitle ||
+          (blog.parentTitle && blog.parentTitle.title === urlTitle) ||
+          (blog.extension1 && blog.extension1.title === urlTitle) ||
+          (blog.extension2 && blog.extension2.title === urlTitle) ||
+          (blog.extension3 && blog.extension3.title === urlTitle) ||
+          (blog.extension4 && blog.extension4.title === urlTitle) ||
+          (blog.extension5 && blog.extension5.title === urlTitle) ||
+          (blog.needForAdvancedTechniques && blog.needForAdvancedTechniques.title === urlTitle) ||
+          (blog.dask && blog.dask.title === urlTitle) ||
+          (blog.vaex && blog.vaex.title === urlTitle) ||
+          (blog.optimizationStrategies && blog.optimizationStrategies.title === urlTitle) ||
+          (blog.parallelComputing && blog.parallelComputing.title === urlTitle) ||
+          // Add more checks for other extensions as needed
+          // ...
+          false
+      );
+
+      if (matchingBlog) {
+        // Set the current page to the matched blog's page
+        const pageIndex =
+          Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
+        setCurrentPage(pageIndex);
+      }
+    }
+  }, [location.pathname, clickedTitle, blogsData, fetchDataForAllCollections]);
 
       const indexOfLastPost = currentPage * postsPerPage;
       const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -401,7 +445,7 @@ useEffect(() => {
             } else if (item.startsWith("$") && item.endsWith("$")) {
               const styledText = item.substring(1, item.length - 1);
               element = (
-                <Text key={index} fontWeight="bold" textColor="red" fontStyle="bold">
+                <Text key={index} fontWeight="bold" textColor="green " fontStyle="bold">
                   {styledText}
                 </Text>
               );
@@ -586,7 +630,7 @@ useEffect(() => {
 />
                   </VStack>
 
-      <VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
+                  <VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
   {renderMediaContent(blog.overview, blog.title)}
 </VStack>
 
