@@ -90,43 +90,7 @@
         }
       };
       
-      const handleTitleClick = (title, collection) => {
-        const encodedTitle = encodeURIComponent(title);
-        const matchingBlog = blogsData[collection].find((blog) => blog.title === title);
-      
-        if (matchingBlog) {
-          const pageIndex =
-            Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
-          setCurrentPage(pageIndex);
-      
-          // Update the URL based on the collection and title
-          navigate(`/blogs/${collection}/${encodedTitle}`, {
-            replace: true,
-          });
-      
-          // Scroll to the clicked title only if it's a child title
-          if (matchingBlog.parentTitle) {
-            scrollToTitle(title, collection);
-      
-            // Render the content of the matched blog directly
-            const contentSection = document.getElementById(`content-${matchingBlog.title}-overview`);
-            if (contentSection) {
-              contentSection.scrollIntoView({
-                behavior: "auto",
-                block: "start",
-              });
-            }
-          }
-        }
-      }; 
-      
-      
-      
-        
-
-      
-    
-
+   
 
       const handleSearchChange = (event) => {
         const newQuery = event.target.value;
@@ -194,34 +158,43 @@
           blog.title.toLowerCase().includes(searchQuery.toLowerCase())
         );
       };  
-           useEffect(() => {
-        const query = location.pathname.split("/blogs/search/")[1] || "";
-        setSearchQuery(decodeURIComponent(query));
-        fetchData("tools");
-        fetchData("working");
-      
-        if (clickedTitle) {
-          // Scroll to the clicked title
-          const [collection, title] = clickedTitle.split("-");
-          const titleRef = titleRefs.current[`${collection}-${title}`];
-          if (titleRef) {
-            titleRef.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          }
-          setClickedTitle(null); // Reset the clicked title state
-        }
-      
-        // Check for title in URL and display the content directly
-        const urlTitleMatch = location.pathname.match(/\/blogs\/(.+?)\/(.+)/);
-        if (urlTitleMatch) {
-          const [, collection, encodedTitle] = urlTitleMatch;
-          const urlTitle = decodeURIComponent(encodedTitle);
-          const matchingBlog = blogsData[collection]?.find(
-            (blog) =>
-              blog.title === urlTitle ||
-              (blog.parentTitle && blog.parentTitle.title === urlTitle) ||
+          const handleTitleClick = (title, collection) => {
+  const encodedTitle = encodeURIComponent(title);
+  const matchingBlog = blogsData[collection].find((blog) => blog.title === title);
+
+  if (matchingBlog) {
+    const pageIndex =
+      Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
+
+    // Update the URL based on the collection and title
+    navigate(`/blogs/${collection}/${encodedTitle}`, {
+      replace: true,
+    });
+
+    setCurrentPage(pageIndex);
+  }
+};
+
+useEffect(() => {
+  const query = location.pathname.split("/blogs/search/")[1] || "";
+  setSearchQuery(decodeURIComponent(query));
+  fetchData("tools");
+  fetchData("working");
+
+  if (clickedTitle) {
+    // Reset the clicked title state
+    setClickedTitle(null);
+  }
+
+  // Check for title in URL and display the content directly
+  const urlTitleMatch = location.pathname.match(/\/blogs\/(.+?)\/(.+)/);
+  if (urlTitleMatch) {
+    const [, collection, encodedTitle] = urlTitleMatch;
+    const urlTitle = decodeURIComponent(encodedTitle);
+    const matchingBlog = blogsData[collection]?.find(
+      (blog) =>
+        blog.title === urlTitle ||
+      (blog.parentTitle && blog.parentTitle.title === urlTitle) ||
               (blog.extension1 && blog.extension1.title === urlTitle) ||
               (blog.extension2 && blog.extension2.title === urlTitle) ||
               (blog.extension3 && blog.extension3.title === urlTitle) ||
@@ -234,27 +207,17 @@
               (blog.parallelComputing && blog.parallelComputing.title === urlTitle) ||
               // Add more checks for other extensions as needed
               // ...
-              false
-          );
-      
-          if (matchingBlog) {
-            // Set the current page to the matched blog's page
-            const pageIndex =
-              Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
-            setCurrentPage(pageIndex);
-      
-            // Render the content of the matched blog directly
-            const contentSection = document.getElementById(`content-${matchingBlog.title}-overview`);
-            if (contentSection) {
-              contentSection.scrollIntoView({
-                behavior: "auto",
-                block: "start",
-              });
-            }
-          }
-        }
-      }, [location.pathname, clickedTitle, blogsData]);
- 
+              false    );
+
+    if (matchingBlog) {
+      // Set the current page to the matched blog's page
+      const pageIndex =
+        Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
+      setCurrentPage(pageIndex);
+    }
+  }
+}, [location.pathname, clickedTitle, blogsData]);
+
       
 
       const indexOfLastPost = currentPage * postsPerPage;
