@@ -255,12 +255,18 @@
           false
       );
 
-      if (matchingBlog) {
+  if (matchingBlog) {
+        // Set the document title to the matched blog's title
+        document.title = `${matchingBlog.title} - EduXcel`;
         // Set the current page to the matched blog's page
         const pageIndex =
           Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
         setCurrentPage(pageIndex);
       }
+    } else {
+      // Reset the document title for other pages
+      document.title = "EduXcel: Empowering Global Learning Journeys with High-Quality Online Courses";
+    
     }
   }, [location.pathname, clickedTitle, blogsData, fetchDataForAllCollections]);
 
