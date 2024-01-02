@@ -218,6 +218,8 @@
       });
 
       setCurrentPage(pageIndex);
+            setClickedTitle(title); // Save the clicked title
+
     }
   }, [blogsData, navigate, postsPerPage]);
 
