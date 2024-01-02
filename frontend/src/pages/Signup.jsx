@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import axios from 'axios';
 import '../styles/AuthForms.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import validator from 'validator';
+import { css } from '@emotion/react';
+import { RingLoader } from 'react-spinners';
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -15,6 +17,7 @@ function Signup() {
   const [signupError, setSignupError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [signupSuccess, setSignupSuccess] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,23 +33,29 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
       if (!validator.isEmail(formData.email)) {
         setSignupError('Invalid email format');
         return;
       }
 
-      const response = await axios.post(
-        'https://edu-back-j3mz.onrender.com/api/signup',
-        formData
-      );
+      const response = await axios.post('https://edu-back-j3mz.onrender.com/api/signup', formData);
       console.log('Signup success');
       setSignupSuccess('Signup successful!');
     } catch (error) {
       console.error('Signup error:', error.response.data.message);
       setSignupError(error.response.message);
+    } finally {
+      setLoading(false);
     }
   };
+
+  const override = css`
+    display: block;
+    margin: 0 auto;
+  `;
 
   return (
     <div className="form-container">
@@ -75,13 +84,14 @@ function Signup() {
           </div>
         </div>
         <button type="submit" className="form-button">
-          Signup
+          {loading ? (
+            <RingLoader color={'#ffffff'} loading={loading} css={override} size={30} />
+          ) : (
+            'Signup'
+          )}
         </button>
         {signupError && <p className="error-message">{signupError}</p>}
-        {signupSuccess && (
-          <p className="success-message">{signupSuccess}</p>
-        )}{' '}
-        {/* Render signup success message */}
+        {signupSuccess && <p className="success-message">{signupSuccess}</p>}
       </form>
     </div>
   );
