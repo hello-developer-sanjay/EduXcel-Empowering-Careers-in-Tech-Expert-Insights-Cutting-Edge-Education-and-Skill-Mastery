@@ -92,6 +92,19 @@
       ]
     }
   </script>
+<!-- Add this script in the head section -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const titleElement = document.querySelector('title');
+    
+    // Extract the blog title from the URL
+    const pathArray = window.location.pathname.split('/');
+    const blogTitle = pathArray[pathArray.length - 1];
+    
+    // Set the title dynamically
+    titleElement.innerText = `${blogTitle} - Eduxcel`;
+  });
+</script>
 
   <!-- Open Graph and Twitter Card meta tags for social media sharing -->
   <meta property="og:title" content="EduXcel - Nurturing Excellence through Global Online Education" />
