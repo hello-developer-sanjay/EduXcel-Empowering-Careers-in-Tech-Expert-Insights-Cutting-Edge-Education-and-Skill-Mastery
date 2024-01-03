@@ -141,7 +141,6 @@
     }
   </script>
 <!-- Add this script in the head section -->
-<!-- Add this script in the head section -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const titleElement = document.querySelector('title');
@@ -164,10 +163,9 @@
     const pathArray = window.location.pathname.split('/');
     const blogTitle = pathArray[pathArray.length - 1].replace(/%20/g, ' ');
 
-    // Find the matching blog in the data
-    const matchingBlog = blogsData.tools.find((blog) => blog.title === blogTitle);
-
     // Set the meta description based on the blog's overview
+    const matchingBlog = window.blogsData?.tools.find((blog) => blog.title === blogTitle);
+
     if (matchingBlog && matchingBlog.overview) {
       metaDescriptionElement.setAttribute('content', matchingBlog.overview.join(' '));
     } else {
