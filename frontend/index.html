@@ -141,16 +141,17 @@
     }
   </script>
 <!-- Add this script in the head section -->
+<!-- Add this script in the head section -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const titleElement = document.querySelector('title');
     
     // Extract the blog title from the URL
     const pathArray = window.location.pathname.split('/');
-    const blogTitle = pathArray[pathArray.length - 1];
+    const blogTitleWithSpaces = pathArray[pathArray.length - 1].replace(/%20/g, ' ');
     
     // Set the title dynamically
-    titleElement.innerText = `${blogTitle} - Eduxcel`;
+    titleElement.innerText = `${blogTitleWithSpaces} - Eduxcel`;
   });
 </script>
 
