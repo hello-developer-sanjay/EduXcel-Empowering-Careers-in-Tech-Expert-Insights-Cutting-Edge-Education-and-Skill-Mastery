@@ -155,6 +155,28 @@
   });
 </script>
 
+<!-- Add the new script for setting meta description -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const metaDescriptionElement = document.querySelector('meta[name="description"]');
+    
+    // Extract the blog title from the URL
+    const pathArray = window.location.pathname.split('/');
+    const blogTitle = pathArray[pathArray.length - 1].replace(/%20/g, ' ');
+
+    // Find the matching blog in the data
+    const matchingBlog = blogsData.tools.find((blog) => blog.title === blogTitle);
+
+    // Set the meta description based on the blog's overview
+    if (matchingBlog && matchingBlog.overview) {
+      metaDescriptionElement.setAttribute('content', matchingBlog.overview.join(' '));
+    } else {
+      // Set a default description if the blog or overview is not found
+      metaDescriptionElement.setAttribute('content', 'Default description');
+    }
+  });
+</script>
+
   <!-- Open Graph and Twitter Card meta tags for social media sharing -->
   <meta property="og:title" content="EduXcel - Nurturing Excellence through Global Online Education" />
   <meta property="og:description" content="Empower your learning journey with EduXcel. Explore a diverse range of high-quality courses and personalized learning experiences tailored just for you, now available globally." />
