@@ -13,6 +13,8 @@
       Button,
     } from "@chakra-ui/react";
 
+import { PulseLoader, RotateLoader, ScaleLoader } from "react-spinners";
+
     import { motion } from "framer-motion";
     import ModalImage from "react-modal-image"; 
 
@@ -62,7 +64,8 @@
         tools: [],
         working: [],
       });
-      
+      const [loading, setLoading] = useState(true);
+
       const [currentPage, setCurrentPage] = useState(1);
       const [postsPerPage] = useState(1); 
       const navigate = useNavigate();
@@ -144,10 +147,10 @@
           blog.title.toLowerCase().includes(searchQuery.toLowerCase())
         );
       }; 
-      useEffect(() => {
-        fetchDataForAllCollections();
-      }, []);
-    
+    useEffect(() => {
+  fetchDataForAllCollections().then(() => setLoading(false));
+}, []);
+
       const debouncedSearchChange = useCallback(debounce(handleSearchChange, 500), []);
     
       useEffect(() => {
@@ -218,8 +221,6 @@
       });
 
       setCurrentPage(pageIndex);
-            setClickedTitle(title); // Save the clicked title
-
     }
   }, [blogsData, navigate, postsPerPage]);
 
@@ -257,18 +258,12 @@
           false
       );
 
-  if (matchingBlog) {
-        // Set the document title to the matched blog's title
-        document.title = `${matchingBlog.title} - EduXcel`;
+      if (matchingBlog) {
         // Set the current page to the matched blog's page
         const pageIndex =
           Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
         setCurrentPage(pageIndex);
       }
-    } else {
-      // Reset the document title for other pages
-      document.title = "EduXcel: Empowering Global Learning Journeys with High-Quality Online Courses";
-    
     }
   }, [location.pathname, clickedTitle, blogsData, fetchDataForAllCollections]);
 
@@ -533,7 +528,6 @@
 
 
       const navbarHeight = document.querySelector(".navbar")?.clientHeight || 0;
-
       return (
         <Box
           w="full"
@@ -549,96 +543,115 @@
           textAlign={"left"}
           maxHeight="calc(100vh - 100px)"
           height="auto"
-
           overflowX="hidden"
           boxShadow="0px 4px 8px rgba(0, 0, 0, 0.1)"
           onScroll={handleScroll}
           mt="50px"
         >
-          {/* Toggle Button */}
-          <Button
-            style={toggleButtonStyle}
-            onClick={onToggle}
-            leftIcon={isOpen ? <FaTimes /> : <FaBars />}
-          >
-            {isOpen ? "Close" : "Open"}
-          </Button>
-
-          {/* Sidebar */}
-          <Collapse in={isOpen}>
-            <Box style={sidebarStyle}>
-              <VStack align="start" spacing={2}>
-              
-{Object.keys(blogsData).map((collection) => (
-  <VStack key={collection} align="start" spacing={2}>
-    <Text fontSize="md" fontWeight="semibold" mb={2}>
-      {`${collection.charAt(0).toUpperCase()}${collection.slice(1)}`}
-    </Text>
-    {filteredBlogs(collection).map((blog) => (
-      <BlogTitle
-        key={blog.title}
-        title={blog.title}
-        collection={collection}
-        onClick={(title, collection) => handleTitleClick(title, collection)}
-        ref={(el) => (titleRefs.current[`${collection}-${blog.title}`] = el)}
-      />
-    ))}
-  </VStack>
-))}
-
-              </VStack>
-            </Box>
-          </Collapse>
-
-          {/* Main Content */}
-          <Box mt={0} p={0} ml={isOpen ? "200px" : "0"}>
-            <Box
-              style={headerStyle}
-            >
-              <VStack spacing={0} align="start" w="100%" marginTop="0">
-                <Input
-                  type="text"
-                  placeholder="Search for blogs"
-                  value={searchQuery}
-                  onChange={handleSearchChange}
-                  p={0}
-                  marginTop={0}
-                  borderWidth="5px"
-                  rounded="md"
-                  bg="white"
-                  color="black"
-                  mb={0}
-                />
-                <Box style={progressBarStyle} />
-                <Box style={remainingBarStyle} />
-              </VStack>
-              <IconButton
-                icon={<FaArrowCircleUp />}
-                aria-label="Scroll to Top"
-                onClick={scrollToTop}
-                style={scrollToTopButtonStyle}
-              />
-            </Box>
-
-            {currentPosts.map((blog, index) => (
-              <motion.div
-                key={blog.title}
-                ref={
-                  index === currentPosts.length - 1
-                    ? (node) => observeLastBlog("tools", node)
-                    : null
-                }
+          {loading ? (
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+          {loading && (
+            <>
+              <div style={{ marginRight: "20px" }}>
+                <PulseLoader color={"#FF6347"} loading={loading} size={20} />
+                <span style={{ color: "#FF6347", fontSize: "12px" }}>Loading...</span>
+              </div>
+        
+              <div style={{ marginRight: "20px" }}>
+                <RotateLoader color={"#36D7B7"} loading={loading} size={30} />
+                <span style={{ color: "#36D7B7", fontSize: "14px" }}>Hang tight!</span>
+              </div>
+        
+              <div>
+                <ScaleLoader color={"#5E35B1"} loading={loading} size={40} />
+                <span style={{ color: "#5E35B1", fontSize: "16px" }}>Almost there...</span>
+              </div>
+              {/* Add more loaders or customize the existing ones */}
+            </>
+          )}
+        </div>
+         
+          ) : (
+            <>
+              {/* Toggle Button */}
+              <Button
+                style={toggleButtonStyle}
+                onClick={onToggle}
+                leftIcon={isOpen ? <FaTimes /> : <FaBars />}
               >
-                <VStack align="start" spacing={2} id={`title-${blog.title}`} ref={(el) => (titleRefs.current[blog.title] = el)}>
-                <BlogTitle
-  key={blog.title}
-  title={blog.title}
-  collection="tools"
-  onClick={() => handleTitleClick(blog.title, "tools")}
-/>
+                {isOpen ? "Close" : "Open"}
+              </Button>
+      
+              {/* Sidebar */}
+              <Collapse in={isOpen}>
+                <Box style={sidebarStyle}>
+                  <VStack align="start" spacing={2}>
+                    {Object.keys(blogsData).map((collection) => (
+                      <VStack key={collection} align="start" spacing={2}>
+                        <Text fontSize="md" fontWeight="semibold" mb={2}>
+                          {`${collection.charAt(0).toUpperCase()}${collection.slice(1)}`}
+                        </Text>
+                        {filteredBlogs(collection).map((blog) => (
+                          <BlogTitle
+                            key={blog.title}
+                            title={blog.title}
+                            collection={collection}
+                            onClick={(title, collection) => handleTitleClick(title, collection)}
+                            ref={(el) => (titleRefs.current[`${collection}-${blog.title}`] = el)}
+                          />
+                        ))}
+                      </VStack>
+                    ))}
                   </VStack>
-
-                  <VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
+                </Box>
+              </Collapse>
+      
+              {/* Main Content */}
+              <Box mt={0} p={0} ml={isOpen ? "200px" : "0"}>
+                <Box style={headerStyle}>
+                  <VStack spacing={0} align="start" w="100%" marginTop="0">
+                    <Input
+                      type="text"
+                      placeholder="Search for blogs"
+                      value={searchQuery}
+                      onChange={handleSearchChange}
+                      p={0}
+                      marginTop={0}
+                      borderWidth="5px"
+                      rounded="md"
+                      bg="white"
+                      color="black"
+                      mb={0}
+                    />
+                    <Box style={progressBarStyle} />
+                    <Box style={remainingBarStyle} />
+                  </VStack>
+                  <IconButton
+                    icon={<FaArrowCircleUp />}
+                    aria-label="Scroll to Top"
+                    onClick={scrollToTop}
+                    style={scrollToTopButtonStyle}
+                  />
+                </Box>
+      
+                {currentPosts.map((blog, index) => (
+                  <motion.div
+                    key={blog.title}
+                    ref={
+                      index === currentPosts.length - 1
+                        ? (node) => observeLastBlog("tools", node)
+                        : null
+                    }
+                  >
+                    <VStack align="start" spacing={2} id={`title-${blog.title}`} ref={(el) => (titleRefs.current[blog.title] = el)}>
+                      <BlogTitle
+                        key={blog.title}
+                        title={blog.title}
+                        collection="tools"
+                        onClick={() => handleTitleClick(blog.title, "tools")}
+                      />
+                    </VStack>
+       <VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
   {renderMediaContent(blog.overview, blog.title)}
 </VStack>
 
@@ -977,68 +990,67 @@
 </VStack>
 
 
-              </motion.div>
-            ))}
-
-{/* Pagination */}
-<Box mt={8} display="flex" justifyContent="center" flexWrap="wrap">
-      {Array.from({ length: Math.ceil(filteredBlogs("tools").length / postsPerPage) }, (_, index) => (
-        <motion.div
-          key={index}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
-          <Button
-            onClick={() => handlePageChange(index + 1)}
-            mx={2} // Adjust margin based on your preference
-            my={2} // Adjust margin based on your preference
-            borderRadius="full"
-            fontWeight="bold"
-            fontSize={{ base: "sm", md: "xl" }} // Responsive font size
-            padding={{ base: "0.5rem 1rem", md: "1rem 2rem" }} // Responsive padding
-            _focus={{ outline: "none" }}
-            colorScheme={currentPage === index + 1 ? "green" : "gray"}
-            variant="solid"
-            size="lg"
-            position="relative"
-            overflow="hidden"
-          >
-            {index + 1}
-            <Box
-              position="absolute"
-              top="-2px"
-              left="-2px"
-              right="-2px"
-              bottom="-2px"
-              borderWidth="2px"
-              borderColor="white"
-              opacity={0.5}
-              borderRadius="full"
-            />
-            <Box
-              position="absolute"
-              top="-2px"
-              left="-2px"
-              right="-2px"
-              bottom="-2px"
-              borderWidth="2px"
-              borderColor="white"
-              opacity={0.5}
-              borderRadius="full"
-              transform="rotate(45deg)"
-            />
-          </Button>
-        </motion.div>
-      ))}
-    </Box>
-
-
-
-
-          </Box>
+                  </motion.div>
+                ))}
+      
+                {/* Pagination */}
+                <Box mt={8} display="flex" justifyContent="center" flexWrap="wrap">
+                  {Array.from({ length: Math.ceil(filteredBlogs("tools").length / postsPerPage) }, (_, index) => (
+                    <motion.div
+                      key={index}
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <Button
+                        onClick={() => handlePageChange(index + 1)}
+                        mx={2} // Adjust margin based on your preference
+                        my={2} // Adjust margin based on your preference
+                        borderRadius="full"
+                        fontWeight="bold"
+                        fontSize={{ base: "sm", md: "xl" }} // Responsive font size
+                        padding={{ base: "0.5rem 1rem", md: "1rem 2rem" }} // Responsive padding
+                        _focus={{ outline: "none" }}
+                        colorScheme={currentPage === index + 1 ? "green" : "gray"}
+                        variant="solid"
+                        size="lg"
+                        position="relative"
+                        overflow="hidden"
+                      >
+                        {index + 1}
+                        <Box
+                          position="absolute"
+                          top="-2px"
+                          left="-2px"
+                          right="-2px"
+                          bottom="-2px"
+                          borderWidth="2px"
+                          borderColor="white"
+                          opacity={0.5}
+                          borderRadius="full"
+                        />
+                        <Box
+                          position="absolute"
+                          top="-2px"
+                          left="-2px"
+                          right="-2px"
+                          bottom="-2px"
+                          borderWidth="2px"
+                          borderColor="white"
+                          opacity={0.5}
+                          borderRadius="full"
+                          transform="rotate(45deg)"
+                        />
+                      </Button>
+                    </motion.div>
+                  ))}
+                </Box>
+              </Box>
+            </>
+          )}
         </Box>
       );
-    };
-
-    export default Blogs;
+      };
+      
+      export default Blogs;
+      
