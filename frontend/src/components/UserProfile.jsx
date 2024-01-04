@@ -1,8 +1,11 @@
+/* eslint-disable react/jsx-no-undef */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import EditProfile from './EditProfile';
 import '../styles/UserProfile.css';
+import { Link, Box, Text } from '@chakra-ui/react';
+
 import CreativeSpinner from './CreativeSpinner';
 import { useNavigate } from 'react-router-dom';
 
@@ -30,7 +33,20 @@ const UserProfile = () => {
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [lastVisitedBlog, setLastVisitedBlog] = useState(null);
 
+  useEffect(() => {
+    // Retrieve last visited blog from local storage
+    const storedLastVisitedBlog = localStorage.getItem('lastVisitedBlog');
+    if (storedLastVisitedBlog) {
+      setLastVisitedBlog(JSON.parse(storedLastVisitedBlog));
+    }
+  }, []);
+  const handleLinkClick = () => {
+    if (lastVisitedBlog) {
+      navigate(`/blogs/${lastVisitedBlog.collection}/${encodeURIComponent(lastVisitedBlog.title)}`);
+    }
+  };
 
 useEffect(() => {
   const fetchUserProfile = async () => {
@@ -162,12 +178,34 @@ useEffect(() => {
           <p>First Name: {userProfile.firstName}</p>
           <p>Last Name: {userProfile.lastName}</p>
           <p>Bio: {userProfile.bio}</p>
+          <Text
+        fontSize={{ base: 'sm', md: 'md', lg: 'lg' }} // Responsive font size
+        fontWeight="bold" // Bold font weight
+        color="gray.400" // Text color
+        mb={{ base: 2, md: 4 }} // Margin bottom
+      >
+        Last Visited Blog 👇
+      </Text> <p>     
+      {/* Clickable link with different styles */}
+      {lastVisitedBlog && (
+        <Link
+          onClick={handleLinkClick}
+          fontSize={{ base: 'md', md: 'lg', lg: 'xl' }} // Responsive font size
+          color="blue.500" // Text color
+          _hover={{ textDecoration: 'underline' }} // Hover effect
+          cursor="pointer" // Change cursor on hover
+        >
+          {lastVisitedBlog.title}
+        </Link>
+      )}</p>
           <button className="edit-button" onClick={handleEditProfile}>
             Edit Profile
           </button>
           <button onClick={handleLogout} className="logout-button">
             Log Out
           </button>
+        
+
         </div>
       )}
       {isEditing && (
