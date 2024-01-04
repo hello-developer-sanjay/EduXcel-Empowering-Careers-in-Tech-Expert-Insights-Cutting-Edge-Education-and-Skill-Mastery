@@ -262,6 +262,14 @@
           (blog.vaex && blog.vaex.title === urlTitle) ||
           (blog.optimizationStrategies && blog.optimizationStrategies.title === urlTitle) ||
           (blog.parallelComputing && blog.parallelComputing.title === urlTitle) ||
+
+
+          (blog.settingUpGit && blog.settingUpGit.title === urlTitle) ||
+
+          (blog.configuringUsernameAndEmail && blog.configuringUsernameAndEmail.title === urlTitle) ||
+
+          (blog.configuringEditorAndDefaultBranch && blog.configuringEditorAndDefaultBranch.title === urlTitle) ||
+
           // Add more checks for other extensions as needed
           // ...
           false
@@ -441,8 +449,10 @@
                 {renderMediaContent(item.description, title)}
                 {renderMediaContent(item.installation, title)}
                 {renderMediaContent(item.content, title)}
+                {renderMediaContent(item.steps, title)}
 
                 {renderMediaContent(item.settings, title)} {/* Add this line to handle settings */}
+                
               </VStack>
             );
           }
@@ -1005,6 +1015,29 @@ if (matchSpecialChars) {
 <VStack spacing={2} id={`content-${blog.title}-parallelComputing`} style={contentSectionStyle}>
   {renderMediaContent(blog.parallelComputing , blog.title)}
 </VStack>
+{/* new  */}
+
+<VStack spacing={2} id={`content-${blog.title}-settingUpGit`} style={contentSectionStyle}>
+  {renderMediaContent(blog.settingUpGit , blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-configuringUsernameAndEmail
+`} style={contentSectionStyle}>
+  {renderMediaContent(blog.configuringUsernameAndEmail
+ , blog.title)}
+</VStack>
+
+
+                  
+
+<VStack spacing={2} id={`content-${blog.title}-configuringEditorAndDefaultBranch
+`} style={contentSectionStyle}>
+  {renderMediaContent(blog.configuringEditorAndDefaultBranch
+ , blog.title)}
+</VStack>  
+
+
 	
 
                   </motion.div>
