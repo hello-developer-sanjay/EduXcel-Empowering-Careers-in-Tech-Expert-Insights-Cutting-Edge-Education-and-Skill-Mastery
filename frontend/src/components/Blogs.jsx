@@ -13,8 +13,14 @@
       Button,
     } from "@chakra-ui/react";
 
-import { PulseLoader, RotateLoader, ScaleLoader } from "react-spinners";
-
+    import {
+    
+      RingLoader,
+      SyncLoader,
+      ClipLoader,
+    
+    } from "react-spinners";
+    
     import { motion } from "framer-motion";
     import ModalImage from "react-modal-image"; 
 
@@ -71,6 +77,7 @@ import { PulseLoader, RotateLoader, ScaleLoader } from "react-spinners";
       const navigate = useNavigate();
       const titleRefs = useRef({});
       const { isOpen, onToggle } = useDisclosure();
+      const [lastVisitedBlog, setLastVisitedBlog] = useState(null);
 
       const debounce = (func, delay) => {
         let timeoutId;
@@ -222,6 +229,8 @@ import { PulseLoader, RotateLoader, ScaleLoader } from "react-spinners";
 
       setCurrentPage(pageIndex);
     }
+    setLastVisitedBlog({ title, collection });
+
   }, [blogsData, navigate, postsPerPage]);
 
   useEffect(() => {
@@ -264,6 +273,9 @@ import { PulseLoader, RotateLoader, ScaleLoader } from "react-spinners";
           Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
         setCurrentPage(pageIndex);
       }
+    }
+    if (lastVisitedBlog) {
+      localStorage.setItem('lastVisitedBlog', JSON.stringify(lastVisitedBlog));
     }
   }, [location.pathname, clickedTitle, blogsData, fetchDataForAllCollections]);
 
@@ -415,9 +427,8 @@ import { PulseLoader, RotateLoader, ScaleLoader } from "react-spinners";
             );
           }
       
-      
           let element;
-    
+      
           if (typeof item === "object" && item.title) {
             // Display object field titles on the same page as the parent title
             element = (
@@ -427,44 +438,47 @@ import { PulseLoader, RotateLoader, ScaleLoader } from "react-spinners";
                   collection="tools"
                   onClick={() => handleTitleClick(item.title, "tools")}
                 />
-                          {renderMediaContent(item.description, title)}
-                          {renderMediaContent(item.installation, title)}
+                {renderMediaContent(item.description, title)}
+                {renderMediaContent(item.installation, title)}
+                {renderMediaContent(item.content, title)}
 
-                          {renderMediaContent(item.content, title)}
-
-
+                {renderMediaContent(item.settings, title)} {/* Add this line to handle settings */}
               </VStack>
-              
             );
-            }
+          }
+      
           if (typeof item === "string") {
-            if (item.startsWith("*") && item.endsWith("*")) {
-              const styledText = item.substring(1, item.length - 1);
-              element = (
-                <Text key={index} fontWeight="bold" textColor="gold" fontStyle="italic">
-                  {styledText}
-                </Text>
-              );
-            } else if (item.startsWith("$") && item.endsWith("$")) {
-              const styledText = item.substring(1, item.length - 1);
-              element = (
-                <Text key={index} fontWeight="bold" textColor="green " fontStyle="bold">
-                  {styledText}
-                </Text>
-              );
-            } else if (item.startsWith("~") && item.endsWith("~")) {
-              const styledText = item.substring(1, item.length - 1);
-              element = (
-                <Text key={index} fontWeight="bold" textColor="lime" fontStyle="bold">
-                  {styledText}
-                </Text>
-              );
-            } else {
-              // Check for links
+            // Handle special characters
+            const specialCharsRegex = /[*$~]([^*$~]+)[*$~]/;
+const matchSpecialChars = item.match(specialCharsRegex);
+
+if (matchSpecialChars) {
+  const specialText = matchSpecialChars[1];
+  const textBeforeSpecial = item.split(matchSpecialChars[0])[0];
+  const textAfterSpecial = item.split(matchSpecialChars[0])[1];
+
+  element = (
+    <Text key={index}>
+      {textBeforeSpecial}
+      <span
+        style={{
+          fontWeight: matchSpecialChars[0] === '*' ? 'bold' : 'normal',
+          color: matchSpecialChars[0] === '$' ? 'green' : matchSpecialChars[0] === '~' ? 'lime' : 'gold',
+          fontStyle: matchSpecialChars[0] === '*' ? 'italic' : 'normal',
+          textDecoration: 'none',
+        }}
+      >
+        {specialText}
+      </span>
+      {textAfterSpecial}
+    </Text>
+  );
+} else {              // Check for links
               const linkRegex = /@([^@]+)@/;
               const match = item.match(linkRegex);
       
               if (match) {
+                // Handle links
                 const link = match[1];
                 const textBeforeLink = item.split(match[0])[0];
                 const textAfterLink = item.split(match[0])[1];
@@ -482,6 +496,7 @@ import { PulseLoader, RotateLoader, ScaleLoader } from "react-spinners";
                   </Text>
                 );
               } else if (item.startsWith("http")) {
+                // Handle images and videos
                 if (item.match(/\.(jpeg|jpg|gif|png)$/)) {
                   element = (
                     <Box key={index} mb={2} className="image-container">
@@ -514,6 +529,7 @@ import { PulseLoader, RotateLoader, ScaleLoader } from "react-spinners";
                   element = <Text key={index}>{item}</Text>;
                 }
               } else {
+                // Handle regular text
                 element = <Text key={index}>{item}</Text>;
               }
             }
@@ -551,23 +567,24 @@ import { PulseLoader, RotateLoader, ScaleLoader } from "react-spinners";
           {loading ? (
           <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
           {loading && (
-            <>
-              <div style={{ marginRight: "20px" }}>
-                <PulseLoader color={"#FF6347"} loading={loading} size={20} />
-                <span style={{ color: "#FF6347", fontSize: "12px" }}>Loading...</span>
-              </div>
-        
-              <div style={{ marginRight: "20px" }}>
-                <RotateLoader color={"#36D7B7"} loading={loading} size={30} />
-                <span style={{ color: "#36D7B7", fontSize: "14px" }}>Hang tight!</span>
-              </div>
-        
-              <div>
-                <ScaleLoader color={"#5E35B1"} loading={loading} size={40} />
-                <span style={{ color: "#5E35B1", fontSize: "16px" }}>Almost there...</span>
-              </div>
-              {/* Add more loaders or customize the existing ones */}
-            </>
+                    <>
+                    <div style={{ marginRight: "20px" }}>
+                      <ClipLoader color={"#FF6347"} loading={loading} size={20} />
+                      <span style={{ color: "#FF6347", fontSize: "12px" }}>Fetching data...</span>
+                    </div>
+          
+                    <div style={{ marginRight: "20px" }}>
+                      <RingLoader color={"#36D7B7"} loading={loading} size={30} />
+                      <span style={{ color: "#36D7B7", fontSize: "14px" }}>Preparing content...</span>
+                    </div>
+          
+                    <div>
+                      <SyncLoader color={"#5E35B1"} loading={loading} size={40} />
+                      <span style={{ color: "#5E35B1", fontSize: "16px" }}>Almost there...</span>
+                    </div>
+                    {/* Add more loaders or customize the existing ones */}
+                  </>
+          
           )}
         </div>
          
@@ -988,7 +1005,7 @@ import { PulseLoader, RotateLoader, ScaleLoader } from "react-spinners";
 <VStack spacing={2} id={`content-${blog.title}-parallelComputing`} style={contentSectionStyle}>
   {renderMediaContent(blog.parallelComputing , blog.title)}
 </VStack>
-
+	
 
                   </motion.div>
                 ))}
