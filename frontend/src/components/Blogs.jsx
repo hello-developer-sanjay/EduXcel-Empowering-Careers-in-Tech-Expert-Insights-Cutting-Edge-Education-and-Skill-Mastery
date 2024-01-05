@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
   /* eslint-disable react/prop-types */
     /* eslint-disable react/display-name */
     import React, { useState,useMemo, useEffect, useRef, useCallback } from "react";
@@ -109,19 +110,6 @@
           });
         }
       };
-    
-      
-      
-      
-      
-      
-      
-      
-        
-
-      
-    
-
 
       const handleSearchChange = (event) => {
         const newQuery = event.target.value;
@@ -268,7 +256,9 @@
 
           (blog.configuringUsernameAndEmail && blog.configuringUsernameAndEmail.title === urlTitle) ||
 
-          (blog.configuringEditorAndDefaultBranch && blog.configuringEditorAndDefaultBranch.title === urlTitle) ||
+          (blog.components && blog.components.title === urlTitle) ||
+          (blog.settingUpJavaDevelopmentEnvironment && blog.settingUpJavaDevelopmentEnvironment.title === urlTitle) ||
+          (blog.jvm && blog.jvm.title === urlTitle) ||
 
           // Add more checks for other extensions as needed
           // ...
@@ -450,8 +440,23 @@
                 {renderMediaContent(item.installation, title)}
                 {renderMediaContent(item.content, title)}
                 {renderMediaContent(item.steps, title)}
+            
+                {renderMediaContent(item.features, title)}
 
-                {renderMediaContent(item.settings, title)} {/* Add this line to handle settings */}
+                 {renderMediaContent(item.components, title)}
+                 {renderMediaContent(item.whatIsJdk, title)}
+                                  {renderMediaContent(item.whatIsJvm, title)}
+
+
+                {renderMediaContent(item.features, title)}
+
+                {renderMediaContent(item.jvm, title)}
+                
+                {renderMediaContent(item.jdk, title)}
+
+                {renderMediaContent(item.settingUpJavaDevelopmentEnvironment, title)}
+                {renderMediaContent(item.overview, title)}
+               {renderMediaContent(item.settings, title)} {/* Add this line to handle settings */}
                 
               </VStack>
             );
@@ -740,10 +745,6 @@ if (matchSpecialChars) {
   {renderMediaContent(blog.content, blog.title)}
 </VStack>
 
-
-
-
-
 <VStack spacing={2} id={`content-${blog.title}-needForAdvancedTechniques`} style={contentSectionStyle}>
   {renderMediaContent(blog.needForAdvancedTechniques, blog.title)}
 </VStack>
@@ -755,7 +756,6 @@ if (matchSpecialChars) {
 <VStack spacing={2} id={`content-${blog.title}-what_jvm`} style={contentSectionStyle}>
   {renderMediaContent(blog.what_jvm, blog.title)}
 </VStack>
-
 
 <VStack spacing={2} id={`content-${blog.title}-feature_jvm`} style={contentSectionStyle}>
   {renderMediaContent(blog.feature_jvm, blog.title)}
@@ -769,7 +769,6 @@ if (matchSpecialChars) {
   {renderMediaContent(blog.ideas, blog.title)}
 </VStack>
 
-
 <VStack spacing={2} id={`content-${blog.title}-shortcuts`} style={contentSectionStyle}>
   {renderMediaContent(blog.shortcuts, blog.title)}
 </VStack>
@@ -782,7 +781,6 @@ if (matchSpecialChars) {
 <VStack spacing={2} id={`content-${blog.title}-tools`} style={contentSectionStyle}>
   {renderMediaContent(blog.tools, blog.title)}
 </VStack>
-
 
 
 <VStack spacing={2} id={`content-${blog.title}-features`} style={contentSectionStyle}>
@@ -799,15 +797,12 @@ if (matchSpecialChars) {
   {renderMediaContent(blog.profiling, blog.title)}
 </VStack>
 
-
-
 <VStack spacing={2} id={`content-${blog.title}-collaboration`} style={contentSectionStyle}>
   {renderMediaContent(blog.collaboration, blog.title)}
 </VStack>
 <VStack spacing={2} id={`content-${blog.title}-customization`} style={contentSectionStyle}>
   {renderMediaContent(blog.customization, blog.title)}
 </VStack>
-
 
 <VStack spacing={2} id={`content-${blog.title}-environments`} style={contentSectionStyle}>
   {renderMediaContent(blog.environments, blog.title)}
@@ -822,7 +817,6 @@ if (matchSpecialChars) {
 <VStack spacing={2} id={`content-${blog.title}-data_manipulation`} style={contentSectionStyle}>
   {renderMediaContent(blog.data_manipulation, blog.title)}
 </VStack>
-
 
 
 <VStack spacing={2} id={`content-${blog.title}-data_analysis`} style={contentSectionStyle}>
@@ -852,7 +846,6 @@ if (matchSpecialChars) {
 <VStack spacing={2} id={`content-${blog.title}-troubleshooting`} style={contentSectionStyle}>
   {renderMediaContent(blog.troubleshooting, blog.title)}
 </VStack>
-
 
 
 <VStack spacing={2} id={`content-${blog.title}-code_analysis`} style={contentSectionStyle}>
@@ -926,11 +919,9 @@ if (matchSpecialChars) {
   {renderMediaContent(blog.installing_nodejs, blog.title)}
 </VStack>
 
-
 <VStack spacing={2} id={`content-${blog.title}-configuring_npm`} style={contentSectionStyle}>
   {renderMediaContent(blog.configuring_npm, blog.title)}
 </VStack>
-
 
 <VStack spacing={2} id={`content-${blog.title}-basic_project_setup`} style={contentSectionStyle}>
   {renderMediaContent(blog.basic_project_setup, blog.title)}
@@ -940,11 +931,9 @@ if (matchSpecialChars) {
   {renderMediaContent(blog.installing_git, blog.title)}
 </VStack>
 
-
 <VStack spacing={2} id={`content-${blog.title}-configuring_git`} style={contentSectionStyle}>
   {renderMediaContent(blog.configuring_git, blog.title)}
 </VStack>
-
 
 <VStack spacing={2} id={`content-${blog.title}-git_commands`} style={contentSectionStyle}>
   {renderMediaContent(blog.git_commands, blog.title)}
@@ -1003,11 +992,9 @@ if (matchSpecialChars) {
   {renderMediaContent(blog.dask, blog.title)}
 </VStack>
 
-
 <VStack spacing={2} id={`content-${blog.title}-vaex`} style={contentSectionStyle}>
   {renderMediaContent(blog.vaex, blog.title)}
 </VStack>
-
 
 <VStack spacing={2} id={`content-${blog.title}-optimizationStrategies`} style={contentSectionStyle}>
   {renderMediaContent(blog.optimizationStrategies, blog.title)}
@@ -1021,80 +1008,48 @@ if (matchSpecialChars) {
   {renderMediaContent(blog.settingUpGit , blog.title)}
 </VStack>
 
-
 <VStack spacing={2} id={`content-${blog.title}-configuringUsernameAndEmail
 `} style={contentSectionStyle}>
-  {renderMediaContent(blog.configuringUsernameAndEmail
- , blog.title)}
-</VStack>
-
-
-                  
+  {renderMediaContent(blog.configuringUsernameAndEmail, blog.title)}
+</VStack>                
 
 <VStack spacing={2} id={`content-${blog.title}-configuringEditorAndDefaultBranch
 `} style={contentSectionStyle}>
-  {renderMediaContent(blog.configuringEditorAndDefaultBranch
- , blog.title)}
+  {renderMediaContent(blog.configuringEditorAndDefaultBranch, blog.title)}
 </VStack>  
 
+{/* new33333333 */}
 
-	
+<VStack spacing={2} id={`content-${blog.title}-jvm`} style={contentSectionStyle}>
+{renderMediaContent(blog.components?.jdk, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-jvm`} style={contentSectionStyle}>
+{renderMediaContent(blog.components?.jvm, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-whatIsJdk`} style={contentSectionStyle}>
+  {renderMediaContent(blog.whatIsJdk, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-whatIsJvm`} style={contentSectionStyle}>
+  {renderMediaContent(blog.whatIsJvm, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-settingUpJavaDevelopmentEnvironment`} style={contentSectionStyle}>
+  {renderMediaContent(blog.components?.settingUpJavaDevelopmentEnvironment, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-components`} style={contentSectionStyle}>
+  {renderMediaContent(blog.components, blog.title)}
+</VStack>
 
                   </motion.div>
                 ))}
       
                 {/* Pagination */}
-                <Box mt={8} display="flex" justifyContent="center" flexWrap="wrap">
-                  {Array.from({ length: Math.ceil(filteredBlogs("tools").length / postsPerPage) }, (_, index) => (
-                    <motion.div
-                      key={index}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                    >
-                      <Button
-                        onClick={() => handlePageChange(index + 1)}
-                        mx={2} // Adjust margin based on your preference
-                        my={2} // Adjust margin based on your preference
-                        borderRadius="full"
-                        fontWeight="bold"
-                        fontSize={{ base: "sm", md: "xl" }} // Responsive font size
-                        padding={{ base: "0.5rem 1rem", md: "1rem 2rem" }} // Responsive padding
-                        _focus={{ outline: "none" }}
-                        colorScheme={currentPage === index + 1 ? "green" : "gray"}
-                        variant="solid"
-                        size="lg"
-                        position="relative"
-                        overflow="hidden"
-                      >
-                        {index + 1}
-                        <Box
-                          position="absolute"
-                          top="-2px"
-                          left="-2px"
-                          right="-2px"
-                          bottom="-2px"
-                          borderWidth="2px"
-                          borderColor="white"
-                          opacity={0.5}
-                          borderRadius="full"
-                        />
-                        <Box
-                          position="absolute"
-                          top="-2px"
-                          left="-2px"
-                          right="-2px"
-                          bottom="-2px"
-                          borderWidth="2px"
-                          borderColor="white"
-                          opacity={0.5}
-                          borderRadius="full"
-                          transform="rotate(45deg)"
-                        />
-                      </Button>
-                    </motion.div>
-                  ))}
-                </Box>
+                
               </Box>
             </>
           )}
