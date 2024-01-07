@@ -216,24 +216,26 @@
         }
       };
        
-   const handleTitleClick = useCallback((title, collection) => {
-    const encodedTitle = encodeURIComponent(title);
-    const matchingBlog = blogsData[collection].find((blog) => blog.title === title);
-
-    if (matchingBlog) {
-      const pageIndex =
-        Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
-
-      navigate(`/blogs/${collection}/${encodedTitle}`, {
-        replace: true,
-      });
-
-      setCurrentPage(pageIndex);
-    }
-    setLastVisitedBlog({ title, collection });
-
-  }, [blogsData, navigate, postsPerPage]);
-
+  const handleTitleClick = useCallback((title, collection) => {
+        const encodedTitle = encodeURIComponent(title);
+        const matchingBlog = blogsData[collection].find((blog) => blog.title === title);
+    
+        if (matchingBlog) {
+          const pageIndex =
+            Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
+    
+          navigate(`/blogs/${collection}/${encodedTitle}`, {
+            replace: true,
+          });
+    
+          setCurrentPage(pageIndex);
+    
+          // Set the title dynamically when a title is clicked
+          document.title = `${matchingBlog.title} | Eduxcel`; // Replace with your website name
+        }
+        setLastVisitedBlog({ title, collection });
+      }, [blogsData, navigate, postsPerPage]);
+    
   useEffect(() => {
     const query = location.pathname.split("/blogs/search/")[1] || "";
     setSearchQuery(decodeURIComponent(query));
