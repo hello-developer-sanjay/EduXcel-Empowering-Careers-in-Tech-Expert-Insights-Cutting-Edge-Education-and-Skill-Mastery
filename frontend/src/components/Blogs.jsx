@@ -278,37 +278,40 @@
           false
       );
 
-      if (matchingBlog) {
-        // Set the current page to the matched blog's page
-        const pageIndex =
-          Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
-        setCurrentPage(pageIndex);
+       if (matchingBlog) {
+      // Set the current page to the matched blog's page
+      const pageIndex =
+        Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
+      setCurrentPage(pageIndex);
 
-        // Set the title and description dynamically for SEO
-        const blogTitle = matchingBlog.title;
-        const blogDescription = matchingBlog.description;
+      // Set the title and description dynamically for SEO
+      const blogTitle = matchingBlog.title;
 
-        // Use Helmet to update the document head
-        Helmet.canUseDOM &&
-          Helmet.startUpdating();
-        Helmet.canUseDOM &&
-          Helmet.updateHelmet({
-            title: `${blogTitle} | Eduxcel`,  
-            meta: [
-              {
-                name: "description",
-                content: blogDescription,
-              },
-            ],
-          });
-        Helmet.canUseDOM &&
-          Helmet.stopUpdating();
-      }
+      // Check for both "description" and "overview" fields
+      const blogDescription =
+        matchingBlog.description || matchingBlog.overview || "Explore a variety of educational topics and tutorials on EduXcel. Enhance your knowledge and skills with our high-quality online courses and learning resources.";
+
+      // Use Helmet to update the document head
+      Helmet.canUseDOM &&
+        Helmet.startUpdating();
+      Helmet.canUseDOM &&
+        Helmet.updateHelmet({
+          title: `${blogTitle} | Eduxcel`,  
+          meta: [
+            {
+              name: "description",
+              content: blogDescription,
+            },
+          ],
+        });
+      Helmet.canUseDOM &&
+        Helmet.stopUpdating();
     }
-    if (lastVisitedBlog) {
-      localStorage.setItem('lastVisitedBlog', JSON.stringify(lastVisitedBlog));
-    }
-  }, [location.pathname, clickedTitle, blogsData, fetchDataForAllCollections]);
+  }
+  if (lastVisitedBlog) {
+    localStorage.setItem('lastVisitedBlog', JSON.stringify(lastVisitedBlog));
+  }
+}, [location.pathname, clickedTitle, blogsData, fetchDataForAllCollections]);
 
       const indexOfLastPost = currentPage * postsPerPage;
       const indexOfFirstPost = indexOfLastPost - postsPerPage;
