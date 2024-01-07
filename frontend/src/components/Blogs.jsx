@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
   /* eslint-disable react/prop-types */
     /* eslint-disable react/display-name */
     import React, { useState,useMemo, useEffect, useRef, useCallback } from "react";
@@ -13,6 +12,7 @@
       Collapse,
       Button,
     } from "@chakra-ui/react";
+    import { Helmet } from "react-helmet-async";  // Import Helmet
 
     import {
     
@@ -110,6 +110,19 @@
           });
         }
       };
+    
+      
+      
+      
+      
+      
+      
+      
+        
+
+      
+    
+
 
       const handleSearchChange = (event) => {
         const newQuery = event.target.value;
@@ -270,6 +283,26 @@
         const pageIndex =
           Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
         setCurrentPage(pageIndex);
+
+        // Set the title and description dynamically for SEO
+        const blogTitle = matchingBlog.title;
+        const blogDescription = matchingBlog.description;
+
+        // Use Helmet to update the document head
+        Helmet.canUseDOM &&
+          Helmet.startUpdating();
+        Helmet.canUseDOM &&
+          Helmet.updateHelmet({
+            title: `${blogTitle} | Eduxcel`,  
+            meta: [
+              {
+                name: "description",
+                content: blogDescription,
+              },
+            ],
+          });
+        Helmet.canUseDOM &&
+          Helmet.stopUpdating();
       }
     }
     if (lastVisitedBlog) {
@@ -734,6 +767,7 @@ if (matchSpecialChars) {
 <VStack spacing={2} id={`content-${blog.title}-debugging_issues`} style={contentSectionStyle}>
   {renderMediaContent(blog.debugging_issues, blog.title)}
 </VStack>
+ 
 
 <VStack spacing={2} id={`content-${blog.title}-installation_problems`} style={contentSectionStyle}>
   {renderMediaContent(blog.installation_problems, blog.title)}
@@ -1049,7 +1083,57 @@ if (matchSpecialChars) {
                 ))}
       
                 {/* Pagination */}
-                
+                <Box mt={8} display="flex" justifyContent="center" flexWrap="wrap">
+                  {Array.from({ length: Math.ceil(filteredBlogs("tools").length / postsPerPage) }, (_, index) => (
+                    <motion.div
+                      key={index}
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <Button
+                        onClick={() => handlePageChange(index + 1)}
+                        mx={2} // Adjust margin based on your preference
+                        my={2} // Adjust margin based on your preference
+                        borderRadius="full"
+                        fontWeight="bold"
+                        fontSize={{ base: "sm", md: "xl" }} // Responsive font size
+                        padding={{ base: "0.5rem 1rem", md: "1rem 2rem" }} // Responsive padding
+                        _focus={{ outline: "none" }}
+                        colorScheme={currentPage === index + 1 ? "green" : "gray"}
+                        variant="solid"
+                        size="lg"
+                        position="relative"
+                        overflow="hidden"
+                      >
+                        {index + 1}
+                        <Box
+                          position="absolute"
+                          top="-2px"
+                          left="-2px"
+                          right="-2px"
+                          bottom="-2px"
+                          borderWidth="2px"
+                          borderColor="white"
+                          opacity={0.5}
+                          borderRadius="full"
+                        />
+                        <Box
+                          position="absolute"
+                          top="-2px"
+                          left="-2px"
+                          right="-2px"
+                          bottom="-2px"
+                          borderWidth="2px"
+                          borderColor="white"
+                          opacity={0.5}
+                          borderRadius="full"
+                          transform="rotate(45deg)"
+                        />
+                      </Button>
+                    </motion.div>
+                  ))}
+                </Box>
               </Box>
             </>
           )}
