@@ -139,7 +139,6 @@
       ]
     }
   </script>
-<!-- Add this script in the head section -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const titleElement = document.querySelector('title');
@@ -152,28 +151,36 @@
     titleElement.innerText = `${blogTitleWithSpaces} - Eduxcel`;
   });
 </script>
-
-<!-- Add the new script for setting meta description -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
+    const titleElement = document.querySelector('title');
     const metaDescriptionElement = document.querySelector('meta[name="description"]');
     
     // Extract the blog title from the URL
     const pathArray = window.location.pathname.split('/');
-    const blogTitle = pathArray[pathArray.length - 1].replace(/%20/g, ' ');
+    const blogTitle = decodeURIComponent(pathArray[pathArray.length - 1]).replace(/%20/g, ' ');
 
-    // Set the meta description based on the blog's overview
+    // Set the title and meta description dynamically
+    titleElement.innerText = `${blogTitle} - Eduxcel`;
+
+    // Set the meta description based on the blog's overview or description
     const matchingBlog = window.blogsData?.tools.find((blog) => blog.title === blogTitle);
 
-    if (matchingBlog && matchingBlog.overview) {
-      metaDescriptionElement.setAttribute('content', matchingBlog.overview.join(' '));
+    if (matchingBlog) {
+      const overviewOrDescription = matchingBlog.overview || matchingBlog.description;
+
+      if (overviewOrDescription) {
+        metaDescriptionElement.setAttribute('content', overviewOrDescription.join(' '));
+      } else {
+        // Set a default description if neither overview nor description is found
+        metaDescriptionElement.setAttribute('content', 'Explore a variety of educational topics and tutorials on EduXcel. Enhance your knowledge and skills with our high-quality online courses and learning resources.');
+      }
     } else {
-      // Set a default description if the blog or overview is not found
+      // Set a default description if the blog is not found
       metaDescriptionElement.setAttribute('content', 'Explore a variety of educational topics and tutorials on EduXcel. Enhance your knowledge and skills with our high-quality online courses and learning resources.');
     }
   });
 </script>
-
   <!-- Open Graph and Twitter Card meta tags for social media sharing -->
   <meta property="og:title" content="EduXcel - Nurturing Excellence through Global Online Education" />
   <meta property="og:description" content="Empower your learning journey with EduXcel. Explore a diverse range of high-quality courses and personalized learning experiences tailored just for you, now available globally." />
