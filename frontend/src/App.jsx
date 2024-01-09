@@ -10,6 +10,7 @@ import CourseDetails from './components/CourseDetails';
 import SubModuleDetails from './components/SubModuleDetails';
 import Blogs from './components/Blogs';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 import Footer from './components/Footer';
 import SignInSignUp from './components/SignInSignUp'; // Import the SignInSignUp component
@@ -34,6 +35,7 @@ function App() {
     <SubHeader/>
           <ScrollToTop />
         <Analytics />
+        <SpeedInsights />
 
           <Routes>
             <Route path="/" element={<Home />} />
