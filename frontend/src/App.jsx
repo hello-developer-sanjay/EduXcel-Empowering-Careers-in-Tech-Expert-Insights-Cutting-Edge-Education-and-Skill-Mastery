@@ -9,6 +9,8 @@ import ModuleDetails from './components/ModuleDetails';
 import CourseDetails from './components/CourseDetails';
 import SubModuleDetails from './components/SubModuleDetails';
 import Blogs from './components/Blogs';
+import { Analytics } from '@vercel/analytics/react';
+
 import Footer from './components/Footer';
 import SignInSignUp from './components/SignInSignUp'; // Import the SignInSignUp component
 import ForgotPassword from './components/ForgotPassword';
@@ -31,7 +33,8 @@ function App() {
           <Header />
     <SubHeader/>
           <ScrollToTop />
-       
+        <Analytics />
+
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<UserProfile />} />
