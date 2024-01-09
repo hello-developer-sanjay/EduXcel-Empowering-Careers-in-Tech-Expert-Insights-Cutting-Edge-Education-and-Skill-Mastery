@@ -16,6 +16,8 @@
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
+        "@vercel/analytics": "^1.1.1",
+
     "antd": "^5.8.6",
     "axios": "^1.5.0",
 "react-modal-image": "^2.6.0",
