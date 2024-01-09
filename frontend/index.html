@@ -142,11 +142,11 @@
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const titleElement = document.querySelector('title');
-    
+
     // Extract the blog title from the URL
     const pathArray = window.location.pathname.split('/');
-    const blogTitleWithSpaces = pathArray[pathArray.length - 1].replace(/%20/g, ' ');
-    
+    const blogTitleWithSpaces = pathArray[pathArray.length - 1].replace(/%20/g, ' ').replace(/%28/g, ' ').replace(/%29/g, '-');
+
     // Set the title dynamically
     titleElement.innerText = `${blogTitleWithSpaces} - Eduxcel`;
   });
@@ -158,7 +158,7 @@
     
     // Extract the blog title from the URL
     const pathArray = window.location.pathname.split('/');
-    const blogTitle = decodeURIComponent(pathArray[pathArray.length - 1]).replace(/%20/g, ' ');
+    const blogTitle = decodeURIComponent(pathArray[pathArray.length - 1]).replace(/%20/g, ' ').replace(/%28/g, ' ').replace(/%29/g, '-');
 
     // Set the title and meta description dynamically
     titleElement.innerText = `${blogTitle} - Eduxcel`;
