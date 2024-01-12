@@ -1,3 +1,4 @@
+import  { useEffect, useRef } from 'react';
 
 import styled, { keyframes } from 'styled-components';
 import { motion, AnimatePresence,  } from "framer-motion";
@@ -345,6 +346,36 @@ const Footer = () => {
     "Exploring the Future. Get Involved!",
     "Unlock Knowledge. Engage and Share.",
   ];
+const footerRef = useRef(null);
+useEffect(() => {
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5, // Adjust the threshold as needed
+  };
+
+  const callback = (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        // Footer is in view, show toast message
+toast.info("Hey there! If you have feedback or a question for the admin, feel free to submit them separately. We appreciate your input!");
+        observer.unobserve(entry.target);
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(callback, options);
+
+  if (footerRef.current) {
+    observer.observe(footerRef.current);
+  }
+
+  return () => {
+    if (footerRef.current) {
+      observer.unobserve(footerRef.current);
+    }
+  };
+}, []);
 
   const getRandomCatchyMessage = () =>
     catchyMessages[Math.floor(Math.random() * catchyMessages.length)];
@@ -411,7 +442,7 @@ let endpoint = "submit-feedback";
   };
 
   return (
-    <FooterContainer>
+    <FooterContainer ref={footerRef}>
       <BorderLineTop
         initial={{ width: 0 }}
         animate={{ width: "80%" }}
