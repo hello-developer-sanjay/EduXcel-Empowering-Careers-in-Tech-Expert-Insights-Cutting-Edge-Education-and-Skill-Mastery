@@ -347,36 +347,52 @@ const Footer = () => {
     "Unlock Knowledge. Engage and Share.",
   ];
 const footerRef = useRef(null);
-useEffect(() => {
-  const options = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.5, // Adjust the threshold as needed
-  };
-
-  const callback = (entries, observer) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        // Footer is in view, show toast message
-toast.info("Hey there! If you have feedback or a question for the admin, feel free to submit them separately. We appreciate your input!");
-        observer.unobserve(entry.target);
-      }
-    });
-  };
-
-  const observer = new IntersectionObserver(callback, options);
-
-  if (footerRef.current) {
-    observer.observe(footerRef.current);
-  }
-
-  return () => {
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.4,
+    };
+  
+    const callback = (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          toast.info(
+            "Hey there! If you have feedback or a question for the admin, feel free to submit them separately. We appreciate your input!",
+            {
+              position: "top-right", // Set toast position
+              autoClose: 7000, // Set auto-close duration in milliseconds
+              hideProgressBar: false, // Show or hide progress bar
+              closeOnClick: true, // Close the toast when clicked
+              pauseOnHover: true, // Pause the timer when hovered
+              draggable: true, // Make the toast draggable
+              progress: undefined, // Disable progress bar animation
+              style: {
+                background: "#333", // Set background color
+                color: "#fff", // Set text color
+                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.4)", // Add box shadow
+                borderRadius: "10px", // Add border-radius
+              },
+            }
+          );
+          observer.unobserve(entry.target);
+        }
+      });
+    };
+  
+    const observer = new IntersectionObserver(callback, options);
+  
     if (footerRef.current) {
-      observer.unobserve(footerRef.current);
+      observer.observe(footerRef.current);
     }
-  };
-}, []);
-
+  
+    return () => {
+      if (footerRef.current) {
+        observer.unobserve(footerRef.current);
+      }
+    };
+  }, [footerRef]);
+  
   const getRandomCatchyMessage = () =>
     catchyMessages[Math.floor(Math.random() * catchyMessages.length)];
 
