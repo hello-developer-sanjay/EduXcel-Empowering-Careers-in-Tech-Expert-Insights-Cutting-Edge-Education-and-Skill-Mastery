@@ -360,18 +360,18 @@ const footerRef = useRef(null);
           toast.info(
             "Hey there! If you have feedback or a question for the admin, feel free to submit them separately. We appreciate your input!",
             {
-              position: "top-right", // Set toast position
-              autoClose: 7000, // Set auto-close duration in milliseconds
-              hideProgressBar: false, // Show or hide progress bar
-              closeOnClick: true, // Close the toast when clicked
-              pauseOnHover: true, // Pause the timer when hovered
-              draggable: true, // Make the toast draggable
-              progress: undefined, // Disable progress bar animation
+              position: "top-right", 
+              autoClose: 10000, 
+              hideProgressBar: false, 
+              closeOnClick: true, 
+              pauseOnHover: true, 
+              draggable: true, 
+              progress: undefined,
               style: {
-                background: "#333", // Set background color
-                color: "#fff", // Set text color
-                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.4)", // Add box shadow
-                borderRadius: "10px", // Add border-radius
+                background: "#487503", 
+                color: "#fff", 
+                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.4)", 
+                borderRadius: "10px", 
               },
             }
           );
