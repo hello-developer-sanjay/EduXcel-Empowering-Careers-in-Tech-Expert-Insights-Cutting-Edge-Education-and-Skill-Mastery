@@ -110,19 +110,6 @@
           });
         }
       };
-    
-      
-      
-      
-      
-      
-      
-      
-        
-
-      
-    
-
 
       const handleSearchChange = (event) => {
         const newQuery = event.target.value;
@@ -280,32 +267,33 @@
           false
       );
 
-        if (matchingBlog) {
-        // Set the current page to the matched blog's page
-        const pageIndex =
-          Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
-        setCurrentPage(pageIndex);
-      
-        // Set the title and description dynamically for SEO
-        const blogTitle = matchingBlog.title;
-        const blogDescription = matchingBlog.overview
-          ? matchingBlog.overview.join(' ')
-          : matchingBlog.description || '';
-      
-        // Use Helmet to update the document head
-        Helmet.canUseDOM && Helmet.startUpdating();
-        Helmet.canUseDOM &&
-          Helmet.updateHelmet({
-            title: `${blogTitle} | Eduxcel`,
-            meta: [
-              {
-                name: 'description',
-                content: blogDescription,
-              },
-            ],
-          });
-        Helmet.canUseDOM && Helmet.stopUpdating();
-      }
+      if (matchingBlog) {
+  // Set the current page to the matched blog's page
+  const pageIndex =
+    Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
+  setCurrentPage(pageIndex);
+
+  // Set the title and description dynamically for SEO
+  const blogTitle = decodeURIComponent(matchingBlog.title);
+  const cleanedBlogTitle = blogTitle.replace(/%20/g, ' ').replace(/%28/g, '(').replace(/%29/g, ')');
+  const blogDescription = matchingBlog.overview
+    ? matchingBlog.overview.join(' ')
+    : matchingBlog.description || '';
+
+  // Use Helmet to update the document head
+  Helmet.canUseDOM && Helmet.startUpdating();
+  Helmet.canUseDOM &&
+    Helmet.updateHelmet({
+      title: `${cleanedBlogTitle} | Eduxcel`,
+      meta: [
+        {
+          name: 'description',
+          content: blogDescription,
+        },
+      ],
+    });
+  Helmet.canUseDOM && Helmet.stopUpdating();
+}
       
     }
     if (lastVisitedBlog) {
