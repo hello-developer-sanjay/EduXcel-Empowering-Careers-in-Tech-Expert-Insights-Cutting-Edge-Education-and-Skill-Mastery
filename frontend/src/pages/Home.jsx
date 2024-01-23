@@ -49,7 +49,8 @@ if (inViewImage) {
 
 
 
- // Animate the content when it comes into view with a magical and floating animation
+
+  // Animate the content when it comes into view with a magical and floating animation
 if (inViewContent) {
   controlsContent.start((index) => ({
     y: 0,
@@ -138,6 +139,39 @@ if (inViewContent) {
             '@type': 'ItemList',
           })}
         </script>
+
+
+        <script type="text/javascript" dangerouslySetInnerHTML={{ __html: `
+          document.addEventListener('DOMContentLoaded', function () {
+            const titleElement = document.querySelector('title');
+            const metaDescriptionElement = document.querySelector('meta[name="description"]');
+            
+            // Extract the blog title from the URL
+            const pathArray = window.location.pathname.split('/');
+            const decodedBlogTitle = decodeURIComponent(pathArray[pathArray.length - 1]);
+            const blogTitle = decodedBlogTitle.replace(/%20/g, ' ').replace(/%28/g, '(').replace(/%29/g, ')');
+            
+            // Set the title and meta description dynamically
+            titleElement.innerText = \`\${blogTitle} - Eduxcel\`;
+            
+            // Set the meta description based on the blog's overview or description
+            const matchingBlog = window.blogsData?.tools.find((blog) => blog.title === decodedBlogTitle || blog.title === blogTitle);
+            
+            if (matchingBlog) {
+              const overviewOrDescription = matchingBlog.overview || (matchingBlog.content && matchingBlog.content.description);
+              
+              if (overviewOrDescription) {
+                metaDescriptionElement.setAttribute('content', overviewOrDescription.join(' '));
+              } else {
+                // Set a default description if neither overview nor description is found
+                metaDescriptionElement.setAttribute('content', 'Explore a variety of educational topics and tutorials on EduXcel. Enhance your knowledge and skills with our high-quality online courses and learning resources.');
+              }
+            } else {
+              // Set a default description if the blog is not found
+              metaDescriptionElement.setAttribute('content', 'Explore a variety of educational topics and tutorials on EduXcel. Enhance your knowledge and skills with our high-quality online courses and learning resources.');
+            }
+          });
+        `}} />
       </Helmet>
       
 
