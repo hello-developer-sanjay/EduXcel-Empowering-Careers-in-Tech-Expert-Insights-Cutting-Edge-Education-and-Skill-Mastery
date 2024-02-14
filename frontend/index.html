@@ -167,19 +167,24 @@
     // Set the meta description based on the blog's overview or description
     const matchingBlog = window.blogsData?.tools.find((blog) => blog.title === decodedBlogTitle || blog.title === blogTitle);
 
-    if (matchingBlog) {
-      const overviewOrDescription = matchingBlog.overview || (matchingBlog.content && matchingBlog.content.description);
+  if (matchingBlog) {
+  const overview = matchingBlog.overview;
+  const description = matchingBlog.description;
 
-      if (overviewOrDescription) {
-        metaDescriptionElement.setAttribute('content', overviewOrDescription.join(' '));
-      } else {
-        // Set a default description if neither overview nor description is found
-        metaDescriptionElement.setAttribute('content', 'Explore a variety of educational topics and tutorials on EduXcel. Enhance your knowledge and skills with our high-quality online courses and learning resources.');
-      }
-    } else {
-      // Set a default description if the blog is not found
-      metaDescriptionElement.setAttribute('content', 'Explore a variety of educational topics and tutorials on EduXcel. Enhance your knowledge and skills with our high-quality online courses and learning resources.');
-    }
+  if (overview) {
+    // Display the overview as the meta description if available
+    metaDescriptionElement.setAttribute('content', overview.join(' '));
+  } else if (description) {
+    // Display the description as the meta description if overview is not available
+    metaDescriptionElement.setAttribute('content', description.join(' '));
+  } else {
+    // Set a default description if neither overview nor description is found
+    metaDescriptionElement.setAttribute('content', 'Explore a variety of educational topics and tutorials on EduXcel. Enhance your knowledge and skills with our high-quality online courses and learning resources.');
+  }
+} else {
+  // Set a default description if the blog is not found
+  metaDescriptionElement.setAttribute('content', 'Explore a variety of educational topics and tutorials on EduXcel. Enhance your knowledge and skills with our high-quality online courses and learning resources.');
+}
   });
 </script>
   <!-- Open Graph and Twitter Card meta tags for social media sharing -->
