@@ -197,23 +197,114 @@
   <meta name="twitter:description" content="Empower your learning journey with EduXcel. Explore a diverse range of high-quality courses and personalized learning experiences tailored just for you, now available globally." />
   <meta name="twitter:image" content="https://sanjaybasket.s3.ap-south-1.amazonaws.com/socialmedisharing.jpeg" />
 
-  <!-- Adsense script -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4434555762031338"
      crossorigin="anonymous"></script>
 
-  <!-- Additional Global SEO Meta Tags -->
   <meta name="geo.region" content="IN" />
   <meta name="geo.placename" content="India" />
   <meta name="geo.position" content="20.5937;78.9629" />
   <meta name="ICBM" content="20.5937, 78.9629" />
 
-  <!-- Security Headers -->
-  <!-- Add any additional security headers if needed -->
 
 </head>
 
 <body>
   <div id="root"></div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const sitemapUrls = [
+          'https://eduxcel.vercel.app/blogs',
+          'https://eduxcel.vercel.app/blogs/tools/Introduction%20to%20Visual%20Studio%20Code%20(VS%20Code)',
+          'https://eduxcel.vercel.app/signup',
+          'https://eduxcel.vercel.app/profile',
+          'https://eduxcel.vercel.app/blogs/tools/Getting%20Started%20with%20VS%20Code%20Extensions',
+          'https://eduxcel.vercel.app/blogs/tools/How%20to%20Customize%20VS%20Code%20Settings',
+
+          'https://eduxcel.vercel.app/blogs/tools/How%20to%20Download%20and%20Install%20VS%20Code%20on%20Windows',
+
+          'https://eduxcel.vercel.app/blogs/tools/What%20is%20VS%20Code%3F',
+
+          'https://eduxcel.vercel.app/blogs/tools/What%20is%20VS%20Code%3F',
+
+          'https://eduxcel.vercel.app/blogs/tools/Troubleshooting%20Common%20Issues%20in%20VS%20Code',
+
+          'https://eduxcel.vercel.app/blogs/tools/Introduction%20to%20Java%20Development%20Kit%20(JDK)%20and%20Java%20Virtual%20Machine%20(JVM)',
+
+          'https://eduxcel.vercel.app/blogs/tools/Java%20IDEs%20and%20Development%20Tools',
+
+          'https://eduxcel.vercel.app/blogs/tools/Java%20Spring%20Framework%20Overview',
+
+          'https://eduxcel.vercel.app/blogs/tools/Getting%20Started%20with%20Java%20Programming',
+
+          'https://eduxcel.vercel.app/blogs/tools/Getting%20Started%20with%20Eclipse%20IDE',
+
+          'https://eduxcel.vercel.app/blogs/tools/Advanced%20Eclipse%20IDE%20Features',
+
+          'https://eduxcel.vercel.app/blogs/tools/Introduction%20to%20Eclipse%20IDE',
+
+          'https://eduxcel.vercel.app/blogs/tools/Eclipse%20Shortcuts%20and%20Productivity%20Tips',
+
+          'https://eduxcel.vercel.app/blogs/tools/Getting%20Started%20with%20Jupyter%20Notebooks',
+
+          'https://eduxcel.vercel.app/blogs/tools/Conda%3A%20Managing%20Environments%20and%20Packages',
+
+          'https://eduxcel.vercel.app/blogs/tools/Data%20Science%20with%20Anaconda%3A%20A%20Comprehensive%20Guide',
+
+          'https://eduxcel.vercel.app/blogs/tools/Introduction%20to%20Anaconda',
+
+          'https://eduxcel.vercel.app/blogs/tools/Advanced%20Anaconda%20Usage%3A%20Optimization%20and%20Best%20Practices',
+
+          'https://eduxcel.vercel.app/blogs/tools/Getting%20Started%20with%20IntelliJ%20IDEA',
+
+          'https://eduxcel.vercel.app/blogs/tools/IntelliJ%20IDEA%20Shortcuts%20and%20Productivity%20Tips',
+
+          'https://eduxcel.vercel.app/blogs/tools/Advanced%20IntelliJ%20IDEA%20Features',
+
+          'https://eduxcel.vercel.app/blogs/tools/IntelliJ%20IDEA%20for%20Java%20Spring%20Development',
+          'https://eduxcel.vercel.app/courses/Full%20Stack%20Web%20Development%20Bootcamp',
+          'https://eduxcel.vercel.app/courses/Full%20Stack%20Web%20Development%20Bootcamp/Frontend%20Development',
+          'https://eduxcel.vercel.app/courses/Full%20Stack%20Web%20Development%20Bootcamp/Frontend%20Development/submodules/HTML%20Basics',
+          'https://eduxcel.vercel.app/courses/Data%20Science%20Fundamentals',
+          'https://eduxcel.vercel.app/courses/Data%20Science%20Fundamentals/Introduction%20to%20Data%20Science',
+          'https://eduxcel.vercel.app/courses/Machine%20Learning%20for%20Beginners',
+          'https://eduxcel.vercel.app/courses/Machine%20Learning%20for%20Beginners/Machine%20Learning%20Basics',
+          'https://eduxcel.vercel.app/blogs/tools/Download%20and%20Install%20Git',
+          'https://eduxcel.vercel.app/blogs/tools/Installing%20Git%20on%20Windows',
+          'https://eduxcel.vercel.app/blogs/tools/Installing%20Git%20on%20Linux',
+          'https://eduxcel.vercel.app/blogs/tools/Configuring%20Git%3A%20Username%20and%20Email',
+          'https://eduxcel.vercel.app/blogs/tools/Set%20Your%20Username',
+          'https://eduxcel.vercel.app/blogs/tools/Configuring%20Git%3A%20Editor%20and%20Default%20Branch%20Name',
+          'https://eduxcel.vercel.app/blogs/tools/Set%20Your%20Preferred%20Text%20Editor',
+          'https://eduxcel.vercel.app/blogs/tools/Set%20Your%20Preferred%20Text%20Editor',
+          'https://eduxcel.vercel.app/blogs/tools/Java%20Development%20Kit%20(JDK)',
+
+          'https://eduxcel.vercel.app/blogs/tools/Java%20Virtual%20Machine%20(JVM)',
+
+          'https://eduxcel.vercel.app/blogs/tools/Setting%20Up%20Java%20Development%20Environment',
+
+          'https://eduxcel.vercel.app/blogs/tools/Download%20and%20Install%20JDK',
+
+          'https://eduxcel.vercel.app/blogs/tools/Configuring%20JDK%20and%20JVM%20on%20Windows',
+
+          'https://eduxcel.vercel.app/blogs/tools/Configuring%20JDK%20and%20JVM%20on%20macOS',
+        ];
+  
+        const rootElement = document.getElementById('root');
+        const internalLinksContainer = document.createElement('div');
+  
+        sitemapUrls.forEach(url => {
+          const link = document.createElement('a');
+          link.href = url;
+          link.textContent = url;
+          link.style.display = 'block'; 
+          internalLinksContainer.appendChild(link);
+        });
+  
+        rootElement.appendChild(internalLinksContainer);
+      });
+    </script>
+  
+  
   <script type="module" src="./src/index.jsx"></script>
 </body>
 
