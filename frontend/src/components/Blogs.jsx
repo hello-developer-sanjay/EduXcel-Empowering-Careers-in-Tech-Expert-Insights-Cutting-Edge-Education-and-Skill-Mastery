@@ -744,6 +744,23 @@ if (matchSpecialChars) {
   {renderMediaContent(blog.extension4, blog.title)}
 </VStack>
 
+
+                      
+<VStack spacing={2} id={`content-${blog.title}-best_practice`} style={contentSectionStyle}>
+  {renderMediaContent(blog.best_practice, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-common_issues`} style={contentSectionStyle}>
+  {renderMediaContent(blog.common_issues, blog.title)}
+</VStack>
+
+
+
+<VStack spacing={2} id={`content-${blog.title}-common_tasks`} style={contentSectionStyle}>
+  {renderMediaContent(blog.common_tasks, blog.title)}
+</VStack>
+
+
 <VStack spacing={2} id={`content-${blog.title}-extension5`} style={contentSectionStyle}>
   {renderMediaContent(blog.extension5, blog.title)}
 </VStack>
