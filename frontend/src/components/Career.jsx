@@ -756,20 +756,20 @@ if (matchSpecialChars) {
 </VStack>
 
 
-<VStack spacing={2} id={`content-${blog.title}-jvm`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-entry_level`} style={contentSectionStyle}>
 {renderMediaContent(blog.career_path?.entry_level, blog.title)}
 </VStack>
 
 
 
-<VStack spacing={2} id={`content-${blog.title}-jvm`} style={contentSectionStyle}>
+<VStack spacing={2} id={`content-${blog.title}-mid_level`} style={contentSectionStyle}>
 {renderMediaContent(blog.career_path?.mid_level, blog.title)}
 </VStack>
 
 
 
-<VStack spacing={2} id={`content-${blog.title}-jvm`} style={contentSectionStyle}>
-{renderMediaContent(blog.career_path?.mid_level, blog.title)}
+<VStack spacing={2} id={`content-${blog.title}-senior_level`} style={contentSectionStyle}>
+{renderMediaContent(blog.career_path?.senior_level, blog.title)}
 </VStack>
 
 
