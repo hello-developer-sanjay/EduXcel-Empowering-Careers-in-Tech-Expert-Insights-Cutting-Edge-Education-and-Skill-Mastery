@@ -54,7 +54,7 @@
           style={{ fontSize: location === "main" ? "24px" : "18px" }} 
         >
           <Link
-            to={`/${collection}/${encodeURIComponent(title)}`}
+            to={`/blogs/${collection}/${encodeURIComponent(title)}`}
             style={{ color: "inherit", textDecoration: "none" }}
           >
             {title}
