@@ -14,6 +14,7 @@ import WhyUsImage from '../assets/why.webp';
 import About from '../components/About';
 import Faq from '../components/Faq';
 import { useInView } from 'react-intersection-observer'; // Import react-intersection-observer
+import Suggest from '../components/Suggest';
 
 function Home() {
   const [courseData, setCourseData] = useState([]);
@@ -205,6 +206,7 @@ if (inViewContent) {
   <p className={`${styles.heroSubText} mt-8 text-white-100 text-center`}>Explore our courses and enhance your skills</p>
   <CourseList courseData={courseData} />
 </div>
+<Suggest/>
 
 
       <div className={`relative top-[20px] max-w-8xl mx-auto ${styles.paddingX} flex flex-col items-center`}>
