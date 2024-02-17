@@ -33,7 +33,7 @@
 
     import { Link } from "react-router-dom";
 
-    const BlogTitle = React.forwardRef(({ title, collection, onClick }, ref) => (
+    const BlogTitle = React.forwardRef(({ title, collection, onClick, location }, ref) => (
       <motion.div
         whileHover={{
           textDecoration: "underline",
@@ -45,26 +45,23 @@
         style={{ cursor: "pointer" }}
       >
         <Text
-          fontSize={{ base: "xl", md: "2xl" }}
           fontWeight="bold"
           _hover={{ textDecoration: "none" }}
           color="#ffffff" // White text color
-          fontFamily="Quicksand, sans-serif" // Clean sans-serif font
+          fontFamily="Roboto, sans-serif"
           textAlign="left"
           p={2}
+          style={{ fontSize: location === "main" ? "24px" : "18px" }} 
         >
-       <Link
-            to={`/blogs/${collection}/${encodeURIComponent(title)}`}
+          <Link
+            to={`/${collection}/${encodeURIComponent(title)}`}
             style={{ color: "inherit", textDecoration: "none" }}
           >
             {title}
           </Link>
-
         </Text>
       </motion.div>
     ));
-    
-
 
     const Blogs = () => {
       const [blogsData, setBlogsData] = useState({
@@ -654,6 +651,8 @@ if (matchSpecialChars) {
                             collection={collection}
                             onClick={(title, collection) => handleTitleClick(title, collection)}
                             ref={(el) => (titleRefs.current[`${collection}-${blog.title}`] = el)}
+                                                      location="sidebar" 
+
                           />
                         ))}
                       </VStack>
@@ -705,6 +704,8 @@ if (matchSpecialChars) {
                         title={blog.title}
                         collection="tools"
                         onClick={() => handleTitleClick(blog.title, "tools")}
+                                                  location="main" 
+
                       />
                     </VStack>
        <VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
