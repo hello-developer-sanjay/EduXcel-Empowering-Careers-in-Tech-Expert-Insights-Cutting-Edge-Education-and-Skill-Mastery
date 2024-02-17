@@ -31,9 +31,9 @@
     import ReactPlayer from "react-player";
     import "../styles/Blogs.css";
 
-    import { Link } from "react-router-dom";
 
-    const BlogTitle = React.forwardRef(({ title, collection, onClick }, ref) => (
+    import { Link } from "react-router-dom";
+    const BlogTitle = React.forwardRef(({ title, collection, onClick, location }, ref) => (
       <motion.div
         whileHover={{
           textDecoration: "underline",
@@ -45,24 +45,26 @@
         style={{ cursor: "pointer" }}
       >
         <Text
-          fontSize={{ base: "xl", md: "2xl" }}
           fontWeight="bold"
           _hover={{ textDecoration: "none" }}
           color="#ffffff" // White text color
-          fontFamily="Quicksand, sans-serif" // Clean sans-serif font
+          fontFamily="Roboto, sans-serif"
           textAlign="left"
           p={2}
+          style={{ fontSize: location === "main" ? "24px" : "18px" }} 
         >
-       <Link
+          <Link
             to={`/${collection}/${encodeURIComponent(title)}`}
             style={{ color: "inherit", textDecoration: "none" }}
           >
             {title}
           </Link>
-
         </Text>
       </motion.div>
     ));
+    
+    
+    
     
 
 
@@ -325,7 +327,7 @@
       fontFamily: "Poppins, sans-serif", // Modern sans-serif font
     };
 
-
+   
       const progressBarStyle = {
         width: `${scrollProgress}%`,
         height: "4px",
@@ -646,24 +648,27 @@ if (matchSpecialChars) {
               {/* Sidebar */}
               <Collapse in={isOpen}>
                 <Box style={sidebarStyle}>
-                  <VStack align="start" spacing={2}>
-                    {Object.keys(blogsData).map((collection) => (
-                      <VStack key={collection} align="start" spacing={2}>
-                        <Text fontSize="md" fontWeight="semibold" mb={2}>
-                          {`${collection.charAt(0).toUpperCase()}${collection.slice(1)}`}
-                        </Text>
-                        {filteredBlogs(collection).map((blog) => (
-                          <BlogTitle
-                            key={blog.title}
-                            title={blog.title}
-                            collection={collection}
-                            onClick={(title, collection) => handleTitleClick(title, collection)}
-                            ref={(el) => (titleRefs.current[`${collection}-${blog.title}`] = el)}
-                          />
-                        ))}
-                      </VStack>
-                    ))}
-                  </VStack>
+                <VStack align="start" spacing={2}>
+  {Object.keys(blogsData).map((collection) => (
+    <VStack key={collection} align="start" spacing={2}>
+      <Text fontSize="md" fontWeight="semibold" mb={2}>
+        {`${collection.charAt(0).toUpperCase()}${collection.slice(1)}`}
+      </Text>
+      {filteredBlogs(collection).map((blog) => (
+       <BlogTitle
+       key={blog.title}
+       title={blog.title}
+       collection={collection}
+       onClick={(title, collection) => handleTitleClick(title, collection)}
+       location="sidebar" // Pass location prop indicating main content area
+     />
+     
+      ))}
+    </VStack>
+  ))}
+</VStack>
+
+
                 </Box>
               </Collapse>
       
@@ -716,6 +721,8 @@ if (matchSpecialChars) {
                         title={blog.title}
                         collection="careers"
                         onClick={() => handleTitleClick(blog.title, "careers")}
+                        location="main" // Pass location prop indicating sidebar
+
                       />
                      </VStack>
        <VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
