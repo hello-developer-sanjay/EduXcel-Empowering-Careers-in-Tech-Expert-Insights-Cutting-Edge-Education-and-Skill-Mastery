@@ -262,6 +262,7 @@
           (blog.settingUpJavaDevelopmentEnvironment && blog.settingUpJavaDevelopmentEnvironment.title === urlTitle) ||
           (blog.jvm && blog.jvm.title === urlTitle) ||
           (blog.features && blog.features.title === urlTitle) ||
+          (blog.entry_level && blog.entry_level.title === urlTitle) ||
 
           // Add more checks for other extensions as needed
           // ...
@@ -465,7 +466,9 @@
                 {renderMediaContent(item.installation, title)}
                 {renderMediaContent(item.content, title)}
                 {renderMediaContent(item.steps, title)}
-            
+                {renderMediaContent(item.career_path, title)}
+                {renderMediaContent(item.entry_level, title)}
+
 
                  {renderMediaContent(item.components, title)}
                  {renderMediaContent(item.whatIsJdk, title)}
@@ -500,14 +503,16 @@ if (matchSpecialChars) {
     <Text key={index}>
       {textBeforeSpecial}
       <span
-        style={{
-          fontWeight: matchSpecialChars[0] === '*' ? 'bold' : 'normal',
-          color: matchSpecialChars[0] === '$' ? 'green' : matchSpecialChars[0] === '~' ? 'lime' : 'gold',
-          fontStyle: matchSpecialChars[0] === '*' ? 'italic' : 'normal',
-          textDecoration: 'none',
-        }}
-      >
-        {specialText}
+  style={{
+    fontWeight: matchSpecialChars[0] === '*' ? 'bold' : 'normal',
+    color: matchSpecialChars[0] === '$' ? 'green' : matchSpecialChars[0] === '~' ? 'lime' : 'gold',
+    fontStyle: matchSpecialChars[0] === '*' ? 'italic' : 'normal',
+    textDecoration: 'none',
+    fontSize: matchSpecialChars[0] === '$' ? '1.2em' : matchSpecialChars[0] === '~' ? '1.1em' : '1em',
+  }}
+>
+
+   {specialText}
       </span>
       {textAfterSpecial}
     </Text>
@@ -720,28 +725,53 @@ if (matchSpecialChars) {
 <VStack spacing={2} id={`content-${blog.title}-description`} style={contentSectionStyle}>
   {renderMediaContent(blog.description, blog.title)}
 </VStack>
-<VStack spacing={2} id={`content-${blog.title}-what`} style={contentSectionStyle}>
-  {renderMediaContent(blog.what, blog.title)}
+<VStack spacing={2} id={`content-${blog.title}-responsibilities`} style={contentSectionStyle}>
+  {renderMediaContent(blog.responsibilities, blog.title)}
 </VStack>
-<VStack spacing={2} id={`content-${blog.title}-feature`} style={contentSectionStyle}>
-  {renderMediaContent(blog.feature, blog.title)}
-</VStack>
-
-<VStack spacing={2} id={`content-${blog.title}-steps`} style={contentSectionStyle}>
-  {renderMediaContent(blog.steps, blog.title)}
+<VStack spacing={2} id={`content-${blog.title}-skills`} style={contentSectionStyle}>
+  {renderMediaContent(blog.skills, blog.title)}
 </VStack>
 
-<VStack spacing={2} id={`content-${blog.title}-extension1`} style={contentSectionStyle}>
-  {renderMediaContent(blog.extension1, blog.title)}
+<VStack spacing={2} id={`content-${blog.title}-career_path`} style={contentSectionStyle}>
+  {renderMediaContent(blog.career_path, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-entry_level`} style={contentSectionStyle}>
+  {renderMediaContent(blog.entry_level, blog.title)}
 </VStack>
 {/* new  */}
-<VStack spacing={2} id={`content-${blog.title}-extension2`} style={contentSectionStyle}>
-  {renderMediaContent(blog.extension2, blog.title)}
+<VStack spacing={2} id={`content-${blog.title}-career_outlook`} style={contentSectionStyle}>
+  {renderMediaContent(blog.career_outlook, blog.title)}
 </VStack>
 
-<VStack spacing={2} id={`content-${blog.title}-ides`} style={contentSectionStyle}>
-  {renderMediaContent(blog.ides, blog.title)}
+<VStack spacing={2} id={`content-${blog.title}-common_questions`} style={contentSectionStyle}>
+  {renderMediaContent(blog.common_questions, blog.title)}
 </VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-jvm`} style={contentSectionStyle}>
+{renderMediaContent(blog.career_path?.entry_level, blog.title)}
+</VStack>
+
+
+
+<VStack spacing={2} id={`content-${blog.title}-jvm`} style={contentSectionStyle}>
+{renderMediaContent(blog.career_path?.mid_level, blog.title)}
+</VStack>
+
+
+
+<VStack spacing={2} id={`content-${blog.title}-jvm`} style={contentSectionStyle}>
+{renderMediaContent(blog.career_path?.mid_level, blog.title)}
+</VStack>
+
+
+
+
+
+
+
+
 <VStack spacing={2} id={`content-${blog.title}-extension3`} style={contentSectionStyle}>
   {renderMediaContent(blog.extension3, blog.title)}
 </VStack>
