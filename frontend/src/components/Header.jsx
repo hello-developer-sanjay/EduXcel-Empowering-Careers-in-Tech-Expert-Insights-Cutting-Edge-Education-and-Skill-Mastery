@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Typed from 'react-typed';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUserPlus, faNewspaper } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUserPlus, faNewspaper,faBriefcase } from '@fortawesome/free-solid-svg-icons';
 
 const HeaderContainer = styled.header`
 background: linear-gradient(to right, #1a1a2e, #16213e, #0d1b2a);
@@ -35,7 +35,6 @@ const Logo = styled.h1`
   margin: 0;
   color: #fff;
 `;
-
 const EduxcelText = styled.span`
   font-size: 25px;
   color: #51D5FF;
@@ -97,6 +96,8 @@ const EduxcelText = styled.span`
     background: linear-gradient(45deg, #e74c3c, #c0392b);
   }
 `;
+
+
 const LargeScreenText = styled(EduxcelText)`
   display: none;
 
@@ -240,6 +241,10 @@ const HamburgerIcon = styled.div`
     }
   }
 `;
+
+
+
+
 const HamburgerMenu = styled.div`
   @media (max-width: 768px) {
     display: none;
@@ -247,7 +252,7 @@ const HamburgerMenu = styled.div`
     ${({ isOpen }) =>
       isOpen &&
       `
-display: flex;
+        display: flex;
         flex-direction: column;
         align-items: center;
         position: absolute;
@@ -286,6 +291,7 @@ display: flex;
     }
   }
 `;
+
 
 
 
@@ -350,7 +356,8 @@ function Header() {
       <HeaderContent>
         <Link to="/">
         <Logo>
-            <LargeScreenText className="eduxcel-text">Eduxcel Mastery: Your Journey to Academic Brilliance</LargeScreenText>
+            <LargeScreenText className="eduxcel-text">Eduxcel Mastery: Your Journey to Academic Brilliance
+</LargeScreenText>
             <SmallScreenText className="eduxcel-text">Eduxcel</SmallScreenText>
           </Logo>
         </Link>
@@ -363,12 +370,17 @@ function Header() {
       </HamburgerIcon>
       <HamburgerMenu isOpen={isOpen}>
         <NavList>
+         
           <NavItem>
-            <NavLinkItem to="/" aria-label="Home" onClick={toggleMenu}>
-              <FontAwesomeIcon icon={faHome} />
-              Home
+            <NavLinkItem to="/careers" aria-label="Career" onClick={toggleMenu}>
+            <FontAwesomeIcon icon={faBriefcase} />
+
+
+            Career Insights
             </NavLinkItem>
+            
           </NavItem>
+       
           <NavItem>
             <NavLinkItem to="/profile" aria-label="Profile" onClick={toggleMenu}>
               {profileImage ? (
@@ -390,6 +402,8 @@ function Header() {
               <FontAwesomeIcon icon={faNewspaper} />
               Blogs
             </NavLinkItem>
+        
+
           </NavItem>
           {/* Add more navigation links */}
         </NavList>
