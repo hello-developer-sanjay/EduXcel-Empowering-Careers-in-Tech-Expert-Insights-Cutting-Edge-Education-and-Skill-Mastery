@@ -51,7 +51,7 @@
           fontFamily="Roboto, sans-serif"
           textAlign="left"
           p={2}
-          style={{ fontSize: location === "main" ? "24px" : "18px" }} 
+          style={{ fontSize: location === "main" ? "24px" : "16px" }} 
         >
           <Link
             to={`/blogs/${collection}/${encodeURIComponent(title)}`}
