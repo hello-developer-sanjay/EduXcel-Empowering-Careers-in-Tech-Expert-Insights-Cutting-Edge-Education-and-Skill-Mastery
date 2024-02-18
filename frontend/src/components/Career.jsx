@@ -766,7 +766,26 @@ if (matchSpecialChars) {
        <VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
   {renderMediaContent(blog.overview, blog.title)}
 </VStack>
+  <div id={`content-${blog.title}-design`} style={contentSectionStyle}>
+                      {renderMediaContent(blog.responsibilities?.design, blog.title)}
+                    </div>
 
+                    <div id={`content-${blog.title}-development`} style={contentSectionStyle}>
+                      {renderMediaContent(blog.responsibilities?.development, blog.title)}
+                    </div>
+                    <div id={`content-${blog.title}-maintenance`} style={contentSectionStyle}>
+                      {renderMediaContent(blog.responsibilities?.maintenance, blog.title)}
+                    </div>
+
+                    <div id={`content-${blog.title}-communication`} style={contentSectionStyle}>
+                      {renderMediaContent(blog.responsibilities?.communication, blog.title)}
+                    </div>
+
+                    <div id={`content-${blog.title}-continous_learning`} style={contentSectionStyle}>
+                      {renderMediaContent(blog.responsibilities?.continous_learning, blog.title)}
+                    </div>
+
+                  
 <VStack spacing={2} id={`content-${blog.title}-description`} style={contentSectionStyle}>
   {renderMediaContent(blog.description, blog.title)}
 </VStack>
