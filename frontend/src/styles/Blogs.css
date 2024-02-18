@@ -1,5 +1,26 @@
 
-
+@keyframes shine {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+    transform-origin: center;
+  }
+  40% {
+    transform: scaleX(1.2);
+    opacity: 1;
+    transform-origin: center;
+  }
+  60% {
+    transform: scaleX(1);
+    opacity: 1;
+    transform-origin: center;
+  }
+  100% {
+    transform: scaleX(0);
+    opacity: 0;
+    transform-origin: center;
+  }
+}
 .image-container {
   display: flex;
   justify-content: center;
