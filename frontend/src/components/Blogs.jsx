@@ -33,7 +33,7 @@
 
     import { Link } from "react-router-dom";
 
-    const BlogTitle = React.forwardRef(({ title, collection, onClick, location }, ref) => (
+     const BlogTitle = React.forwardRef(({ title, collection, onClick, location }, ref) => (
       <motion.div
         whileHover={{
           textDecoration: "underline",
@@ -42,27 +42,45 @@
         transition={{ duration: 0.2 }}
         onClick={() => onClick(title, collection)}
         ref={ref}
-        style={{ cursor: "pointer" }}
+        style={{ cursor: "pointer", marginLeft: location === "main" ? "50px" : "0", position: "relative" }} // Add position relative
       >
-        <Text
-          fontWeight="bold"
-          _hover={{ textDecoration: "none" }}
-          color="#ffffff" // White text color
-          fontFamily="Roboto, sans-serif"
-          textAlign="left"
-          p={2}
-          style={{ fontSize: location === "main" ? "24px" : "16px" }} 
+        <div
+          style={{
+            fontWeight: "bold",
+            textDecoration: "none",
+            fontFamily: "Roboto, sans-serif",
+            textAlign: "left",
+            padding: "8px",
+            fontSize: location === "main" ? "25px" : "20px",
+            color: location === "main" ? "white" : "Turquoise ",
+            marginTop: location === "main" ? "50px" : "5px",
+          }}
         >
           <Link
-            to={`/blogs/${collection}/${encodeURIComponent(title)}`}
+            to={`/${collection}/${encodeURIComponent(title)}`}
             style={{ color: "inherit", textDecoration: "none" }}
           >
             {title}
           </Link>
-        </Text>
+        </div>
+        {location === "main" && (
+        <div
+        style={{
+          position: "absolute",
+          bottom: "-5px",
+          left: 0,
+          width: "100%",
+          height: "2px",
+          background: "linear-gradient(to right, rgba(255, 215, 0, 1), rgba(255, 255, 255, 0.7), rgba(255, 215, 0, 1))", // Use linear gradient for a more dynamic shine effect
+          borderRadius: "10px", 
+          animation: "shine 2s infinite linear", 
+        }}
+      />
+      
+        )}
       </motion.div>
     ));
-
+    
     const Blogs = () => {
       const [blogsData, setBlogsData] = useState({
         tools: [],
