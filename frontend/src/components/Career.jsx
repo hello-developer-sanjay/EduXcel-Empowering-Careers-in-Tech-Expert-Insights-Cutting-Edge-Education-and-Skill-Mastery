@@ -51,7 +51,7 @@
             fontFamily: "Roboto, sans-serif",
             textAlign: "left",
             padding: "8px",
-            fontSize: location === "main" ? "25px" : "16px",
+            fontSize: location === "main" ? "25px" : "18px",
             color: location === "main" ? "white" : "Turquoise ",
             marginTop: location === "main" ? "50px" : "5px",
           }}
