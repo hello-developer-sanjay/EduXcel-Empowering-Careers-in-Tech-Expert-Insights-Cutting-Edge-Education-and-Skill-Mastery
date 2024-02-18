@@ -378,7 +378,8 @@
 
       const contentSectionStyle = {
         borderRadius: "12px",
-        
+                marginLeft: "50px",
+
        justifyContent:"start",
        alignItems:"start",
       };
