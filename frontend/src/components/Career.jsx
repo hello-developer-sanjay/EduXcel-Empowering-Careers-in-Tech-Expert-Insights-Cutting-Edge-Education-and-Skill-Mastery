@@ -730,16 +730,26 @@ if (matchSpecialChars) {
                         : null
                     }
                   >
-                    <VStack align="start" spacing={2} id={`title-${blog.title}`} ref={(el) => (titleRefs.current[blog.title] = el)}>
-                      <BlogTitle
-                        key={blog.title}
-                        title={blog.title}
-                        collection="careers"
-                        onClick={() => handleTitleClick(blog.title, "careers")}
-                        location="main" // Pass location prop indicating sidebar
+                    <div id={`title-${blog.title}`} ref={(el) => (titleRefs.current[blog.title] = el)}>
+  <BlogTitle
+    key={blog.title}
+    title={blog.title}
+    collection="careers"
+    onClick={() => handleTitleClick(blog.title, "careers")}
+    location="main" // Pass location prop indicating sidebar
+  />
+<div style={{ marginTop: "30px", padding: "10px", border: "1px solid #ccc", color: "White", borderRadius: "8px" }}>
+  <div style={{ fontWeight: "bold", marginBottom: "10px" }}>Published By:</div>
+  <div>{renderMediaContent(blog.published_by, blog.title)}</div>
 
-                      />
-                     </VStack>
+  <div style={{ marginTop: "20px", fontWeight: "bold", marginBottom: "10px" }}>Keywords:</div>
+  <div>{renderMediaContent(blog.keywords, blog.title)}</div>
+
+  <div style={{ marginTop: "20px", fontWeight: "bold", marginBottom: "10px" }}>Last Modified:</div>
+  <div>{renderMediaContent(blog.Last_Modified, blog.title)}</div>
+</div>
+
+</div>
        <VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
   {renderMediaContent(blog.overview, blog.title)}
 </VStack>
