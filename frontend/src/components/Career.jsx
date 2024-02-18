@@ -739,16 +739,28 @@ if (matchSpecialChars) {
     location="main" // Pass location prop indicating sidebar
   />
 <div style={{ marginTop: "30px", padding: "10px", border: "1px solid #ccc", color: "White", borderRadius: "8px" }}>
-  <div style={{ fontWeight: "bold", marginBottom: "10px" }}>Published By:</div>
-  <div>{renderMediaContent(blog.published_by, blog.title)}</div>
-
-  <div style={{ marginTop: "20px", fontWeight: "bold", marginBottom: "10px" }}>Keywords:</div>
-  <div>{renderMediaContent(blog.keywords, blog.title)}</div>
-
-  <div style={{ marginTop: "20px", fontWeight: "bold", marginBottom: "10px" }}>Last Modified:</div>
-  <div>{renderMediaContent(blog.Last_Modified, blog.title)}</div>
+<div style={{ fontWeight: "bold", marginBottom: "10px", fontSize: "1.2rem" }}>Published By:</div>
+<div style={{ display: "flex", alignItems: "center" }}>
+  <a href="https://sanjay-patidar.vercel.app" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "#007bff", marginRight: "20px", padding: "10px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)" }}>
+    <span style={{ fontSize: "1.1rem", fontWeight: "bold" }}>Sanjay Patidar</span>
+    <br />
+    <span style={{ fontSize: "0.9rem", color: "#6c757d" }}>Click to visit Sanjay Patidar's website</span>
+  </a>
+  <span style={{ color: "#6c757d" }}>|</span>
+  <a href="https://eduxcel.vercel.app" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "#007bff", marginLeft: "20px", padding: "10px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)" }}>
+    <span style={{ fontSize: "1.1rem", fontWeight: "bold" }}>Founder: EduXcel - Nurturing Excellence through Online Education</span>
+    <br />
+    <span style={{ fontSize: "0.9rem", color: "#6c757d" }}>Click to visit EduXcel's website</span>
+  </a>
 </div>
 
+
+  <div style={{ marginTop: "20px", fontWeight: "bold", marginBottom: "10px" , fontSize: "1.2rem"}}>Keywords:</div>
+  <div>{renderMediaContent(blog.keywords, blog.title)}</div>
+
+  <div style={{ marginTop: "20px", fontWeight: "bold", marginBottom: "10px" , fontSize: "1.2rem"}}>Last Modified:</div>
+  <div>{renderMediaContent(blog.Last_Modified, blog.title)}</div>
+</div>
 </div>
        <VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
   {renderMediaContent(blog.overview, blog.title)}
