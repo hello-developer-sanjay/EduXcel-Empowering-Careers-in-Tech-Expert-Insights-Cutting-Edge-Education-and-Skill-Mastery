@@ -6,6 +6,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import validator from 'validator';
 import { css } from '@emotion/react';
 import { RingLoader } from 'react-spinners';
+import { Helmet } from 'react-helmet';
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -59,6 +60,39 @@ function Signup() {
 
   return (
     <div className="form-container">
+      <Helmet>
+  <title>Join EduXcel: Unlock Your Learning Journey with Easy Signup</title>
+
+  <meta name="description" content="Sign up for EduXcel E-Learning Platform to access high-quality courses and personalized learning experiences." />
+
+  <meta name="keywords" content="signup,eduxcel, sanjay patidar , sanjay , signin, elearning,  register, e-learning, online education, courses, personalized learning" />
+
+  <link rel="canonical" href="https://eduxcel.vercel.app/signup" />
+
+  <meta property="og:title" content="Join EduXcel: Unlock Your Learning Journey with Easy Signup" />
+  <meta property="og:description" content="Sign up for EduXcel E-Learning Platform to access high-quality courses and personalized learning experiences." />
+  <meta property="og:url" content="https://eduxcel.vercel.app/signup" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://sanjaybasket.s3.ap-south-1.amazonaws.com/career_advice/security.gif" /> 
+  <meta property="og:image:alt" content="EduXcel Logo" /> 
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Join EduXcel: Unlock Your Learning Journey with Easy Signup" />
+  <meta name="twitter:description" content="Sign up for EduXcel E-Learning Platform to access high-quality courses and personalized learning experiences." />
+  <meta name="twitter:url" content="https://eduxcel.vercel.app/signup" />
+  <meta name="twitter:image" content="https://sanjaybasket.s3.ap-south-1.amazonaws.com/career_advice/security.gif" /> 
+
+  <script type="application/ld+json">{`
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Join EduXcel: Unlock Your Learning Journey with Easy Signup",
+      "description": "Sign up for EduXcel E-Learning Platform to access high-quality courses and personalized learning experiences.",
+      "url": "https://eduxcel.vercel.app/signup"
+    }
+  `}</script>
+</Helmet>
+
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Username:</label>
