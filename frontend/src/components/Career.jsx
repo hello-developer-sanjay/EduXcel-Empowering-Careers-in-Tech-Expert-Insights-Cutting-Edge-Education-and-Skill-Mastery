@@ -1200,7 +1200,28 @@ if (matchSpecialChars) {
 <VStack spacing={2} id={`content-${blog.title}-components`} style={contentSectionStyle}>
   {renderMediaContent(blog.components, blog.title)}
 </VStack>
-
+ <div id={`content-${blog.title}-ProgrammingLanguages`} style={contentSectionStyle}>
+                      {renderMediaContent(blog.skills?.ProgrammingLanguages, blog.title)}
+                    </div>
+                    <div id={`content-${blog.title}-BackendDevelopment`} style={contentSectionStyle}>
+                      {renderMediaContent(blog.skills?.BackendDevelopment, blog.title)}
+                    </div>
+                    <div id={`content-${blog.title}-VersionControlSystems`} style={contentSectionStyle}>
+                      {renderMediaContent(blog.skills?.VersionControlSystems, blog.title)}
+                    </div>
+                    <div id={`content-${blog.title}-WebDevelopmentToolsAndTechnologies`} style={contentSectionStyle}>
+                      {renderMediaContent(blog.skills?.WebDevelopmentToolsAndTechnologies, blog.title)}
+                    </div>
+                    <div id={`content-${blog.title}-ProblemSolvingAndDebugging`} style={contentSectionStyle}>
+                      {renderMediaContent(blog.skills?.ProblemSolvingAndDebugging, blog.title)}
+                    </div>
+                    <div id={`content-${blog.title}-SoftSkills`} style={contentSectionStyle}>
+                      {renderMediaContent(blog.skills?.SoftSkills, blog.title)}
+                    </div>  
+                    <div id={`content-${blog.title}-ContinuousLearningAndAdaptability`} style={contentSectionStyle}>
+                      {renderMediaContent(blog.skills?.ContinuousLearningAndAdaptability, blog.title)}
+                    </div>  
+                 
       
 
                   </motion.div>
