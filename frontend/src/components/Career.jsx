@@ -295,7 +295,7 @@
 
   // Set the title and description dynamically for SEO
   const blogTitle = decodeURIComponent(matchingBlog.title);
-  const cleanedBlogTitle = blogTitle.replace(/%20/g, ' ').replace(/%28/g, '(').replace(/%29/g, ')');
+  const cleanedBlogTitle = blogTitle.replace(/%3/f, ' ').replace(/%3/g, ' ').replace(/%20/g, ' ').replace(/%28/g, '(').replace(/%29/g, ')');
   const blogDescription = matchingBlog.overview
     ? matchingBlog.overview.join(' ')
     : matchingBlog.description || '';
