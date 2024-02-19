@@ -57,7 +57,7 @@
           }}
         >
           <Link
-            to={`/${collection}/${encodeURIComponent(title)}`}
+            to={`/careers/${collection}/${encodeURIComponent(title)}`}
             style={{ color: "inherit", textDecoration: "none" }}
           >
             {title}
@@ -228,7 +228,7 @@
           const pageIndex =
             Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
     
-          navigate(`/${collection}/${encodedTitle}`, {
+          navigate(`/careers/${collection}/${encodedTitle}`, {
             replace: true,
           });
     
@@ -251,7 +251,7 @@
     }
 
     // Check for title in URL and display the content directly
-    const urlTitleMatch = location.pathname.match(/(.+?)\/(.+)/);
+    const urlTitleMatch = location.pathname.match(/\/careers\/(.+?)\/(.+)/);
     if (urlTitleMatch) {
       const [, collection, encodedTitle] = urlTitleMatch;
       const urlTitle = decodeURIComponent(encodedTitle);
@@ -280,6 +280,7 @@
           (blog.jvm && blog.jvm.title === urlTitle) ||
           (blog.features && blog.features.title === urlTitle) ||
           (blog.entry_level && blog.entry_level.title === urlTitle) ||
+          (blog.common_questions && blog.common_questions.title === urlTitle) ||
 
           // Add more checks for other extensions as needed
           // ...
@@ -676,6 +677,8 @@ if (matchSpecialChars) {
        title={blog.title}
        collection={collection}
        onClick={(title, collection) => handleTitleClick(title, collection)}
+                                     ref={(el) => (titleRefs.current[`${collection}-${blog.title}`] = el)}
+
        location="sidebar" // Pass location prop indicating main content area
      />
      
