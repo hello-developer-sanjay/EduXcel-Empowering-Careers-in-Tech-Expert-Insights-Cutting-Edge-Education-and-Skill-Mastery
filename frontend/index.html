@@ -151,42 +151,6 @@
     titleElement.innerText = `${blogTitleWithSpaces} - Eduxcel`;
   });
 </script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const titleElement = document.querySelector('title');
-    const metaDescriptionElement = document.querySelector('meta[name="description"]');
-    
-    // Extract the blog title from the URL
-    const pathArray = window.location.pathname.split('/');
-    const decodedBlogTitle = decodeURIComponent(pathArray[pathArray.length - 1]);
-    const blogTitle = decodedBlogTitle.replace(/%20/g, ' ').replace(/%28/g, '(').replace(/%29/g, ')');
-
-    // Set the title and meta description dynamically
-    titleElement.innerText = `${blogTitle} - Eduxcel`;
-
-    // Set the meta description based on the blog's overview or description
-    const matchingBlog = window.blogsData?.tools.find((blog) => blog.title === decodedBlogTitle || blog.title === blogTitle);
-
-  if (matchingBlog) {
-  const overview = matchingBlog.overview;
-  const description = matchingBlog.description;
-
-  if (overview) {
-    // Display the overview as the meta description if available
-    metaDescriptionElement.setAttribute('content', overview.join(' '));
-  } else if (description) {
-    // Display the description as the meta description if overview is not available
-    metaDescriptionElement.setAttribute('content', description.join(' '));
-  } else {
-    // Set a default description if neither overview nor description is found
-    metaDescriptionElement.setAttribute('content', 'Explore a variety of educational topics and tutorials on EduXcel. Enhance your knowledge and skills with our high-quality online courses and learning resources.');
-  }
-} else {
-  // Set a default description if the blog is not found
-  metaDescriptionElement.setAttribute('content', 'Explore a variety of educational topics and tutorials on EduXcel. Enhance your knowledge and skills with our high-quality online courses and learning resources.');
-}
-  });
-</script>
   <!-- Open Graph and Twitter Card meta tags for social media sharing -->
   <meta property="og:title" content="EduXcel - Nurturing Excellence through Global Online Education" />
   <meta property="og:description" content="Empower your learning journey with EduXcel. Explore a diverse range of high-quality courses and personalized learning experiences tailored just for you, now available globally." />
