@@ -151,33 +151,39 @@ const Suggest = () => {
 
     fetchRandomBlogTitles();
   }, []);
-
+  const slugify = (text) => {
+    return text.toString().toLowerCase()
+      .replace(/\s+/g, '-')        // Replace spaces with -
+      .replace(/[^\w-]+/g, '')     // Remove all non-word characters
+      .replace(/--+/g, '-')        // Replace multiple - with single -
+      .replace(/^-+/, '')          // Trim - from start of text
+      .replace(/-+$/, '');         // Trim - from end of text
+  };
   return (
-
     <>
-    <CardWrapper> 
-      <Title>Curated Blog Recommendations</Title>
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        {randomBlogTitles.map((title, index) => (
-          <Link key={index} to={`https://eduxcel.vercel.app/blogs/tools/${encodeURIComponent(title)}`}>
-            <CardContainer style={{ animationDelay: `${index * 0.1}s` }}>
-              {/* Image Section */}
-              <ImageContainer>
-                <CardImage src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/e.webp" alt="Blog Thumbnail" />
-              </ImageContainer>
+      <CardWrapper>
+        <Title>Curated Blog Recommendations</Title>
+        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+          {randomBlogTitles.map((title, index) => {
+            const slug = slugify(title);
+            return (
+              <Link key={index} to={`https://eduxcel.vercel.app/blogs/tools/${slug}`}>
+                <CardContainer style={{ animationDelay: `${index * 0.1}s` }}>
+                  {/* Image Section */}
+                  <ImageContainer>
+                    <CardImage src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/e.webp" alt="Blog Thumbnail" />
+                  </ImageContainer>
 
-              {/* Title Section */}
-              <TitleSection>
-                <BlogTitle>{title}</BlogTitle>
-              </TitleSection>
-            </CardContainer>
-          </Link>
-        ))}
-      </div>
-
-  
-    </CardWrapper>
-  
+                  {/* Title Section */}
+                  <TitleSection>
+                    <BlogTitle>{title}</BlogTitle>
+                  </TitleSection>
+                </CardContainer>
+              </Link>
+            );
+          })}
+        </div>
+      </CardWrapper>
     </>
   );
 };
