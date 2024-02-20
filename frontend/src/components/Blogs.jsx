@@ -12,7 +12,6 @@
       Collapse,
       Button,
     } from "@chakra-ui/react";
-    import { Helmet } from "react-helmet-async";  // Import Helmet
 
     import {
     
@@ -33,53 +32,67 @@
 
     import { Link } from "react-router-dom";
 
-     const BlogTitle = React.forwardRef(({ title, collection, onClick, location }, ref) => (
-      <motion.div
-        whileHover={{
-          textDecoration: "underline",
-        }}
-        whileTap={{ scale: 0.95 }}
-        transition={{ duration: 0.2 }}
-        onClick={() => onClick(title, collection)}
-        ref={ref}
-        style={{ cursor: "pointer", marginLeft: location === "main" ? "50px" : "0", position: "relative" }} // Add position relative
-      >
-        <div
-          style={{
-            fontWeight: "bold",
-            textDecoration: "none",
-            fontFamily: "Roboto, sans-serif",
-            textAlign: "left",
-            padding: "8px",
-            fontSize: location === "main" ? "25px" : "20px",
-            color: location === "main" ? "white" : "Turquoise ",
-            marginTop: location === "main" ? "50px" : "5px",
+   
+    const slugify = (text) => {
+      return text.toString().toLowerCase()
+        .replace(/\s+/g, '-')        // Replace spaces with -
+        .replace(/[^\w-]+/g, '')     // Remove all non-word characters
+        .replace(/--+/g, '-')        // Replace multiple - with single -
+        .replace(/^-+/, '')          // Trim - from start of text
+        .replace(/-+$/, '');         // Trim - from end of text
+    };
+    
+    const BlogTitle = React.forwardRef(({ title, collection, onClick, location }, ref) => {
+      const slug = slugify(title); // Generate slug from title
+    
+      return (
+        <motion.div
+          whileHover={{
+            textDecoration: "underline",
           }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ duration: 0.2 }}
+          onClick={() => onClick(title, collection)}
+          ref={ref}
+          style={{ cursor: "pointer", marginLeft: location === "main" ? "50px" : "0", position: "relative" }} // Add position relative
         >
-          <Link
-            to={`/${collection}/${encodeURIComponent(title)}`}
-            style={{ color: "inherit", textDecoration: "none" }}
+          <div
+            style={{
+              fontWeight: "bold",
+              textDecoration: "none",
+              fontFamily: "Roboto, sans-serif",
+              textAlign: "left",
+              padding: "8px",
+              fontSize: location === "main" ? "25px" : "18px",
+              color: location === "main" ? "white" : "Turquoise ",
+              marginTop: location === "main" ? "50px" : "5px",
+            }}
           >
-            {title}
-          </Link>
-        </div>
-        {location === "main" && (
-        <div
-        style={{
-          position: "absolute",
-          bottom: "-5px",
-          left: 0,
-          width: "100%",
-          height: "2px",
-          background: "linear-gradient(to right, rgba(255, 215, 0, 1), rgba(255, 255, 255, 0.7), rgba(255, 215, 0, 1))", // Use linear gradient for a more dynamic shine effect
-          borderRadius: "10px", 
-          animation: "shine 2s infinite linear", 
-        }}
-      />
-      
-        )}
-      </motion.div>
-    ));
+            <Link
+              to={`/blogs/${collection}/${slug}`} 
+              style={{ color: "inherit", textDecoration: "none" }}
+            >
+              {title}
+            </Link>
+          </div>
+          {location === "main" && (
+            <div
+              style={{
+                position: "absolute",
+                bottom: "-5px",
+                left: 0,
+                width: "100%",
+                height: "2px",
+                background: "linear-gradient(to right, rgba(255, 215, 0, 1), rgba(255, 255, 255, 0.7), rgba(255, 215, 0, 1))", // Use linear gradient for a more dynamic shine effect
+                borderRadius: "10px",
+                animation: "shine 2s infinite linear",
+              }}
+            />
+          )}
+        </motion.div>
+      );
+    });
+    
     
     const Blogs = () => {
       const [blogsData, setBlogsData] = useState({
@@ -217,8 +230,15 @@
           });
         }
       };
-       
-  const handleTitleClick = useCallback((title, collection) => {
+      const generateSlug = (text) => {
+        return text.toString().toLowerCase()
+          .replace(/\s+/g, '-')        // Replace spaces with -
+          .replace(/[^\w-]+/g, '')     // Remove all non-word characters
+          .replace(/--+/g, '-')        // Replace multiple - with single -
+          .replace(/^-+/, '')          // Trim - from start of text
+          .replace(/-+$/, '');         // Trim - from end of text
+      };
+      const handleTitleClick = useCallback((title, collection) => {
         const encodedTitle = encodeURIComponent(title);
         const matchingBlog = blogsData[collection].find((blog) => blog.title === title);
     
@@ -226,17 +246,19 @@
           const pageIndex =
             Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
     
-          navigate(`/blogs/${collection}/${encodedTitle}`, {
+          const slug = generateSlug(title); // Generate slug from title
+    
+          navigate(`/blogs/${collection}/${slug}`, {
             replace: true,
           });
     
           setCurrentPage(pageIndex);
     
           // Set the title dynamically when a title is clicked
-          document.title = `${matchingBlog.title} | Eduxcel`; // Replace with your website name
+          document.title = `${matchingBlog.title} | Eduxcel`; 
         }
         setLastVisitedBlog({ title, collection });
-      }, [blogsData, navigate, postsPerPage]);
+      }, [blogsData, navigate, postsPerPage, setCurrentPage, setLastVisitedBlog]);
     
   useEffect(() => {
     const query = location.pathname.split("/blogs/search/")[1] || "";
@@ -255,8 +277,8 @@
       const urlTitle = decodeURIComponent(encodedTitle);
       const matchingBlog = blogsData[collection]?.find(
         (blog) =>
-          blog.title === urlTitle ||
-          (blog.parentTitle && blog.parentTitle.title === urlTitle) ||
+        slugify(blog.title) === urlTitle ||
+        (blog.parentTitle && blog.parentTitle.title === urlTitle) ||
           (blog.extension1 && blog.extension1.title === urlTitle) ||
           (blog.extension2 && blog.extension2.title === urlTitle) ||
           (blog.extension3 && blog.extension3.title === urlTitle) ||
@@ -282,35 +304,19 @@
           false
       );
 
+   
       if (matchingBlog) {
-  // Set the current page to the matched blog's page
-  const pageIndex =
-    Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
-  setCurrentPage(pageIndex);
+        // Set the current page to the matched blog's page
+        const pageIndex =
+          Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
+        setCurrentPage(pageIndex);
 
-  // Set the title and description dynamically for SEO
-  const blogTitle = decodeURIComponent(matchingBlog.title);
-  const cleanedBlogTitle = blogTitle.replace(/%20/g, ' ').replace(/%28/g, '(').replace(/%29/g, ')');
-  const blogDescription = matchingBlog.overview
-    ? matchingBlog.overview.join(' ')
-    : matchingBlog.description || '';
-
-  // Use Helmet to update the document head
-  Helmet.canUseDOM && Helmet.startUpdating();
-  Helmet.canUseDOM &&
-    Helmet.updateHelmet({
-      title: `${cleanedBlogTitle} | Eduxcel`,
-      meta: [
-        {
-          name: 'description',
-          content: blogDescription,
-        },
-      ],
-    });
-  Helmet.canUseDOM && Helmet.stopUpdating();
-}
-      
+        // Set the title and description dynamically for SEO
+        const blogTitle = decodeURIComponent(matchingBlog.title);
+        document.title = `${blogTitle} | EduXcel`;
+      }
     }
+
     if (lastVisitedBlog) {
       localStorage.setItem('lastVisitedBlog', JSON.stringify(lastVisitedBlog));
     }
