@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+  import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { css } from '@emotion/react';
@@ -118,7 +118,7 @@ function Signin() {
           )}
         </button>
         <Link to="/forgot-password" className="forgot-password-link">
-          Forgot Password
+          Forgot Password❓ Click to reset 
         </Link>
       </form>
       {signinError && <p className="error-message">{signinError}</p>}
