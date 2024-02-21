@@ -38,7 +38,7 @@ function ResetPassword() {
 
   return (
     <div className="reset-password-container">
-      <h2>Reset Password</h2>
+        <h1 className="reset-heading">Password Reset | Eduxcel</h1>
       {message && <p className={`message ${message === 'Password reset successfully' ? 'success' : 'error'}`}>{message}</p>}
       <form onSubmit={handleSubmit}>
         <div className="input-container">
