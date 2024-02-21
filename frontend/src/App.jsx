@@ -12,6 +12,7 @@ import Blogs from './components/Blogs';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import Career from './components/Career';
+import PageTransition from "./components/PageTransition"; 
 
 import Footer from './components/Footer';
 import SignInSignUp from './components/SignInSignUp'; // Import the SignInSignUp component
@@ -47,9 +48,9 @@ function App() {
               path="/courses/:title/:module/submodules/:submodule"
               element={<SubModuleDetails />}
             />
-            <Route path="/signup" element={<SignInSignUp />} /> {/* Use SignInSignUp component for sign-up */}
-            <Route path="/signin" element={<SignInSignUp />} /> {/* Use SignInSignUp component for sign-in */}
-            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/signup" element={<PageTransition><SignInSignUp /></PageTransition>} />
+        <Route path="/signin" element={<PageTransition><SignInSignUp /></PageTransition>} />
+            <Route path="/forgot-password" element={<PageTransition><ForgotPassword /></PageTransition>} />
             <Route path="/reset" element={<ResetPassword />} />
                <Route path="/blogs/*" element={<Blogs />} />
                        <Route path="/careers/*" element={<Career />} />
