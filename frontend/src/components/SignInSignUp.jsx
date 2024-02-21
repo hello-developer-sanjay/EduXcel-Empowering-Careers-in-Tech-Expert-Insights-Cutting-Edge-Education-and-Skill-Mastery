@@ -16,30 +16,31 @@ function SignInSignUp({ showCloseButton }) {
   };
 
   return (
-    <div className="auth-container">
-      <div className={`auth-box ${isSignUp ? 'signup' : 'signin'}`}>
-        {showCloseButton && (
-          <button className="close-button" onClick={handleClose}>
-            Close
-          </button>
-        )}
-        <div className="auth-content">
-          <h2>{isSignUp ? 'Sign Up' : 'Sign In'}</h2>
-          {isSignUp ? <Signup /> : <Signin />}
-        </div>
-      
-        <div className="auth-toggle">
-          <p onClick={toggleForm} className="toggle-link">
-            {isSignUp
-              ? 'Already have an account? Sign in'
-              : "Don't have an account? Sign up"}
-          </p>
-        </div>
-          <div className="auth-image">
-          <img src={SecurityImage} alt="Security" />
-        </div>
-      </div>
+    <div className="auth-content-container">
+  <div className={`auth-box ${isSignUp ? 'signup' : 'signin'}`}>
+    {showCloseButton && (
+      <button className="close-button" onClick={handleClose}>
+        Close
+      </button>
+    )}
+    <div className="auth-content">
+      <h1 className="sign-heading">{isSignUp ? 'Sign Up - EduXcel' : 'Sign In - EduXcel'}</h1>
+      {isSignUp ? <Signup /> : <Signin />}
     </div>
+  
+    <div className="auth-toggle">
+      <p onClick={toggleForm} className="toggle-link">
+        {isSignUp
+          ? 'Already have an account? Sign in'
+          : "Don't have an account? Sign up"}
+      </p>
+    </div>
+  </div>
+  <div className="auth-image">
+    <img src={SecurityImage} alt="Security" />
+  </div>
+</div>
+
   );
 }
 
