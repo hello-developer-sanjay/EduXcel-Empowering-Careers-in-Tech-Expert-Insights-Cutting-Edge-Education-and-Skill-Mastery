@@ -1,6 +1,6 @@
 // ForgotPassword.jsx
-import React, { useState } from 'react';
-import '../styles/ForgotPassword.css'; // Import the CSS file for styling
+import  { useState } from 'react';
+import '../styles/ForgotPassword.css';
 import axios from 'axios';
 
 function ForgotPassword() {
@@ -25,7 +25,7 @@ function ForgotPassword() {
   return (
     <div className="forgot-password-container">
       <div className="forgot-password-box">
-        <h1 className="forgot-password-heading">Forgot Password</h1>
+        <h1 className="forgot-password-heading">Password Reset | Eduxcel</h1>
         <form onSubmit={handleSubmit} className="forgot-password-form">
           <div className="form-group">
             <label htmlFor="email" className="form-label">Email:</label>
@@ -41,10 +41,11 @@ function ForgotPassword() {
           <button type="submit" className="reset-button">Reset Password</button>
         </form>
         {message && (
-  <p className={`message ${message === 'Password reset email sent successfully' ? 'success' : 'error'}`}>
-    {message}
-  </p>
-)}
+          <p className={`message ${message === 'Password reset email sent successfully' ? 'success' : 'error'}`}>
+            {message}
+          </p>
+        )}
+        <p className="note">Note: If your email is registered with us, you will receive instructions to reset your password.</p>
       </div>
     </div>
   );
