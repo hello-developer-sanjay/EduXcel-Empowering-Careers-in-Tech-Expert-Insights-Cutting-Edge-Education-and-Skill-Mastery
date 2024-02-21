@@ -41,7 +41,7 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/profile" element={<UserProfile />} />
+            <Route path="/profile" element={<PageTransition><UserProfile /></PageTransition>} />
             <Route path="/courses/:title" element={<CourseDetails />} />
             <Route path="/courses/:title/:module" element={<ModuleDetails />} />
             <Route
