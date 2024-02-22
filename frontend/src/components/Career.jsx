@@ -303,14 +303,18 @@
               Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
             setCurrentPage(pageIndex);
     
-            // Set the title and description dynamically for SEO
-            const blogTitle = decodeURIComponent(matchingBlog.title);
-            document.title = `${blogTitle} | EduXcel`;
+           // Set the title dynamically for SEO
+      const pageTitle = `${matchingBlog.title} | EduXcel | Sanjay Patidar`;
+
+      // Update Helmet to set the dynamically generated title
+      const helmet = document.querySelector('title');
+      if (helmet) {
+        helmet.innerText = pageTitle;
+      }
           }
         }
       }, [blogsData, fetchDataForAllCollections, location, postsPerPage, setCurrentPage]);
-   
-      const indexOfLastPost = currentPage * postsPerPage;
+         const indexOfLastPost = currentPage * postsPerPage;
       const indexOfFirstPost = indexOfLastPost - postsPerPage;
       const currentPosts = filteredBlogs("careers").slice(indexOfFirstPost, indexOfLastPost);
 
