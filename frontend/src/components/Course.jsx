@@ -51,6 +51,10 @@ const ProjectWebsiteLink = styled.a`
     transform: rotate(45deg); /* Rotate the icon on hover */
   }
 `;
+const HighlightedText = styled.span`
+  color: #0070f3; /* Highlighted text color */
+  font-weight: bold; /* Highlighted text bold */
+`;
 
 const ProjectTitle = styled.span`
   font-weight: bold;
@@ -81,6 +85,7 @@ const ProjectTitle = styled.span`
       transform: translateY(-5px);
     }
   }
+  
 `;
 
 
@@ -171,14 +176,13 @@ const ProjectDescription = styled.p`
 
 
   &:before {
-    content: '✨ Project Description ✨'; /* Use decorative stars as labels */
+    content: '✨ Course Description ✨'; /* Use decorative stars as labels */
     display: block;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     color: #0070f3; /* Change the label color */
     font-size: 1.2rem; /* Adjust label font size */
     letter-spacing: 2px; /* Add letter spacing for emphasis */
-    text-align: center;
+    text-align: left;
     text-transform: uppercase; /* Uppercase text for emphasis */
   }
 
@@ -213,7 +217,7 @@ const ProjectDescription = styled.p`
 
 const Course = () => {
   const { category } = useParams();
-  const [projects, setProjects] = useState([]);
+  const [courses, setProjects] = useState([]);
 
   useEffect(() => {
     async function fetchProjects() {
@@ -276,52 +280,24 @@ Frontend            </ProjectsNavLinkContainer>
         </ProjectsNavList>
       </ProjectsNavigation>
       <ProjectsContent>
-        {projects.length > 0 ? (
-         <ProjectList>
-            {projects.map((course) => (
-              <ProjectItem key={course._id}>
-                <NavLink to={`/api/courses/details/${course._id}`}
-                   style={{ textDecoration: 'none' }}
-                  >
-                  <ProjectTitle>
-                    {course.title}
-                  </ProjectTitle>
-                </NavLink>
-                {course.websiteLink && (
-                  <ProjectWebsiteLink href={course.websiteLink} target="_blank" rel="noopener noreferrer">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      width="18"
-                      height="18"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M19 19a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h5l2 2h2a2 2 0 012 2v8z"
-                      />
-                    </svg>
-                    Visit Website
-                  </ProjectWebsiteLink>
-                )}
-                                       {course.description && (
+        {courses.length > 0 ? (
+          <ProjectList>
+            {courses.map((course) => {
+              console.log("Course:", course);
+              return (
+                <ProjectItem key={course._id}>
+                  <NavLink to={`/api/courses/details/${course._id}`} style={{ textDecoration: 'none' }}>
+                    <ProjectTitle>{course.title}</ProjectTitle>
+                  </NavLink>
+                  {course.websiteLink && (
+                    <ProjectWebsiteLink href={course.websiteLink} target="_blank" rel="noopener noreferrer">
+                      {/* Your SVG path here... */}
+                      Visit Website
+                    </ProjectWebsiteLink>
+                  )}
+                                 {course.overview && (
                   <ProjectDescription>
-                    {course.description.map((desc, index) => {
+                    {course.overview.map((desc, index) => {
                       // Use regular expressions to find text between ^ markers and apply styling
                       const highlightedText = desc.split(/\^([^]+?)\^/).map((part, i) => {
                         if (i % 2 === 1) {
@@ -339,14 +315,17 @@ Frontend            </ProjectsNavLinkContainer>
                       );
                     })}
                   </ProjectDescription>
-                )}
-              </ProjectItem>
-            ))}
+)}
+                </ProjectItem>
+              );
+            })}
           </ProjectList>
         ) : (
           <p>No projects found.</p>
         )}
       </ProjectsContent>
+
+    
     </ProjectsContainer>
   );
 };
