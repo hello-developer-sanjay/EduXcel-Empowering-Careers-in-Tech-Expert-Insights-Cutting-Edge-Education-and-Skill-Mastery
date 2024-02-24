@@ -150,10 +150,9 @@ if (inViewContent) {
             // Extract the blog title from the URL
             const pathArray = window.location.pathname.split('/');
             const decodedBlogTitle = decodeURIComponent(pathArray[pathArray.length - 1]);
-            const blogTitle = decodedBlogTitle.replace(/%20/g, ' ').replace(/%28/g, '(').replace(/%29/g, ')');
             
             // Set the title and meta description dynamically
-            titleElement.innerText = \`\${blogTitle} - Eduxcel\`;
+            titleElement.innerText = \`\${title} - Eduxcel\`;
             
             // Set the meta description based on the blog's overview or description
             const matchingBlog = window.blogsData?.tools.find((blog) => blog.title === decodedBlogTitle || blog.title === blogTitle);
