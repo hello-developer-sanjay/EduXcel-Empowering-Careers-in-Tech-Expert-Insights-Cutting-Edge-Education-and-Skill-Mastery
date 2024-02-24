@@ -79,7 +79,7 @@ function CourseList() {
                 ></div>
                 <div className="course-info">
                   <h3>{category}</h3>
-                  <p>{course.overview}</p>
+                  <p>{course.description}</p>
                 </div>
               </Link>
             </div>
