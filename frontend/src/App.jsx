@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route ,useNavigate } from 'react-router-dom';
+import  { useEffect} from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import SubHeader from './components/SubHeader';
 import Home from './pages/Home';
@@ -17,44 +17,19 @@ import PageTransition from "./components/PageTransition";
 import Course from './components/Course';
 import CourseDetailed from './components/CourseDetailed';
 import CourseList from './components/CourseList';
+import { useLocation } from 'react-router-dom';
 const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [pathname]);
 
   return null;
 };
-// Custom hook to manage the current route state
-const useCurrentRoute = () => {
-  const [isBlogsRoute, setIsBlogsRoute] = useState(false);
-
-  useEffect(() => {
-    const handleRouteChange = () => {
-      setIsBlogsRoute(window.location.pathname.startsWith('/blogs'));
-    };
-
-    // Attach the event listener
-    window.addEventListener('popstate', handleRouteChange);
-
-    // Call it once to set the initial state
-    handleRouteChange();
-
-    // Detach the event listener on component unmount
-    return () => {
-      window.removeEventListener('popstate', handleRouteChange);
-    };
-  }, []);
-
-  useEffect(() => {
-    // Additional check to handle initial rendering
-    setIsBlogsRoute(window.location.pathname.startsWith('/blogs'));
-  }, []);
-
-  return isBlogsRoute;
-};
 
 function App() {
-  const isBlogsRoute = useCurrentRoute();
+  
 
 
 
@@ -70,9 +45,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/courses" element={<Course />} />
-            <Route path="/courses/:category" element={<PageTransition><Course /></PageTransition>} />
-            <Route path="/courses/category/${category}" element={<PageTransition><CourseList /></PageTransition>} />
-            <Route path="/api/courses/details/:id" element={<PageTransition><CourseDetailed /></PageTransition>} />
+            <Route path="/courses/:category" element={<Course />} />
+            <Route path="/courses/category/${category}" element={<CourseList />} />
+            <Route path="/api/courses/details/:id" element={<CourseDetailed />} />
 
 
             <Route path="/profile" element={<PageTransition><UserProfile /></PageTransition>} />
@@ -93,7 +68,7 @@ function App() {
           </Routes>
         </div>
         <div className='relative z-0'>
-        {!isBlogsRoute && <Footer />}
+       <Footer />
         </div>
       </div>
     </Router>
