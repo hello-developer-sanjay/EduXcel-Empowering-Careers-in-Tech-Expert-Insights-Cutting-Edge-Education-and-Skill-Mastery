@@ -11,13 +11,14 @@ const ProjectDetailsContainer = styled.div`
   background-color: #CBD1C3;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
 `;
 
 const ProjectDetailsTitle = styled.h2`
   font-size: 3rem;
   margin-bottom: 1rem;
-  
+  align-items: center;
+justify-content: center;
   color: #ff6b6b;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   font-family: 'Pacifico', cursive;
@@ -55,14 +56,14 @@ const ProjectDetailsDescription = styled.p`
 
 
   &:before {
-    content: '✨ Project Description ✨'; /* Use decorative stars as labels */
+    content: '✨  Description ✨'; /* Use decorative stars as labels */
     display: block;
     font-weight: bold;
     margin-bottom: 0.5rem;
     color: #0070f3; /* Change the label color */
     font-size: 1.2rem; /* Adjust label font size */
     letter-spacing: 2px; /* Add letter spacing for emphasis */
-    text-align: center;
+    text-align: left;
     text-transform: uppercase; /* Uppercase text for emphasis */
   }
 
@@ -197,7 +198,7 @@ const CourseDetailed = () => {
           )}
          {course.description && (
                   <ProjectDetailsDescription>
-                    {course.description.map((desc, index) => {
+                    {course.overview.map((desc, index) => {
                       // Use regular expressions to find text between ^ markers and apply styling
                       const highlightedText = desc.split(/\^([^]+?)\^/).map((part, i) => {
                         if (i % 2 === 1) {
