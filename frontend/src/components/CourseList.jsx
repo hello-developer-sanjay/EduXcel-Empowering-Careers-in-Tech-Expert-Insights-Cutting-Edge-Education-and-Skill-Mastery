@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import '../styles/CourseList.css';
 import courseImage1 from '../assets/full2.webp';
@@ -10,11 +11,20 @@ import SignInSignUp from './SignInSignUp';
 function CourseList() {
   const [courses, setCourses] = useState([]);
   const [showSignInSignUp, setShowSignInSignUp] = useState(false);
+  const { category } = useParams();
 
   useEffect(() => {
     async function fetchCourses() {
       try {
-        const response = await axios.get('https://edu-back-j3mz.onrender.com/api/courses');
+        let response;
+        if (!category || category === 'all') {
+          response = await axios.get('https://edu-back-j3mz.onrender.com/api/courses/category/all');
+        } else {
+          response = await axios.get(`https://edu-back-j3mz.onrender.com/api/courses/category/${category}`);
+        }
+        if (!response) {
+          response = await axios.get('https://edu-back-j3mz.onrender.com/api/courses/category');
+        }
         setCourses(response.data);
       } catch (error) {
         console.error('Error fetching courses:', error);
@@ -22,10 +32,13 @@ function CourseList() {
     }
 
     fetchCourses();
-  }, []);
+  }, [category]);
+
+  const uniqueCategories = Array.from(new Set(courses.map(course => course.category)));
 
   // Function to handle hover over course card
   const handleCourseCardHover = () => {
+    // Only show the signup form if the user is not signed in
     if (!localStorage.getItem('token')) {
       setShowSignInSignUp(true);
     }
@@ -46,29 +59,32 @@ function CourseList() {
 
   return (
     <div className="course-list">
-     
       <div className="course-cards">
-        {courses.map((course, index) => (
-          <div
-            className="course-card"
-            key={course._id}
-            onMouseEnter={handleCourseCardHover}
-            onMouseLeave={handleCourseCardHoverOut}
-          >
-            <Link to={`/courses/${course.title}`}>
-              <div
-                className="course-image"
-                style={{
-                  backgroundImage: `url(${getImageForCourse(index)})`,
-                }}
-              ></div>
-              <div className="course-info">
-                <h3>{course.title}</h3>
-                <p>{course.description}</p>
-              </div>
-            </Link>
-          </div>
-        ))}
+        {uniqueCategories.map((category, index) => {
+          const course = courses.find(course => course.category === category);
+          const image = getImageForCategory(category);
+          return (
+            <div
+              className="course-card"
+              key={index} // Use index as key since category itself is not unique
+              onMouseEnter={handleCourseCardHover}
+              onMouseLeave={handleCourseCardHoverOut}
+            >
+              <Link to={`/courses/${category}`}>
+                <div
+                  className="course-image"
+                  style={{
+                    backgroundImage: `url(${image})`,
+                  }}
+                ></div>
+                <div className="course-info">
+                  <h3>{category}</h3>
+                  <p>{course.overview}</p>
+                </div>
+              </Link>
+            </div>
+          );
+        })}
       </div>
       {showSignInSignUp && (
         <div className="sign-in-sign-up-container">
@@ -82,10 +98,19 @@ function CourseList() {
   );
 }
 
-// Function to get the image URL for each course card
-function getImageForCourse(index) {
-  const courseImages = [courseImage1, courseImage2, courseImage3];
-  return courseImages[index] || '';
+// Function to get the image URL for each category
+function getImageForCategory(category) {
+  // You can modify this function based on your logic to map categories to images
+  switch (category) {
+    case 'frontend':
+      return courseImage1;
+    case 'data_science':
+      return courseImage2;
+    case 'machine_learning':
+      return courseImage3;
+    default:
+      return ''; // Default image or empty string for no image
+  }
 }
 
 export default CourseList;
