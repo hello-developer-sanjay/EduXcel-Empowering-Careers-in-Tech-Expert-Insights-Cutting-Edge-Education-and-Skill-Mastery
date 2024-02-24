@@ -114,3 +114,4 @@ function getImageForCategory(category) {
 }
 
 export default CourseList;
+
