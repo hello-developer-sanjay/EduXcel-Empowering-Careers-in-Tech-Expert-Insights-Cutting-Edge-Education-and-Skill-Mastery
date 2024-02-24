@@ -26,7 +26,6 @@ function CourseList() {
 
   // Function to handle hover over course card
   const handleCourseCardHover = () => {
-    // Only show the signup form if the user is not signed in
     if (!localStorage.getItem('token')) {
       setShowSignInSignUp(true);
     }
