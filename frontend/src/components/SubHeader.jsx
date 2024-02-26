@@ -1,12 +1,13 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import '../styles/SubHeader.css'; // Import your CSS file for styling
+import { useNavigate, useParams } from 'react-router-dom';
+import '../styles/SubHeader.css';
 
 function SubHeader() {
   const navigate = useNavigate();
   const [courses, setCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState(null);
+  const { category } = useParams();
 
   useEffect(() => {
     async function fetchCourses() {
@@ -25,11 +26,11 @@ function SubHeader() {
     const courseTitle = event.target.value;
     const selectedCourse = courses.find((course) => course.title === courseTitle);
     setSelectedCourse(selectedCourse);
-    if (selectedCourse) {
-      navigate(`/courses/${encodeURIComponent(courseTitle)}`);
+    if (selectedCourse && selectedCourse.category) {
+      navigate(`/course/${selectedCourse.category}`);
     }
   };
-
+  
   return (
     <div className="subheader">
       <div className="dropdown-container">
@@ -46,7 +47,11 @@ function SubHeader() {
             Choose a Course
           </option>
           {courses.map((course) => (
-            <option key={course._id} value={course.title} className="dropdown-option">
+            <option
+              key={course._id}
+              value={course.title}
+              className="dropdown-option"
+            >
               {course.title}
             </option>
           ))}
