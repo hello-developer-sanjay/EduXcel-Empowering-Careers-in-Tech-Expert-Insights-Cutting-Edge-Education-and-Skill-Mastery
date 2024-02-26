@@ -263,17 +263,17 @@ const Course = () => {
         <ProjectsNavList>
           
           <ProjectsNavItem>
-            <ProjectsNavLinkContainer to="/courses/frontend">
-Frontend            </ProjectsNavLinkContainer>
+            <ProjectsNavLinkContainer to="/course/frontend_courses">
+  Frontend            </ProjectsNavLinkContainer>
           </ProjectsNavItem>
           <ProjectsNavItem>
-            <ProjectsNavLinkContainer to="/courses/data_science">
+            <ProjectsNavLinkContainer to="/course/data_science_courses">
         Data Science
             </ProjectsNavLinkContainer>
           </ProjectsNavItem>
           <ProjectsNavItem>
 
-            <ProjectsNavLinkContainer to="/courses/machine_learning">
+            <ProjectsNavLinkContainer to="/course/machine_learning_courses">
               Machine Learning
             </ProjectsNavLinkContainer>
           </ProjectsNavItem>
