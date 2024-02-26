@@ -70,7 +70,7 @@ function CourseList() {
               onMouseEnter={handleCourseCardHover}
               onMouseLeave={handleCourseCardHoverOut}
             >
-              <Link to={`/courses/${category}`}>
+              <Link to={`/course/${category}`}>
                 <div
                   className="course-image"
                   style={{
