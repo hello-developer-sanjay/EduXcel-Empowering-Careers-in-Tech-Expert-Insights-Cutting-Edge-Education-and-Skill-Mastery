@@ -102,11 +102,11 @@ function CourseList() {
 function getImageForCategory(category) {
   // You can modify this function based on your logic to map categories to images
   switch (category) {
-    case 'frontend':
+    case 'frontend_courses':
       return courseImage1;
-    case 'data_science':
+    case 'data_science_courses':
       return courseImage2;
-    case 'machine_learning':
+    case 'machine_learning_courses':
       return courseImage3;
     default:
       return ''; // Default image or empty string for no image
