@@ -128,7 +128,7 @@ if (inViewContent) {
   return (
     <section className={`relative w-full min-h-screen mx-auto`}>
        <Helmet>
-        <title>EduXcel - Nurturing Excellence through Online Education</title>
+        <title>EduXcel | Empowering Careers in Tech: Expert Insights, Cutting-Edge Education, and Skill Mastery</title>
         <meta
           name="description"
           content="Explore our courses and enhance your skills with Eduxcel. Find a wide range of online courses on various topics to boost your knowledge."
@@ -142,37 +142,7 @@ if (inViewContent) {
         </script>
 
 
-        <script type="text/javascript" dangerouslySetInnerHTML={{ __html: `
-          document.addEventListener('DOMContentLoaded', function () {
-            const titleElement = document.querySelector('title');
-            const metaDescriptionElement = document.querySelector('meta[name="description"]');
-            
-            // Extract the blog title from the URL
-            const pathArray = window.location.pathname.split('/');
-            const decodedBlogTitle = decodeURIComponent(pathArray[pathArray.length - 1]);
-            
-            // Set the title and meta description dynamically
-            titleElement.innerText = \`\${title} - Eduxcel\`;
-            
-            // Set the meta description based on the blog's overview or description
-            const matchingBlog = window.blogsData?.tools.find((blog) => blog.title === decodedBlogTitle || blog.title === blogTitle);
-            
-            if (matchingBlog) {
-              const overviewOrDescription = matchingBlog.overview || (matchingBlog.content && matchingBlog.content.description);
-              
-              if (overviewOrDescription) {
-                metaDescriptionElement.setAttribute('content', overviewOrDescription.join(' '));
-              } else {
-                // Set a default description if neither overview nor description is found
-                metaDescriptionElement.setAttribute('content', 'Explore a variety of educational topics and tutorials on EduXcel. Enhance your knowledge and skills with our high-quality online courses and learning resources.');
-              }
-            } else {
-              // Set a default description if the blog is not found
-              metaDescriptionElement.setAttribute('content', 'Explore a variety of educational topics and tutorials on EduXcel. Enhance your knowledge and skills with our high-quality online courses and learning resources.');
-            }
-          });
-        `}} />
-      </Helmet>
+       </Helmet>
       
 
      <div className={`relative top-[10px] max-w-8xl mx-auto ${styles.paddingX} flex flex-col items-center`}>
