@@ -1,8 +1,8 @@
-# EduXcel E-Learning Platform
+# EduXcel | Empowering Careers in Tech: Expert Insights, Cutting-Edge Education, and Skill Mastery
 
 ![EduXcel Logo](https://sanjaybasket.s3.ap-south-1.amazonaws.com/logo.png)
 
-Welcome to the EduXcel E-Learning Platform! We are thrilled to introduce you to our innovative project, designed to revolutionize online education.
+Welcome to the EduXcel | Empowering Careers in Tech: Expert Insights, Cutting-Edge Education, and Skill Mastery! We are thrilled to introduce you to our innovative project, designed to revolutionize online education.
 
 ## Table of Contents
 
