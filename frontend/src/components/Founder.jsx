@@ -2,7 +2,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import {  useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { motion,useAnimation  } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
   import { Helmet } from 'react-helmet';
@@ -11,14 +10,6 @@ import DuckImage from "../assets/duck4.gif";
 import unlock from "../assets/unlock.gif";
 import Message from './Message';
 import 'react-toastify/dist/ReactToastify.css';
-import {
-  FaArrowRight,
-  FaUserGraduate,
-  FaLaptopCode,
-  FaBriefcase,
-  FaFilePdf,
-  FaCertificate,
-} from 'react-icons/fa';
 
 import Typed from 'react-typed';
 
@@ -59,7 +50,8 @@ const H1Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 3rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 
   @media (max-width: 768px) {
     display: none;
@@ -343,7 +335,7 @@ const Introduction = styled(motion.p)`
   }
    @media (max-width: 768px) {
   margin-top:1rem;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 
   }
 `;
@@ -408,90 +400,7 @@ const TypedText = styled.span`
   }
 `;
 
-const ActionsContainer = styled(motion.div)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  
-  gap: 1rem;
-  margin-top: 2rem;
-   @media (max-width: 768px) {
-    margin-bottom: 2rem;  
 
-  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
-  }
-`;
-
-const ActionLink = styled(Link)`
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(45deg, #ff6f00, #ffcc80);
-  color: #1a1a1a;
-  padding: 0.8rem 1rem;
-  margin-bottom: 4rem;  
-  border: 2px solid #ff6f00;
-  border-radius: 30px;
-  display: inline-flex;
-  align-items: center;
-  font-family: 'Playfair Display', serif;
-
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1rem;
-  transition: background 0.3s, transform 0.3s, box-shadow 0.3s, color 0.3s;
-  cursor: pointer;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
-
-  &:hover {
-    background: linear-gradient(to bottom right, #8a2be2, #4a90e2);
-    color: #fff;
-    transform: translateY(-7px);
-    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.5);
-  }
-
-  &:before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: linear-gradient(45deg, #ff6f00, #ffcc80);
-    border-radius: 30px;
-    transform: scaleX(0);
-    transform-origin: bottom right;
-    transition: transform 0.3s;
-  }
-
-  &:hover:before {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-  }
-
-  &:after {
-    content: 'Explore'; /* Display better text here */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-    font-size: 1rem;
-    font-weight: bold;
-    opacity: 0;
-    transition: opacity 0.3s, transform 0.3s;
-  }
-
-  &:hover:after {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.2);
-  }
-  @media (max-width: 768px) {
-    margin-bottom: 0rem;  
-
-  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
-  }
-`;
 
 
 
@@ -522,7 +431,7 @@ const socialButtons = [
 const SocialIcon = styled(motion.a)`
 display: flex;
 align-items: center;
-margin-top:3rem;
+margin-top:2rem;
 justify-content: center;
 width: 3rem;
 height: 3rem;
@@ -609,7 +518,7 @@ const Founder = () => {
 
   
 
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
+  const [ inView] = useInView({ triggerOnce: true, threshold: 0.3 });
   useEffect(() => {
     if (inView && animationEnabled) {
       controlsArray.forEach(async (_, index) => {
@@ -945,7 +854,9 @@ const Founder = () => {
             loop
           />
         </TypedText>
-        <H2> Sanjay Patidar</H2>  <br/> <span className="highlight">Founder : EduXcel</span><br/>Embark on the inspiring journey of Sanjay Patidar, the visionary founder behind EduXcel, dedicated to revolutionizing the tech industry.<br/> Sanjay is an accomplished web developer and UI/UX designer, driven by a passion for innovation and excellence.
+        <H2> Sanjay Patidar</H2>  <br/> <span className="highlight">Founder : EduXcel</span><br/>Embark on the inspiring journey of Sanjay Patidar, the visionary founder behind EduXcel, dedicated to revolutionizing the tech industry.<br/> Sanjay is an accomplished web developer and UI/UX designer, driven by a passion for innovation and excellence.<br/> <p>to Know more about Sanjay Patidar <a href="https://sanjay-patidar.vercel.app/" target="_blank"> 🌐 click here</a></p>
+
+
 
       </Introduction>
       </ProfileTextContainer>
@@ -972,44 +883,7 @@ const Founder = () => {
             Your Full Potential !</H1>
         </H1Container>
        
-     
-   
-
-
-
-
-
 <Message/>
-
-
-
-      <ActionsContainer>
-      {[
-        { to: "https://sanjay-patidar.vercel.app/skills" , text: "Explore My Skills", icon: <FaUserGraduate /> },
-        { to: "https://sanjay-patidar.vercel.app/education", text: "My Education", icon: <FaUserGraduate /> },
-        { to: "https://sanjay-patidar.vercel.app/projects", text: "Discover My Projects", icon: <FaLaptopCode /> },
-        { to: "https://sanjay-patidar.vercel.app/certifications", text: "Explore Certifications", icon: <FaCertificate /> },
-        { to: "https://sanjay-patidar.vercel.app/experiences", text: "View My Experiences", icon: <FaBriefcase /> },
-        { to: "https://sanjay-patidar.vercel.app/resume", text: "Download Resume", icon: <FaFilePdf /> },
-        { to: "https://sanjay-patidar.vercel.app/contact", text: "Contact Me", icon: <FaArrowRight /> },
-      ].map((link, index) => (
-        <motion.div
-        key={index}
-        initial={{ opacity: 0, y: 20 }}
-        animate={controlsArray[index]}
-        transition={{ delay: 0.1 * index, duration: 0.5 }}
-      >
-        <ActionLink to={link.to} ref={ref} onClick={() => animateInView(index)}>
-
-            {link.icon}
-            {link.text}
-          </ActionLink>
-        </motion.div>
-      ))}
-      
-    </ActionsContainer>
-
-
 
     </HomeContainer>
   );
