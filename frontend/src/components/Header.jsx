@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Typed from 'react-typed';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUserPlus, faNewspaper,faBriefcase } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUserPlus, faNewspaper,faBriefcase, faUserTie } from '@fortawesome/free-solid-svg-icons';
 
 const HeaderContainer = styled.header`
 background: linear-gradient(to right, #1a1a2e, #16213e, #0d1b2a);
@@ -136,7 +136,7 @@ const NavLinkItem = styled(Link)`
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px;
+  padding: 2px;
   border-radius: 10px;
   position: relative;
   overflow: hidden;
@@ -152,7 +152,7 @@ const NavLinkItem = styled(Link)`
   svg {
     font-size: 20px;
     transition: all 0.3s ease;
-    margin-right: 5px;
+    margin-right: 2px;
   }
 
   img {
@@ -356,7 +356,7 @@ function Header() {
       <HeaderContent>
         <Link to="/">
         <Logo>
-            <LargeScreenText className="eduxcel-text">Eduxcel Mastery: Your Journey to Academic Brilliance
+            <LargeScreenText className="eduxcel-text">Eduxcel Mastery:  Journey to Academic Brilliance
 </LargeScreenText>
             <SmallScreenText className="eduxcel-text">Eduxcel</SmallScreenText>
           </Logo>
@@ -405,6 +405,17 @@ function Header() {
         
 
           </NavItem>
+
+
+          <NavItem>
+            <NavLinkItem to="/sanjay-patidar-founder-eduxcel" aria-label="Founder" onClick={toggleMenu}>
+            <FontAwesomeIcon icon={faUserTie } />
+
+
+Meet Founder            </NavLinkItem>
+            
+          </NavItem>
+
           {/* Add more navigation links */}
         </NavList>
       </HamburgerMenu>
