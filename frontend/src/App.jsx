@@ -17,6 +17,8 @@ import PageTransition from "./components/PageTransition";
 import Course from './components/Course';
 import CourseDetailed from './components/CourseDetailed';
 import CourseList from './components/CourseList';
+import  Founder from './components/Founder';
+
 import { useLocation } from 'react-router-dom';
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -44,6 +46,8 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Home />} />
+                        <Route path="/sanjay-patidar-founder-eduxcel" element={<Founder/>} />
+
             <Route path="/courses" element={<Course />} />
             <Route path="/course/:category" element={<Course />} />
             <Route path="/courses/category/${category}" element={<CourseList />} />
