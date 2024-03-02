@@ -27,11 +27,7 @@ const HomeContainer = styled(motion.div)`
   position: relative;
 
  
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-
-  /* Add a border with a neon glow effect */
-  border: 2px solid #3f51b5; /* Royal blue */
-  border-radius: 10px;
+  background-color: #050816; 
 
   
 `;
@@ -70,17 +66,21 @@ const H1 = styled.h1`
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   letter-spacing: 2px; /* Increase letter spacing for a stylish look */
   transform: skew(-5deg); /* Apply a slight skew for a dynamic effect */
+
 `;
 const H2 = styled.h1`
   font-size: 3rem;
-  margin-bottom: 0rem;
+  margin-bottom: 1rem;
+
   font-weight: 900;
   color: #2ecc71;
-
   font-family: 'Playfair Display', serif;
 
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   transform: skew(-5deg); /* Apply a slight skew for a dynamic effect */
+  @media (max-width: 768px) {
+    font-size:2rem;
+    }
 `;
 const StyledCreaTeaImage = styled.img`
   width: 40px;
@@ -88,6 +88,14 @@ const StyledCreaTeaImage = styled.img`
   border-radius: 50%;
   box-shadow: 0px 0px 10px rgba(46, 204, 113, 0.5);
 `;
+const Text = styled.h1`
+  margin: 0;
+  font-size: 1.1rem;
+  color: #fff; 
+  padding: 5px 10px; /* Padding to create space around the text */
+
+`;
+
 
 const StyledUnlockImage = styled.img`
   width: 40px;
@@ -141,6 +149,7 @@ const ProfileImageContainer = styled.div`
     margin-right: 5rem;
     align-self: flex-start; /* Align the image to the start of the container on larger screens */
   }
+  
 `;
 
 
@@ -156,9 +165,9 @@ const BackgroundOverlay = styled.div`
 
 
 const ProfileImage = styled(motion.img)`
-  width: 380px;
-  height: 380px;
-  margin-top: 3rem;
+  width: 430px;
+  height: 430px;
+  margin-top: 6rem;
 
   border-radius: 50%;
   box-shadow: 0 0 10px rgba(255, 165, 0, 0.8), 0 0 20px rgba(255, 165, 0, 0.6);
@@ -290,9 +299,7 @@ const Introduction = styled(motion.p)`
     background-clip: text;
     -webkit-background-clip: text;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Shadow for depth */
-    padding-bottom: 5px;
-    margin-bottom: 1px;
-    line-height: 2rem;
+    padding-bottom: 0px;
     /* Animation for the highlight class */
     animation: highlightAnimation 3s ease-in-out infinite;
     @media (max-width: 768px) {
@@ -344,7 +351,7 @@ const Introduction = styled(motion.p)`
 const TypedText = styled.span`
   display: block;
   margin-top: 1rem;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   text-transform:uppercase;
   font-style: italic;
   font-weight: bold;
@@ -400,14 +407,6 @@ const TypedText = styled.span`
   }
 `;
 
-
-
-
-
-
-
-
-
 const SocialIconsContainer = styled(motion.div)`
 display: flex;
 justify-content: center;
@@ -431,7 +430,7 @@ const socialButtons = [
 const SocialIcon = styled(motion.a)`
 display: flex;
 align-items: center;
-margin-top:2rem;
+margin-top:4rem;
 justify-content: center;
 width: 3rem;
 height: 3rem;
@@ -776,11 +775,6 @@ const Founder = () => {
       <ProfileImageContainer>
       <ProfileImage
 
-
-
-
-
-
   src={profileImage1}
   alt="Sanjay Patidar"
   initial={{ y: -100, opacity: 0, filter: 'blur(10px)' }}
@@ -854,7 +848,15 @@ const Founder = () => {
             loop
           />
         </TypedText>
-        <H2> Sanjay Patidar</H2>  <br/> <span className="highlight">Founder : EduXcel</span><br/>Embark on the inspiring journey of Sanjay Patidar, the visionary founder behind EduXcel, dedicated to revolutionizing the tech industry.<br/> Sanjay is an accomplished web developer and UI/UX designer, driven by a passion for innovation and excellence.<br/> <p>to Know more about Sanjay Patidar <a href="https://sanjay-patidar.vercel.app/" target="_blank"> 🌐 click here</a></p>
+        <H2> Sanjay Patidar</H2>  
+        <span className="highlight">Founder & Developer : EduXcel</span><br/> 
+
+
+        <Text>Meet Sanjay Patidar, the Man Behind EduXcel</Text>
+<Text>Embark on the inspiring journey of Sanjay Patidar, the brain behind EduXcel, a platform dedicated to empowering careers in tech. As a web developer extraordinaire, Sanjay brings cutting-edge expertise to the table, crafting immersive digital experiences that redefine online education.</Text>
+<Text>Driven by a passion for innovation and excellence, Sanjay's vision for EduXcel is to make tech education accessible and exciting for everyone. With his knack for creating user-friendly interfaces and engaging learning experiences, he's revolutionizing the way Indians learn online.</Text>
+<Text>Whether you're a student eager to enhance your skills or an aspiring web developer looking to kickstart your career, Sanjay's expertise and EduXcel's offerings are your gateway to success in the digital world.</Text>
+<Text>Curious to know more about Sanjay Patidar and his journey? <a href="https://sanjay-patidar.vercel.app/" target="_blank">Click here</a> to explore!</Text>
 
 
 
