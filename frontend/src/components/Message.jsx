@@ -74,6 +74,13 @@ const Title = styled.h1`
     pointer-events: none; /* Allow interaction with elements behind the pseudo-element */
   }
 `;
+const Text = styled.h1`
+  margin: 0;
+  font-size: 1.1rem;
+  color: #fff; 
+  padding: 5px 10px; /* Padding to create space around the text */
+
+`;
 
 
 
@@ -91,28 +98,37 @@ const TitleSection = styled.div`
 
 const BlogTitle = styled.h3`
   margin: 0;
-  font-size: 18px;
-  color: #5AB2A0;
+  font-size: 20px;
+  color: #479E0B;
   position: relative;
   overflow: hidden;
   padding:1rem;
   transition: color 0.3s ease-in-out;
 
-  &:before {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease-in-out;
-  }
+ 
 `;
 
 const Message = () => {
-  
+  const copyContactNumber = () => {
+    const contactNumber = document.getElementById('contactNumber');
+    const range = document.createRange();
+    range.selectNode(contactNumber);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+    alert('Contact number copied!');
+  };
+  const copyInstaID = () => {
+    const instaID = document.getElementById('instaID');
+    const range = document.createRange();
+    range.selectNode(instaID);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+    alert('Instagram ID copied!');
+  };
 
   return (
     <>
@@ -122,29 +138,51 @@ const Message = () => {
         <Title>Welcome to EduXcel: Empowering Careers in Tech! </Title>
         <TitleSection>
           <BlogTitle>A Message from Our Founder </BlogTitle>
-<p>Dear Valued Visitors,
+<Text>Dear Valued Visitors,
 <br/>
-</p>
-<p>I am thrilled to extend a warm welcome to you as the <span className="highlight">founder of EduXcel</span>. Our journey began with a profound vision to revolutionize the tech industry and empower individuals like you to excel in your careers.<br/>
-</p>
+</Text>
+<Text>I am thrilled to extend a warm welcome to you as the <span className="highlight">founder of EduXcel</span>. Our journey began with a profound vision to revolutionize the tech industry and empower individuals like you to excel in your careers.<br/>
+</Text>
 
-<p>At <span className="highlight">EduXcel</span>, we believe that education is the cornerstone of progress, and technology serves as the catalyst for innovation. Our mission is simple yet ambitious: to provide expert insights, cutting-edge education, and skill mastery opportunities to learners worldwide.<br/></p>
+<Text>At <span className="highlight">EduXcel</span>, we believe that education is the cornerstone of progress, and technology serves as the catalyst for innovation. Our mission is simple yet ambitious: to provide expert insights, cutting-edge education, and skill mastery opportunities to learners worldwide.<br/></Text>
 
-<p>As a passionate advocate for education and technology, I understand the transformative power they hold. From my own experiences as a student to my endeavors in web development and UI/UX design, I've witnessed firsthand the profound impact that knowledge and innovation can have on one's journey.<br/></p>
+<Text>As a passionate advocate for education and technology, I understand the transformative power they hold. From my own experiences as a student to my endeavors in web development and UI/UX design, I've witnessed firsthand the profound impact that knowledge and innovation can have on one's journey.<br/></Text>
 
-<p>Through <span className="highlight">EduXcel</span>, we strive to cultivate a dynamic learning community where curiosity is encouraged, challenges are embraced, and growth is inevitable. Whether you're a seasoned professional seeking to enhance your skills or a budding enthusiast eager to explore new horizons, you'll find a wealth of resources and support within our platform.<br/></p>
+<Text>Through <span className="highlight">EduXcel</span>, we strive to cultivate a dynamic learning community where curiosity is encouraged, challenges are embraced, and growth is inevitable. Whether you're a seasoned professional seeking to enhance your skills or a budding enthusiast eager to explore new horizons, you'll find a wealth of resources and support within our platform.<br/></Text>
     
-    <p>Our commitment extends beyond just providing information; we are dedicated to fostering a culture of collaboration, creativity, and excellence. Together, let's embark on a journey of discovery, where each lesson learned and every skill mastered brings us closer to our goals.<br/></p>
-    <p>Thank you for choosing <span className="highlight">EduXcel</span> as your partner in education and tech. I invite you to explore our offerings, engage with our community, and join us in shaping the future of technology together.<br/></p>
-<p>Empower your career. Ignite your passion. Excel with <span className="highlight">EduXcel</span>.
-<br/>
-</p>
-    <p>Warm regards,<br/></p>
-   <p> <span className="highlight">Sanjay Patidar
-    </span><br/></p>
-    <span className="highlight">Founder, EduXcel | Empowering Careers in Tech
+    <Text>Our commitment extends beyond just providing information; we are dedicated to fostering a culture of collaboration, creativity, and excellence. Together, let's embark on a journey of discovery, where each lesson learned and every skill mastered brings us closer to our goals.<br/></Text>
+    <Text>Thank you for choosing <span className="highlight">EduXcel</span> as your partner in education and tech. I invite you to explore our offerings, engage with our community, and join us in shaping the future of technology together.<br/></Text>
 
+<Text>Empower your career. Ignite your passion. Excel with <span className="highlight">EduXcel</span>.
+<br/>
+</Text>
+
+    <Text>Warm regards,<br/></Text>
+   <Text> <span className="highlight">Sanjay Patidar
+    </span><br/></Text>
+    <Text>
+    <span className="highlight">Founder, EduXcel | Empowering Careers in Tech
 </span>
+</Text>
+
+
+<Text>
+              ☎  Sanjay Patidar  <span className="highlight">Contact | Mobile Number : </span>{' '}
+              <span id="contactNumber">+91 9131743250 </span>
+              
+              <button onClick={copyContactNumber} style={{  color: '#fff', padding: '2px 4px', border: '2px solid #ff6b6b', borderRadius: '30px', cursor: 'pointer' }}>Copy Number</button>
+            </Text>
+
+
+            <Text>
+              ☎  Sanjay Patidar <span className="highlight">Instagram ID  : </span>{' '}
+              <span id="instaID">sanjay_patidar_mcmxcviii </span>
+              
+              <button onClick={copyInstaID} style={{  color: '#fff', padding: '2px 4px', border: '2px solid #ff6b6b', borderRadius: '30px', cursor: 'pointer' }}>Copy Insta ID</button>
+            </Text>
+
+
+
 
         </TitleSection>
               </Introduction>
