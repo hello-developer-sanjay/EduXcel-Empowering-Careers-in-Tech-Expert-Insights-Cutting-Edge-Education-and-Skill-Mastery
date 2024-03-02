@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUserPlus, faNewspaper,faBriefcase, faUserTie } from '@fortawesome/free-solid-svg-icons';
 
 const HeaderContainer = styled.header`
-background: linear-gradient(to right, #1a1a2e, #16213e, #0d1b2a);
-  color: #fff;
+background-color: #050816; 
+color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,14 +15,12 @@ background: linear-gradient(to right, #1a1a2e, #16213e, #0d1b2a);
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  border-bottom: 2px solid #2980b9;
-  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 
   @media (max-width: 768px) {
     padding: 1rem 0.5rem;
   }
 `;
+
 
 const HeaderContent = styled.div`
   margin-left: 20px;
