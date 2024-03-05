@@ -39,7 +39,7 @@
     const slugify = (text) => {
       return text.toString().toLowerCase()
         .replace(/\s+/g, '-')      
-        .replace(/[^\w-]+/g, '')     // Remove all non-word characters
+        .replace(/[^\w-]+/g, '')   
         .replace(/--+/g, '-')        // Replace multiple - with single -
         .replace(/^-+/, '')          // Trim - from start of text
         .replace(/-+$/, '');         // Trim - from end of text
