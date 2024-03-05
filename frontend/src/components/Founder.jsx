@@ -92,6 +92,7 @@ const Text = styled.h1`
   margin: 0;
   font-size: 1.1rem;
   color: #fff; 
+  text-align: left;
   padding: 5px 10px; /* Padding to create space around the text */
 
 `;
@@ -146,7 +147,8 @@ const ProfileImageContainer = styled.div`
 
   @media (min-width: 768px) {
     order: 1;
-    margin-right: 5rem;
+    margin-right: 4rem;
+
     align-self: flex-start; /* Align the image to the start of the container on larger screens */
   }
   
@@ -165,9 +167,10 @@ const BackgroundOverlay = styled.div`
 
 
 const ProfileImage = styled(motion.img)`
-  width: 430px;
-  height: 430px;
-  margin-top: 6rem;
+  width: 380px;
+  height: 380px;
+  margin-top: 5.5rem;
+  margin-left: 5rem;
 
   border-radius: 50%;
   box-shadow: 0 0 10px rgba(255, 165, 0, 0.8), 0 0 20px rgba(255, 165, 0, 0.6);
@@ -232,6 +235,8 @@ const ProfileImage = styled(motion.img)`
     width: 180px;
     height: 180px;
   margin-top : 2rem;
+    margin-left: 0rem;
+
 }
 
   @keyframes heartbeat {
@@ -347,7 +352,17 @@ const Introduction = styled(motion.p)`
   }
 `;
 
+const Onlyforlap = styled.div`
 
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+margin-right : 3rem;
+  @media (max-width: 768px) {
+    display: none;
+    margin-top: 0rem;
+  
+  }
+`;
 const TypedText = styled.span`
   display: block;
   margin-top: 1rem;
@@ -494,9 +509,49 @@ const Founder = () => {
  
   const [animationEnabled, setAnimationEnabled] = useState(true);
   const [imageLoading, setImageLoading] = useState(true);
+  const copyGitIDforlap = () => {
+    const gitID = document.getElementById('gitIDforlap');
+    const range = document.createRange();
+    range.selectNode(gitID);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+    alert('Github Link copied ! Reminder: By copying this link to Github Profile, you can access valuable projects and insights. . ');
+  };
 
+  const copyContactNumber = () => {
+    const contactNumber = document.getElementById('contactNumber');
+    const range = document.createRange();
+    range.selectNode(contactNumber);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+    alert('Contact number copied!');
+  };
+  const copyInstaID = () => {
+    const instaID = document.getElementById('instaID');
+    const range = document.createRange();
+    range.selectNode(instaID);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+    alert('Instagram ID copied!');
+  };
 
-
+  const copyEduxcelID = () => {
+    const eduxcelID = document.getElementById('eduxcelID');
+    const range = document.createRange();
+    range.selectNode(eduxcelID);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+    alert('Eduxcel Website Link copied!');
+  };
+  
   
 
   const controlsArray = Array.from({ length: 7 }, () => useAnimation());
@@ -550,7 +605,7 @@ const Founder = () => {
     >
          <Helmet>
   
-         <title>Sanjay Patidar | Founder & Developer of EduXcel | Empowering Careers in Tech | Web Development & UI/UX Design Expert | Chandigarh University | Crafting Scalable Digital Solutions for Global Innovation</title>
+         <title>Sanjay Patidar : Founder & Developer of EduXcel | EduXcel : Empowering Careers in Tech | Web Development & UI/UX Design Expert | Chandigarh University </title>
   <meta
     name="description"
     content="Discover the remarkable journey of Sanjay Patidar, a dedicated and passionate individual excelling in the realms of web development and UI/UX design. As a Computer Science and Engineering student, Sanjay embodies a profound commitment to mastering the intricacies of programming, with a specialized focus on crafting immersive digital experiences. Currently pursuing a Bachelor of Engineering degree at Chandigarh University, Sanjay brings forth a proactive approach and an unwavering dedication to excellence in all endeavors. His educational odyssey began at Jawahar Navodaya Vidyalaya School, where he laid the foundation for his academic and extracurricular prowess from 2009 to 2016. This esteemed residential institution, administered under the Ministry of Education, fostered holistic development and instilled a fervent pursuit of excellence. Throughout his tenure, Sanjay actively engaged in a plethora of inter-school competitions, showcasing his versatility and achieving distinction in both academic and non-academic domains. Building upon this robust foundation, Sanjay embarked on his tertiary education journey at Chandigarh University, where he embarked on a quest for knowledge and innovation. Embracing the cutting-edge infrastructure and progressive pedagogical approaches of the university, he delved deep into the intricacies of Computer Science Engineering. His academic trajectory is marked by a stellar GPA of 7.5, a testament to his unwavering dedication and intellectual acumen. Beyond the confines of academia, Sanjay's passion for technology extends to the realms of practical application. Actively participating in coding competitions, hackathons, and collaborative projects, he honed his problem-solving prowess and cultivated invaluable teamwork skills. His journey is characterized by a relentless pursuit of excellence, driven by a profound sense of creativity, innovation, and a commitment to delivering exceptional digital solutions. Explore the professional portfolio of Sanjay Patidar, where innovation meets expertise, and witness firsthand the culmination of passion, creativity, and a relentless pursuit of excellence in web development and UI/UX design.Based in Indore, Madhya Pradesh, Sanjay serves clients across India, including	Chandigarh, Punjab, Mumbai,Maharashtra, Bangalore,Karnataka, Delhi, Kolkata, West Bengal, Chennai, Tamil Nadu, Hyderabad, Telangana, Pune, Ahmedabad, Gujarat, Jaipur, Rajasthan, Lucknow, Uttar Pradesh, Bhopal, Nagpur, Visakhapatnam, Andhra Pradesh, Kochi, Kerala, Guwahati, Assam, Bhubaneswar, Odisha, Dehradun, Uttarakhand, Raipur, Chhattisgarh,  and beyond."
@@ -558,16 +613,16 @@ const Founder = () => {
   
   <link rel="canonical" href="https://sanjay-patidar.vercel.app" />
 
-  <meta property="og:title" content="Sanjay Patidar | Founder & Developer of EduXcel | Empowering Careers in Tech | Web Development & UI/UX Design Expert | Chandigarh University | Crafting Scalable Digital Solutions for Global Innovation" />
+  <meta property="og:title" content="Sanjay Patidar : Founder & Developer of EduXcel | EduXcel : Empowering Careers in Tech | Web Development & UI/UX Design Expert | Chandigarh University" />
   <meta property="og:description" content="Discover the remarkable journey of Sanjay Patidar, a dedicated and passionate individual excelling in the realms of web development and UI/UX design. As a Computer Science and Engineering student, Sanjay embodies a profound commitment to mastering the intricacies of programming, with a specialized focus on crafting immersive digital experiences. Currently pursuing a Bachelor of Engineering degree at Chandigarh University, Sanjay brings forth a proactive approach and an unwavering dedication to excellence in all endeavors. His educational odyssey began at Jawahar Navodaya Vidyalaya School, where he laid the foundation for his academic and extracurricular prowess from 2009 to 2016. This esteemed residential institution, administered under the Ministry of Education, fostered holistic development and instilled a fervent pursuit of excellence. Throughout his tenure, Sanjay actively engaged in a plethora of inter-school competitions, showcasing his versatility and achieving distinction in both academic and non-academic domains. Building upon this robust foundation, Sanjay embarked on his tertiary education journey at Chandigarh University, where he embarked on a quest for knowledge and innovation. Embracing the cutting-edge infrastructure and progressive pedagogical approaches of the university, he delved deep into the intricacies of Computer Science Engineering. His academic trajectory is marked by a stellar GPA of 7.5, a testament to his unwavering dedication and intellectual acumen. Beyond the confines of academia, Sanjay's passion for technology extends to the realms of practical application. Actively participating in coding competitions, hackathons, and collaborative projects, he honed his problem-solving prowess and cultivated invaluable teamwork skills. His journey is characterized by a relentless pursuit of excellence, driven by a profound sense of creativity, innovation, and a commitment to delivering exceptional digital solutions. Explore the professional portfolio of Sanjay Patidar, where innovation meets expertise, and witness firsthand the culmination of passion, creativity, and a relentless pursuit of excellence in web development and UI/UX design.Based in Indore, Madhya Pradesh, Sanjay serves clients across India, including	Chandigarh, Punjab, Mumbai,Maharashtra, Bangalore,Karnataka, Delhi, Kolkata, West Bengal, Chennai, Tamil Nadu, Hyderabad, Telangana, Pune, Ahmedabad, Gujarat, Jaipur, Rajasthan, Lucknow, Uttar Pradesh, Bhopal, Nagpur, Visakhapatnam, Andhra Pradesh, Kochi, Kerala, Guwahati, Assam, Bhubaneswar, Odisha, Dehradun, Uttarakhand, Raipur, Chhattisgarh,  and beyond." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://sanjay-patidar.vercel.app" />
   <meta property="og:image" content="https://sanjaybasket.s3.ap-south-1.amazonaws.com/sixpack.jpeg" />
   <meta property="og:image:alt" content="Sanjay Patidar" />
-  <meta property="og:site_name" content="Sanjay Patidar | Founder & Developer of EduXcel | Empowering Careers in Tech | Web Development & UI/UX Design Expert | Chandigarh University | Crafting Scalable Digital Solutions for Global Innovation" />
+  <meta property="og:site_name" content="Sanjay Patidar : Founder & Developer of EduXcel | EduXcel : Empowering Careers in Tech | Web Development & UI/UX Design Expert | Chandigarh University" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Sanjay Patidar | Founder & Developer of EduXcel | Empowering Careers in Tech | Web Development & UI/UX Design Expert | Chandigarh University | Crafting Scalable Digital Solutions for Global Innovation" />
+  <meta name="twitter:title" content="Sanjay Patidar : Founder & Developer of EduXcel | EduXcel : Empowering Careers in Tech | Web Development & UI/UX Design Expert | Chandigarh University" />
   <meta name="twitter:description" content="Discover the remarkable journey of Sanjay Patidar, a dedicated and passionate individual excelling in the realms of web development and UI/UX design. As a Computer Science and Engineering student, Sanjay embodies a profound commitment to mastering the intricacies of programming, with a specialized focus on crafting immersive digital experiences. Currently pursuing a Bachelor of Engineering degree at Chandigarh University, Sanjay brings forth a proactive approach and an unwavering dedication to excellence in all endeavors. His educational odyssey began at Jawahar Navodaya Vidyalaya School, where he laid the foundation for his academic and extracurricular prowess from 2009 to 2016. This esteemed residential institution, administered under the Ministry of Education, fostered holistic development and instilled a fervent pursuit of excellence. Throughout his tenure, Sanjay actively engaged in a plethora of inter-school competitions, showcasing his versatility and achieving distinction in both academic and non-academic domains. Building upon this robust foundation, Sanjay embarked on his tertiary education journey at Chandigarh University, where he embarked on a quest for knowledge and innovation. Embracing the cutting-edge infrastructure and progressive pedagogical approaches of the university, he delved deep into the intricacies of Computer Science Engineering. His academic trajectory is marked by a stellar GPA of 7.5, a testament to his unwavering dedication and intellectual acumen. Beyond the confines of academia, Sanjay's passion for technology extends to the realms of practical application. Actively participating in coding competitions, hackathons, and collaborative projects, he honed his problem-solving prowess and cultivated invaluable teamwork skills. His journey is characterized by a relentless pursuit of excellence, driven by a profound sense of creativity, innovation, and a commitment to delivering exceptional digital solutions. Explore the professional portfolio of Sanjay Patidar, where innovation meets expertise, and witness firsthand the culmination of passion, creativity, and a relentless pursuit of excellence in web development and UI/UX design.Based in Indore, Madhya Pradesh, Sanjay serves clients across India, including	Chandigarh, Punjab, Mumbai,Maharashtra, Bangalore,Karnataka, Delhi, Kolkata, West Bengal, Chennai, Tamil Nadu, Hyderabad, Telangana, Pune, Ahmedabad, Gujarat, Jaipur, Rajasthan, Lucknow, Uttar Pradesh, Bhopal, Nagpur, Visakhapatnam, Andhra Pradesh, Kochi, Kerala, Guwahati, Assam, Bhubaneswar, Odisha, Dehradun, Uttarakhand, Raipur, Chhattisgarh,  and beyond." />
   <meta name="twitter:image" content="https://sanjaybasket.s3.ap-south-1.amazonaws.com/sixpack.jpeg" />
   <meta name="twitter:site" content="@sanjaypatidar" />
@@ -782,11 +837,9 @@ const Founder = () => {
   transition={{ type: "spring", damping: 10, stiffness: 100, delay: 0.5 }}
   className={`profile-image ${imageLoading ? 'loading' : ''}`}
   onLoad={() => {
-    console.log("Image loaded successfully!");
     setImageLoading(false);
   }}
   onError={() => {
-    console.error("Error loading image!");
     setImageLoading(true); 
   }}
 />
@@ -819,8 +872,52 @@ const Founder = () => {
        
         
           ))}
+          
         </SocialIconsContainer>
-        
+
+        <Onlyforlap>
+        <Introduction>
+
+
+<Text>
+                ☎  <span className="light">Contact | Mobile Number : </span>{' '}
+                <span id="contactNumber">+91 9131743250 </span>
+                
+                <button onClick={copyContactNumber} style={{  marginLeft : '4px', color: '#fff', padding: '2px 4px', border: '2px solid #ff6b6b', borderRadius: '30px', cursor: 'pointer' }}>Copy Number</button>
+              </Text>
+  
+  
+              <Text>🔗 
+              <span className="light">Sanjay's  Instagram ID  : </span>{' '}
+                <span id="instaID">sanjay_patidar_mcmxcviii </span>
+                
+                <button onClick={copyInstaID} style={{  marginLeft : '4px',color: '#fff', padding: '2px 4px', border: '2px solid #ff6b6b', borderRadius: '30px', cursor: 'pointer' }}>Copy Insta ID</button>
+              </Text>
+              <Text>
+              🔗    Eduxcel <span className="light">Website link : </span>{' '}
+                <span id="eduxcelID">https://eduxcel.vercel.app </span>
+                
+                <button onClick={copyEduxcelID} style={{  marginLeft : '4px', color: '#fff', padding: '2px 4px', border: '2px solid #ff6b6b', borderRadius: '30px', cursor: 'pointer' }}>Copy Web link</button>
+              </Text>
+  
+  
+  
+              <Text>
+                🔗  <span className="light">Github: </span>{' '}
+                  <span id="gitIDforlap">https://github.com/hello-developer-sanjay </span>
+                  
+                  <button onClick={copyGitIDforlap} style={{  marginLeft : '4px', color: '#fff', padding: '2px 4px', border: '2px solid #ff6b6b', borderRadius: '30px', cursor: 'pointer' }}>Copy Web link</button>
+                </Text>
+                <Text>              <span className="light"> | Founder | Developer | Creator | Visionary | Innovator | Leader | <br/> | Entrepreneur | Technologist |</span><br/>
+
+
+                </Text>
+  
+
+
+</Introduction>
+
+  </Onlyforlap>
         </ProfileImageContainer>
   
     
@@ -851,12 +948,23 @@ const Founder = () => {
         <H2> Sanjay Patidar</H2>  
         <span className="highlight">Founder & Developer : EduXcel</span><br/> 
 
+        <Text>Meet the Mind Behind EduXcel: Sanjay Patidar - Founder | Developer | Creator | Director</Text>
 
-        <Text>Meet Sanjay Patidar, the Man Behind EduXcel</Text>
-<Text>Embark on the inspiring journey of Sanjay Patidar, the brain behind EduXcel, a platform dedicated to empowering careers in tech. As a web developer extraordinaire, Sanjay brings cutting-edge expertise to the table, crafting immersive digital experiences that redefine online education.</Text>
-<Text>Driven by a passion for innovation and excellence, Sanjay's vision for EduXcel is to make tech education accessible and exciting for everyone. With his knack for creating user-friendly interfaces and engaging learning experiences, he's revolutionizing the way Indians learn online.</Text>
-<Text>Whether you're a student eager to enhance your skills or an aspiring web developer looking to kickstart your career, Sanjay's expertise and EduXcel's offerings are your gateway to success in the digital world.</Text>
-<Text>Curious to know more about Sanjay Patidar and his journey? <a href="https://sanjay-patidar.vercel.app/" target="_blank">Click here</a> to explore!</Text>
+
+<Text>
+🙋 Curious to know about the mastermind behind EduXcel?<br/>
+🙋‍♀️ Allow me to introduce Sanjay Patidar, the visionary at the helm, spearheading our mission to redefine the tech landscape with EduXcel!
+<br/>
+🙋 Wondering what's the secret to EduXcel's success?<br/>
+🙋‍♀️ It's all about pushing boundaries and striving for excellence. Sanjay is like a digital wizard, conjuring up immersive experiences that captivate and inspire. But here's the kicker: it's not just about the tech for Sanjay. He's deeply passionate about education and believes in empowering people through knowledge. That's why EduXcel isn't just a tech company; it's a platform for growth and learning, fueled by Sanjay's vision and dedication.
+<br/>
+🙋 How did Sanjay develop EduXcel into such a tech-loaded platform?<br/>
+🙋‍♀️ Sanjay's expertise as a MERN stack developer played a pivotal role in shaping EduXcel. By leveraging technologies like MongoDB, Express.js, React, and Node.js, he created a seamless and secure environment for online education.  EduXcel isn't just a website; it's a testament to Sanjay's technical prowess and dedication to revolutionizing online education.
+</Text>
+
+
+<Text>➥ Whether you're a student eager to enhance your skills or an aspiring web developer looking to kickstart your career, Sanjay's expertise and EduXcel's offerings are your gateway to success in the digital world.</Text><br/>
+<Text>➥ Curious to know more about Sanjay Patidar and his journey? <a style={{  color: '#FAF7F7', padding: '2px 4px', border: '2px solid #ff6b6b', borderRadius: '30px', cursor: 'pointer', textDecoration: "none" }} href="https://sanjay-patidar.vercel.app/" target="_blank">Click here</a> to explore!</Text>
 
 
 
