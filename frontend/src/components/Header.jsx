@@ -256,40 +256,32 @@ const HamburgerMenu = styled.div`
         position: absolute;
         top: 100%;
         left: 0;
-        width: 100%;
-        box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
-
-        /* Create a complex and artistic background pattern */
-        background: 
-          radial-gradient(ellipse at center, rgba(173, 216, 230, 0.3) 0%, rgba(173, 216, 230, 0) 30%, rgba(173, 216, 230, 0.6) 50%, rgba(173, 216, 230, 0) 70%, rgba(173, 216, 230, 0.3) 100%),
-          linear-gradient(90deg, #3498db, #2c3e50);
-      
-        /* Optional: Add animation or transition properties for a dynamic effect */
-        transition: background 0.3s ease-in-out;        padding: 20px;
+        width: 90%;
+        background: #050816;
+        padding: 20px;
         transform-origin: top;
-        animation: rollAndFold 0.5s ease-in-out;
+        animation: slideIn 0.5s ease-in-out;
         opacity: 1;
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
       `}
   }
 
-  @keyframes rollAndFold {
+  @keyframes slideIn {
     0% {
-      transform: scaleY(0.1) translateY(-20px) rotate(0deg);
+      transform: scaleY(0.1) translateY(-20px);
       opacity: 0;
     }
     50% {
-      transform: scaleY(0.5) translateY(0) rotate(180deg);
-      opacity: 1;
+      transform: scaleY(0.5) translateY(-10);
+      opacity: 0.5;
     }
     100% {
-      transform: scaleY(1) translateY(0) rotate(360deg);
+      transform: scaleY(1) translateY(0);
       opacity: 1;
     }
   }
 `;
-
 
 
 
