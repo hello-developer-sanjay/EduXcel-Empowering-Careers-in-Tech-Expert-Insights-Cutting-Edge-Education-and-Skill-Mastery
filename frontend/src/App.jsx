@@ -56,7 +56,7 @@ function App() {
 
 
             <Route path="/profile" element={<PageTransition><UserProfile /></PageTransition>} />
-            <Route path="/courses/:title" element={<CourseDetails />} />
+            <Route path="/courses/:title" element={<CourseDetailes />} />
             <Route path="/courses/:title/:module" element={<ModuleDetails />} />
             <Route
               path="/courses/:title/:module/submodules/:submodule"
