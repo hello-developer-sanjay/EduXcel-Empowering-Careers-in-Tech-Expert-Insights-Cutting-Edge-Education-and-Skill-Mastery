@@ -190,10 +190,7 @@ const HamburgerIcon = styled.div`
   color: #fff;
   transition: transform 0.3s ease-in-out;
 
-  &:hover {
-    transform: rotate(360deg) scale(1.2);
-  }
-
+ 
   &::before,
   &::after {
     content: '';
