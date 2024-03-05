@@ -253,7 +253,7 @@ const HamburgerMenu = styled.div`
         position: absolute;
         top: 100%;
         left: 0;
-        width: 90%;
+        width: 100%;
         background: #050816;
         padding: 20px;
         transform-origin: top;
