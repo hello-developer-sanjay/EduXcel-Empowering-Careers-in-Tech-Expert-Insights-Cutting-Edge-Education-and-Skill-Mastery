@@ -4,141 +4,59 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
 
-const ProjectsContainer = styled.div`
+const CourseContainer = styled.div`
   padding: 2rem;
-  background-color: #D0EAE7;
+  background-color: #050816; 
   min-height: 100vh;
 `;
 
-const ProjectsNavigation = styled.nav`
+const CourseNavigation = styled.nav`
   margin-bottom: 2rem;
 `;
 
-const ProjectsNavList = styled.ul`
+const CourseNavList = styled.ul`
   list-style: none;
   display: flex;
+  color : #fff;
   flex-wrap: wrap;
   gap: 1rem;
 `;
-const ProjectWebsiteLink = styled.a`
-  text-decoration: none;
-  color: #ffffff;
-  display: inline-flex;
-  align-items: center;
-  font-size: 1rem;
-  margin-top: 1rem;
-  padding: 1rem 1rem;
-  border-radius: 50px;
-  background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 100%);
-  background-size: 100% 100%;
-  transition: transform 0.3s, background 0.5s, box-shadow 0.3s;
 
-  svg {
-    margin-right: 1rem;
-    fill: #ffffff;
-    transition: fill 0.3s;
-  }
 
-  &:hover {
-    background-position: 100% 0;
-   
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    filter: hue-rotate(45deg); /* Add a vibrant color shift on hover */
-  }
-
-  &:hover svg {
-    fill: #ffffff;
-    transform: rotate(45deg); /* Rotate the icon on hover */
-  }
-`;
-const HighlightedText = styled.span`
-  color: #0070f3; /* Highlighted text color */
-  font-weight: bold; /* Highlighted text bold */
-`;
-
-const ProjectTitle = styled.span`
+const CourseTitle = styled.span`
   font-weight: bold;
   font-size: 1.2rem;
-  color: #0070f3;
-  transition: color 0.3s, transform 0.3s;
-
-  &:hover {
-    color: #ff6b6b; /* Change color on hover */
-    transform: translateY(-2px); /* Add a subtle upward hover effect */
-  }
-
-  .arrow {
-    display: block; /* Display the arrow as a block element */
-    text-align: left;
-    font-size: 1.5rem; /* Adjust the font size of the arrow */
-    animation: bounce 1s infinite; /* Add the bounce animation */
-  }
-
-  @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-      transform: translateY(0);
-    }
-    40% {
-      transform: translateY(-10px);
-    }
-    60% {
-      transform: translateY(-5px);
-    }
-  }
-  
+  color : #fff;
 `;
 
 
-const ProjectsNavItem = styled.li`
-  flex: 1;
-  padding: 0.5rem;
-  text-align: center;
-  background-color: #f0f8ff; /* Light blue background */
-  border-radius: 5px;
-  transition: transform 0.2s, background-color 0.2s;
+const CourseNavItem = styled.li`
+flex: 1;
+padding: 0.5rem;
+text-align: center;
+border-radius: 5px;
+transition: transform 0.2s, background-color 0.2s;
 
-  &:hover {
-    transform: translateY(-2px);
-    background-color: #0070f3; /* Blue background on hover */
-    color: #ffffff; /* White text on hover */
-  }
+
+  color: #ffffff; 
+}
+
   
 `;
 
-const ProjectsNavLinkContainer = styled(NavLink)`
+const CourseNavLinkContainer = styled(NavLink)`
   text-decoration: none;
-  color: #333;
   display: block;
-  height: 100%; /* Make the link take up the full height of the container */
   position: relative;
+  color: #fff;
 
   &:hover {
-    color: #ff6b6b;
-    &:before {
-      content: ''; /* Add a decorative line under the link on hover */
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background-color: #ff6b6b;
-    }
+    color: yellow;
   }
+
 
   &.active {
-    color: #ffffff;
-    background: linear-gradient(to right, #0070f3, #ff6b6b, #33d9b2, #ffad5a); /* Gradient background for the active link */
-    background-size: 300% 100%; /* Control the gradient width */
-    animation: gradient-shift 5s linear infinite; /* Animation for gradient shift */
-  }
-
-  @keyframes gradient-shift {
-    0% {
-      background-position: 0% 0%;
-    }
-    100% {
-      background-position: 100% 0%;
-    }
+    color: red; /* Text color for the active link */
   }
 `;
 
@@ -146,28 +64,28 @@ const ProjectsNavLinkContainer = styled(NavLink)`
 
 
 
-const ProjectsContent = styled.div`
-  background-color: #C9DACD;
-  padding: 1.5rem;
+const CourseContent = styled.div`
+background-color: #050816; 
+padding: 1.5rem;
   border-radius: 10px;
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
 `;
 
-const ProjectList = styled.ul`
+const CourseList = styled.ul`
   list-style: none;
   padding: 0;
 `;
 
-const ProjectItem = styled.li`
+const CourseItem = styled.li`
   margin-bottom: 1rem;
 `;
 
-const ProjectDescription = styled.p`
+const CourseDescription = styled.p`
  font-size: 1rem; /* Small font size */
-  line-height: 1.6;
+  line-height: 1;
   margin-top: 1rem;
   position: relative;
-  color: #333; /* Default text color */
+  color: #fff; /* Default text color */
 
   span.highlight {
     color: #0070f3; /* Highlighted text color */
@@ -176,12 +94,15 @@ const ProjectDescription = styled.p`
 
 
   &:before {
-    content: '✨ Course Description ✨'; /* Use decorative stars as labels */
+    content: ' Course Description '; /* Use decorative stars as labels */
     display: block;
     margin-bottom: 1rem;
+    font-weight: 500;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    transform: skew(-5deg); /* Apply a slight skew for a dynamic effect */
     color: #0070f3; /* Change the label color */
-    font-size: 1.2rem; /* Adjust label font size */
-    letter-spacing: 2px; /* Add letter spacing for emphasis */
+    font-size: 1rem; /* Adjust label font size */
+    letter-spacing: 1px; /* Add letter spacing for emphasis */
     text-align: left;
     text-transform: uppercase; /* Uppercase text for emphasis */
   }
@@ -237,66 +158,87 @@ const Course = () => {
     fetchProjects();
   }, [category]);
   return (
-    <ProjectsContainer>
+    <CourseContainer>
       <Helmet>
-      <title>Eduxcel | Course Portfolio: Web Development, Mobile App Development, UI/UX Design</title>
-  <meta name="description" content="Explore the diverse range of projects developed by Sanjay Patidar, showcasing expertise in web development, mobile app development, and various other categories. Discover innovative solutions, unique designs, and successful implementations." />
-  <meta name="keywords" content="Sanjay Patidar, projects, web development, mobile app development, innovative projects, technology, programming, coding, software development" />
+      <title>Eduxcel | Comprehensive Tech Course Portfolio: Web Development, Machine Learning, Artificial Intelligence, and More</title>
+      <meta name="description" content="Explore Eduxcel's comprehensive course offerings in web development, machine learning, artificial intelligence, and more. Our courses cover a wide range of topics, including programming languages, version control, databases, problem-solving, communication skills, web accessibility, performance optimization, security principles, and continuous learning. Whether you're a beginner looking to start a career in tech or a seasoned professional seeking to enhance your skills, Eduxcel provides expert-led courses designed to help you succeed in today's fast-paced digital landscape. Join us and take your skills to the next level with our innovative and engaging online learning platform."/>
+  <meta name="keywords" content="Sanjay Patidar, projects,courses, careers, tech,  web development, mobile app development, innovative projects, technology, programming, coding, software development" />
   <meta name="author" content="Sanjay Patidar" />
   <meta name="robots" content="index, follow" />
-  <meta property="og:title" content="Sanjay Patidar | Projects Portfolio: Web Development, Mobile App Development, UI/UX Design" />
-  <meta property="og:description" content="Explore the diverse range of projects developed by Sanjay Patidar, showcasing expertise in web development, mobile app development, and various other categories. Discover innovative solutions, unique designs, and successful implementations." />
+  <meta property="og:title" content="Eduxcel | Comprehensive Tech Course Portfolio: Web Development, Machine Learning, Artificial Intelligence, and More" />
+  <meta property="og:description" content="Explore Eduxcel's comprehensive course offerings in web development, machine learning, artificial intelligence, and more. Our courses cover a wide range of topics, including programming languages, version control, databases, problem-solving, communication skills, web accessibility, performance optimization, security principles, and continuous learning. Whether you're a beginner looking to start a career in tech or a seasoned professional seeking to enhance your skills, Eduxcel provides expert-led courses designed to help you succeed in today's fast-paced digital landscape. Join us and take your skills to the next level with our innovative and engaging online learning platform." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://sanjay-patidar.vercel.app/projects" />
   <meta property="og:image" content="https://sanjaybasket.s3.ap-south-1.amazonaws.com/skillsImage.png" />
-  <meta property="og:image:alt" content="Sanjay Patidar | Projects Portfolio: Web Development, Mobile App Development, UI/UX Design" />
-  <meta property="og:site_name" content="Sanjay Patidar | Projects Portfolio: Web Development, Mobile App Development, UI/UX Design" />
+  <meta property="og:image:alt" content="Eduxcel | Comprehensive Tech Course Portfolio: Web Development, Machine Learning, Artificial Intelligence, and More" />
+  <meta property="og:site_name" content="Eduxcel | Comprehensive Tech Course Portfolio: Web Development, Machine Learning, Artificial Intelligence, and More" />
   <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Sanjay Patidar | Projects Portfolio: Web Development, Mobile App Development, UI/UX Design" />
-  <meta name="twitter:description" content="Explore the diverse range of projects developed by Sanjay Patidar, showcasing expertise in web development, mobile app development, and various other categories. Discover innovative solutions, unique designs, and successful implementations." />
+  <meta name="twitter:title" content="Eduxcel | Comprehensive Tech Course Portfolio: Web Development, Machine Learning, Artificial Intelligence, and More" />
+  <meta name="twitter:description" content="Explore Eduxcel's comprehensive course offerings in web development, machine learning, artificial intelligence, and more. Our courses cover a wide range of topics, including programming languages, version control, databases, problem-solving, communication skills, web accessibility, performance optimization, security principles, and continuous learning. Whether you're a beginner looking to start a career in tech or a seasoned professional seeking to enhance your skills, Eduxcel provides expert-led courses designed to help you succeed in today's fast-paced digital landscape. Join us and take your skills to the next level with our innovative and engaging online learning platform." />
   <meta name="twitter:image" content="https://sanjaybasket.s3.ap-south-1.amazonaws.com/skillsImage.png" />
 
 </Helmet>
 
-     <ProjectsNavigation>
-        <ProjectsNavList>
+     <CourseNavigation>
+        <CourseNavList>
           
-          <ProjectsNavItem>
-            <ProjectsNavLinkContainer to="/course/frontend_courses">
-  Frontend            </ProjectsNavLinkContainer>
-          </ProjectsNavItem>
-          <ProjectsNavItem>
-            <ProjectsNavLinkContainer to="/course/data_science_courses">
-        Data Science
-            </ProjectsNavLinkContainer>
-          </ProjectsNavItem>
-          <ProjectsNavItem>
+          <CourseNavItem>
+            <CourseNavLinkContainer to="/course/html_courses">
+  HTML            </CourseNavLinkContainer>
+          </CourseNavItem>
+          <CourseNavItem>
+            <CourseNavLinkContainer to="/course/css_courses">
+            CSS (Cascading Style Sheets)
+            </CourseNavLinkContainer>
+          </CourseNavItem>
 
-            <ProjectsNavLinkContainer to="/course/machine_learning_courses">
-              Machine Learning
-            </ProjectsNavLinkContainer>
-          </ProjectsNavItem>
-        </ProjectsNavList>
-      </ProjectsNavigation>
-      <ProjectsContent>
+
+          <CourseNavItem>
+
+            <CourseNavLinkContainer to="/course/javascript_courses">
+            JavaScript
+                        </CourseNavLinkContainer>
+          </CourseNavItem>
+
+          <CourseNavItem>
+
+<CourseNavLinkContainer to="/course/responsive_web_design_courses">
+Responsive Web Design
+            </CourseNavLinkContainer>
+</CourseNavItem>
+
+
+
+<CourseNavItem>
+
+<CourseNavLinkContainer to="/course/css_preprocessors_courses">
+CSS Preprocessors
+
+            </CourseNavLinkContainer>
+</CourseNavItem>
+
+
+
+<CourseNavItem>
+
+<CourseNavLinkContainer to="/course/dom_manipulation_courses">
+DOM Manipulation
+            </CourseNavLinkContainer>
+</CourseNavItem>
+        </CourseNavList>
+      </CourseNavigation>
+      <CourseContent>
         {courses.length > 0 ? (
-          <ProjectList>
+          <CourseList>
             {courses.map((course) => {
-              console.log("Course:", course);
               return (
-                <ProjectItem key={course._id}>
-                  <NavLink to={`/api/courses/details/${course._id}`} style={{ textDecoration: 'none' }}>
-                    <ProjectTitle>{course.title}</ProjectTitle>
+                <CourseItem key={category}>
+                  <NavLink to={`/${category}`} style={{ textDecoration: 'none' }}>
+                    <CourseTitle>{course.title}</CourseTitle>
                   </NavLink>
-                  {course.websiteLink && (
-                    <ProjectWebsiteLink href={course.websiteLink} target="_blank" rel="noopener noreferrer">
-                      {/* Your SVG path here... */}
-                      Visit Website
-                    </ProjectWebsiteLink>
-                  )}
+                
                                  {course.overview && (
-                  <ProjectDescription>
+                  <CourseDescription>
                     {course.overview.map((desc, index) => {
                       // Use regular expressions to find text between ^ markers and apply styling
                       const highlightedText = desc.split(/\^([^]+?)\^/).map((part, i) => {
@@ -314,19 +256,19 @@ const Course = () => {
                         </React.Fragment>
                       );
                     })}
-                  </ProjectDescription>
+                  </CourseDescription>
 )}
-                </ProjectItem>
+                </CourseItem>
               );
             })}
-          </ProjectList>
+          </CourseList>
         ) : (
-          <p>No projects found.</p>
+          <p>No Course found.</p>
         )}
-      </ProjectsContent>
+      </CourseContent>
 
     
-    </ProjectsContainer>
+    </CourseContainer>
   );
 };
 
