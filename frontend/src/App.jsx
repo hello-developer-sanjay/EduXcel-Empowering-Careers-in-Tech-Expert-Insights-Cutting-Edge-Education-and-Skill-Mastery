@@ -5,7 +5,6 @@ import SubHeader from './components/SubHeader';
 import Home from './pages/Home';
 import UserProfile from './components/UserProfile';
 import ModuleDetails from './components/ModuleDetails';
-import CourseDetails from './components/CourseDetails';
 import SubModuleDetails from './components/SubModuleDetails';
 import Blogs from './components/Blogs';
 import Footer from './components/Footer';
@@ -16,7 +15,7 @@ import Career from './components/Career';
 import PageTransition from "./components/PageTransition"; 
 import Course from './components/Course';
 import CourseDetailed from './components/CourseDetailed';
-import CourseDetails from './components/CourseDetails';
+import CourseDetailes from './components/CourseDetailes';
 
 import CourseList from './components/CourseList';
 import  Founder from './components/Founder';
@@ -70,7 +69,7 @@ function App() {
 
             <Route path="/blogs/*" element={<Blogs />} />
             <Route path="/careers/*" element={<Career />} />
-            <Route path="/:category/*" element={<CourseDetails/>} />
+            <Route path="/:category/*" element={<CourseDetailes/>} />
 
           </Routes>
         </div>
