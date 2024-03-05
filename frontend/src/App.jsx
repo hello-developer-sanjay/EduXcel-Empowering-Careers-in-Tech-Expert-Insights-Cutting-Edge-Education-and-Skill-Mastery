@@ -16,7 +16,6 @@ import Career from './components/Career';
 import PageTransition from "./components/PageTransition"; 
 import Course from './components/Course';
 import CourseDetailed from './components/CourseDetailed';
-import CourseDetailes from './components/CourseDetailes';
 
 import CourseList from './components/CourseList';
 import  Founder from './components/Founder';
@@ -70,7 +69,6 @@ function App() {
 
             <Route path="/blogs/*" element={<Blogs />} />
             <Route path="/careers/*" element={<Career />} />
-            <Route path="/:category/*" element={<CourseDetailes/>} />
 
           </Routes>
         </div>
