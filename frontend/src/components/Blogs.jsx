@@ -147,7 +147,7 @@
       const fetchData = async (collection) => {
         try {
           const response = await fetch(
-            `https://edu-back-j3mz.onrender.com/api/${collection}`
+            `https://portfolio-back-aruc.onrender.com/api/${collection}`
           );
           const responseData = await response.json();
           setBlogsData((prevData) => ({
