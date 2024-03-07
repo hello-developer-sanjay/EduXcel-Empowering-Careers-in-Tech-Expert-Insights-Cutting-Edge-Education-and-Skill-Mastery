@@ -70,12 +70,13 @@ function App() {
         <Route path="/signin" element={<PageTransition><SignInSignUp /></PageTransition>} />
             <Route path="/forgot-password" element={<PageTransition><ForgotPassword /></PageTransition>} />
             <Route path="/reset" element={<PageTransition><ResetPassword /></PageTransition>} />
-            <Route path="/:vision/*" element={<CareerBlog/>} />
-            <Route path="/career/:vision" element={<CareerPage />} />
 
             <Route path="/blogs/*" element={<Blogs />} />
             <Route path="/careers/*" element={<CareerOption />} />
             <Route path="/:category/*" element={<CourseDetailes/>} />
+            <Route path="/careers/:vision" element={<CareerPage />} />
+            <Route path="/career/:vision/*" element={<CareerBlog/>} />
+
           </Routes>
         </div>
         <div className='relative z-0'>
