@@ -49,7 +49,7 @@ function CareerList() {
               key={index} // Use index as key since vision itself is not unique
             
             >
-              <Link to={`/career/${vision}`}>
+              <Link to={`/careers/${vision}`}>
                 <div
                   className="course-image"
                   style={{
