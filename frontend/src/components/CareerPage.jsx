@@ -182,7 +182,7 @@ const CourseDescription = styled.p`
   }
 `;
 
-const Talk = () => {
+const CareerPage = () => {
   const { vision } = useParams();
   const [careers, setCareers] = useState([]);
   const [loading, setLoading] = useState(true); // Add loading state
@@ -265,4 +265,4 @@ const Talk = () => {
   );
 };
 
-export default Talk;
+export default CareerPage;
