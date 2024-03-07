@@ -3,9 +3,11 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import '../styles/CourseList.css';
-import courseImage1 from '../assets/full2.webp';
-import courseImage2 from '../assets/binary2.webp';
-import courseImage3 from '../assets/machine2.webp';
+import courseImage1 from '../assets/html.png';
+import courseImage2 from '../assets/css.png';
+import courseImage3 from '../assets/responsive1.png';
+import courseImage4 from '../assets/preprocessors.png';
+
 import SignInSignUp from './SignInSignUp';
 
 function CourseList() {
@@ -100,18 +102,18 @@ function CourseList() {
 
 // Function to get the image URL for each category
 function getImageForCategory(category) {
-  // You can modify this function based on your logic to map categories to images
   switch (category) {
-    case 'frontend_courses':
+    case 'html_courses':
       return courseImage1;
-    case 'data_science_courses':
+    case 'css_courses':
       return courseImage2;
-    case 'machine_learning_courses':
+    case 'responsive_web_design_courses':
       return courseImage3;
+      case 'css_preprocessors_courses':
+      return courseImage4;
     default:
-      return ''; // Default image or empty string for no image
+      return ''; 
   }
 }
 
 export default CourseList;
-
