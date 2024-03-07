@@ -76,7 +76,6 @@ function App() {
             <Route path="/blogs/*" element={<Blogs />} />
             <Route path="/careers/*" element={<CareerOption />} />
             <Route path="/:category/*" element={<CourseDetailes/>} />
-
           </Routes>
         </div>
         <div className='relative z-0'>
