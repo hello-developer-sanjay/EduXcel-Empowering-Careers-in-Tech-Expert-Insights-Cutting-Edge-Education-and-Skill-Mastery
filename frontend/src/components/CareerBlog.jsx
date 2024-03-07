@@ -72,7 +72,7 @@
             }}
           >
             <Link
-              to={`/${library}/${slug}`} 
+              to={`/career/${library}/${slug}`} 
               style={{ color: "inherit", textDecoration: "none" }}
             >
               {title}
@@ -126,7 +126,7 @@
       const handleSearchChange = (event) => {
         const newQuery = event.target.value;
         setSearchQuery(newQuery);
-        navigate(`/${vision}/search/${encodeURIComponent(newQuery)}`);
+        navigate(`/career/${vision}/search/${encodeURIComponent(newQuery)}`);
       };
 
 
@@ -240,7 +240,7 @@
       
             const slug = generateSlug(title); // Generate slug from title
       
-            navigate(`/${vision}/${slug}`, {
+            navigate(`/career/${vision}/${slug}`, {
               replace: true,
             });
       
@@ -254,7 +254,7 @@
       
 
       useEffect(() => {
-        const query = location.pathname.split("/${vision}/search/")[1] || "";
+        const query = location.pathname.split("/career/${vision}/search/")[1] || "";
         setSearchQuery(decodeURIComponent(query));
         fetchDataForAlllibrarys();
     
@@ -264,7 +264,7 @@
         }
     
         // Check for title in URL and display the content directly
-        const urlTitleMatch = location.pathname.match(/\/(.+?)\/(.+)/);
+        const urlTitleMatch = location.pathname.match(/\/career\/(.+?)\/(.+)/);
         if (urlTitleMatch) {
           const [, library, encodedTitle] = urlTitleMatch;
           const urlTitle = decodeURIComponent(encodedTitle);
