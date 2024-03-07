@@ -16,6 +16,10 @@ import PageTransition from "./components/PageTransition";
 import Course from './components/Course';
 import CourseDetailed from './components/CourseDetailed';
 import CourseDetailes from './components/CourseDetailes';
+import CareerOption from './pages/CareerOption';
+import CareerPage from './components/CareerPage';
+import CareerBlog from './components/CareerBlog';
+
 
 import CourseList from './components/CourseList';
 import  Founder from './components/Founder';
@@ -66,9 +70,11 @@ function App() {
         <Route path="/signin" element={<PageTransition><SignInSignUp /></PageTransition>} />
             <Route path="/forgot-password" element={<PageTransition><ForgotPassword /></PageTransition>} />
             <Route path="/reset" element={<PageTransition><ResetPassword /></PageTransition>} />
+            <Route path="/:vision/*" element={<CareerBlog/>} />
+            <Route path="/career/:vision" element={<CareerPage />} />
 
             <Route path="/blogs/*" element={<Blogs />} />
-            <Route path="/careers/*" element={<Career />} />
+            <Route path="/careers/*" element={<CareerOption />} />
             <Route path="/:category/*" element={<CourseDetailes/>} />
 
           </Routes>
