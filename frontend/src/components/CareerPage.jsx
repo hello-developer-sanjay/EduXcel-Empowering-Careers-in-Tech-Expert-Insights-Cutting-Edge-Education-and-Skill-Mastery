@@ -212,12 +212,12 @@ const Talk = () => {
       <CourseNavigation>
         <CourseNavList>
           <CourseNavItem>
-            <CourseNavLinkContainer to="/career/frontend_development_careers">
+            <CourseNavLinkContainer to="/careers/frontend_development_careers">
               Frontend_development_career{' '}
             </CourseNavLinkContainer>
           </CourseNavItem>
           <CourseNavItem>
-            <CourseNavLinkContainer to="/career/backend_development_careers">
+            <CourseNavLinkContainer to="/careers/backend_development_careers">
               Backend_development_career{' '}
             </CourseNavLinkContainer>
           </CourseNavItem>
