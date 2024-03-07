@@ -182,7 +182,7 @@ const CourseDescription = styled.p`
   }
 `;
 
-const CareerPage = () => {
+const Talk = () => {
   const { vision } = useParams();
   const [careers, setCareers] = useState([]);
   const [loading, setLoading] = useState(true); // Add loading state
@@ -231,7 +231,7 @@ const CareerPage = () => {
             {careers.map((career, index) => {
               return (
                 <CourseItem key={index}>
-                  <NavLink to={`/${vision}`} style={{ textDecoration: 'none' }}>
+                  <NavLink to={`/career/${vision}`} style={{ textDecoration: 'none' }}>
                     <CourseTitle>{career.title}</CourseTitle>
                   </NavLink>
                   {career.overview && (
@@ -265,4 +265,4 @@ const CareerPage = () => {
   );
 };
 
-export default CareerPage;
+export default Talk;
