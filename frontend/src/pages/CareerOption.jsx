@@ -1,5 +1,5 @@
 import  { useEffect, useState } from 'react';
-import CareerList from '../components/Careerlist';
+import CareerList from '../components/CareerList';
 import { Helmet } from 'react-helmet';
 
 import 'slick-carousel/slick/slick.css';
