@@ -3,8 +3,8 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import '../styles/CourseList.css';
-import courseImage1 from '../assets/full2.webp';
-import courseImage2 from '../assets/binary2.webp';
+import courseImage1 from '../assets/frontend1.png';
+import courseImage2 from '../assets/backend1.png';
 
 function CareerList() {
   const [careers, setCareers] = useState([]);
@@ -72,7 +72,6 @@ function CareerList() {
 
 // Function to get the image URL for each category
 function getImageForVision(vision) {
-  // You can modify this function based on your logic to map categories to images
   switch (vision) {
     case 'frontend_development_careers':
       return courseImage1;
