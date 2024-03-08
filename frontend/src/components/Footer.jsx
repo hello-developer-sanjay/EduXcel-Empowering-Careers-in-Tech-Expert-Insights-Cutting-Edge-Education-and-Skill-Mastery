@@ -91,7 +91,7 @@ const CatchyMessage = styled(motion.p)`
   font-size: 1.5rem;
   font-weight: bold;
   margin-top: 1rem;
-  color: black;
+  color: white;
   word-wrap: break-word;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease-in-out;
