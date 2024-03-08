@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Typed from 'react-typed';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUserPlus, faNewspaper,faBriefcase, faUserTie } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUserPlus, faNewspaper,faBriefcase, faUserTie ,faInfoCircle} from '@fortawesome/free-solid-svg-icons';
 
 const HeaderContainer = styled.header`
 background-color: #050816; 
@@ -343,7 +343,7 @@ function Header() {
       <HeaderContent>
         <Link to="/">
         <Logo>
-            <LargeScreenText className="eduxcel-text">Eduxcel Mastery:  Journey to Academic Brilliance
+            <LargeScreenText className="eduxcel-text">Eduxcel Mastery
 </LargeScreenText>
             <SmallScreenText className="eduxcel-text">Eduxcel</SmallScreenText>
           </Logo>
@@ -403,8 +403,15 @@ Meet Founder            </NavLinkItem>
             
           </NavItem>
 
-          {/* Add more navigation links */}
-        </NavList>
+<NavItem>
+            <NavLinkItem to="/about-us" aria-label="About-Us" onClick={toggleMenu}>
+            <FontAwesomeIcon icon={faInfoCircle } />
+
+
+About Us            </NavLinkItem>
+            
+          </NavItem>
+               </NavList>
       </HamburgerMenu>
     </HeaderContainer>
   );
