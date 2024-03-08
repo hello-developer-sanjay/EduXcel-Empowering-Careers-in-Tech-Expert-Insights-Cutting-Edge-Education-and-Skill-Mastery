@@ -173,6 +173,8 @@ if (inViewContent) {
   </div>
   <div className={`${styles.sectionHeadText} text-center mb-4`}>Featured Courses</div>
   <p className={`${styles.heroSubText} mt-8 text-white-100 text-center`}>Explore our courses and enhance your skills</p>
+         <CourseList courseData={courseData} />
+
 </div>
 <Suggest/>
 
