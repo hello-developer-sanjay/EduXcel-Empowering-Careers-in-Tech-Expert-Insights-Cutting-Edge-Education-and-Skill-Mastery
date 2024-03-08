@@ -19,7 +19,6 @@ const CardWrapper = styled.div`
   flex-direction: column;
   align-items: center; /* Center horizontally */
   justify-content: center; /* Center vertically */
-  border: 2px solid #ff6b6b; 
   border-radius: 20px;
   padding: 20px;
 `;
