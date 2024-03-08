@@ -30,9 +30,9 @@
 }
 
 .course-image {
-  height: 200px; /* Reduced height */
-  width: 100%; /* Ensure image stretches to fill container horizontally */
-  background-size: contain; /* Adjusted to contain */
+  height: 150px; 
+  width: 100%;
+  background-size: contain; 
   background-repeat: no-repeat;
   background-position: center;
   border-top-left-radius: 8px;
