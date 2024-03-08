@@ -531,7 +531,8 @@ let endpoint = "submit-feedback";
         Submit
       </QueryButton>
       </ContactForm>
-      <ToastContainer className="custom-toast-container" position="top-right" />
+      <ToastContainer className="custom-toast-container" position="top-right"   style={{ marginTop: '100px' }}
+ />
     </FooterContainer>
   );
 };
