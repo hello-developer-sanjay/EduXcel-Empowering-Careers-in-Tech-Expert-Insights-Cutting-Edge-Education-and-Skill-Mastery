@@ -11,7 +11,6 @@ import Footer from './components/Footer';
 import SignInSignUp from './components/SignInSignUp';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
-import Career from './components/Career';
 import PageTransition from "./components/PageTransition"; 
 import Course from './components/Course';
 import CourseDetailed from './components/CourseDetailed';
@@ -19,8 +18,8 @@ import CourseDetailes from './components/CourseDetailes';
 import CareerOption from './pages/CareerOption';
 import CareerPage from './components/CareerPage';
 import CareerBlog from './components/CareerBlog';
-
-
+import About from './components/About';
+import Faq from './components/Faq';
 import CourseList from './components/CourseList';
 import  Founder from './components/Founder';
 
@@ -49,8 +48,9 @@ function App() {
           <SubHeader />
           <ScrollToTop />
 
-          <Routes>
-            <Route path="/" element={<Home />} />
+          <Routes>     
+             <Route path="/" element={<HomeWithBlogSuggestion />} />
+
                         <Route path="/sanjay-patidar-founder-eduxcel" element={<Founder/>} />
 
             <Route path="/courses" element={<Course />} />
@@ -59,7 +59,9 @@ function App() {
             <Route path="/api/courses/details/:id" element={<CourseDetailed />} />
 
 
-            <Route path="/profile" element={<PageTransition><UserProfile /></PageTransition>} />
+            <Route path="/profile" element={<UserProfile />} />
+            <Route path="/about-us" element={<About />} />
+
             <Route path="/courses/:title" element={<CourseDetailes />} />
             <Route path="/courses/:title/:module" element={<ModuleDetails />} />
             <Route
@@ -84,7 +86,20 @@ function App() {
         </div>
       </div>
     </Router>
+
+    
   );
 }
+const HomeWithBlogSuggestion = () => {
+  return (
+    <>
+      <Home />
+            <Faq/>
+
+   
+    </>
+  );
+};
+
 
 export default App;
