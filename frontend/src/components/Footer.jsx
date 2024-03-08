@@ -196,7 +196,7 @@ const ContactForm = styled(motion.form)`
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
   padding: 1.5rem;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 15px;
