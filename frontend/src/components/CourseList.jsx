@@ -60,7 +60,8 @@ function CourseList() {
   };
 
   return (
-    <div className="container mx-auto">
+  
+    <section className={`relative w-full min-h-screen mx-auto`}>
 
     <div className="course-list">
       <div className="course-cards">
@@ -99,8 +100,9 @@ function CourseList() {
         </div>
       )}
     </div>
-    </div>
-    
+  
+    </section>
+
   );
 }
 
