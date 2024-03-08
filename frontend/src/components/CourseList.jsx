@@ -60,6 +60,8 @@ function CourseList() {
   };
 
   return (
+    <div className="container mx-auto">
+
     <div className="course-list">
       <div className="course-cards">
         {uniqueCategories.map((category, index) => {
@@ -97,6 +99,8 @@ function CourseList() {
         </div>
       )}
     </div>
+    </div>
+    
   );
 }
 
