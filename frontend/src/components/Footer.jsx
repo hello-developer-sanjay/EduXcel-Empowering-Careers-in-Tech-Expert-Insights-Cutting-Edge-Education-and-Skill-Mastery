@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 const FooterContainer = styled(motion.footer)`
    position: relative;
   color: white;
-  padding: 3rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
