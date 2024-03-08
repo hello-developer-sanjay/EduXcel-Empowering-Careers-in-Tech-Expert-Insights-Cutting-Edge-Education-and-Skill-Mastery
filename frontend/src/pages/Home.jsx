@@ -178,7 +178,6 @@ if (inViewContent) {
   <CourseList courseData={courseData} /></div>
 
 </div>
-</div>
 <Suggest/>
 
 
