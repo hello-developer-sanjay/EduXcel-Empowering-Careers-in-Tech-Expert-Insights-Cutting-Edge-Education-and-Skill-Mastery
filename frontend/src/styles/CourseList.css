@@ -3,6 +3,21 @@
   padding: 20px;
   margin-bottom: 40px;
 }
+.container2 {
+
+  width: 100%;
+min-height: 100vh;
+display: flex;
+
+flex-direction: column;
+align-items: center;
+justify-content: space-between;
+/* Replace with your background image path */
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+
+}
 
 .course-cards {
   display: flex;
@@ -26,6 +41,8 @@
 
   &:hover {
     transform: scale(1.02);
+    
+  transition: transform 0.3s ease;
   }
 }
 
