@@ -408,9 +408,9 @@ function Home() {
 <div className="w-full max-w-8xl">
 
   <CourseList courseData={courseData} /></div>
+<Suggest/>
 
 </div>
-<Suggest/>
 
 
       <div className={`relative top-[20px] max-w-8xl mx-auto mb-0 ${styles.paddingX} flex flex-col items-center`}>
