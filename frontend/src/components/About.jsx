@@ -49,7 +49,7 @@ const H1 = styled.h1`
   color: #2ecc71;
   margin-right: 0.5rem;
   margin-left: 0.5rem;
-  font-family: 'Playfair Display', serif;
+ font-family: 'Playfair Display', serif !important; 
 
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   letter-spacing: 2px; /* Increase letter spacing for a stylish look */
@@ -89,7 +89,7 @@ color: #2ecc71;
   font-size: 3rem;
  margin-bottom: 0rem;
  font-weight: 900;
- font-family: 'Playfair Display', serif;
+ font-family: 'Playfair Display', serif !important; 
  margin-top: 0rem;
 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
  transform: skew(-5deg); /* Apply a slight skew for a dynamic effect */
