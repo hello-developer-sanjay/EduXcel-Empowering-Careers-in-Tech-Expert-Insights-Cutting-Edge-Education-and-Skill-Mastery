@@ -45,6 +45,7 @@ border-left: 4px solid #5d00ff;
 border-right: 4px solid #5d00ff;
 
 padding-left: 10px;
+padding-right:10px;
 border-radius: 8px;
 box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 `;
