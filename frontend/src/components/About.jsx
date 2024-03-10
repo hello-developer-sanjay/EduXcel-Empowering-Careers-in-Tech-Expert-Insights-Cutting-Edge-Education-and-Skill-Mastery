@@ -17,7 +17,7 @@ align-items: center;
 max-width: 100%;
 margin-top: 0rem;
 margin-right: 1rem;
-height: 160px;
+height: 180px;
 @media (min-width: 768px) {
   text-align: left;
   margin-top: 0;
@@ -29,6 +29,38 @@ height: 160px;
 
 }
 `;
+const StyledText = styled.span`
+  .eduxcel-text {
+    font-size: 40px;
+    font-weight: bold; 
+    position: relative; 
+    color: #fff; 
+
+    &:hover {
+      color: #fbbf24; 
+    }
+
+    /* Styling the "X" */
+    &:before {
+      content: '';
+    }
+
+    .x-letter {
+      color: #fbbf24;
+      margin-left: 10px;
+      font-size: 48px; 
+      font-family: 'Bangers', cursive; 
+      transform: skew(-20deg, -5deg) scaleX(1.2); 
+      display: inline-block;
+      position: relative;
+      top: -5px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
+    }
+    
+  }
+`;
+
+
 const H1Container = styled.div`
   display: flex;
   justify-content: center;
@@ -49,7 +81,7 @@ const H1 = styled.h1`
   color: #2ecc71;
   margin-right: 0.5rem;
   margin-left: 0.5rem;
- font-family: 'Playfair Display', serif !important; 
+  font-family: 'Playfair Display', serif;
 
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   letter-spacing: 2px; /* Increase letter spacing for a stylish look */
@@ -89,7 +121,7 @@ color: #2ecc71;
   font-size: 3rem;
  margin-bottom: 0rem;
  font-weight: 900;
- font-family: 'Playfair Display', serif !important; 
+ font-family: 'Playfair Display', serif;
  margin-top: 0rem;
 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
  transform: skew(-5deg); /* Apply a slight skew for a dynamic effect */
@@ -100,7 +132,22 @@ text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 
  }
 `;
+const H3 = styled.h1`
+color: #2E35D2;
+  font-size: 3rem;
+ margin-bottom: 0rem;
+ font-weight: 900;
+ font-family: 'Playfair Display', serif;
+ margin-top: 0rem;
+text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+ transform: skew(-5deg); /* Apply a slight skew for a dynamic effect */
+ 
+ @media (max-width: 768px) {
+   margin-top: 0rem;
+   font-size: 1.5rem;
 
+ }
+`;
 const TypedText = styled.span`
     display: block;
     margin-top: 1rem;
@@ -207,7 +254,7 @@ Empower your learning journey with EduXcel, the leading platform for high-qualit
  <meta property="og:description" content="At EduXcel, we believe that education is the cornerstone of progress, and technology serves as the catalyst for innovation. Our mission is simple yet ambitious: to provide expert insights, cutting-edge education, and skill mastery opportunities to learners worldwide.As a passionate advocate for education and technology, I understand the transformative power they hold. From my own experiences as a student to my endeavors in web development and UI/UX design, I've witnessed firsthand the profound impact that knowledge and innovation can have on one's journey.Through EduXcel, we strive to cultivate a dynamic learning community where curiosity is encouraged, challenges are embraced, and growth is inevitable. Whether you're a seasoned professional seeking to enhance your skills or a budding enthusiast eager to explore new horizons, you'll find a wealth of resources and support within our platform.Our commitment extends beyond just providing information; we are dedicated to fostering a culture of collaboration, creativity, and excellence. Together, let's embark on a journey of discovery, where each lesson learned and every skill mastered brings us closer to our goals.
 Empower your learning journey with EduXcel, the leading platform for high-quality online education. Explore diverse courses, personalized learning, and discover how to deploy websites on Vercel and Render backend hosting.Discover the remarkable journey of Sanjay Patidar, a dedicated and passionate individual excelling in the realms of web development and UI/UX design. As a Computer Science and Engineering student, Sanjay embodies a profound commitment to mastering the intricacies of programming, with a specialized focus on crafting immersive digital experiences. Currently pursuing a Bachelor of Engineering degree at Chandigarh University, Sanjay brings forth a proactive approach and an unwavering dedication to excellence in all endeavors. His educational odyssey began at Jawahar Navodaya Vidyalaya School, where he laid the foundation for his academic and extracurricular prowess from 2009 to 2016. This esteemed residential institution, administered under the Ministry of Education, fostered holistic development and instilled a fervent pursuit of excellence. Throughout his tenure, Sanjay actively engaged in a plethora of inter-school competitions, showcasing his versatility and achieving distinction in both academic and non-academic domains. Building upon this robust foundation, Sanjay embarked on his tertiary education journey at Chandigarh University, where he embarked on a quest for knowledge and innovation. Embracing the cutting-edge infrastructure and progressive pedagogical approaches of the university, he delved deep into the intricacies of Computer Science Engineering. His academic trajectory is marked by a stellar GPA of 7.5, a testament to his unwavering dedication and intellectual acumen. Beyond the confines of academia, Sanjay's passion for technology extends to the realms of practical application. Actively participating in coding competitions, hackathons, and collaborative projects, he honed his problem-solving prowess and cultivated invaluable teamwork skills. His journey is characterized by a relentless pursuit of excellence, driven by a profound sense of creativity, innovation, and a commitment to delivering exceptional digital solutions. Explore the professional portfolio of Sanjay Patidar, where innovation meets expertise, and witness firsthand the culmination of passion, creativity, and a relentless pursuit of excellence in web development and UI/UX design. Based in Indore, Madhya Pradesh, Sanjay serves clients across India, including	Chandigarh, Punjab, Mumbai,Maharashtra, Bangalore,Karnataka, Delhi, Kolkata, West Bengal, Chennai, Tamil Nadu, Hyderabad, Telangana, Pune, Ahmedabad, Gujarat, Jaipur, Rajasthan, Lucknow, Uttar Pradesh, Bhopal, Nagpur, Visakhapatnam, Andhra Pradesh, Kochi, Kerala, Guwahati, Assam, Bhubaneswar, Odisha, Dehradun, Uttarakhand, Raipur, Chhattisgarh,  and beyond.User data is protected with state-of-the-art security measures.Explore our courses and enhance your skills with Eduxcel. Find a wide range of online courses on various topics to boost your knowledge. Discover the remarkable journey of Sanjay Patidar, a dedicated and passionate individual excelling in the realms of web development and UI/UX design. As a Computer Science and Engineering student, Sanjay embodies a profound commitment to mastering the intricacies of programming, with a specialized focus on crafting immersive digital experiences. Currently pursuing a Bachelor of Engineering degree at Chandigarh University, Sanjay brings forth a proactive approach and an unwavering dedication to excellence in all endeavors. His educational odyssey began at Jawahar Navodaya Vidyalaya School, where he laid the foundation for his academic and extracurricular prowess from 2009 to 2016. This esteemed residential institution, administered under the Ministry of Education, fostered holistic development and instilled a fervent pursuit of excellence. Throughout his tenure, Sanjay actively engaged in a plethora of inter-school competitions, showcasing his versatility and achieving distinction in both academic and non-academic domains. Building upon this robust foundation, Sanjay embarked on his tertiary education journey at Chandigarh University, where he embarked on a quest for knowledge and innovation. Embracing the cutting-edge infrastructure and progressive pedagogical approaches of the university, he delved deep into the intricacies of Computer Science Engineering. His academic trajectory is marked by a stellar GPA of 7.5, a testament to his unwavering dedication and intellectual acumen. Beyond the confines of academia, Sanjay's passion for technology extends to the realms of practical application. Actively participating in coding competitions, hackathons, and collaborative projects, he honed his problem-solving prowess and cultivated invaluable teamwork skills. His journey is characterized by a relentless pursuit of excellence, driven by a profound sense of creativity, innovation, and a commitment to delivering exceptional digital solutions. Explore the professional portfolio of Sanjay Patidar, where innovation meets expertise, and witness firsthand the culmination of passion, creativity, and a relentless pursuit of excellence in web development and UI/UX design." />
  <meta property="og:type" content="website" />
- <meta property="og:url" content="https://eduxcel.vercel.app/about-us" />
+ <meta property="og:url" content="https://eduxcel.vercel.app" />
  <meta property="og:image:alt" content="Sanjay Patidar" />
  <meta property="og:site_name" content="EduXcel: About Us - Transforming Tech Careers with Expert Insights and Cutting-Edge Education" />
 
@@ -411,10 +458,10 @@ Empower your learning journey with EduXcel, the leading platform for high-qualit
     <motion.section className="about-section" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <div className="container mx-auto">
         <motion.div className="flex flex-col items-center mb-12" initial={{ y: -50 }} animate={{ y: 0 }} transition={{ delay: 0.2 }}>
-          <h2 className="text-4xl font-semibold text-center text-blue-600 mb-6">
-            Welcome to <span className="text-yellow-500">EduXcel</span> E-Learning Wonderland!
-          </h2>
-          <ProfileTextContainer>
+        <StyledText>
+ <H3>Welcome to <span className="eduxcel-text">Edu<span className="x-letter">X</span>cel</span> E-Learning Wonderland!</H3>
+</StyledText>
+   <ProfileTextContainer>
           <Introduction
     initial={{ opacity: 0, y: -100,  scale: 0.5 }} 
     animate={{ opacity: 1, y: 0, scale: 1 }} 
@@ -432,7 +479,18 @@ Empower your learning journey with EduXcel, the leading platform for high-qualit
           <H2>
 
   <Typed
-    strings={['Cultivate Intellectual Discovery ', 'Awaken the Genius Within', 'Nurture the Seeds of Intellectual Growth  ']}
+strings={[
+  'Explore Cutting-Edge Tech Insights with EduXcel',
+  'Unleash Your Potential: Dive into EduXcel',
+  'Master Tech Skills: Your Journey Starts with EduXcel',
+  'EduXcel: Your Passport to Tech Mastery',
+  'Tech Evolution Awaits: EduXcel Leads the Way',
+  'Discover Innovation Beyond Boundaries with EduXcel',
+  'Forge Your Tech Career with EduXcel',
+  'EduXcel: Where Tech Dreams Take Flight',
+  'Empower Your Journey: EduXcel Lights the Path',
+  'EduXcel: Where Learning Meets Innovation',
+]}
     typeSpeed={60}
     backSpeed={60}
     smartBackspace={true}
@@ -446,8 +504,10 @@ Empower your learning journey with EduXcel, the leading platform for high-qualit
           </Introduction>
           </ProfileTextContainer>
           <p className="text-purple-700 text-center max-w-6xl font-bold" style={{ fontSize: '20px' }}>
-            We are thrilled to introduce you to our innovative project, designed to revolutionize online education.
-          </p>
+          Step into the future of online education with us! Our groundbreaking project is set to redefine the way you learn.
+
+
+</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -568,11 +628,11 @@ Empower your learning journey with EduXcel, the leading platform for high-qualit
 
          
         <div className="flex justify-center items-center  mt-4">
-  <h2 className="text-2xl font-semibold text-green-600 mr-4 ">Made With</h2>
+  <H1 className="text-2xl font-semibold text-green-600 mr-4 ">Made With</H1>
   <h2 className="text-4xl font-semibold text-blue-600 flex items-center creativity">
-    <span className="text-yellow-600">Crea</span>
+  <StyledSpan className="text-white-600">Crea</StyledSpan>
     <img src={CreaTeaImage} alt="CreaTea" className="w-12 h-12 mx-2" />
-    <span className="text-green-600">vity</span>
+    <StyledSpan className="text-green-600">vity</StyledSpan>
   </h2>
 </div>
       </div>
@@ -585,7 +645,7 @@ Empower your learning journey with EduXcel, the leading platform for high-qualit
             <StyledSpan className="text-green-600">tivity</StyledSpan>
           </h1>
           
-            <H1> Partner with Us to 
+            <H1>: Partner with Us to 
             </H1>
             <h1 className="text-4xl font-semibold text-blue-600 flex items-center creativity">
 
