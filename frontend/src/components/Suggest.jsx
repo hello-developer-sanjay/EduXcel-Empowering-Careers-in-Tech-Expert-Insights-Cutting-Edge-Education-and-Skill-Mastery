@@ -21,6 +21,8 @@ const CardWrapper = styled.div`
   justify-content: center; /* Center vertically */
   border-radius: 20px;
   padding: 20px;
+    border: 2px solid #ff6b6b; 
+
 `;
 
 const Title = styled.h1`
