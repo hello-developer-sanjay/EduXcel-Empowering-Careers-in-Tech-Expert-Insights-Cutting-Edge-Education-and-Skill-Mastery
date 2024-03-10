@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import CourseList from '../components/CourseList';
 import { Helmet } from 'react-helmet';
 import Slider from 'react-slick';
+import Typed from 'react-typed';
+import styled from 'styled-components';
 
 import { motion, useAnimation } from 'framer-motion'; // Import Framer Motion
 import 'slick-carousel/slick/slick.css';
@@ -16,6 +18,143 @@ import LearnImage from '../assets/learning.png';
 
 import { useInView } from 'react-intersection-observer'; // Import react-intersection-observer
 import Suggest from '../components/Suggest';
+const H2 = styled.h1`
+color: #0DCB9A;
+
+  font-size: 3rem;
+ margin-bottom: 0rem;
+ font-weight: 900;
+ font-family: 'Playfair Display', serif !important; 
+ margin-top: 0rem;
+text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+ transform: skew(-5deg); /* Apply a slight skew for a dynamic effect */
+ 
+ @media (max-width: 768px) {
+   margin-top: 0rem;
+   font-size: 1.2rem;
+
+ }
+`;
+const Text = styled.h1`
+font-size: 1.1rem;
+color: #f3f3f3;
+margin-bottom: 1.5rem;
+line-height: 1.4;
+text-align: justify;
+border-left: 4px solid #5d00ff;
+border-right: 4px solid #5d00ff;
+
+padding-left: 10px;
+border-radius: 8px;
+box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+`;
+const TitleText = styled.h1`
+
+font-size: 1.6rem;
+margin-bottom: 1.5rem;
+color: #5d00ff;
+text-transform: capitalize;
+font-weight: bold;
+text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+@media (max-width: 768px) {
+  font-size: 1.4rem;
+
+  }
+`;
+const TypedText = styled.span`
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    text-transform:uppercase;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 4rem;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+
+    @media (max-width: 768px) {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+
+    }
+
+    /* Change the color of the typing text */
+    @media (prefers-color-scheme: dark) {
+      color: #51D5FF; /* Bright yellow in dark mode */
+    }
+
+    @media (prefers-color-scheme: light) {
+      color: #ffffff; /* Deep orange in light mode */
+    }
+  `;
+  const ProfileTextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  margin-top: 0rem;
+  margin-right: 1rem;
+  height: 160px;
+  @media (min-width: 768px) {
+    text-align: left;
+    margin-top: 0;
+  
+  }
+  @media (max-width: 768px) {
+    
+    max-width: 90%;
+  
+  }
+  `;
+ const Introduction = styled(motion.p)`
+ font-size: 1.5rem;
+ line-height: 1.5;
+ max-width: 800px;
+ text-align: center;
+ margin-top : 1rem;
+ margin-bottom: 1rem;
+ color: #ffffff; /* White on hover */
+
+ 
+ .highlight {
+   position: relative;
+   display: inline-block;
+   font-size: 4rem;
+   font-weight: bold;
+   color: transparent;
+   background: linear-gradient(45deg, #ff4081, #00bcd4); /* Gradient highlight */
+   background-clip: text;
+   -webkit-background-clip: text;
+   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+   padding-bottom: 5px;
+   margin-bottom: 1px;
+   line-height: 4rem;
+   /* Animation for the highlight class */
+   @media (max-width: 768px) {
+ font-size: 1.5rem;
+ line-height: 2rem;
+
+ }
+ }
+
+
+ @keyframes highlightAnimation {
+   0%, 100% {
+     background-position: 0% 50%;
+   }
+   50% {
+     background-position: 100% 50%;
+   }
+ }
+
+
+ @media (max-width: 768px) {
+ margin-top:1rem;
+ font-size: 1.5rem;
+
+ }
+`;
 
 function Home() {  
   
@@ -24,6 +163,8 @@ function Home() {
   const [contentAnimated, setContentAnimated] = useState(false);
   const controlsImage = useAnimation();
   const controlsContent = useAnimation();
+  const controlsContents = useAnimation();
+
   const [inViewImage] = useInView();
   const [whyImageAnimated, setWhyImageAnimated] = useState(false);
   const [learnImageAnimated, setLearnImageAnimated] = useState(false);
@@ -35,7 +176,6 @@ function Home() {
   const [ inViewContent] = useInView();
 
   useEffect(() => {
-    // Fetch course data from your API endpoint
     async function fetchCourses() {
       try {
         const response = await axios.get('https://edu-back-j3mz.onrender.com/api/courses');
@@ -78,6 +218,22 @@ function Home() {
       controlsContent.start((index) => ({
         y: 0,
         opacity: 1,
+        scale: 1,
+        transition: {
+          duration: 1.5,
+          delay: index * 0.2,
+          type: 'spring',
+          stiffness: 100,
+          bounce: 0.5, 
+        },
+      }));
+      setContentAnimated(true);
+    }
+    
+    if (inViewContent && !contentAnimated) {
+      controlsContents.start((index) => ({
+        y: 0,
+        opacity: 1,
         rotate: [0, (index % 2 === 0 ? 360 : -360)],
         transition: {
           duration: 1.5,
@@ -88,10 +244,10 @@ function Home() {
       }));
       setContentAnimated(true);
     }
-  }, [controlsImage, controlsWhyImage, inViewWhyImage, controlsLearnImage, inViewLearnImage, whyImageAnimated, learnImageAnimated, inViewImage, controlsContent, inViewContent, imageAnimated, contentAnimated]);
+  }, [controlsImage, controlsWhyImage,controlsContents, inViewWhyImage, controlsLearnImage, inViewLearnImage, whyImageAnimated, learnImageAnimated, inViewImage, controlsContent, inViewContent, imageAnimated, contentAnimated]);
 
  
-  const contentBlocks = [
+  const contentBlock = [
     {
       title: 'Interactive Learning Experiences',
       description: 'Immerse yourself in interactive lessons, quizzes, and assignments designed to make learning engaging and enjoyable. Explore diverse courses tailored to your interests and career goals.',
@@ -114,8 +270,13 @@ function Home() {
     },
     
   ];
+  const contentBlocks = [
+    {
+      title: 'EduXcel: Unleashing Tech Potential & Expert Insights',
+      description: 'Embark on a transformative journey with EduXcel! Gain exclusive access to insider insights, cutting-edge education, and skill mastery curated by industry leaders. Elevate your career prospects and unlock your full potential in the dynamic world of technology.',
+    },
+  ];
   
-
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -379,6 +540,7 @@ function Home() {
 
      <div className={`relative top-[10px] max-w-8xl mx-auto ${styles.paddingX} flex flex-col items-center`}>
   <div className="w-full max-w-4xl">
+    
     <Slider {...sliderSettings}>
       <div className="w-full">
         <img
@@ -401,14 +563,108 @@ function Home() {
           className="w-full h-auto object-cover"
         />
       </div>
+
     </Slider>
+    
+    
   </div>
-  <div className={`${styles.sectionHeadText} text-center mb-4`}>Featured Courses</div>
-  <p className={`${styles.heroSubText} mt-8 text-white-100 text-center`}>Explore our courses and enhance your skills</p>
+
+  <div className="w-full max-w-6xl">
+
+            {contentBlocks.map((block , index) => {
+                  const [refContent, inViewContent] = useInView({ triggerOnce: true });
+                  const controlsContents = useAnimation();
+
+              useEffect(() => {
+  if (inViewContent) {
+    controlsContents.start({
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 1.5,
+        delay: index * 0.2,
+        type: 'spring',
+        stiffness: 100,
+      },
+    });
+  }
+}, [inViewContent, controlsContents, index]);
+
+                  return (
+                    <motion.div
+                      key={index}
+                      ref={refContent}
+                      className="mb-8"
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={controlsContent}
+                    >
+          <div className={`${styles.sectionHeadText} text-center mb-4`}>
+                        {block.title}
+                      </div>
+                    <Text>     
+                     {block.description}
+
+                     </Text>         
+           </motion.div>
+                  );
+                })}
+             </div>
+
+  <ProfileTextContainer>
+    
+    
+  <Introduction
+    initial={{ opacity: 0, y: -100,  scale: 0.5 }} 
+    animate={{ opacity: 1, y: 0, scale: 1 }} 
+    transition={{
+      type: "spring", 
+      stiffness: 200, 
+      damping: 12, 
+      delay: 1, 
+      duration: 0.8 
+    }}
+  >
+       
+          
+          <TypedText>
+          <H2>
+
+  <Typed
+strings={[
+  'Embark on a Tech Odyssey with EduXcel',
+  'Transform Your Future with EduXcel',
+  'Innovate, Learn, and Excel with EduXcel',
+  'Empowering Tech Enthusiasts Worldwide',
+  'Unleash Your Tech Potential with EduXcel',
+  'Discover Limitless Opportunities with EduXcel',
+  'EduXcel: Where Tech Dreams Become Reality',
+  'EduXcel: Your Gateway to Tech Excellence',
+  'EduXcel: Pioneering Tomorrow Tech Leaders',
+]}
+    typeSpeed={60}
+    backSpeed={60}
+    smartBackspace={true}
+    shuffle={false}
+    backDelay={1500}
+    loop
+  />
+  </H2>
+</TypedText>
+  
+          </Introduction>
+          </ProfileTextContainer>
+ 
+          <div className={`${styles.sectionHeadText} text-center mb-4`}>
+  Elevate Your Skills with Our Featured Courses
+</div>
+<p className={`${styles.heroSubText} mt-8 text-white-100 text-center`}>
+  Discover our curated selection of courses designed to empower you
+</p>
 <div className="w-full max-w-8xl">
 
   <CourseList courseData={courseData} /></div>
-<Suggest/>
+  <Suggest/>
 
 </div>
 
@@ -478,7 +734,7 @@ function Home() {
               </div>
             </div>
             <div className="lg:w-1/2 lg:pl-12 why-us-content">
-            {contentBlocks.map((block, index) => {
+            {contentBlock.map((block, index) => {
                   const [refContent, inViewContent] = useInView({ triggerOnce: true });
                   const controlsContent = useAnimation();
 
