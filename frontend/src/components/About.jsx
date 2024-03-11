@@ -268,40 +268,40 @@ Empower your learning journey with EduXcel, the leading platform for high-qualit
  <meta name="keywords" content="portfolio, signup , eduxcel , tech, education, careers, opportunity, personal-portfolio,developer_sanju,sanjay, Sanjay, SANJAY, Sanjay Patidar, SANJAY PATIDAR, SANJAY WEB DEVELOPER,about Eduxcel SANJAY DEVELOPER, Full Stack Web Developer, Mern Stack Web Developer, sanjay patidar, sanjay-patidar, professional, web developer portfolio, coder, web development, UI/UX design, Chandigarh University, EduXcel, Indore,contact, developer, programmer, engineer, AI, Artificial Intelligence ,tech enthusiastic, creativity ,creator, work , technology, coding, projects, experiences, resume, cv" />
  <meta name="author" content="Sanjay Patidar" />      
        
-       <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "ItemList",
-  "name": "Sanjay Patidar",
-  "birthDate": "1998-07-01",
-  "birthPlace": {
-    "@type": "Place",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Indore"
-    }
-  },
-  "alumniOf": {
-    "@type": "CollegeOrUniversity",
-    "name": "Chandigarh University",
-    "location": {
+     <script type="application/ld+json">
+  ${JSON.stringify({
+    "@context": "http://schema.org",
+    "@type": "ItemList",
+    "name": "Sanjay Patidar",
+    "birthDate": "1998-07-01",
+    "birthPlace": {
       "@type": "Place",
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Chandigarh",
-        "addressRegion": "Punjab",
-        "addressCountry": "India"
+        "addressLocality": "Indore"
       }
-    }
-  },
-  "address": [
-    {
-      "@type": "PostalAddress",
-      "addressLocality": "Indore",
-      "addressRegion": "Madhya Pradesh",
-      "postalCode": "452001",
-      "addressCountry": "India"
     },
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Chandigarh University",
+      "location": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Chandigarh",
+          "addressRegion": "Punjab",
+          "addressCountry": "India"
+        }
+      }
+    },
+    "address": [
+      {
+        "@type": "PostalAddress",
+        "addressLocality": "Indore",
+        "addressRegion": "Madhya Pradesh",
+        "postalCode": "452001",
+        "addressCountry": "India"
+      },
  {
              "@type": "PostalAddress",
              "addressLocality": "Chandigarh",
@@ -428,23 +428,22 @@ Empower your learning journey with EduXcel, the leading platform for high-qualit
              "postalCode": "248001",
              "addressCountry": "India"
            }
-  ],
-  "worksFor": {
-    "@type": "Organization",
-    "name": "Eduxcel" 
-  },
-  "url": "https://eduxcel.vercel.app/",
-  "sameAs": [
-    "https://www.linkedin.com/in/sanjay-patidar-25b580292/",
-    "https://github.com/hello-developer-sanjay",
-    "https://www.instagram.com/sanjay_patidar_mcmxcviii/",
-    "https://eduxcel.vercel.app/",
-    "https://eduxcel.vercel.app/about-us",
-    "https://eduxcel.vercel.app/signup"
-  ]
-}
+    ],
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Eduxcel" 
+    },
+    "url": "https://eduxcel.vercel.app/",
+    "sameAs": [
+      "https://www.linkedin.com/in/sanjay-patidar-25b580292/",
+      "https://github.com/hello-developer-sanjay",
+      "https://www.instagram.com/sanjay_patidar_mcmxcviii/",
+      "https://eduxcel.vercel.app/",
+      "https://eduxcel.vercel.app/about-us",
+      "https://eduxcel.vercel.app/signup"
+    ]
+  })}
 </script>
-
 
     </Helmet>
 
