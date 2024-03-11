@@ -443,8 +443,10 @@ Empower your learning journey with EduXcel, the leading platform for high-qualit
            "https://www.linkedin.com/in/sanjay-patidar-25b580292/",
            "https://github.com/hello-developer-sanjay",
            "https://www.instagram.com/sanjay_patidar_mcmxcviii/",
-           "https://eduxcel.vercel.app/",
-                        "https://eduxcel.vercel.app/signup"
+                      "https://eduxcel.vercel.app/",
+
+           "https://eduxcel.vercel.app/about-us",
+                        "https://eduxcel.vercel.app/signup",
 
          ]
    
