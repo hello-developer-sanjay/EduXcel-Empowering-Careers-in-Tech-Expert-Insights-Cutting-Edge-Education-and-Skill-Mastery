@@ -363,7 +363,7 @@
       
       const sidebarStyle = {
         position: "fixed",
-        top: "190px",
+        top: "50px",
         left: 0,
         height: "100%",
         width: "200px",
@@ -374,7 +374,7 @@
         transition: "left 0.3s",
         overflowX: "hidden",
         overflowY: "auto", 
-  maxHeight: "calc(100% - 200px)", 
+  maxHeight: "calc(100% - 50px)", 
       };
 
       const toggleButtonStyle = {
@@ -600,7 +600,7 @@ if (matchSpecialChars) {
           overflowX="hidden"
           boxShadow="0px 4px 8px rgba(0, 0, 0, 0.1)"
           onScroll={handleScroll}
-          mt="50px"
+          mt="0px"
         >
           {loading ? (
           <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
