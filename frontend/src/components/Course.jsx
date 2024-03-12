@@ -423,20 +423,20 @@ fontSize: matchSpecialChars[0] === '$' ? '1.2em' : matchSpecialChars[0] === '~' 
   return (
     <CourseContainer>
       <Helmet>
-      <title>Eduxcel | Comprehensive Tech Course Portfolio: Web Development, Machine Learning, Artificial Intelligence, and More</title>
+      <title>Eduxcel | Courses | Elevate Your Tech Skills with Our Comprehensive Course Portfolio"</title>
       <meta name="description" content="Explore Eduxcel's comprehensive course offerings in web development, machine learning, artificial intelligence, and more. Our courses cover a wide range of topics, including programming languages, version control, databases, problem-solving, communication skills, web accessibility, performance optimization, security principles, and continuous learning. Whether you're a beginner looking to start a career in tech or a seasoned professional seeking to enhance your skills, Eduxcel provides expert-led courses designed to help you succeed in today's fast-paced digital landscape. Join us and take your skills to the next level with our innovative and engaging online learning platform."/>
   <meta name="keywords" content="Sanjay Patidar, projects,courses, careers, tech,  web development, mobile app development, innovative projects, technology, programming, coding, software development" />
   <meta name="author" content="Sanjay Patidar" />
   <meta name="robots" content="index, follow" />
-  <meta property="og:title" content="Eduxcel | Comprehensive Tech Course Portfolio: Web Development, Machine Learning, Artificial Intelligence, and More" />
+  <meta property="og:title" content="Eduxcel | Courses | Elevate Your Tech Skills with Our Comprehensive Course Portfolio" />
   <meta property="og:description" content="Explore Eduxcel's comprehensive course offerings in web development, machine learning, artificial intelligence, and more. Our courses cover a wide range of topics, including programming languages, version control, databases, problem-solving, communication skills, web accessibility, performance optimization, security principles, and continuous learning. Whether you're a beginner looking to start a career in tech or a seasoned professional seeking to enhance your skills, Eduxcel provides expert-led courses designed to help you succeed in today's fast-paced digital landscape. Join us and take your skills to the next level with our innovative and engaging online learning platform." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://sanjaybasket.s3.ap-south-1.amazonaws.com/skillsImage.png" />
-  <meta property="og:image:alt" content="Eduxcel | Comprehensive Tech Course Portfolio: Web Development, Machine Learning, Artificial Intelligence, and More" />
-  <meta property="og:site_name" content="Eduxcel | Comprehensive Tech Course Portfolio: Web Development, Machine Learning, Artificial Intelligence, and More" />
+  <meta property="og:image:alt" content="Eduxcel | Courses | Elevate Your Tech Skills with Our Comprehensive Course Portfolio" />
+  <meta property="og:site_name" content="Eduxcel | Courses | Elevate Your Tech Skills with Our Comprehensive Course Portfolio" />
   <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Eduxcel | Comprehensive Tech Course Portfolio: Web Development, Machine Learning, Artificial Intelligence, and More" />
+  <meta name="twitter:title" content="Eduxcel | Courses | Elevate Your Tech Skills with Our Comprehensive Course Portfolio" />
   <meta name="twitter:description" content="Explore Eduxcel's comprehensive course offerings in web development, machine learning, artificial intelligence, and more. Our courses cover a wide range of topics, including programming languages, version control, databases, problem-solving, communication skills, web accessibility, performance optimization, security principles, and continuous learning. Whether you're a beginner looking to start a career in tech or a seasoned professional seeking to enhance your skills, Eduxcel provides expert-led courses designed to help you succeed in today's fast-paced digital landscape. Join us and take your skills to the next level with our innovative and engaging online learning platform." />
   <meta name="twitter:image" content="https://sanjaybasket.s3.ap-south-1.amazonaws.com/skillsImage.png" />
 
