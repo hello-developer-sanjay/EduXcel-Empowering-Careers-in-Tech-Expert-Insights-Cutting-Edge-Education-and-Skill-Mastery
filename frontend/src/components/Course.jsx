@@ -3,7 +3,7 @@ import { NavLink, useParams } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
-
+import SubHeader  from './SubHeader';
 import {
   Box,
   VStack,
@@ -53,9 +53,10 @@ const CourseNavigation = styled.nav`
   position: sticky;
   top: 0;
   z-index: 1; /* Ensure it's above other content */
-  margin-bottom: 2rem;
+  margin-bottom: 0rem;
+  
   background-color: #050816;
-  padding: 1rem 2rem;
+  padding: 0.5rem 1rem  ;
   overflow-y: auto; /* Enable vertical scrolling for navigation */
   max-height: calc(100vh - 4rem); /* Limit height to viewport height minus padding */
   &::-webkit-scrollbar {
@@ -67,13 +68,7 @@ const CourseNavigation = styled.nav`
   }
 `;
 
-const CourseNavList = styled.ul`
-  list-style: none;
-  display: flex;
-  color : #fff;
-  flex-wrap: wrap;
-  gap: 1rem;
-`;
+
 
 
 const CourseTitle = styled.span`
@@ -115,36 +110,6 @@ const CourseTitle = styled.span`
 `;
 
 
-const CourseNavItem = styled.li`
-  flex: 1;
-  padding: 0.5rem;
-  text-align: center;
-  border-radius: 5px;
-  transition: transform 0.2s, background-color 0.2s;
-  color: #ffffff;
-`;
-  
-
-
-const CourseNavLinkContainer = styled(NavLink)`
-  text-decoration: none;
-  display: block;
-  position: relative;
-  color: #fff;
-
-  &:hover {
-    color: yellow;
-  }
-
-
-  &.active {
-    color: red; /* Text color for the active link */
-  }
-`;
-
-
-
-
 const CourseContent = styled.div`
   background-color: #050816;
   padding: 1.5rem;
@@ -152,7 +117,7 @@ const CourseContent = styled.div`
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
   overflow-y: auto; 
   max-height: calc(100vh - 4rem);
-  margin-top: 2rem; 
+  margin-top: 0.5rem; 
   margin-left: 5rem; 
   margin-right: 5rem; 
 
@@ -422,7 +387,7 @@ fontSize: matchSpecialChars[0] === '$' ? '1.2em' : matchSpecialChars[0] === '~' 
 
   return (
     <CourseContainer>
-      <Helmet>
+  <Helmet>
       <title>Eduxcel | Courses | Elevate Your Tech Skills with Our Comprehensive Course Portfolio"</title>
       <meta name="description" content="Explore Eduxcel's comprehensive course offerings in web development, machine learning, artificial intelligence, and more. Our courses cover a wide range of topics, including programming languages, version control, databases, problem-solving, communication skills, web accessibility, performance optimization, security principles, and continuous learning. Whether you're a beginner looking to start a career in tech or a seasoned professional seeking to enhance your skills, Eduxcel provides expert-led courses designed to help you succeed in today's fast-paced digital landscape. Join us and take your skills to the next level with our innovative and engaging online learning platform."/>
   <meta name="keywords" content="Sanjay Patidar, projects,courses, careers, tech,  web development, mobile app development, innovative projects, technology, programming, coding, software development" />
@@ -442,53 +407,10 @@ fontSize: matchSpecialChars[0] === '$' ? '1.2em' : matchSpecialChars[0] === '~' 
 
 </Helmet>
 
+
      <CourseNavigation>
-        <CourseNavList>
-          
-          <CourseNavItem>
-            <CourseNavLinkContainer to="/course/html_courses">
-  HTML            </CourseNavLinkContainer>
-          </CourseNavItem>
-          <CourseNavItem>
-            <CourseNavLinkContainer to="/course/css_courses">
-            CSS (Cascading Style Sheets)
-            </CourseNavLinkContainer>
-          </CourseNavItem>
+       <SubHeader/>
 
-
-          <CourseNavItem>
-
-            <CourseNavLinkContainer to="/course/javascript_courses">
-            JavaScript
-                        </CourseNavLinkContainer>
-          </CourseNavItem>
-
-          <CourseNavItem>
-
-<CourseNavLinkContainer to="/course/responsive_web_design_courses">
-Responsive Web Design
-            </CourseNavLinkContainer>
-</CourseNavItem>
-
-
-
-<CourseNavItem>
-
-<CourseNavLinkContainer to="/course/css_preprocessors_courses">
-CSS Preprocessors
-
-            </CourseNavLinkContainer>
-</CourseNavItem>
-
-
-
-<CourseNavItem>
-
-<CourseNavLinkContainer to="/course/dom_manipulation_courses">
-DOM Manipulation
-            </CourseNavLinkContainer>
-</CourseNavItem>
-        </CourseNavList>
       </CourseNavigation>
       <CourseContent>
       {loading ? ( 
