@@ -18,7 +18,6 @@ align-items: center;
 padding: 1rem;
 box-sizing: border-box;
 overflow: hidden;
-position: relative;
 
 background-color: #050816; 
 `;
