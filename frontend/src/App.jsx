@@ -66,10 +66,10 @@ function App() {
               path="/courses/:title/:module/submodules/:submodule"
               element={<SubModuleDetails />}
             />
-            <Route path="/signup" element={<PageTransition><SignInSignUp /></PageTransition>} />
-        <Route path="/signin" element={<PageTransition><SignInSignUp /></PageTransition>} />
-            <Route path="/forgot-password" element={<PageTransition><ForgotPassword /></PageTransition>} />
-            <Route path="/reset" element={<PageTransition><ResetPassword /></PageTransition>} />
+            <Route path="/signup" element={<SignInSignUp />} />
+        <Route path="/signin" element={<SignInSignUp />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset" element={<ResetPassword />} />
 
             <Route path="/blogs/*" element={<Blogs />} />
             <Route path="/careers/*" element={<CareerOption />} />
