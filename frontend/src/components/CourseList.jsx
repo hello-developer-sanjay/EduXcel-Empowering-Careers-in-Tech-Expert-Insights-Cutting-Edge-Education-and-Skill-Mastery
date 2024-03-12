@@ -116,7 +116,6 @@ function CourseList() {
           </div>
         )}
       </div>
-      <ToastContainer />
     </section>
   );
 }
