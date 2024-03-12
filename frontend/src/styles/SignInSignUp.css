@@ -7,11 +7,20 @@
     min-height: 100vh;
   
   }
+  
+  .toggle-sign {
+    align-items: center;
+    margin-top: -100px;
+  }
   .auth-content-container {
     display: flex;
-    align-items: center; 
+    align-items: center;
+    margin-top: 0px;
   }
-  
+  .auth-content {
+    align-items: center;
+    margin-top: 0px;
+  }
 
   
   .auth-image {
@@ -273,10 +282,12 @@
   .sign-heading {
     font-size: 2rem;
     margin-top: 5rem;
+
     text-align: center;
     justify-content: center;
     color: #17f3f6;
     letter-spacing: 3px;
+
     position: relative;
   }
   
