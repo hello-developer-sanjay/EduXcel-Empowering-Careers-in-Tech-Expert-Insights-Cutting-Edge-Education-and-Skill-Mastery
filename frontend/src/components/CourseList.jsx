@@ -39,7 +39,7 @@ function CourseList() {
 
   const uniqueCategories = Array.from(new Set(courses.map(course => course.category)));
 
-  const handleCourseCardClick = (clickedCategory) => {
+ const handleCourseCardClick = (clickedCategory) => {
     if (localStorage.getItem('token')) {
       setRedirectCategory(clickedCategory);
     } else {
@@ -52,10 +52,16 @@ function CourseList() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
+        style: {
+          backgroundColor: '#040521',
+          color: 'white',
+          borderRadius: '8px',
+          padding: '12px',
+          fontSize: '16px',
+        }
       });
     }
   };
-
   const handleCloseForm = () => {
     setShowSignInSignUp(false);
   };
