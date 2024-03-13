@@ -1,12 +1,11 @@
     /* eslint-disable react/prop-types */
     /* eslint-disable react/display-name */
-    import React, { useState,useMemo, useEffect, useRef, useCallback } from "react";
+    import React, { useState, useEffect, useRef, useCallback } from "react";
     import {
       Box,
       Input,
       VStack,
       Text,
-      
       IconButton,
       useDisclosure,
       Collapse,
@@ -14,38 +13,29 @@
     } from "@chakra-ui/react";
 
     import {
-    
       RingLoader,
-      SyncLoader,
       ClipLoader,
-    
+  
     } from "react-spinners";
-    
+  
     import { motion } from "framer-motion";
     import ModalImage from "react-modal-image"; 
     import { useParams } from 'react-router-dom';
-
     import { FaArrowCircleUp, FaBars, FaTimes } from "react-icons/fa";
-
     import { useNavigate, useLocation } from "react-router-dom";
     import ReactPlayer from "react-player";
     import "../styles/Blogs.css";
-
-
     import { Link } from "react-router-dom";
-
-
-
     const slugify = (text) => {
       return text.toString().toLowerCase()
-        .replace(/\s+/g, '-')      
-        .replace(/[^\w-]+/g, '')   
+        .replace(/\s+/g, '-')        // Replace spaces with -
+        .replace(/[^\w-]+/g, '')     // Remove all non-word characters
         .replace(/--+/g, '-')        // Replace multiple - with single -
         .replace(/^-+/, '')          // Trim - from start of text
         .replace(/-+$/, '');         // Trim - from end of text
     };
     
-    const BlogTitle = React.forwardRef(({ title, collection, category,onClick, location }, ref) => {
+    const BlogTitle = React.forwardRef(({ title, collection,onClick, location }, ref) => {
       const slug = slugify(title); // Generate slug from title
     
       return (
@@ -95,10 +85,7 @@
         </motion.div>
       );
     });
-    
-   
-
-
+  
     const CourseDetails = () => {
       const [blogsData, setBlogsData] = useState({
        
@@ -111,25 +98,17 @@
       const titleRefs = useRef({});
       const { isOpen, onToggle } = useDisclosure();
       const [lastVisitedBlog, setLastVisitedBlog] = useState(null);
-
-    
       const observer = useRef();
-
       const [searchQuery, setSearchQuery] = useState("");
       const [scrollProgress, setScrollProgress] = useState(0);
       const [remainingProgress, setRemainingProgress] = useState(100);
-
       const location = useLocation();
       const [clickedTitle, setClickedTitle] = useState(null);
-    
-
       const handleSearchChange = (event) => {
         const newQuery = event.target.value;
         setSearchQuery(newQuery);
         navigate(`/${category}/search/${encodeURIComponent(newQuery)}`);
       };
-
-
       const fetchDataForCategory = async (category) => {
         try {
           const response = await fetch(`https://edu-back-j3mz.onrender.com/api/${category}`);
@@ -150,9 +129,6 @@
           fetchDataForAllCollections().then(() => setLoading(false));
         }
       }, [category]);
-      
-    
-
       const fetchDataForAllCollections = async () => {
         const collections = ["data_science_courses", "machine_learning_courses"];
         const promises = collections.map((collection) => fetchData(collection));
@@ -160,23 +136,24 @@
       };
       const filteredBlogs = (category) => {
         const blogsCollection = blogsData[category] || [];
-        return blogsCollection.filter((blog) =>
-          blog.title.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-      }; 
-                       
+        return blogsCollection.filter((blog) => {
+          // Check if blog.title is a string before calling toLowerCase()
+          if (typeof blog.title === 'string') {
+            return blog.title.toLowerCase().includes(searchQuery.toLowerCase());
+          } else {
+            return false; // Exclude the blog if title is not a string
+          }
+        });
+      };                  
     useEffect(() => {
   fetchDataForAllCollections().then(() => setLoading(false));
 }, []);
-
-  
-    
       const observeLastBlog = useCallback(
         (collection, node) => {
           if (observer.current) {
             observer.current.disconnect();
           }
-    
+
           observer.current = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) {
               // Implement your logic here if needed
@@ -267,15 +244,12 @@
                 slugify(blog.title) === urlTitle ||
           (blog.parentTitle && blog.parentTitle.title === urlTitle) ||
           
-          (blog.entry_level && blog.entry_level.title === urlTitle) ||
-          (blog.common_questions && blog.common_questions.title === urlTitle) ||
+          (blog.content && blog.content.title === urlTitle) ||
 
           // Add more checks for other extensions as needed
           // ...
           false
       );
-
-
           if (matchingBlog) {
             // Set the current page to the matched blog's page
             const pageIndex =
@@ -299,9 +273,6 @@
       const indexOfLastPost = currentPage * postsPerPage;
       const indexOfFirstPost = indexOfLastPost - postsPerPage;
       const currentPosts = filteredBlogs(category).slice(indexOfFirstPost, indexOfLastPost);
-
-    
-
     const headerStyle = {
       position: "sticky",
       top:0,
@@ -317,8 +288,6 @@
       alignItems: "center",
       fontFamily: "Poppins, sans-serif", // Modern sans-serif font
     };
-
-   
       const progressBarStyle = {
         width: `${scrollProgress}%`,
         height: "4px",
@@ -359,24 +328,21 @@
        justifyContent:"start",
        alignItems:"start",
       };
-      
-      
       const sidebarStyle = {
         position: "fixed",
-        top: "50px",
+        top: "70px",
         left: 0,
         height: "100%",
         width: "200px",
         backgroundColor: "black",
         borderRight: "1px solid lightgray",
-        padding: "20px",
+        padding: "0px",
         zIndex: 2,
         transition: "left 0.3s",
         overflowX: "hidden",
         overflowY: "auto", 
   maxHeight: "calc(100% - 50px)", 
       };
-
       const toggleButtonStyle = {
         position: "fixed",
         top: "170px",
@@ -396,36 +362,6 @@
         border: "2px solid #fff", // White border
         fontSize: "12px",
       };
-
-      // Rotating animation on toggle
-      toggleButtonStyle.rotate = {
-        transform: isOpen ? "rotate(180deg)" : "rotate(0)",
-        transition: "transform 0.3s",
-      };
-
-      // Hover effect
-      toggleButtonStyle["&:hover"] = {
-        background: isOpen ? "#c0392b" : "#27ae60", // Darker red when open, darker green when closed
-      };
-
-      // Pulse animation on hover
-      toggleButtonStyle["&:hover"].pulse = {
-        animation: "pulse 0.5s infinite",
-      };
-
-      // Keyframe animation for pulse
-      toggleButtonStyle["@keyframes pulse"] = {
-        "0%": {
-          transform: "scale(1)",
-        },
-        "50%": {
-          transform: "scale(1.2)",
-        },
-        "100%": {
-          transform: "scale(1)",
-        },
-      };
-
       const renderMediaContent = (content, title) => {
         if (!content) {
           return null;
@@ -459,27 +395,8 @@
                 {renderMediaContent(item.description, title)}
                 {renderMediaContent(item.installation, title)}
                 {renderMediaContent(item.content, title)}
-                {renderMediaContent(item.steps, title)}
-                {renderMediaContent(item.career_path, title)}
-                {renderMediaContent(item.entry_level, title)}
-
-
-                 {renderMediaContent(item.components, title)}
-                 {renderMediaContent(item.whatIsJdk, title)}
-                                  {renderMediaContent(item.whatIsJvm, title)}
-
-
-
-                {renderMediaContent(item.jvm, title)}
-                
-                {renderMediaContent(item.jdk, title)}
-
-                {renderMediaContent(item.settingUpJavaDevelopmentEnvironment, title)}
-                {renderMediaContent(item.overview, title)}
-               {renderMediaContent(item.settings, title)} 
-                
-               {renderMediaContent(item.features, title)} 
-              </VStack>
+      
+             </VStack>
             );
           }
       
@@ -576,10 +493,6 @@ if (matchSpecialChars) {
           return <Box key={index} mb={2}>{element}</Box>;
         });
       };
-      
-      
-      
-
 
       const navbarHeight = document.querySelector(".navbar")?.clientHeight || 0;
       return (
@@ -616,11 +529,7 @@ if (matchSpecialChars) {
                       <span style={{ color: "#36D7B7", fontSize: "14px" }}>Preparing content...</span>
                     </div>
           
-                    <div>
-                      <SyncLoader color={"#5E35B1"} loading={loading} size={40} />
-                      <span style={{ color: "#5E35B1", fontSize: "16px" }}>Almost there...</span>
-                    </div>
-                    {/* Add more loaders or customize the existing ones */}
+                  
                   </>
           
           )}
@@ -660,10 +569,7 @@ if (matchSpecialChars) {
       ))}
     </VStack>
   ))}
-</VStack>
-
-
-                </Box>
+</VStack>      </Box>
               </Collapse>
       
               {/* Main Content */}
@@ -673,12 +579,6 @@ if (matchSpecialChars) {
                     <Input
                       type="text"
                       placeholder="Enter your desired job title or keywords"
-
-
-
-
-
-
                       value={searchQuery}
                       onChange={handleSearchChange}
                       p={0}
@@ -717,7 +617,7 @@ if (matchSpecialChars) {
     onClick={() => handleTitleClick(blog.title, category)}
     location="main" // Pass location prop indicating sidebar
   />
-<div style={{ marginTop: "30px", padding: "10px", border: "1px solid #ccc", color: "White", borderRadius: "8px" }}>
+<div style={{ marginTop: "30px", padding: "4px", border: "1px solid #ccc", color: "White", borderRadius: "8px" }}>
 <div style={{ fontWeight: "bold", marginBottom: "10px", fontSize: "1.2rem" }}>Published By:</div>
 <div style={{ display: "flex", alignItems: "center" }}>
   <a href="https://sanjay-patidar.vercel.app" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "#007bff", marginRight: "20px", padding: "10px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)" }}>
@@ -732,8 +632,6 @@ if (matchSpecialChars) {
     <span style={{ fontSize: "0.9rem", color: "#6c757d" }}>Click to visit EduXcel's website</span>
   </a>
 </div>
-
-
   <div style={{ marginTop: "20px", fontWeight: "bold", marginBottom: "10px" , fontSize: "1.2rem"}}>Keywords:</div>
   <div>{renderMediaContent(blog.keywords, blog.title)}</div>
 
@@ -771,8 +669,61 @@ if (matchSpecialChars) {
   {renderMediaContent(blog.responsibilities, blog.title)}
 </VStack>
 
-                 
-      
+
+{/* new */}
+
+
+<VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
+  {renderMediaContent(blog.content?.overview, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
+  {renderMediaContent(blog.content?.topics?.History_of_HTML, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
+  {renderMediaContent(blog.content?.topics?.History_of_HTML?.content?.overview, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
+  {renderMediaContent(blog.content?.topics?.History_of_HTML?.content?.versions, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
+  {renderMediaContent(blog.content?.topics?.History_of_HTML?.content?.significance, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-Purpose_of_HTML`} style={contentSectionStyle}>
+  {renderMediaContent(blog.content?.topics?.Purpose_of_HTML, blog.title)}
+</VStack>
+
+
+<VStack spacing={2} id={`content-${blog.title}-structuring`} style={contentSectionStyle}>
+  {renderMediaContent(blog.content?.topics?.Purpose_of_HTML?.content?.structuring, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-semantic_markup`} style={contentSectionStyle}>
+  {renderMediaContent(blog.content?.topics?.Purpose_of_HTML?.content?.semantic_markup, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-interactivity`} style={contentSectionStyle}>
+  {renderMediaContent(blog.content?.topics?.Purpose_of_HTML?.content?.interactivity, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-Role_in_Web_Development`} style={contentSectionStyle}>
+  {renderMediaContent(blog.content?.topics?.Role_in_Web_Development, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-frontend`} style={contentSectionStyle}>
+  {renderMediaContent(blog.content?.topics?.Role_in_Web_Development?.content?.frontend, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-integration`} style={contentSectionStyle}>
+  {renderMediaContent(blog.content?.topics?.Role_in_Web_Development?.content?.integration, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-compatibility`} style={contentSectionStyle}>
+  {renderMediaContent(blog.content?.topics?.Role_in_Web_Development?.content?.compatibility, blog.title)}
+</VStack>
+
 
                   </motion.div>
                 ))}
