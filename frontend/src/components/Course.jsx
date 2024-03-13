@@ -44,8 +44,6 @@ const SectionStyle = {
   padding: "2px",
   boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
   textDecoration: 'underline',
-
-
 };
 
 
@@ -221,11 +219,12 @@ const CourseDescriptions = styled.p`
 
 `;
 
-
-
 const Course = () => {
   const { category } = useParams();
+
   const [courses, setProjects] = useState([]);
+
+
   const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
@@ -250,8 +249,6 @@ const Course = () => {
     fetchProjects();
   }, [category]);
 
-
-
   const renderMediaContent = (content, title) => {
     if (!content) {
       return null;
@@ -270,11 +267,8 @@ const Course = () => {
           </VStack>
         );
       }
-  
+
       let element;
-  
-   
-  
       if (typeof item === "string") {
         // Handle special characters
         const specialCharsRegex = /[*$~]([^*$~]+)[*$~]/;
@@ -384,29 +378,17 @@ fontSize: matchSpecialChars[0] === '$' ? '1.2em' : matchSpecialChars[0] === '~' 
     });
   };
 
-
+  function slugify(text) {
+    return text.toString().toLowerCase()
+      .replace(/\s+/g, '-')           // Replace spaces with -
+      .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+      .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+      .replace(/^-+/, '')             // Trim - from start of text
+      .replace(/-+$/, '');            // Trim - from end of text
+  }
+  
   return (
     <CourseContainer>
-  <Helmet>
-      <title>Eduxcel | Courses | Elevate Your Tech Skills with Our Comprehensive Course Portfolio"</title>
-      <meta name="description" content="Explore Eduxcel's comprehensive course offerings in web development, machine learning, artificial intelligence, and more. Our courses cover a wide range of topics, including programming languages, version control, databases, problem-solving, communication skills, web accessibility, performance optimization, security principles, and continuous learning. Whether you're a beginner looking to start a career in tech or a seasoned professional seeking to enhance your skills, Eduxcel provides expert-led courses designed to help you succeed in today's fast-paced digital landscape. Join us and take your skills to the next level with our innovative and engaging online learning platform."/>
-  <meta name="keywords" content="Sanjay Patidar, projects,courses, careers, tech,  web development, mobile app development, innovative projects, technology, programming, coding, software development" />
-  <meta name="author" content="Sanjay Patidar" />
-  <meta name="robots" content="index, follow" />
-  <meta property="og:title" content="Eduxcel | Courses | Elevate Your Tech Skills with Our Comprehensive Course Portfolio" />
-  <meta property="og:description" content="Explore Eduxcel's comprehensive course offerings in web development, machine learning, artificial intelligence, and more. Our courses cover a wide range of topics, including programming languages, version control, databases, problem-solving, communication skills, web accessibility, performance optimization, security principles, and continuous learning. Whether you're a beginner looking to start a career in tech or a seasoned professional seeking to enhance your skills, Eduxcel provides expert-led courses designed to help you succeed in today's fast-paced digital landscape. Join us and take your skills to the next level with our innovative and engaging online learning platform." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://sanjaybasket.s3.ap-south-1.amazonaws.com/skillsImage.png" />
-  <meta property="og:image:alt" content="Eduxcel | Courses | Elevate Your Tech Skills with Our Comprehensive Course Portfolio" />
-  <meta property="og:site_name" content="Eduxcel | Courses | Elevate Your Tech Skills with Our Comprehensive Course Portfolio" />
-  <meta property="og:locale" content="en_US" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Eduxcel | Courses | Elevate Your Tech Skills with Our Comprehensive Course Portfolio" />
-  <meta name="twitter:description" content="Explore Eduxcel's comprehensive course offerings in web development, machine learning, artificial intelligence, and more. Our courses cover a wide range of topics, including programming languages, version control, databases, problem-solving, communication skills, web accessibility, performance optimization, security principles, and continuous learning. Whether you're a beginner looking to start a career in tech or a seasoned professional seeking to enhance your skills, Eduxcel provides expert-led courses designed to help you succeed in today's fast-paced digital landscape. Join us and take your skills to the next level with our innovative and engaging online learning platform." />
-  <meta name="twitter:image" content="https://sanjaybasket.s3.ap-south-1.amazonaws.com/skillsImage.png" />
-
-</Helmet>
-
 
      <CourseNavigation>
        <SubHeader/>
@@ -424,7 +406,7 @@ fontSize: matchSpecialChars[0] === '$' ? '1.2em' : matchSpecialChars[0] === '~' 
                   <NavLink to={`/${category}`} style={{ textDecoration: 'none' }}>
                     <CourseTitle>{course.title}</CourseTitle>
                   </NavLink>
-                
+                  
                                  {course.overview && (
                   <CourseDescriptions>
                     {course.overview.map((desc, index) => {
@@ -443,43 +425,48 @@ fontSize: matchSpecialChars[0] === '$' ? '1.2em' : matchSpecialChars[0] === '~' 
                       );
                     })}
                   </CourseDescriptions>
-
-
 )}
                                 Max Learning Hour : {course.max_learning_hours}
-
-
 
 <div id={`content-${course.title}-Introduction_to_HTML`} style={SectionStyle}>
 {renderMediaContent(course.topics?.title, course.title)}
 </div>
 
-<div id={`content-${course.title}-Introduction_to_HTML`} style={SectionStyle}>
-{renderMediaContent(course.topics?.Introduction_to_HTML?.title, course.title)}
-</div>
 
+<NavLink to={`/${category}/${course.topics?.Introduction_to_HTML?.title ? slugify(course.topics.Introduction_to_HTML.title) : ''}`} style={{ textDecoration: 'none' }}>
+ 
+  <div id={`content-${course.title}-Introduction_to_HTML`} style={SectionStyle}>
+    {renderMediaContent(course.topics?.Introduction_to_HTML?.title, course.title)}
+  </div>
+</NavLink>
 
-<div id={`content-${course.title}-Introduction_to_HTML`} style={contentSectionStyle}>
+<div id={`content-${course.overview}-Introduction_to_HTML`} style={contentSectionStyle}>
 {renderMediaContent(course.topics?.Introduction_to_HTML?.overview, course.title)}
 </div>
 
+<NavLink to={`/${category}/${course.topics?.HTML_Document_Structure?.title ? slugify(course.topics.HTML_Document_Structure.title) : ''}`} style={{ textDecoration: 'none' }}>
 <div id={`content-${course.title}-HTML_Document_Structure`} style={SectionStyle}>
+
 {renderMediaContent(course.topics?.HTML_Document_Structure?.title, course.title)}
-</div>
+</div>  </NavLink>
+
 <div id={`content-${course.title}-HTML_Document_Structure`} style={contentSectionStyle}>
 {renderMediaContent(course.topics?.HTML_Document_Structure?.overview, course.title)}
 </div>
 
-
+<NavLink to={`/${category}/${course.topics?.HTML_Elements_and_Tags?.title ? slugify(course.topics.HTML_Elements_and_Tags.title) : ''}`} style={{ textDecoration: 'none' }}>
 
 <div id={`content-${course.title}-HTML_Elements_and_Tags`} style={SectionStyle}>
 {renderMediaContent(course.topics?.HTML_Elements_and_Tags?.title, course.title)}
-</div>
+</div> 
+
+</NavLink>
+
+
+
 <div id={`content-${course.title}-HTML_Elements_and_Tags`} style={contentSectionStyle}>
 {renderMediaContent(course.topics?.HTML_Elements_and_Tags?.overview, course.title)}
 </div>
-
-
 <div id={`content-${course.title}-HTML_Attributes`} style={SectionStyle}>
 {renderMediaContent(course.topics?.HTML_Attributes?.title, course.title)}
 </div>
@@ -493,31 +480,24 @@ fontSize: matchSpecialChars[0] === '$' ? '1.2em' : matchSpecialChars[0] === '~' 
 <div id={`content-${course.title}-HTML_Forms`} style={contentSectionStyle}>
 {renderMediaContent(course.topics?.HTML_Forms?.overview, course.title)}
 </div>
-
-
-
 <div id={`content-${course.title}-HTML_Tables`} style={SectionStyle}>
 {renderMediaContent(course.topics?.HTML_Tables?.title, course.title)}
 </div>
 <div id={`content-${course.title}-HTML_Tables`} style={contentSectionStyle}>
 {renderMediaContent(course.topics?.HTML_Tables?.overview, course.title)}
 </div>
-
-
 <div id={`content-${course.title}-HTML_Semantic_Elements`} style={SectionStyle}>
 {renderMediaContent(course.topics?.HTML_Semantic_Elements?.title, course.title)}
 </div>
 <div id={`content-${course.title}-HTML_Semantic_Elements`} style={contentSectionStyle}>
 {renderMediaContent(course.topics?.HTML_Semantic_Elements?.overview, course.title)}
 </div>
-
 <div id={`content-${course.title}-HTML_Multimedia`} style={SectionStyle}>
 {renderMediaContent(course.topics?.HTML_Multimedia?.title, course.title)}
 </div>
 <div id={`content-${course.title}-HTML_Multimedia`} style={contentSectionStyle}>
 {renderMediaContent(course.topics?.HTML_Multimedia?.overview, course.title)}
 </div>
-
 <div id={`content-${course.title}-HTML_Layouts`} style={SectionStyle}>
 {renderMediaContent(course.topics?.HTML_Layouts?.title, course.title)}
 </div>
@@ -530,8 +510,6 @@ fontSize: matchSpecialChars[0] === '$' ? '1.2em' : matchSpecialChars[0] === '~' 
 <div id={`content-${course.title}-HTML5_Features`} style={contentSectionStyle}>
 {renderMediaContent(course.topics?.HTML5_Features?.overview, course.title)}
 </div>
-
-
 <div id={`content-${course.title}-Introduction_to_HTML`} style={SectionStyle}>
 {renderMediaContent(course.important_topics?.title, course.title)}
 </div>
@@ -541,28 +519,24 @@ fontSize: matchSpecialChars[0] === '$' ? '1.2em' : matchSpecialChars[0] === '~' 
 <div id={`content-${course.title}-HTML_Syntax`} style={contentSectionStyle}>
 {renderMediaContent(course.important_topics?.HTML_Syntax?.overview, course.title)}
 </div>
-
 <div id={`content-${course.title}-HTML_Elements_and_Attributes`} style={SectionStyle}>
 {renderMediaContent(course.important_topics?.HTML_Elements_and_Attributes?.title, course.title)}
 </div>
 <div id={`content-${course.title}-HTML_Elements_and_Attributes`} style={contentSectionStyle}>
 {renderMediaContent(course.important_topics?.HTML_Elements_and_Attributes?.overview, course.title)}
 </div>
-
 <div id={`content-${course.title}-HTML_Forms_and_Input_Types`} style={SectionStyle}>
 {renderMediaContent(course.important_topics?.HTML_Forms_and_Input_Types?.title, course.title)}
 </div>
 <div id={`content-${course.title}-HTML_Forms_and_Input_Types`} style={contentSectionStyle}>
 {renderMediaContent(course.important_topics?.HTML_Forms_and_Input_Types?.overview, course.title)}
 </div>
-
 <div id={`content-${course.title}-HTML5_Semantic_Elements`} style={SectionStyle}>
 {renderMediaContent(course.important_topics?.HTML5_Semantic_Elements?.title, course.title)}
 </div>
 <div id={`content-${course.title}-HTML5_Semantic_Elements`} style={contentSectionStyle}>
 {renderMediaContent(course.important_topics?.HTML5_Semantic_Elements?.overview, course.title)}
 </div>
-
 <div id={`content-${course.title}-HTML_Multimedia_Tags`} style={SectionStyle}>
 {renderMediaContent(course.important_topics?.HTML_Multimedia_Tags?.title, course.title)}
 </div>
@@ -578,7 +552,7 @@ fontSize: matchSpecialChars[0] === '$' ? '1.2em' : matchSpecialChars[0] === '~' 
 </div>
 
                 </CourseItem>
-                
+              
               );
             })}
           </CourseList>
@@ -586,8 +560,6 @@ fontSize: matchSpecialChars[0] === '$' ? '1.2em' : matchSpecialChars[0] === '~' 
 <p style={{ fontSize: '18px', color: '#666', fontStyle: 'italic', textAlign: 'center' }}>No courses found. We're currently updating our content. Please check back later.</p>
         )}
       </CourseContent>
-
-    
     </CourseContainer>
   );
 };
