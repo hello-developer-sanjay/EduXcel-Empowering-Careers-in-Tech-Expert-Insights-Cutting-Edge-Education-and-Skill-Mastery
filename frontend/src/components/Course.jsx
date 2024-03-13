@@ -389,7 +389,10 @@ fontSize: matchSpecialChars[0] === '$' ? '1.2em' : matchSpecialChars[0] === '~' 
   
   return (
     <CourseContainer>
-
+ <Helmet>
+ <title>{`${category ? category.replace(/_/g, ' ').toUpperCase() + '' : 'All Courses'} | EduXcel | Sanjay patidar`}</title>
+        <meta name="description" content={`Browse ${category ? category.toUpperCase() + ' courses' : 'all courses'} offered by EduXcel, where education meets innovation. Explore expert insights, cutting-edge education, and skill mastery opportunities. Whether you're a seasoned professional seeking to enhance your skills or a budding enthusiast eager to explore new horizons, EduXcel provides a dynamic learning community where curiosity is encouraged, challenges are embraced, and growth is inevitable. Join us on a journey of discovery, collaboration, and excellence.`} />
+      </Helmet>
      <CourseNavigation>
        <SubHeader/>
 
@@ -433,8 +436,12 @@ fontSize: matchSpecialChars[0] === '$' ? '1.2em' : matchSpecialChars[0] === '~' 
 </div>
 
 
-<NavLink to={`/${category}/${course.topics?.Introduction_to_HTML?.title ? slugify(course.topics.Introduction_to_HTML.title) : ''}`} style={{ textDecoration: 'none' }}>
- 
+<NavLink
+  to={`/${category}/${course.topics?.Introduction_to_HTML?.title ? slugify(course.topics.Introduction_to_HTML.title) : ''}`}
+  style={{ textDecoration: 'none' }}
+  target="_blank"  
+  rel="noopener noreferrer"  
+>
   <div id={`content-${course.title}-Introduction_to_HTML`} style={SectionStyle}>
     {renderMediaContent(course.topics?.Introduction_to_HTML?.title, course.title)}
   </div>
@@ -444,7 +451,8 @@ fontSize: matchSpecialChars[0] === '$' ? '1.2em' : matchSpecialChars[0] === '~' 
 {renderMediaContent(course.topics?.Introduction_to_HTML?.overview, course.title)}
 </div>
 
-<NavLink to={`/${category}/${course.topics?.HTML_Document_Structure?.title ? slugify(course.topics.HTML_Document_Structure.title) : ''}`} style={{ textDecoration: 'none' }}>
+<NavLink to={`/${category}/${course.topics?.HTML_Document_Structure?.title ? slugify(course.topics.HTML_Document_Structure.title) : ''}`} style={{ textDecoration: 'none' }}  target="_blank"  
+  rel="noopener noreferrer"  >
 <div id={`content-${course.title}-HTML_Document_Structure`} style={SectionStyle}>
 
 {renderMediaContent(course.topics?.HTML_Document_Structure?.title, course.title)}
@@ -454,7 +462,8 @@ fontSize: matchSpecialChars[0] === '$' ? '1.2em' : matchSpecialChars[0] === '~' 
 {renderMediaContent(course.topics?.HTML_Document_Structure?.overview, course.title)}
 </div>
 
-<NavLink to={`/${category}/${course.topics?.HTML_Elements_and_Tags?.title ? slugify(course.topics.HTML_Elements_and_Tags.title) : ''}`} style={{ textDecoration: 'none' }}>
+<NavLink to={`/${category}/${course.topics?.HTML_Elements_and_Tags?.title ? slugify(course.topics.HTML_Elements_and_Tags.title) : ''}`} style={{ textDecoration: 'none' }}  target="_blank"  
+  rel="noopener noreferrer"  >
 
 <div id={`content-${course.title}-HTML_Elements_and_Tags`} style={SectionStyle}>
 {renderMediaContent(course.topics?.HTML_Elements_and_Tags?.title, course.title)}
