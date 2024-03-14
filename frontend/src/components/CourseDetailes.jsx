@@ -1,6 +1,8 @@
     /* eslint-disable react/prop-types */
     /* eslint-disable react/display-name */
     import React, { useState, useEffect, useRef, useCallback } from "react";
+    import { Helmet } from "react-helmet";
+
     import {
       Box,
       Input,
@@ -269,10 +271,16 @@
           localStorage.setItem('lastVisitedBlog', JSON.stringify(lastVisitedBlog));
         }
       }, [blogsData, fetchDataForAllCollections, location, postsPerPage, setCurrentPage]);
-   
+    
       const indexOfLastPost = currentPage * postsPerPage;
       const indexOfFirstPost = indexOfLastPost - postsPerPage;
       const currentPosts = filteredBlogs(category).slice(indexOfFirstPost, indexOfLastPost);
+      useEffect(() => {
+        if (currentPosts.length > 0) {
+          const pageTitle = `${currentPosts[0].title} | EduXcel | Sanjay Patidar`;
+          document.title = pageTitle;
+        }
+      }, [currentPosts]);
     const headerStyle = {
       position: "sticky",
       top:0,
@@ -496,6 +504,10 @@ if (matchSpecialChars) {
 
       const navbarHeight = document.querySelector(".navbar")?.clientHeight || 0;
       return (
+<>        <Helmet>
+        <title>{`${currentPosts.length > 0 ? currentPosts[0].title : ""} | EduXcel | Sanjay Patidar`}</title>
+        
+      </Helmet>
         <Box
           w="full"
           minH="100vh"
@@ -732,8 +744,13 @@ if (matchSpecialChars) {
             </>
           )}
         </Box>
+
+        </>
+
       );
+
       };
+
       
       export default CourseDetails;
       
