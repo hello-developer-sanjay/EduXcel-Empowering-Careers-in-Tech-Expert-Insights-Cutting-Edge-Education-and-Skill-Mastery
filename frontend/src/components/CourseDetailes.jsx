@@ -2,7 +2,6 @@
     /* eslint-disable react/display-name */
     import React, { useState, useEffect, useRef, useCallback } from "react";
     import { Helmet } from "react-helmet";
-
     import {
       Box,
       Input,
@@ -92,6 +91,11 @@
       const [blogsData, setBlogsData] = useState({
        
       });
+ 
+    
+      
+      
+      
       const [loading, setLoading] = useState(true);
       const { category } = useParams();
       const [currentPage, setCurrentPage] = useState(1);
@@ -503,11 +507,40 @@ if (matchSpecialChars) {
       };
 
       const navbarHeight = document.querySelector(".navbar")?.clientHeight || 0;
+
+
+      const handleDownloadPDF = () => {
+        alert("Please close the sidebar to ensure complete content is printed.");
+      
+        const scrollableContainer = document.getElementById('blogs-section');
+        
+        const htmlContent = scrollableContainer.innerHTML;
+      
+        const title = currentPosts.length > 0 ? currentPosts[0].title : "";
+      
+        const printWindow = window.open('', '_blank');
+        printWindow.document.open();
+        printWindow.document.write(`
+          <html>
+            <head>
+              <title>${title} | EduXcel | Sanjay Patidar</title>
+            </head>
+            <body>
+              ${htmlContent}
+            </body>
+          </html>
+        `);
+        printWindow.document.close();
+              printWindow.print();
+      };
+      
       return (
 <>        <Helmet>
         <title>{`${currentPosts.length > 0 ? currentPosts[0].title : ""} | EduXcel | Sanjay Patidar`}</title>
         
       </Helmet>
+
+       
         <Box
           w="full"
           minH="100vh"
@@ -526,6 +559,7 @@ if (matchSpecialChars) {
           boxShadow="0px 4px 8px rgba(0, 0, 0, 0.1)"
           onScroll={handleScroll}
           mt="0px"
+          
         >
           {loading ? (
           <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
@@ -546,6 +580,7 @@ if (matchSpecialChars) {
           
           )}
         </div>
+        
          
           ) : (
             <>
@@ -561,13 +596,17 @@ if (matchSpecialChars) {
               {/* Sidebar */}
               <Collapse in={isOpen}>
                 <Box style={sidebarStyle}>
+   
                 <VStack align="start" spacing={2}>
   {Object.keys(blogsData).map((collection) => (
     <VStack key={collection} align="start" spacing={2}>
+      
       <Text fontSize="md" fontWeight="semibold" mb={2}>
+        
         {`${collection.charAt(0).toUpperCase()}${collection.slice(1)}`}
       </Text>
       {filteredBlogs(collection).map((blog) => (
+        
        <BlogTitle
        key={blog.title}
        title={blog.title}
@@ -576,6 +615,7 @@ if (matchSpecialChars) {
                                      ref={(el) => (titleRefs.current[`${collection}-${blog.title}`] = el)}
 
        location="sidebar" // Pass location prop indicating main content area
+       
      />
      
       ))}
@@ -585,7 +625,7 @@ if (matchSpecialChars) {
               </Collapse>
       
               {/* Main Content */}
-              <Box mt={0} p={0} ml={isOpen ? "200px" : "0"}>
+<Box id="main-content" mt={0} p={0} ml={isOpen ? "200px" : "0"}>
                 <Box style={headerStyle}>
                   <VStack spacing={0} align="start" w="100%" marginTop="0">
                     <Input
@@ -629,6 +669,30 @@ if (matchSpecialChars) {
     onClick={() => handleTitleClick(blog.title, category)}
     location="main" // Pass location prop indicating sidebar
   />
+  
+  <Button 
+  onClick={handleDownloadPDF} 
+  isLoading={loading} 
+  loadingText="Downloading..."
+  style={{
+    marginLeft: '20px', 
+    backgroundColor: 'rgb(63, 81, 181)', 
+    color: 'white', 
+    borderRadius: '30px',
+    padding: '8px 20px',
+    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s, transform 0.3s',
+  }}
+  hoverStyle={{
+    backgroundColor: 'rgb(48, 63, 159)',
+  }}
+>
+  <span style={{ marginRight: '8px' }}>🖨️</span> Print PDF
+</Button>
+
+
 <div style={{ marginTop: "30px", padding: "4px", border: "1px solid #ccc", color: "White", borderRadius: "8px" }}>
 <div style={{ fontWeight: "bold", marginBottom: "10px", fontSize: "1.2rem" }}>Published By:</div>
 <div style={{ display: "flex", alignItems: "center" }}>
@@ -639,7 +703,7 @@ if (matchSpecialChars) {
   </a>
   <span style={{ color: "#6c757d" }}>|</span>
   <a href="https://eduxcel.vercel.app" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "#007bff", marginLeft: "20px", padding: "10px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)" }}>
-    <span style={{ fontSize: "1.1rem", fontWeight: "bold" }}>Founder: EduXcel - Nurturing Excellence through Online Education</span>
+    <span style={{ fontSize: "1.1rem", fontWeight: "bold" }}>Founder: EduXcel | Empowering Careers in Tech: Expert Insights, Cutting-Edge Education, and Skill Mastery</span>
     <br />
     <span style={{ fontSize: "0.9rem", color: "#6c757d" }}>Click to visit EduXcel's website</span>
   </a>
@@ -649,6 +713,7 @@ if (matchSpecialChars) {
 
   <div style={{ marginTop: "20px", fontWeight: "bold", marginBottom: "10px" , fontSize: "1.2rem"}}>Last Modified:</div>
   <div>{renderMediaContent(blog.Last_Modified, blog.title)}</div>
+  
 </div>
 </div>
        <VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
