@@ -27,7 +27,15 @@ const FooterContainer = styled(motion.footer)`
   /* Optional: Add animation or transition properties for a dynamic effect */
   transition: background 0.3s ease-in-out;
 `;
+const Text = styled.h1`
+  margin-top: 0rem;;
+  font-size: 1.1rem;
+  text-align: left;
+  letter-spacing: 0.2px; 
+  color: #fff; 
+  padding: 2px 5px; /* Padding to create space around the text */
 
+`;
 
 const BorderLineTop = styled(motion.div)`
   position: absolute;
@@ -353,6 +361,14 @@ const Footer = () => {
     "Exploring the Future. Get Involved!",
     "Unlock Knowledge. Engage and Share.",
   ];
+  const getCurrentDate = () => {
+    const currentDate = new Date();
+    const month = currentDate.toLocaleString('default', { month: 'long' });
+    const day = currentDate.getDate();
+    const year = currentDate.getFullYear();
+    return `${month} ${day}, ${year}`;
+  };
+
 const footerRef = useRef(null);
   useEffect(() => {
     const options = {
@@ -509,6 +525,9 @@ let endpoint = "submit-feedback";
           ))}
         </SocialIconsContainer>
       </AnimatePresence>
+
+
+
       <ContactForm
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -531,8 +550,30 @@ let endpoint = "submit-feedback";
         Submit
       </QueryButton>
       </ContactForm>
-      <ToastContainer className="custom-toast-container" position="top-right"   style={{ marginTop: '100px' }}
- />
+
+
+
+      <ToastContainer
+  className="custom-toast-container"
+  position="top-right"
+  style={{ marginTop: '100px' }}
+/>
+
+
+
+
+<Text>Eduxcel provides a diverse range of courses tailored just for you. Don't miss out—register now to discover your perfect fit! <a style={{ color: '#FAF7F7', padding: '2px 4px', border: '2px solid #ff6b6b', borderRadius: '30px', cursor: 'pointer', textDecoration: 'none' }} href='https://eduxcel.vercel.app/signup' target='_blank'>Click here</a> to secure your spot!</Text>
+
+
+<Text>
+</Text>
+<Text>Discover the world of Sanjay Patidar: Innovator, Developer, and Founder. Ready to explore? <a style={{ color: '#FAF7F7', padding: '2px 4px', border: '2px solid #ff6b6b', borderRadius: '30px', cursor: 'pointer', textDecoration: 'none' }} href='https://sanjay-patidar.vercel.app/' target='_blank'>Click here</a> to dive in!</Text>
+<Text>
+  <span style={{ color: '#ffbb00', fontWeight: 'bold', fontSize: '1.2rem' }}>©</span> All rights reserved to&nbsp;
+  <span style={{ fontWeight: 'bold', fontStyle: 'italic', color: '#ffbb00' }}>EduXcel</span> founded by&nbsp;
+  <span style={{ fontWeight: 'bold', color: '#ffbb00' }}>Sanjay Patidar</span><br />
+  <span style={{ fontSize: '0.9rem', color: '#ccc' }}>{getCurrentDate()} | India</span>
+</Text>
     </FooterContainer>
   );
 };
