@@ -626,7 +626,7 @@ if (matchSpecialChars) {
           overflowX="hidden"
           boxShadow="0px 4px 8px rgba(0, 0, 0, 0.1)"
           onScroll={handleScroll}
-          mt="50px"
+          mt="0px"
         >
           {loading ? (
           <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
