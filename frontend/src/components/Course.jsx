@@ -8,6 +8,7 @@ import {
   Box,
   VStack,
   Text,
+  Button,
 
 } from "@chakra-ui/react";
 import ModalImage from "react-modal-image"; 
@@ -391,9 +392,38 @@ fontSize: matchSpecialChars[0] === '$' ? '1.2em' : matchSpecialChars[0] === '~' 
       .replace(/^-+/, '')             // Trim - from start of text
       .replace(/-+$/, '');            // Trim - from end of text
   }
+
+  const handleDownloadPDF = () => {
+    alert("printing........");
+  
+    const scrollableContainer = document.getElementById('course'); // Change the ID to match your container
+  
+    // Clone the container and its content
+    const printableContent = scrollableContainer.cloneNode(true);
+  
+    // Adjust styles to remove overflow restrictions
+    printableContent.style.overflow = 'visible';
+    printableContent.style.maxHeight = 'none';
+  
+    // Open a new window for printing
+    const printWindow = window.open('', '_blank');
+    printWindow.document.open();
+    printWindow.document.write(`
+      <html>
+        <head>
+          <title>${category}| EduXcel | Sanjay Patidar</title>
+        </head>
+        <body>
+          ${printableContent.outerHTML}
+        </body>
+      </html>
+    `);
+    printWindow.document.close();
+    printWindow.print();
+  };
   
   return (
-    <CourseContainer>
+    <CourseContainer id="course">
  <Helmet>
  <title>{`${category ? category.replace(/_/g, ' ').toUpperCase() + '' : 'All Courses'} | EduXcel  |Sanjay Patidar`}</title>
         <meta name="description" content={`Browse ${category ? category.toUpperCase() + ' courses' : 'all courses'} offered by EduXcel, where education meets innovation. Explore expert insights, cutting-edge education, and skill mastery opportunities. Whether you're a seasoned professional seeking to enhance your skills or a budding enthusiast eager to explore new horizons, EduXcel provides a dynamic learning community where curiosity is encouraged, challenges are embraced, and growth is inevitable. Join us on a journey of discovery, collaboration, and excellence.`} />
@@ -402,7 +432,9 @@ fontSize: matchSpecialChars[0] === '$' ? '1.2em' : matchSpecialChars[0] === '~' 
        <SubHeader/>
 
       </CourseNavigation>
-      <CourseContent>
+      <CourseContent id="course">
+
+        
       {loading ? ( 
         <p style={{ fontSize: '20px',  color: '#007bff', textAlign: 'center', paddingTop: '20px' }}>Please wait while we fetch the data...</p>
           )
@@ -412,7 +444,29 @@ fontSize: matchSpecialChars[0] === '$' ? '1.2em' : matchSpecialChars[0] === '~' 
               return (
                 <CourseItem key={category}>
                     <CourseTitle>{course.title}</CourseTitle>
-                  
+                    <Button 
+  onClick={handleDownloadPDF} 
+  isLoading={loading} 
+  loadingText="Downloading..."
+  style={{
+    marginLeft: '20px', 
+    marginTop:'0.5rem',  
+    backgroundColor: 'rgb(63, 81, 181)', 
+    color: 'white', 
+    borderRadius: '30px',
+    padding: '8px 20px',
+    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+    border: 'none',
+    cursor: 'pointer',
+    
+    transition: 'background-color 0.3s, transform 0.3s',
+  }}
+  hoverStyle={{
+    backgroundColor: 'rgb(48, 63, 159)',
+  }}
+>
+  <span style={{ marginRight: '8px' }}>🖨️</span> Print PDF
+</Button>
                                  {course.overview && (
                   <CourseDescriptions>
                     {course.overview.map((desc, index) => {
