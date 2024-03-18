@@ -804,6 +804,30 @@ if (matchSpecialChars) {
 </VStack>
 
 
+<VStack spacing={2} id={`content-${blog.title}-Document_Type_Declaration`} style={contentSectionStyle}>
+  {renderMediaContent(blog.components?.Document_Type_Declaration, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-HTML_Element`} style={contentSectionStyle}>
+  {renderMediaContent(blog.components?.HTML_Element, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-Head_Section`} style={contentSectionStyle}>
+  {renderMediaContent(blog.components?.Head_Section, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-Body_Section`} style={contentSectionStyle}>
+  {renderMediaContent(blog.components?.Body_Section, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-HTML_Elements_and_Attributes`} style={contentSectionStyle}>
+  {renderMediaContent(blog.components?.HTML_Elements_and_Attributes, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-Semantic_HTML`} style={contentSectionStyle}>
+  {renderMediaContent(blog.components?.Semantic_HTML, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-Comments`} style={contentSectionStyle}>
+  {renderMediaContent(blog.components?.Comments, blog.title)}
+</VStack>
+
+
+
                   </motion.div>
                 ))}
       
