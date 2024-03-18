@@ -12,7 +12,7 @@
       Collapse,
       Button,
     } from "@chakra-ui/react";
-
+import { Helmet } from "react-helmet";
     import {
     
       RingLoader,
@@ -297,7 +297,7 @@
         helmet.innerText = pageTitle;
       }
           }
-        }
+        } 
         if (lastVisitedBlog) {
           localStorage.setItem('lastVisitedBlog', JSON.stringify(lastVisitedBlog));
         }
@@ -370,18 +370,18 @@ color: '#fff',
       
       const sidebarStyle = {
         position: "fixed",
-        top: "190px",
+        top: "70px",
         left: 0,
         height: "100%",
-        width: "200px",
+        width: "220px",
         backgroundColor: "black",
-        borderRight: "1px solid lightgray",
-        padding: "20px",
+        borderRight: "1px solid li  ghtgray",
+        padding: "0px",
         zIndex: 2,
         transition: "left 0.3s",
         overflowX: "hidden",
         overflowY: "auto", 
-  maxHeight: "calc(100% - 200px)", 
+  maxHeight: "calc(100% - 50px)", 
       };
 
       const toggleButtonStyle = {
@@ -572,8 +572,43 @@ if (matchSpecialChars) {
 
 
       const navbarHeight = document.querySelector(".navbar")?.clientHeight || 0;
+
+      const handleDownloadPDF = () => {
+        alert("Please close the sidebar to ensure complete content is printed.");
+      
+        const scrollableContainer = document.getElementById('blogs-section');
+        
+        const htmlContent = scrollableContainer.innerHTML;
+      
+        const title = currentPosts.length > 0 ? currentPosts[0].title : "";
+      
+        const printWindow = window.open('', '_blank');
+        printWindow.document.open();
+        printWindow.document.write(`
+          <html>
+            <head>
+              <title>${title}| EduXcel | Sanjay Patidar</title>
+            </head>
+            <body>
+              ${htmlContent}
+            </body>
+          </html>
+        `);
+        printWindow.document.close();
+              printWindow.print();
+      };
+      
+
       return (
-        <Box
+
+
+<>
+<Helmet>
+        <title>{`${currentPosts.length > 0 ? currentPosts[0].title : ""} | EduXcel | Sanjay Patidar`}</title>
+        
+      </Helmet>
+
+      <Box
           w="full"
           minH="100vh"
           mx="auto"
@@ -665,10 +700,6 @@ if (matchSpecialChars) {
                       placeholder="Enter your desired job title or keywords"
 
 
-
-
-
-
                       value={searchQuery}
                       onChange={handleSearchChange}
                       p={0}
@@ -689,6 +720,8 @@ if (matchSpecialChars) {
                     style={scrollToTopButtonStyle}
                   />
                 </Box>
+         
+
       
                 {currentPosts.map((blog, index) => (
                   <motion.div
@@ -707,6 +740,28 @@ if (matchSpecialChars) {
     onClick={() => handleTitleClick(blog.title, vision)}
     location="main" // Pass location prop indicating sidebar
   />
+         <Button 
+  onClick={handleDownloadPDF} 
+  isLoading={loading} 
+  loadingText="Downloading..."
+  style={{
+    marginLeft: '20px', 
+    marginTop:'0.5rem',  
+    backgroundColor: 'rgb(63, 81, 181)', 
+    color: 'white', 
+    borderRadius: '30px',
+    padding: '8px 20px',
+    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s, transform 0.3s',
+  }}
+  hoverStyle={{
+    backgroundColor: 'rgb(48, 63, 159)',
+  }}
+>
+  <span style={{ marginRight: '8px' }}>🖨️</span> Print PDF
+</Button>
 <div style={{ marginTop: "30px", padding: "10px", border: "1px solid #ccc", color: "White", borderRadius: "8px" }}>
 <div style={{ fontWeight: "bold", marginBottom: "10px", fontSize: "1.2rem" }}>Published By:</div>
 <div style={{ display: "flex", alignItems: "center" }}>
@@ -872,10 +927,6 @@ if (matchSpecialChars) {
 <VStack spacing={2} id={`content-${blog.title}-responsibilities`} style={contentSectionStyle}>
   {renderMediaContent(blog.responsibilities, blog.title)}
 </VStack>
-
-                 
-      
-
                   </motion.div>
                 ))}
       
@@ -883,6 +934,7 @@ if (matchSpecialChars) {
             </>
           )}
         </Box>
+        </>
       );
       };
       
