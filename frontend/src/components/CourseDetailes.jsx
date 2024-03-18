@@ -676,6 +676,8 @@ if (matchSpecialChars) {
   loadingText="Downloading..."
   style={{
     marginLeft: '20px', 
+          marginTop: '0.5rem', 
+
     backgroundColor: 'rgb(63, 81, 181)', 
     color: 'white', 
     borderRadius: '30px',
