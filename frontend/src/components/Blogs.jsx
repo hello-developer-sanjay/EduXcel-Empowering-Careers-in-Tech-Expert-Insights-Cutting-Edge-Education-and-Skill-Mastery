@@ -310,15 +310,14 @@
         const pageIndex =
           Math.ceil(blogsData[collection].indexOf(matchingBlog) / postsPerPage) + 1;
         setCurrentPage(pageIndex);
+        const pageTitle = `${matchingBlog.title} | EduXcel | Sanjay Patidar`;
 
-          // Set the title dynamically for SEO
-      const pageTitle = `${matchingBlog.title} | EduXcel | Sanjay Patidar`;
-
-      // Update Helmet to set the dynamically generated title
-      const helmet = document.querySelector('title');
-      if (helmet) {
-        helmet.innerText = pageTitle;
-      }     }
+        // Update Helmet to set the dynamically generated title
+        const helmet = document.querySelector('title');
+        if (helmet) {
+          helmet.innerText = pageTitle;
+        }
+      }
     }
 
     if (lastVisitedBlog) {
@@ -608,6 +607,31 @@ if (matchSpecialChars) {
 
 
       const navbarHeight = document.querySelector(".navbar")?.clientHeight || 0;
+      
+      const handleDownloadPDF = () => {
+        alert("Please close the sidebar to ensure complete content is printed.");
+      
+        const scrollableContainer = document.getElementById('blogs-section');
+        
+        const htmlContent = scrollableContainer.innerHTML;
+      
+        const title = currentPosts.length > 0 ? currentPosts[0].title : "";
+      
+        const printWindow = window.open('', '_blank');
+        printWindow.document.open();
+        printWindow.document.write(`
+          <html>
+            <head>
+              <title>${title} | EduXcel | Sanjay Patidar</title>
+            </head>
+            <body>
+              ${htmlContent}
+            </body>
+          </html>
+        `);
+        printWindow.document.close();
+              printWindow.print();
+      };
       return (
         <Box
           w="full"
@@ -735,6 +759,30 @@ if (matchSpecialChars) {
                                                   location="main" 
 
                       />
+
+<Button 
+  onClick={handleDownloadPDF} 
+  isLoading={loading} 
+  loadingText="Downloading..."
+  style={{
+    marginLeft: '20px', 
+    marginTop: '0.5rem',
+    backgroundColor: 'rgb(63, 81, 181)', 
+    color: 'white', 
+    borderRadius: '30px',
+    padding: '8px 20px',
+    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s, transform 0.3s',
+  }}
+  hoverStyle={{
+    backgroundColor: 'rgb(48, 63, 159)',
+  }}
+>
+  <span style={{ marginRight: '8px' }}>🖨️</span> Print PDF
+</Button>
+
                     </VStack>
        <VStack spacing={2} id={`content-${blog.title}-overview`} style={contentSectionStyle}>
   {renderMediaContent(blog.overview, blog.title)}
@@ -847,6 +895,16 @@ if (matchSpecialChars) {
 <VStack spacing={2} id={`content-${blog.title}-tips`} style={contentSectionStyle}>
   {renderMediaContent(blog.tips, blog.title)}
 </VStack>
+
+
+
+
+<VStack spacing={2} id={`content-${blog.title}-tips`} style={contentSectionStyle}>
+  {renderMediaContent(blog.installing_nodejs?.steps, blog.title)}
+</VStack>
+
+
+
 
 
 <VStack spacing={2} id={`content-${blog.title}-tools`} style={contentSectionStyle}>
