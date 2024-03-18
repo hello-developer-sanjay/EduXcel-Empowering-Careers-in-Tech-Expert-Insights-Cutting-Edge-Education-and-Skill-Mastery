@@ -825,6 +825,31 @@ if (matchSpecialChars) {
 <VStack spacing={2} id={`content-${blog.title}-Comments`} style={contentSectionStyle}>
   {renderMediaContent(blog.components?.Comments, blog.title)}
 </VStack>
+<VStack spacing={2} id={`content-${blog.title}-Text_Elements`} style={contentSectionStyle}>
+  {renderMediaContent(blog.html_elements_and_tags?.Text_Elements, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-Inline_Elements`} style={contentSectionStyle}>
+  {renderMediaContent(blog.html_elements_and_tags?.Inline_Elements, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-Semantic_Elements`} style={contentSectionStyle}>
+  {renderMediaContent(blog.html_elements_and_tags?.Semantic_Elements, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-Table_Elements`} style={contentSectionStyle}>
+  {renderMediaContent(blog.html_elements_and_tags?.Table_Elements, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-Form_Elements`} style={contentSectionStyle}>
+  {renderMediaContent(blog.html_elements_and_tags?.Form_Elements, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-Media_Elements`} style={contentSectionStyle}>
+  {renderMediaContent(blog.html_elements_and_tags?.Media_Elements, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-Meta_Elements`} style={contentSectionStyle}>
+  {renderMediaContent(blog.html_elements_and_tags?.Form_Elements, blog.title)}
+</VStack>
+
 
 
 
