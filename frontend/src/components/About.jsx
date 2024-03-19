@@ -242,7 +242,7 @@ const About = () => {
     <>
      <Helmet>
     
-    <title>EduXcel | About Us - Transforming Tech Careers with Expert Insights and Cutting-Edge Education</title>
+    <title>EduXcel | About Us - Empowering Tech Careers through Expertise and Innovation</title>
  <meta
    name="description"
    content="At EduXcel, we believe that education is the cornerstone of progress, and technology serves as the catalyst for innovation. Our mission is simple yet ambitious: to provide expert insights, cutting-edge education, and skill mastery opportunities to learners worldwide.As a passionate advocate for education and technology, I understand the transformative power they hold. From my own experiences as a student to my endeavors in web development and UI/UX design, I've witnessed firsthand the profound impact that knowledge and innovation can have on one's journey.Through EduXcel, we strive to cultivate a dynamic learning community where curiosity is encouraged, challenges are embraced, and growth is inevitable. Whether you're a seasoned professional seeking to enhance your skills or a budding enthusiast eager to explore new horizons, you'll find a wealth of resources and support within our platform.Our commitment extends beyond just providing information; we are dedicated to fostering a culture of collaboration, creativity, and excellence. Together, let's embark on a journey of discovery, where each lesson learned and every skill mastered brings us closer to our goals.
@@ -265,7 +265,7 @@ Empower your learning journey with EduXcel, the leading platform for high-qualit
  <meta name="twitter:site" content="@sanjaypatidar" />
  <meta name="twitter:creator" content="@sanjaypatidar" />
 
- <meta name="keywords" content="portfolio, signup , eduxcel , tech, education, careers, opportunity, personal-portfolio,developer_sanju,sanjay, Sanjay, SANJAY, Sanjay Patidar, SANJAY PATIDAR, SANJAY WEB DEVELOPER,about Eduxcel SANJAY DEVELOPER, Full Stack Web Developer, Mern Stack Web Developer, sanjay patidar, sanjay-patidar, professional, web developer portfolio, coder, web development, UI/UX design, Chandigarh University, EduXcel, Indore,contact, developer, programmer, engineer, AI, Artificial Intelligence ,tech enthusiastic, creativity ,creator, work , technology, coding, projects, experiences, resume, cv" />
+ <meta name="keywords" content="portfolio, signup , eduxcel, about us , about eduxcel , tech, education, careers, opportunity, personal-portfolio,developer_sanju,sanjay, Sanjay, SANJAY, Sanjay Patidar, SANJAY PATIDAR, SANJAY WEB DEVELOPER,about Eduxcel SANJAY DEVELOPER, Full Stack Web Developer, Mern Stack Web Developer, sanjay patidar, sanjay-patidar, professional, web developer portfolio, coder, web development, UI/UX design, Chandigarh University, EduXcel, Indore,contact, developer, programmer, engineer, AI, Artificial Intelligence ,tech enthusiastic, creativity ,creator, work , technology, coding, projects, experiences, resume, cv" />
  <meta name="author" content="Sanjay Patidar" />      
        
    
