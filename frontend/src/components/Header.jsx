@@ -302,7 +302,7 @@ function Header() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      fetch('https://edu-back-j3mz.onrender.com/api/profile', {
+      fetch('https://eduxcel-api3.onrender.com/api/profile', {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -317,7 +317,7 @@ function Header() {
         .then(data => {
           if (data.profileImage) {
             setProfileImage(
-              `https://edu-back-j3mz.onrender.com/${data.profileImage}?key=${Date.now()}`
+              `https://eduxcel-api3.onrender.com/${data.profileImage}?key=${Date.now()}`
             );
           } else {
             setProfileImage(
