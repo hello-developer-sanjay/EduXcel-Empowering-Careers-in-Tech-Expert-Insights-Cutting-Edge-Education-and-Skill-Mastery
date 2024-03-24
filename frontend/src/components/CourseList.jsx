@@ -21,12 +21,12 @@ function CourseList() {
       try {
         let response;
         if (!category || category === 'all') {
-          response = await axios.get('https://edu-back-j3mz.onrender.com/api/courses/category/all');
+          response = await axios.get('https://eduxcel-api3.onrender.com/api/courses/category/all');
         } else {
-          response = await axios.get(`https://edu-back-j3mz.onrender.com/api/courses/category/${category}`);
+          response = await axios.get(`https://eduxcel-api3.onrender.com/api/courses/category/${category}`);
         }
         if (!response) {
-          response = await axios.get('https://edu-back-j3mz.onrender.com/api/courses/category');
+          response = await axios.get('https://eduxcel-api3.onrender.com/api/courses/category');
         }
         setCourses(response.data);
       } catch (error) {
