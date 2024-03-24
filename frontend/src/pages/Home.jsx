@@ -179,7 +179,7 @@ function Home() {
   useEffect(() => {
     async function fetchCourses() {
       try {
-        const response = await axios.get('https://edu-back-j3mz.onrender.com/api/courses');
+        const response = await axios.get('https://eduxcel-api3.onrender.com/api/courses');
         setCourseData(response.data);
       } catch (error) {
         console.error('Error fetching courses:', error);
