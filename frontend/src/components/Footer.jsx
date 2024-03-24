@@ -453,7 +453,7 @@ let endpoint = "submit-feedback";
         successMessage = "Query sent! Await our swift reply, tailored just for you.";
       }
 
-      const response = await fetch(`https://edu-back-j3mz.onrender.com/api/${endpoint}`, {
+      const response = await fetch(`https://eduxcel-api3.onrender.com/api/${endpoint}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
