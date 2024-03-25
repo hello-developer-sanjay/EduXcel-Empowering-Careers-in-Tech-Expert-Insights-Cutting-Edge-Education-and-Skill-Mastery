@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import Typed from 'react-typed';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUserPlus, faNewspaper,faBriefcase, faUserTie ,faInfoCircle} from '@fortawesome/free-solid-svg-icons';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const HeaderContainer = styled.header`
 background-color: #050816; 
@@ -294,6 +296,7 @@ function Header() {
 
   const [profileImage, setProfileImage] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [isToastVisible, setIsToastVisible] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -337,6 +340,19 @@ function Header() {
       );
     }
   }, []);
+const handleCareerInsightsClick = () => {
+    if (!isToastVisible) {
+      toast.info("Hold on ! You're being redirected to explore Blog insights at Sanjay  Patidar Portfolio Website ...", {
+        autoClose: 2000,
+        onOpen: () => setIsToastVisible(true),
+        onClose: () => setIsToastVisible(false),
+      });
+
+      setTimeout(() => {
+        window.open("https://sanjay-patidar.vercel.app/blogs", "_blank");
+      }, 3000); 
+    }
+  };
 
   return (
     <HeaderContainer>
@@ -385,7 +401,7 @@ function Header() {
             </NavLinkItem>
           </NavItem>
           <NavItem>
-            <NavLinkItem to="/blogs" aria-label="Blogs" onClick={toggleMenu}>
+        <NavLinkStyled to="#" aria-label="Blogs" onClick={handleCareerInsightsClick}>
               <FontAwesomeIcon icon={faNewspaper} />
               Blogs
             </NavLinkItem>
