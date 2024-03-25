@@ -342,8 +342,8 @@ function Header() {
   }, []);
 const handleCareerInsightsClick = () => {
     if (!isToastVisible) {
-      toast.info("Hold on ! You're being redirected to explore Blog insights at Sanjay  Patidar Portfolio Website ...", {
-        autoClose: 2000,
+      toast.info("Please wait! You're now being redirected to delve into Blog insights on Sanjay Patidar's Portfolio Website...", {
+        autoClose: 3000,
         onOpen: () => setIsToastVisible(true),
         onClose: () => setIsToastVisible(false),
       });
