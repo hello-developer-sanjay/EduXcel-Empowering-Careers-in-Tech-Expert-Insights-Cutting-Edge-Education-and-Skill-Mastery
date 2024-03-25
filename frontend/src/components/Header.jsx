@@ -401,7 +401,7 @@ const handleCareerInsightsClick = () => {
             </NavLinkItem>
           </NavItem>
           <NavItem>
-        <NavLinkStyled to="#" aria-label="Blogs" onClick={handleCareerInsightsClick}>
+        <NavLinkItem to="#" aria-label="Blogs" onClick={handleCareerInsightsClick}>
               <FontAwesomeIcon icon={faNewspaper} />
               Blogs
             </NavLinkItem>
