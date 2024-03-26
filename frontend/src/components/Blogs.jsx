@@ -12,7 +12,8 @@
       Collapse,
       Button,
     } from "@chakra-ui/react";
-
+    import videojs from 'video.js';
+import 'video.js/dist/video-js.css'; 
     import {
     
       RingLoader,
@@ -100,7 +101,21 @@
         working: [],
       });
       const [loading, setLoading] = useState(true);
-
+ useEffect(() => {
+        // Initialize Video.js for each video element
+        const videos = document.querySelectorAll('video');
+        videos.forEach(videoElement => {
+          videojs(videoElement);
+        });
+      
+        // Cleanup on unmount
+        return () => {
+          videos.forEach(videoElement => {
+            const player = videojs(videoElement);
+            player.dispose();
+          });
+        };
+      }, []);
       const [currentPage, setCurrentPage] = useState(1);
       const [postsPerPage] = useState(1); 
       const navigate = useNavigate();
@@ -411,7 +426,7 @@
         transform: "translateY(-50%)",
         left: isOpen ? "240px" : "20px",
         zIndex: 2,
-        background: isOpen ? "#e74c3c" : "#2ecc71", // Red when open, green when closed
+        background: isOpen ? "#e74c3c" : "#2ecc71", 
         color: "white",
         borderRadius: "50%",
         boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.3)",
@@ -425,7 +440,6 @@
         fontSize: "12px",
       };
 
-      // Rotating animation on toggle
       toggleButtonStyle.rotate = {
         transform: isOpen ? "rotate(180deg)" : "rotate(0)",
         transition: "transform 0.3s",
@@ -433,7 +447,7 @@
 
       // Hover effect
       toggleButtonStyle["&:hover"] = {
-        background: isOpen ? "#c0392b" : "#27ae60", // Darker red when open, darker green when closed
+        background: isOpen ? "#c0392b" : "#27ae60", 
       };
 
       // Pulse animation on hover
@@ -454,18 +468,21 @@
         },
       };
 
+      
       const renderMediaContent = (content, title) => {
         if (!content) {
           return null;
         }
       
         if (!Array.isArray(content)) {
-          // If content is not an array, wrap it in an array to handle it uniformly
           content = [content];
         }
       
         return content.map((item, index) => {
+          let element;
+      
           if (Array.isArray(item)) {
+            // Recursive call for nested arrays
             return (
               <VStack key={index} align="start" spacing={2} mt={2}>
                 {renderMediaContent(item, title)}
@@ -473,137 +490,75 @@
             );
           }
       
-          let element;
-      
-          if (typeof item === "object" && item.title) {
-            // Display object field titles on the same page as the parent title
+          if (typeof item === 'object' && item.title) {
+            // Render object fields
             element = (
               <VStack key={index} align="start" spacing={2} mt={2}>
                 <BlogTitle
                   title={item.title}
                   collection="tools"
-                  onClick={() => handleTitleClick(item.title, "tools")}
+                  onClick={() => handleTitleClick(item.title, 'tools')}
                 />
-                {renderMediaContent(item.description, title)}
-                {renderMediaContent(item.installation, title)}
-                {renderMediaContent(item.content, title)}
-                {renderMediaContent(item.steps, title)}
-            
-                {renderMediaContent(item.features, title)}
-
-                 {renderMediaContent(item.components, title)}
-                 {renderMediaContent(item.whatIsJdk, title)}
-                                  {renderMediaContent(item.whatIsJvm, title)}
-
-
-                {renderMediaContent(item.features, title)}
-
-                {renderMediaContent(item.jvm, title)}
-                
-                {renderMediaContent(item.jdk, title)}
-
-                {renderMediaContent(item.settingUpJavaDevelopmentEnvironment, title)}
-                {renderMediaContent(item.overview, title)}
-               {renderMediaContent(item.settings, title)} {/* Add this line to handle settings */}
-                
+                {Object.keys(item).map(key => {
+                  if (key !== 'title') {
+                    return renderMediaContent(item[key], title);
+                  }
+                  return null;
+                })}
               </VStack>
             );
           }
       
-          if (typeof item === "string") {
-            // Handle special characters
-            const specialCharsRegex = /[*$~]([^*$~]+)[*$~]/;
-const matchSpecialChars = item.match(specialCharsRegex);
-
-if (matchSpecialChars) {
-  const specialText = matchSpecialChars[1];
-  const textBeforeSpecial = item.split(matchSpecialChars[0])[0];
-  const textAfterSpecial = item.split(matchSpecialChars[0])[1];
-
-  element = (
-    <Text key={index}>
-      {textBeforeSpecial}
-      <span
-        style={{
-          fontWeight: matchSpecialChars[0] === '*' ? 'bold' : 'normal',
-          color: matchSpecialChars[0] === '$' ? 'green' : matchSpecialChars[0] === '~' ? 'lime' : 'gold',
-          fontStyle: matchSpecialChars[0] === '*' ? 'italic' : 'normal',
-          textDecoration: 'none',
-        }}
-      >
-        {specialText}
-      </span>
-      {textAfterSpecial}
-    </Text>
-  );
-} else {              // Check for links
-              const linkRegex = /@([^@]+)@/;
-              const match = item.match(linkRegex);
+          if (typeof item === 'string') {
+            const videoRegex = /\.(mp4|webm|mkv)$/; // Regex to match video file extensions
       
-              if (match) {
-                // Handle links
-                const link = match[1];
-                const textBeforeLink = item.split(match[0])[0];
-                const textAfterLink = item.split(match[0])[1];
-      
-                element = (
-                  <Text key={index}>
-                    {textBeforeLink}
-                    <span
-                      style={{ color: "yellow", textDecoration: "underline", cursor: "pointer" }}
-                      onClick={() => window.open(link, "_blank")}
-                    >
-                      {link}
-                    </span>
-                    {textAfterLink}
-                  </Text>
-                );
-              } else if (item.startsWith("http")) {
-                // Handle images and videos
-                if (item.match(/\.(jpeg|jpg|gif|png)$/)) {
-                  element = (
-                    <Box key={index} mb={2} className="image-container">
-                      <ModalImage
-                        small={item}
-                        large={item}
-                        alt={`Image ${index}`}
-                        className="custom-modal-image"
-                      />
-                    </Box>
-                  );
-                } else if (item.match(/\.(mp4|webm|mkv)$/)) {
-                  element = (
-                    <Box
-                      key={index}
-                      position="relative"
-                      paddingTop="56.25%"
-                      width="100%"
-                    >
-                      <ReactPlayer
-                        url={item}
-                        controls
-                        width="100%"
-                        height="100%"
-                        style={{ position: "absolute", top: 0, left: 0 }}
-                      />
-                    </Box>
-                  );
-                } else {
-                  element = <Text key={index}>{item}</Text>;
-                }
-              } else {
-                // Handle regular text
-                element = <Text key={index}>{item}</Text>;
-              }
+            // Check for video URLs
+            if (item.match(videoRegex)) {
+              element = (
+                <Box
+                  key={index}
+                  position="relative"
+                  paddingTop="56.25%"
+                  width="100%"
+                  mb={2}
+                  className="video-container"
+                >
+                  <video
+                    id={`video-${index}`}
+                    className="video-js vjs-default-skin"
+                    controls
+                    preload="auto"
+                    width="100%"
+                    height="100%"
+                  >
+                    <source src={item} type="video/mp4" /> 
+                  </video>
+                </Box>
+              );
+              
+            } else if (item.match(/\.(jpeg|jpg|gif|png)$/)) {
+              // Handle images
+              element = (
+                <Box key={index} mb={2} className="image-container">
+                  <ModalImage
+                    small={item}
+                    large={item}
+                    alt={`Image ${index}`}
+                    className="custom-modal-image"
+                  />
+                </Box>
+              );
+            } else {
+              // Handle regular text
+              element = <Text key={index}>{item}</Text>;
             }
           }
       
-          return <Box key={index} mb={2}>{element}</Box>;
+          return <Box key={index}>{element}</Box>;
         });
       };
       
-      
-      
+   
 
 
       const navbarHeight = document.querySelector(".navbar")?.clientHeight || 0;
