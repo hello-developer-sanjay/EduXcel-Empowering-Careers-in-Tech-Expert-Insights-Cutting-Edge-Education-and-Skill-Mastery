@@ -546,7 +546,10 @@ if (matchSpecialChars) {
       
       return (
 <>  
-       
+       <Helmet>
+        <title>{`${currentPosts.length > 0 ? currentPosts[0].title : ""} | EduXcel | Sanjay Patidar`}</title>
+        
+      </Helmet>
         <Box
           w="full"
           minH="100vh"
