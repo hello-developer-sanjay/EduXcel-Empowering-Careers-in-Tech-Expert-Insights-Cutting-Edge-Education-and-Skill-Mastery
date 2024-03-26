@@ -573,32 +573,41 @@ if (matchSpecialChars) {
 
       const navbarHeight = document.querySelector(".navbar")?.clientHeight || 0;
 
-      const handleDownloadPDF = () => {
-        alert("Please close the sidebar to ensure complete content is printed.");
-      
-        const scrollableContainer = document.getElementById('blogs-section');
+     const handleDownloadPDF = () => {
+          alert("Please close the sidebar to ensure complete content is printed.");
         
-        const htmlContent = scrollableContainer.innerHTML;
+          const scrollableContainer = document.getElementById('blogs-section');
+          
+          // Clone the container to avoid modifying the original content
+          const containerClone = scrollableContainer.cloneNode(true);
       
-        const title = currentPosts.length > 0 ? currentPosts[0].title : "";
+          // Remove video elements from the cloned container
+          const videoElements = containerClone.querySelectorAll('video');
+          videoElements.forEach(video => {
+              video.parentNode.removeChild(video);
+          });
       
-        const printWindow = window.open('', '_blank');
-        printWindow.document.open();
-        printWindow.document.write(`
-          <html>
-            <head>
-              <title>${title}| EduXcel | Sanjay Patidar</title>
-            </head>
-            <body>
-              ${htmlContent}
-            </body>
-          </html>
-        `);
-        printWindow.document.close();
-              printWindow.print();
+          // Get the HTML content of the cloned container
+          const htmlContent = containerClone.innerHTML;
+        
+          const title = currentPosts.length > 0 ? currentPosts[0].title : "";
+        
+          const printWindow = window.open('', '_blank');
+          printWindow.document.open();
+          printWindow.document.write(`
+            <html>
+              <head>
+                <title>${title} | EduXcel | Sanjay Patidar</title>
+              </head>
+              <body>
+                ${htmlContent}
+              </body>
+            </html>
+          `);
+          printWindow.document.close();
+          printWindow.print();
       };
       
-
       return (
 
 
