@@ -29,25 +29,25 @@ function CareerOption() {
         <section className={`relative w-full min-h-screen mx-auto`}>
                   <Helmet>
     
-    <title>EduXcel - Explore Tech Career Paths: Insights, Education & Expert Guidance by Sanjay Patidar - Founder of Eduxcel</title>
+                  <title> EduXcel Careers |Discover Tech Career Paths with EduXcel: Expert Insights, Innovation, and Growth - Sanjay Patidar, Founder</title>
  <meta
    name="description"
    content="Explore a comprehensive range of tech career paths and opportunities with EduXcel. Gain valuable insights, education, and expert guidance from Sanjay Patidar, the founder of Eduxcel, as you embark on your journey towards mastering tech careers. Discover valuable resources, industry insights, and educational content tailored for aspiring developers, empowering you to make informed decisions and succeed in the dynamic world of technology. Join us at EduXcel and unlock the potential of your tech career today."
  />
  
 
- <meta property="og:title" content="EduXcel - Explore Tech Career Paths: Insights, Education & Expert Guidance by Sanjay Patidar - Founder of Eduxcel" />
+ <meta property="og:title" content="EduXcel Careers |Discover Tech Career Paths with EduXcel: Expert Insights, Innovation, and Growth - Sanjay Patidar, Founder" />
  <meta property="og:description" content="Explore a comprehensive range of tech career paths and opportunities with EduXcel. Gain valuable insights, education, and expert guidance from Sanjay Patidar, the founder of Eduxcel, as you embark on your journey towards mastering tech careers. Discover valuable resources, industry insights, and educational content tailored for aspiring developers, empowering you to make informed decisions and succeed in the dynamic world of technology. Join us at EduXcel and unlock the potential of your tech career today." />
  <meta property="og:type" content="website" />
  <meta property="og:url" content="https://eduxcel.vercel.app/careers" />
- <meta property="og:image" content="https://sanjaybasket.s3.ap-south-1.amazonaws.com/sixpack.jpeg" />
+ <meta property="og:image" content="https://sanjaybasket.s3.ap-south-1.amazonaws.com/logo_eduxcel.jpg" />
  <meta property="og:image:alt" content="Sanjay Patidar" />
- <meta property="og:site_name" content="EduXcel - Explore Tech Career Paths: Insights, Education & Expert Guidance by Sanjay Patidar - Founder of Eduxcel" />
+ <meta property="og:site_name" content="EduXcel Careers |Discover Tech Career Paths with EduXcel: Expert Insights, Innovation, and Growth - Sanjay Patidar, Founder" />
 
  <meta name="twitter:card" content="summary_large_image" />
- <meta name="twitter:title" content="EduXcel - Explore Tech Career Paths: Insights, Education & Expert Guidance by Sanjay Patidar - Founder of Eduxcel" />
+ <meta name="twitter:title" content="EduXcel Careers |Discover Tech Career Paths with EduXcel: Expert Insights, Innovation, and Growth - Sanjay Patidar, Founder" />
  <meta name="twitter:description" content="Explore a comprehensive range of tech career paths and opportunities with EduXcel. Gain valuable insights, education, and expert guidance from Sanjay Patidar, the founder of Eduxcel, as you embark on your journey towards mastering tech careers. Discover valuable resources, industry insights, and educational content tailored for aspiring developers, empowering you to make informed decisions and succeed in the dynamic world of technology. Join us at EduXcel and unlock the potential of your tech career today." />
- <meta name="twitter:image" content="https://sanjaybasket.s3.ap-south-1.amazonaws.com/sixpack.jpeg" />
+ <meta name="twitter:image" content="https://sanjaybasket.s3.ap-south-1.amazonaws.com/logo_eduxcel.jpg" />
  <meta name="twitter:site" content="@sanjaypatidar" />
  <meta name="twitter:creator" content="@sanjaypatidar" />
 
@@ -224,7 +224,7 @@ function CareerOption() {
            "@type": "Organization",
            "name": "Eduxcel" 
          },
-         "url": "https://sanjay-patidar.vercel.app/",
+         "url": "https://eduxcel.vercel.app/",
          "sameAs": [
            "https://www.linkedin.com/in/sanjay-patidar-25b580292/",
            "https://github.com/hello-developer-sanjay",
@@ -244,7 +244,7 @@ function CareerOption() {
 
     <div className={`${styles.sectionHeadText} text-center mb-4`}>Explore Featured Tech Career Paths</div>
 
-            <p className={`${styles.heroSubText} mt-8 text-white-100 text-center`}>EduXcel - Explore Tech Career Paths: Insights, Education & Expert Guidance by Sanjay Patidar - Founder of EduXcel</p>
+            <p className={`${styles.heroSubText} mt-8 text-white-100 text-center`}>Explore various tech careers like Frontend Development and Backend Development with EduXcel, where education meets innovation.<br/> Discover expert insights, career opportunities, and skill development pathways.<br/> Whether you're an experienced professional looking to advance your career or a novice enthusiast eager to delve into the world of technology, EduXcel provides a vibrant learning community that fosters curiosity, embraces challenges, and ensures growth. <br/>Join us on a journey of exploration, collaboration, and excellence.</p>
             <CareerList careerData={careerData} />
         </section>
     );
