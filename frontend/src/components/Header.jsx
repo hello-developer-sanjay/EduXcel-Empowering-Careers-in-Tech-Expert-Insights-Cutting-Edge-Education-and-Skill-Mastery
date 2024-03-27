@@ -387,7 +387,7 @@ const handleCareerInsightsClick = () => {
           <NavItem>
             <NavLinkItem to="/profile" aria-label="Profile" onClick={toggleMenu}>
               {profileImage ? (
-                <img src={profileImage} alt="Profile" />
+                <img src={profileImage} alt="UserProfileDP" />
               ) : (
                 'Profile'
               )}
