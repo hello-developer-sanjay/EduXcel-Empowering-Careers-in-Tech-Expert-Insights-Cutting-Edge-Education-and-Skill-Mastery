@@ -210,7 +210,7 @@ const Talk = () => {
   return (
     <CourseContainer>
       <Helmet>
-      <title>{`${vision ? vision.replace(/_/g, ' ').toUpperCase() + ' Careers' : 'Explore Careers'} | Tech Careers with EduXcel - Sanjay Patidar`}</title>
+<title>{`${vision ? vision.replace(/_/g, ' ').toUpperCase() : 'Explore Careers'} | Tech Careers with EduXcel - Sanjay Patidar`}</title>
  <meta name="description" content={`Explore various tech careers like Frontend Development and Backend Development with EduXcel, where education meets innovation. Discover expert insights, career opportunities, and skill development pathways. Whether you're an experienced professional looking to advance your career or a novice enthusiast eager to delve into the world of technology, EduXcel provides a vibrant learning community that fosters curiosity, embraces challenges, and ensures growth. Join us on a journey of exploration, collaboration, and excellence.`} />
       </Helmet>
  
