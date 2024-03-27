@@ -965,7 +965,7 @@ const Founder = () => {
 
 
 <Text>➥ Whether you're a student eager to enhance your skills or an aspiring web developer looking to kickstart your career, Sanjay's expertise and EduXcel's offerings are your gateway to success in the digital world.</Text><br/>
-<Text>➥ Curious to know more about Sanjay Patidar and his journey? <a style={{  color: '#FAF7F7', padding: '2px 4px', border: '2px solid #ff6b6b', borderRadius: '30px', cursor: 'pointer', textDecoration: "none" }} href="https://sanjay-patidar.vercel.app/" target="_blank">Click here</a> to explore!</Text>
+<Text>➥ Curious to know more about Sanjay Patidar and his journey? <a style={{  color: '#FAF7F7', padding: '2px 4px', border: '2px solid #ff6b6b', borderRadius: '30px', cursor: 'pointer', textDecoration: "none" }} href="https://sanjay-patidar.vercel.app/" target="_blank">Sanjay Patidar</a> to explore!</Text>
 
 
 
