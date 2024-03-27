@@ -15,9 +15,9 @@ const CourseNavigation = styled.nav`
   position: sticky;
   top: 0;
   z-index: 1; /* Ensure it's above other content */
-  margin-bottom: 2rem;
+  margin-bottom: 0rem;
   background-color: #050816;
-  padding: 1rem 2rem;
+  padding: 0.2rem 0.2rem;
   overflow-y: auto; /* Enable vertical scrolling for navigation */
   max-height: calc(100vh - 4rem); /* Limit height to viewport height minus padding */
   &::-webkit-scrollbar {
@@ -77,7 +77,7 @@ const CourseTitle = styled.span`
 
 const CourseNavItem = styled.li`
   flex: 1;
-  padding: 0.5rem;
+  padding: 0rem;
   text-align: center;
   border-radius: 5px;
   transition: transform 0.2s, background-color 0.2s;
@@ -210,7 +210,7 @@ const Talk = () => {
   return (
     <CourseContainer>
       <Helmet>
-<title>{`${vision ? vision.replace(/_/g, ' ').toUpperCase() : 'Explore Careers'} | Tech Careers with EduXcel - Sanjay Patidar`}</title>
+      <title>{`${vision ? vision.replace(/_/g, ' ').toUpperCase() : 'Explore Careers'} | Tech Careers with EduXcel - Sanjay Patidar`}</title>
  <meta name="description" content={`Explore various tech careers like Frontend Development and Backend Development with EduXcel, where education meets innovation. Discover expert insights, career opportunities, and skill development pathways. Whether you're an experienced professional looking to advance your career or a novice enthusiast eager to delve into the world of technology, EduXcel provides a vibrant learning community that fosters curiosity, embraces challenges, and ensures growth. Join us on a journey of exploration, collaboration, and excellence.`} />
       </Helmet>
  
