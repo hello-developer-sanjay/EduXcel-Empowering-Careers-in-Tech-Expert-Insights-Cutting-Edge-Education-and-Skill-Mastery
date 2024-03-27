@@ -107,7 +107,7 @@ const CourseContent = styled.div`
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
   overflow-y: auto; 
   max-height: calc(100vh - 4rem);
-  margin-top: 2rem; 
+  margin-top: 0rem; 
 
   /* Custom scrollbar styles */
   &::-webkit-scrollbar {
