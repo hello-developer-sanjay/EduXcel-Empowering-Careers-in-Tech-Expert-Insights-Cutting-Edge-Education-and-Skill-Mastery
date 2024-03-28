@@ -548,7 +548,8 @@ if (matchSpecialChars) {
 <>  
        <Helmet>
         <title>{`${currentPosts.length > 0 ? currentPosts[0].title : ""} | EduXcel | Sanjay Patidar`}</title>
-        
+                        <link rel="canonical" href={window.location.href} />
+
       </Helmet>
         <Box
           w="full"
