@@ -1,10 +1,10 @@
 <!-- sitemap.xml -->
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Blogs -->
-   <url>
-    <loc>https://eduxcel.vercel.app/blogs</loc>
-  <lastmod>2023-02-21</lastmod>  </url>
+
+
+
+  <!-- Navigation links EduXcel -->
 
  <url>
     <loc>https://eduxcel.vercel.app/about-us</loc>
@@ -14,36 +14,78 @@
   <lastmod>2023-02-21</lastmod>  </url>
 
   
-  <!-- Courses -->
-  <url>
-    <loc>https://eduxcel.vercel.app/courses/Full%20Stack%20Web%20Development%20Bootcamp</loc>
-  <lastmod>2023-02-21</lastmod>  </url>
-  <url>
-    <loc>https://eduxcel.vercel.app/courses/Full%20Stack%20Web%20Development%20Bootcamp/Frontend%20Development</loc>
-  <lastmod>2023-02-21</lastmod>  </url>
-  <url>
-    <loc>https://eduxcel.vercel.app/courses/Full%20Stack%20Web%20Development%20Bootcamp/Frontend%20Development/submodules/HTML%20Basics</loc>
+ <url>
+    <loc>https://eduxcel.vercel.app/profile</loc>
   <lastmod>2023-02-21</lastmod>  </url>
 
   <url>
-    <loc>https://eduxcel.vercel.app/courses/Data%20Science%20Fundamentals</loc>
+    <loc>https://eduxcel.vercel.app/signup</loc>
   <lastmod>2023-02-21</lastmod>  </url>
 
-    <url>
-    <loc>https://eduxcel.vercel.app/courses/Data%20Science%20Fundamentals/Introduction%20to%20Data%20Science</loc>
+  <url>
+    <loc>https://eduxcel.vercel.app/signin</loc>
   <lastmod>2023-02-21</lastmod>  </url>
 
-    <url>
-    <loc>https://eduxcel.vercel.app/courses/Machine%20Learning%20for%20Beginners</loc>
+  
+  <url>
+    <loc>https://eduxcel.vercel.app/forgot-password</loc>
   <lastmod>2023-02-21</lastmod>  </url>
 
+
+  
+  <url>
+    <loc>https://eduxcel.vercel.app/reset</loc>
+  <lastmod>2023-02-21</lastmod>  </url>
+
+  
+  <url>
+    <loc>https://eduxcel.vercel.app/reset</loc>
+  <lastmod>2023-02-21</lastmod>  </url>
+  
+  <!-- Courses Provided by EduXcel -->
 
      <url>
-    <loc>https://eduxcel.vercel.app/courses/Machine%20Learning%20for%20Beginners/Machine%20Learning%20Basics</loc>
+    <loc>https://eduxcel.vercel.app/course/html_courses</loc>
+  <lastmod>2023-02-21</lastmod>  </url>
+
+     <url>
+    <loc>https://eduxcel.vercel.app/course/css_courses</loc>
+  <lastmod>2023-02-21</lastmod>  </url>
+
+  <url>
+    <loc>https://eduxcel.vercel.app/html_courses/introduction-to-html-history-purpose-role</loc>
+  <lastmod>2023-02-21</lastmod>  </url>
+
+<url>
+    <loc>https://eduxcel.vercel.app/html_courses/html-elements-and-tags</loc>
+  <lastmod>2023-02-21</lastmod>  </url>
+
+<url>
+    <loc>https://eduxcel.vercel.app/html_courses/html-document-structure</loc>
   <lastmod>2023-02-21</lastmod>  </url>
 
 
+    <!-- Careers page  EduXcel-->
+  
+<url>
+    <loc>https://eduxcel.vercel.app/careers</loc>
+  <lastmod>2023-02-21</lastmod>  </url>
 
+  <url>
+    <loc>https://eduxcel.vercel.app/careers/frontend_development_careers</loc>
+  <lastmod>2023-02-21</lastmod>  </url>
+
+  
+  <url>
+    <loc>https://eduxcel.vercel.app/careers/backend_development_careers</loc>
+  <lastmod>2023-02-21</lastmod>  </url>
+
+  <url>
+    <loc>https://eduxcel.vercel.app/careers/backend_development_careers</loc>
+  <lastmod>2023-02-21</lastmod>  </url>
+
+
+  
      <url>
     <loc>https://eduxcel.vercel.app/signup</loc>
   <lastmod>2023-02-21</lastmod>  </url>
@@ -53,25 +95,7 @@
     <loc>https://eduxcel.vercel.app/profile</loc>
   <lastmod>2023-02-21</lastmod>  </url>
 
-      <!-- Careers -->
-
-  <url>
-    <loc>https://eduxcel.vercel.app/careers</loc>
-  <lastmod>2023-02-21</lastmod>  </url>
-
-  <url>
-    <loc>https://eduxcel.vercel.app/careers/careers/exploring-the-career-path-of-a-web-developer-insights-responsibilities-skills-and-opportunities</loc>
-  <lastmod>2023-02-21</lastmod>  </url>
-
-  <url>
-    <loc>https://eduxcel.vercel.app/careers/careers/what-are-the-typical-responsibilities-of-a-web-developer</loc>
-  <lastmod>2023-02-21</lastmod>  </url>
-
-
-    <url>
-    <loc>https://eduxcel.vercel.app/careers/careers/what-skills-are-required-to-become-a-successful-web-developer</loc>
-  <lastmod>2023-02-21</lastmod>  </url>
-
+    
       <!-- Blogs -->
 
     <url>
@@ -333,23 +357,7 @@
     <loc>https://eduxcel.vercel.app/blogs/tools/what-integrations-does-vs-code-have-with-version-control-systems-like-git</loc>
   <lastmod>2023-02-21</lastmod>  </url>
 
-         <url>
-    <loc>https://eduxcel.vercel.app/html_courses/html-elements-and-tags</loc>
-  <lastmod>2023-02-21</lastmod>  </url>
-
-  
-         <url>
-    <loc>https://eduxcel.vercel.app/html_courses/html-document-structure</loc>
-  <lastmod>2023-02-21</lastmod>  </url>
-
-  
-         <url>
-    <loc>https://eduxcel.vercel.app/html_courses/introduction-to-html</loc>
-  <lastmod>2023-02-21</lastmod>  </url>
 
 
-
-
-  
   
 </urlset>
