@@ -21,7 +21,8 @@ import About from './components/About';
 import Faq from './components/Faq';
 import CourseList from './components/CourseList';
 import  Founder from './components/Founder';
-
+import CollegePage from './components/CollegePage';
+import CollegePost from './components/CollegePost';
 import { useLocation } from 'react-router-dom';
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -70,6 +71,8 @@ function App() {
         <Route path="/signin" element={<SignInSignUp />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset" element={<ResetPassword />} />
+<Route path="/institutes/*" element={<CollegePage />} />
+      <Route path="/institute/:institute/*" element={<CollegePost/>} />
 
             <Route path="/blogs/*" element={<Blogs />} />
             <Route path="/careers/*" element={<CareerOption />} />
