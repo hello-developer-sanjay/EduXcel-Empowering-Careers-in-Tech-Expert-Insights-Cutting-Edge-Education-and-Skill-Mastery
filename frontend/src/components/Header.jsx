@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Typed from 'react-typed';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUserPlus, faNewspaper,faBriefcase, faUserTie ,faInfoCircle} from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUserPlus, faNewspaper,faBriefcase,faUniversity,  faUserTie ,faInfoCircle} from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -380,6 +380,15 @@ const handleCareerInsightsClick = () => {
 
 
             Career Insights
+            </NavLinkItem>
+            
+          </NavItem>
+        <NavItem>
+            <NavLinkItem to="/institutes" aria-label="Institutes" onClick={toggleMenu}>
+            <FontAwesomeIcon icon={faUniversity} />
+
+
+         Colleges
             </NavLinkItem>
             
           </NavItem>
