@@ -862,7 +862,12 @@ import 'video.js/dist/video-js.css';
   {renderMediaContent(blog.tips, blog.title)}
 </VStack>
 
-
+<VStack spacing={2} id={`content-${blog.title}-university_info`} style={contentSectionStyle}>
+  {renderMediaContent(blog.details?.university_info, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-cuims_portal`} style={contentSectionStyle}>
+  {renderMediaContent(blog.details?.cuims_portal, blog.title)}
+</VStack>
 
 
 <VStack spacing={2} id={`content-${blog.title}-tips`} style={contentSectionStyle}>
