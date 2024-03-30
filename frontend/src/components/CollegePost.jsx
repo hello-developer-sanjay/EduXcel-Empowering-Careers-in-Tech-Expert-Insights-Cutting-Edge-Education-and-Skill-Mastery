@@ -856,23 +856,68 @@ if (matchSpecialChars) {
 </VStack>
 
 
+<VStack spacing={2} id={`content-${blog.title}-university_info`} style={contentSectionStyle}>
+  {renderMediaContent(blog.details?.university_info, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-short_detail`} style={contentSectionStyle}>
+  {renderMediaContent(blog.details?.university_info?.short_detail, blog.title)}
+</VStack>
 
-{/* new */}
+<VStack spacing={2} id={`content-${blog.title}-location`} style={contentSectionStyle}>
+  {renderMediaContent(blog.details?.university_info?.location, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-established`} style={contentSectionStyle}>
+  {renderMediaContent(blog.details?.university_info?.established, blog.title)}
+</VStack>
 
-<VStack spacing={2} id={`content-${blog.title}-use_and_purposes`} style={contentSectionStyle}>
-  {renderMediaContent(blog.content?.use_and_purposes, blog.title)}
+<VStack spacing={2} id={`content-${blog.title}-website`} style={contentSectionStyle}>
+  {renderMediaContent(blog.details?.university_info?.website, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-motto`} style={contentSectionStyle}>
+  {renderMediaContent(blog.details?.university_info?.motto, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-accreditations`} style={contentSectionStyle}>
+  {renderMediaContent(blog.details?.university_info?.accreditations, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-affiliations`} style={contentSectionStyle}>
+  {renderMediaContent(blog.details?.university_info?.affiliations, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-recognized_by`} style={contentSectionStyle}>
+  {renderMediaContent(blog.details?.university_info?.recognized_by, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-academic_programs  `} style={contentSectionStyle}>
+  {renderMediaContent(blog.details?.academic_programs, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-campus_facilities  `} style={contentSectionStyle}>
+  {renderMediaContent(blog.details?.campus_facilities, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-international_relations  `} style={contentSectionStyle}>
+  {renderMediaContent(blog.details?.international_relations, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-research_and_innovation  `} style={contentSectionStyle}>
+  {renderMediaContent(blog.details?.research_and_innovation, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-student_support_services  `} style={contentSectionStyle}>
+  {renderMediaContent(blog.details?.student_support_services, blog.title)}
 </VStack>
 
 
-<VStack spacing={2} id={`content-${blog.title}-historys`} style={contentSectionStyle}>
-  {renderMediaContent(blog.content?.historys, blog.title)}
+<VStack spacing={2} id={`content-${blog.title}-alumni_network  `} style={contentSectionStyle}>
+  {renderMediaContent(blog.details?.alumni_network, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-chandigarh_university_information_management_system  `} style={contentSectionStyle}>
+  {renderMediaContent(blog.details?.chandigarh_university_information_management_system, blog.title)}
 </VStack>
 
-<VStack spacing={2} id={`content-${blog.title}-creator`} style={contentSectionStyle}>
-  {renderMediaContent(blog.content?.creator, blog.title)}
+<VStack spacing={2} id={`content-${blog.title}-chandigarh_university_information_management_system  `} style={contentSectionStyle}>
+  {renderMediaContent(blog.details?.chandigarh_university_information_management_system?.functionality, blog.title)}
 </VStack>
-<VStack spacing={2} id={`content-${blog.title}-feature`} style={contentSectionStyle}>
-  {renderMediaContent(blog.content?.feature, blog.title)}
+<VStack spacing={2} id={`content-${blog.title}-security_measures  `} style={contentSectionStyle}>
+  {renderMediaContent(blog.details?.chandigarh_university_information_management_system?.security_measures, blog.title)}
 </VStack>
 
 
