@@ -2,9 +2,14 @@ import  { useEffect, useRef } from 'react';
 
 import styled, { keyframes } from 'styled-components';
 import { motion, AnimatePresence,  } from "framer-motion";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faUserPlus,faUniversity, faNewspaper,faBriefcase, faUserTie ,faInfoCircle} from '@fortawesome/free-solid-svg-icons';
+
 import { FaLinkedin, FaTwitter, FaInstagram, FaGithub, FaUsers } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
 
 const FooterContainer = styled(motion.footer)`
    position: relative;
@@ -229,6 +234,35 @@ const ContactInput = styled.input`
     background-color: rgba(0, 0, 0, 0.7);
   }
 `;
+
+const NavigationContainer = styled.nav`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+gap : 2rem;
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 60%;
+    margin: 0 auto;
+  }
+`;
+
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Link = styled.a`
+  text-decoration: none;
+  color: #fff;
+  margin: 5px 0;
+
+  &:hover {
+    color: #666;
+  }
+`;
+
 const ContactTextArea = styled.textarea`
   padding: 1.5rem;
   border: none;
@@ -347,7 +381,11 @@ const QueryButton = styled(SubmitButton)`
   }
 `;
 
-
+const NavHeading = styled.h2`
+  color: #333;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+`;
 
 
 
@@ -361,6 +399,21 @@ const Footer = () => {
     "Exploring the Future. Get Involved!",
     "Unlock Knowledge. Engage and Share.",
   ];
+  const [isToastVisible, setIsToastVisible] = useState(false);
+
+  const handleCareerInsightsClick = () => {
+    if (!isToastVisible) {
+      toast.info("Please wait! You're now being redirected to delve into Blog insights on Sanjay Patidar's Portfolio Website...", {
+        autoClose: 3000,
+        onOpen: () => setIsToastVisible(true),
+        onClose: () => setIsToastVisible(false),
+      });
+
+      setTimeout(() => {
+        window.open("https://sanjay-patidar.vercel.app/blogs", "_blank");
+      }, 3000); 
+    }
+  };
   const getCurrentDate = () => {
     const currentDate = new Date();
     const month = currentDate.toLocaleString('default', { month: 'long' });
@@ -560,20 +613,76 @@ let endpoint = "submit-feedback";
 />
 
 
+<NavigationContainer>
+  <Column>
+    <NavHeading>Main</NavHeading>
+    <NavLink exact to="/">
+      <FontAwesomeIcon icon={faHome} /> Home
+    </NavLink>
+    <NavLink to="/profile">
+      <FontAwesomeIcon icon={faUserTie} /> Profile
+    </NavLink>
+    <NavLink to="/about-us">
+      <FontAwesomeIcon icon={faInfoCircle} /> About Us
+    </NavLink>
+    <NavLink to="/signup">
+      <FontAwesomeIcon icon={faUserPlus} /> Sign Up
+    </NavLink>
+    <NavLink to="/forgot-password">
+      <FontAwesomeIcon icon={faUserPlus} /> Forgot Password
+    </NavLink>
+    <NavLink to="/reset">
+      <FontAwesomeIcon icon={faUserPlus} /> Reset Password
+    </NavLink>
+  </Column>
+  <Column>
+    <NavHeading>Institutes</NavHeading>
+    <NavLink to="/institutes">
+      <FontAwesomeIcon icon={faUniversity} /> Institutes Home
+    </NavLink>
+    <NavLink to="/institute/chandigarh-university-articles">
+      <FontAwesomeIcon icon={faUniversity} /> Chandigarh University
+    </NavLink>
+    <NavLink to="/institute/chitkara-university-articles">
+      <FontAwesomeIcon icon={faUniversity} /> Chitkara University
+    </NavLink>
+    <NavLink to="/sanjay-patidar-founder-eduxcel">
+      <FontAwesomeIcon icon={faBriefcase} /> Founder | EduXcel
+    </NavLink>
+  </Column>
+  <Column>  
+    <NavHeading>Careers</NavHeading>
+    <NavLink to="/careers">
+      <FontAwesomeIcon icon={faBriefcase} /> Careers Home
+    </NavLink>
+    <NavLink to="/careers/frontend_development_careers">
+      <FontAwesomeIcon icon={faBriefcase} /> Frontend Dev Career Option
+    </NavLink>
+    <NavLink to="/careers/backend_development_careers">
+      <FontAwesomeIcon icon={faBriefcase} /> Backend Dev Career Option
+    </NavLink>
+  </Column>
+  <Column>
+    <NavLink to="#" aria-label="Blogs" onClick={handleCareerInsightsClick}>
+      <FontAwesomeIcon icon={faNewspaper} /> Blogs
+    </NavLink>
+  </Column>
+</NavigationContainer>
 
+  
 
-<Text>Eduxcel provides a diverse range of courses tailored just for you. Don't miss out—register now to discover your perfect fit! <a aria-label="Register for courses at Eduxcel" style={{ color: '#FAF7F7', padding: '2px 4px', border: '2px solid #ff6b6b', borderRadius: '30px', cursor: 'pointer', textDecoration: 'none' }} href='https://eduxcel.vercel.app/signup' target='_blank'>SignUp EduXcel</a> to secure your spot!</Text>
+<Text>Eduxcel provides a diverse range of courses tailored just for you. Don't miss out—register now to discover your perfect fit! <a style={{ color: '#FAF7F7', padding: '2px 4px', border: '2px solid #ff6b6b', borderRadius: '30px', cursor: 'pointer', textDecoration: 'none' }} href='https://eduxcel.vercel.app/signup' target='_blank'>Click here</a> to secure your spot!</Text>
+
 
 <Text>
 </Text>
-<Text>Discover the world of Sanjay Patidar: Innovator, Developer, and Founder. Ready to explore? <a aria-label="Explore Sanjay Patidar's portfolio" style={{ color: '#FAF7F7', padding: '2px 4px', border: '2px solid #ff6b6b', borderRadius: '30px', cursor: 'pointer', textDecoration: 'none' }} href='https://sanjay-patidar.vercel.app/' target='_blank'>Sanjay Patidar Portfolio</a> to dive in!</Text>
+<Text>Discover the world of Sanjay Patidar: Innovator, Developer, and Founder. Ready to explore? <a style={{ color: '#FAF7F7', padding: '2px 4px', border: '2px solid #ff6b6b', borderRadius: '30px', cursor: 'pointer', textDecoration: 'none' }} href='https://sanjay-patidar.vercel.app/' target='_blank'>Click here</a> to dive in!</Text>
 <Text>
   <span style={{ color: '#ffbb00', fontWeight: 'bold', fontSize: '1.2rem' }}>©</span> All rights reserved to&nbsp;
   <span style={{ fontWeight: 'bold', fontStyle: 'italic', color: '#ffbb00' }}>EduXcel</span> founded by&nbsp;
   <span style={{ fontWeight: 'bold', color: '#ffbb00' }}>Sanjay Patidar</span><br />
   <span style={{ fontSize: '0.9rem', color: '#ccc' }}>{getCurrentDate()} | India</span>
 </Text>
-
     </FooterContainer>
   );
 };
