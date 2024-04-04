@@ -243,8 +243,8 @@ function SignInSignUp({ showCloseButton }) {
 </div>
 
 
-<Text>Eduxcel provides a diverse range of courses tailored just for you. Don't miss out—register now to discover your perfect fit! <a style={{ color: '#FAF7F7', padding: '2px 4px', border: '2px solid #ff6b6b', borderRadius: '30px', cursor: 'pointer', textDecoration: 'none' }} href='https://eduxcel.vercel.app' target='_blank'>Click here</a> to secure your spot!</Text>
-<Text>Discover the world of Sanjay Patidar: Innovator, Developer, and Founder. Ready to explore? <a style={{ color: '#FAF7F7', padding: '2px 4px', border: '2px solid #ff6b6b', borderRadius: '30px', cursor: 'pointer', textDecoration: 'none' }} href='https://sanjay-patidar.vercel.app/' target='_blank'>Click here</a> to dive in!</Text>
+<Text>Eduxcel provides a diverse range of courses tailored just for you. Don't miss out—register now to discover your perfect fit! <a style={{ color: '#FAF7F7', padding: '2px 4px', border: '2px solid #ff6b6b', borderRadius: '30px', cursor: 'pointer', textDecoration: 'none' }} href='https://eduxcel.vercel.app' target='_blank'>SignUp EduXcel</a> to secure your spot!</Text>
+<Text>Discover the world of Sanjay Patidar: Innovator, Developer, and Founder. Ready to explore? <a style={{ color: '#FAF7F7', padding: '2px 4px', border: '2px solid #ff6b6b', borderRadius: '30px', cursor: 'pointer', textDecoration: 'none' }} href='https://sanjay-patidar.vercel.app/' target='_blank'>Sanjay Patidar</a> to dive in!</Text>
 <Text>
   <span style={{ color: '#ffbb00', fontWeight: 'bold', fontSize: '1.2rem' }}>©</span> All rights reserved to&nbsp;
   <span style={{ fontWeight: 'bold', fontStyle: 'italic', color: '#ffbb00' }}>EduXcel</span> founded by&nbsp;
