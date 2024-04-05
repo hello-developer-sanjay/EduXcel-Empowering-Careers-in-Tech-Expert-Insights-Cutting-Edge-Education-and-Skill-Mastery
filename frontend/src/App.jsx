@@ -2,6 +2,8 @@ import  { useEffect} from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/Home';
+import PeopleCard from './components/PeopleCard';
+
 import UserProfile from './components/UserProfile';
 import ModuleDetails from './components/ModuleDetails';
 import SubModuleDetails from './components/SubModuleDetails';
@@ -51,6 +53,7 @@ function App() {
              <Route path="/" element={<HomeWithBlogSuggestion />} />
 
                         <Route path="/sanjay-patidar-founder-eduxcel" element={<Founder/>} />
+                        <Route path="/lic-jitendra-patidar" element={<PeopleCard/>} />
 
             <Route path="/courses" element={<Course />} />
             <Route path="/course/:category" element={<Course />} />
