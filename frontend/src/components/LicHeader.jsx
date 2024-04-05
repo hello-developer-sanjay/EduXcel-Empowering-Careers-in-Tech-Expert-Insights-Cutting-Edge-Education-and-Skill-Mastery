@@ -7,12 +7,16 @@ const ProjectDetailsContainer = styled.div`
   background-color: #050816;
   overflow: hidden;
   align-items: center;
+  border: 2px solid #ff6b6b; 
+
 `;
 
 const ProjectsContent = styled.div`
   background-color: #050816;
   padding: 1rem;
   border-radius: 10px;
+  border: 2px solid #ff6b6b; 
+
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
   max-height: 300px; /* Set a fixed height */
