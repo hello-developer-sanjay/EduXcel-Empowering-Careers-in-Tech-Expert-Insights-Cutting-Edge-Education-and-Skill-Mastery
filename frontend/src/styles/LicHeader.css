@@ -1,0 +1,148 @@
+/* SubHeader.css */
+
+/* Container for the entire SubHeader */
+.subheaderlic {
+    background-color: #050816; 
+    padding: 1px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    overflow: visible; /* Ensure the dropdown is fully visible */
+
+    justify-content: center;
+  }
+  
+  /* Dropdown container */
+  .dropdown-containerlic {
+    position: relative;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    overflow: visible; /* Ensure the dropdown is fully visible */
+    padding-bottom: 10px;
+    white-space: nowrap; /* Prevent content from wrapping */
+  }
+  
+  
+  
+  /* Dropdown label */
+  .dropdown-labellic {
+    position: absolute;
+    top: -20px;
+    left: 30px;
+    
+    background-color: #090e0a; /* Background color */
+    color: white; /* Text color */
+    padding: 5px 10px; /* Padding around the text */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 14px;
+    font-weight: bold; /* Bold text */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    z-index: 1; /* Ensure it appears above other elements */
+  }
+  
+  
+  .courses-dropdownlic {
+    padding: 12px;
+    background-color: #c2b03a; /* Light gray background color */
+    color: #333;
+    font-size: 14px; /* Slightly larger font size */
+    border: 1px solid #ccc; /* Add a subtle border */
+    border-radius: 20px;
+    
+    cursor: pointer;
+    width: 100%; /* Fill the container width */
+    max-width: 200px; /* Limit the width of the select */
+    transition: all 0.3s ease; /* Add a smooth transition effect */
+  
+    /* Style for when the dropdown is open */
+    &:focus,
+    &:hover {
+      background-color: #fff; /* White background color */
+      border-color: #00bfff; /* Blue border color */
+      
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    }
+  
+    /* Style for the dropdown arrow icon */
+    &::after {
+      content: '▼'; /* Unicode down arrow character */
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+    }
+  
+    /* Style for the selected option */
+    option:checked {
+      background-color: #00bfff; /* Blue background color for selected option */
+      color: #fff; /* White text color for selected option */
+    }
+  }
+  
+  /* Dropdown options */
+  .dropdown-optionlic {
+    padding: 10px;
+    background-color: #82808c;
+    color: #000000;
+    font-size: 14px;
+    font-weight: bold;
+    
+    display: flex;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px; /* Limit the width of options */
+  }
+  
+  .dropdown-sticky-container {
+    position: sticky;
+    top: 0;
+    z-index: 1; /* Ensure it's above the content container */
+  }
+  
+  .content-container {
+    margin-top: 50px; /* Adjust this value to your preference */
+  }
+  
+  
+  /* Disabled option (placeholder) */
+  .dropdown-option[disabled] {
+    color: #aaa;
+  }
+  
+  /* Styling for selected option */
+  .courses-dropdown option:checked {
+    background-color: #143c14;
+    color: #fff;
+  }
+  
+  /* Custom arrow indicator */
+  .courses-dropdown::-ms-expand {
+    display: none;
+  }
+  
+  .courses-dropdown::after {
+    content: "\f107"; /* Unicode for down arrow icon */
+    font-family: FontAwesome;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #333;
+    font-size: 12px;
+  }
+  
+  /* Responsive styles */
+  @media screen and (max-width: 768px) {
+    .courses-dropdown {
+      max-width: 100%; /* Allow full width on smaller screens */
+    }
+  
+    .dropdown-option {
+      max-width: 100%; /* Allow full width on smaller screens */
+    }
+  }
+  
