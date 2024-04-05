@@ -787,6 +787,13 @@ Join hands with Jitendra Patidar and the LIC India team today to experience the 
   <div className="w-full max-w-4xl">
     
     <Slider {...sliderSettings}>
+    <div className="w-full">
+        <img
+          src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/lic-jay/licheader.jpg"
+          alt="Image 1"
+          className="w-full h-auto object-cover"
+        />
+      </div>
       <div className="w-full">
         <img
           src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/lic-jay/lic.jpg"
