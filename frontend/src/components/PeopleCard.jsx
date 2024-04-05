@@ -588,15 +588,15 @@ function Home() {
       description: 'Discover exciting career prospects at LIC India, where dedication and expertise meet to shape the future of insurance. Join our team and embark on a journey of growth and success in the dynamic world of life insurance.',
     },
     {
-      title: 'Dynamic Leadership with Jitendra Patidar: ADO at LIC India',
+      title: 'Dynamic Leadership with Jitendra Patidar: DO at LIC India',
       description: 'Experience the leadership of Jitendra Patidar, Associate Development Officer at LIC India. With a wealth of knowledge and a commitment to excellence, Jitendra leads by example, fostering innovation and growth within the LIC team.',
     },
   ];
   
   const contentBlocks = [
     {
-      title: 'Jitendra Patidar: Dynamic and Accomplished Associate Development Officer (ADO) at LIC India',
-      description: 'Jitendra Patidar एलआईसी भारत में विकास अधिकारी (ADO) हैं। उन्होंने अपने उत्कृष्ट कार्य और प्रतिबद्धता के माध्यम से LIC के लिए महत्वपूर्ण योगदान दिया है। जितेंद्र एक दक्ष और अनुभवी पेशेवर हैं, जो उनके विभिन्न क्षेत्रों में विस्तृत ज्ञान को प्रकट करता है। उनकी कार्यक्षमता, संवादात्मक कौशल और टीम के साथ अच्छे संबंध ने LIC को उन्हें महत्वपूर्ण धाराओं में बनाए रखा है। उनके नेतृत्व में, LIC ने अधिक से अधिक ग्राहकों को सेवा प्रदान करने के लिए नई ऊर्जा और उत्साह से काम किया है।',
+      title: 'Jitendra Patidar: Dynamic and Accomplished Development Officer (DO) at LIC India',
+      description: 'Jitendra Patidar एलआईसी भारत में विकास अधिकारी (DO) हैं। उन्होंने अपने उत्कृष्ट कार्य और प्रतिबद्धता के माध्यम से LIC के लिए महत्वपूर्ण योगदान दिया है। जितेंद्र एक दक्ष और अनुभवी पेशेवर हैं, जो उनके विभिन्न क्षेत्रों में विस्तृत ज्ञान को प्रकट करता है। उनकी कार्यक्षमता, संवादात्मक कौशल और टीम के साथ अच्छे संबंध ने LIC को उन्हें महत्वपूर्ण धाराओं में बनाए रखा है। उनके नेतृत्व में, LIC ने अधिक से अधिक ग्राहकों को सेवा प्रदान करने के लिए नई ऊर्जा और उत्साह से काम किया है।',
     },
   ];
   
@@ -718,10 +718,10 @@ function Home() {
 
   <Helmet>
     
-    <title>Jitendra Patidar | Associate Development Officer (ADO) at LIC India | Life Insurance Corporation of India | भारतीय जीवन बीमा निगम</title>
+    <title>Jitendra Patidar | Development Officer (DO) at LIC India | Life Insurance Corporation of India | भारतीय जीवन बीमा निगम</title>
  <meta
    name="description"
-   content="Jitendra Patidar, an esteemed Associate Development Officer (ADO) at LIC India, epitomizes the pinnacle of professionalism and expertise within the insurance industry.Jitendra Patidar, our esteemed Associate Development Officer (ADO), operates from the headquarters located in Neemuch District, Madhya Pradesh. With a strong presence across all regions and cities of India, including Ratangarh, Neemuch, Singoli, Mandsaur, and more, Jitendra diligently serves our valued clients nationwide. As a trusted representative of LIC, Jitendra ensures that our insurance solutions reach every corner of the country, providing financial security and peace of mind to individuals and families from diverse backgrounds. With his commitment and expertise, Jitendra exemplifies LIC's mission to be a beacon of trust and reliability in the insurance industry, serving our customers with dedication and integrity. With a rich background in fostering growth and nurturing talent, Jitendra leads by example, guiding his team towards excellence in serving our valued clients. At LIC India, we are committed to providing comprehensive life insurance solutions that safeguard the financial well-being of individuals and families across the nation.
+   content="Jitendra Patidar, an esteemed Development Officer (DO) at LIC India, epitomizes the pinnacle of professionalism and expertise within the insurance industry.Jitendra Patidar, our esteemed  Development Officer (DO), operates from the headquarters located in Neemuch District, Madhya Pradesh. With a strong presence across all regions and cities of India, including Ratangarh, Neemuch, Singoli, Mandsaur, and more, Jitendra diligently serves our valued clients nationwide. As a trusted representative of LIC, Jitendra ensures that our insurance solutions reach every corner of the country, providing financial security and peace of mind to individuals and families from diverse backgrounds. With his commitment and expertise, Jitendra exemplifies LIC's mission to be a beacon of trust and reliability in the insurance industry, serving our customers with dedication and integrity. With a rich background in fostering growth and nurturing talent, Jitendra leads by example, guiding his team towards excellence in serving our valued clients. At LIC India, we are committed to providing comprehensive life insurance solutions that safeguard the financial well-being of individuals and families across the nation.
 
 As India's leading life insurance provider, LIC offers a diverse range of insurance products tailored to meet the evolving needs of our customers. Whether it's securing your family's future, planning for retirement, or investing in wealth creation, LIC has you covered with innovative and reliable insurance plans.
 
@@ -738,8 +738,8 @@ Join hands with Jitendra Patidar and the LIC India team today to experience the 
  />
  
 
- <meta property="og:title" content="Jitendra Patidar | Associate Development Officer (ADO) at LIC India | Life Insurance Corporation of India | भारतीय जीवन बीमा निगम" />
- <meta property="og:description" content="Jitendra Patidar, an esteemed Associate Development Officer (ADO) at LIC India, epitomizes the pinnacle of professionalism and expertise within the insurance industry. Jitendra Patidar, our esteemed Associate Development Officer (ADO), operates from the headquarters located in Neemuch District, Madhya Pradesh. With a strong presence across all regions and cities of India, including Ratangarh, Neemuch, Singoli, Mandsaur, and more, Jitendra diligently serves our valued clients nationwide. As a trusted representative of LIC, Jitendra ensures that our insurance solutions reach every corner of the country, providing financial security and peace of mind to individuals and families from diverse backgrounds. With his commitment and expertise, Jitendra exemplifies LIC's mission to be a beacon of trust and reliability in the insurance industry, serving our customers with dedication and integrity.With a rich background in fostering growth and nurturing talent, Jitendra leads by example, guiding his team towards excellence in serving our valued clients. At LIC India, we are committed to providing comprehensive life insurance solutions that safeguard the financial well-being of individuals and families across the nation.
+ <meta property="og:title" content="Jitendra Patidar |Development Officer (DO) at LIC India | Life Insurance Corporation of India | भारतीय जीवन बीमा निगम" />
+ <meta property="og:description" content="Jitendra Patidar, an esteemed Development Officer (DO) at LIC India, epitomizes the pinnacle of professionalism and expertise within the insurance industry. Jitendra Patidar, our esteemed Development Officer (DO), operates from the headquarters located in Neemuch District, Madhya Pradesh. With a strong presence across all regions and cities of India, including Ratangarh, Neemuch, Singoli, Mandsaur, and more, Jitendra diligently serves our valued clients nationwide. As a trusted representative of LIC, Jitendra ensures that our insurance solutions reach every corner of the country, providing financial security and peace of mind to individuals and families from diverse backgrounds. With his commitment and expertise, Jitendra exemplifies LIC's mission to be a beacon of trust and reliability in the insurance industry, serving our customers with dedication and integrity.With a rich background in fostering growth and nurturing talent, Jitendra leads by example, guiding his team towards excellence in serving our valued clients. At LIC India, we are committed to providing comprehensive life insurance solutions that safeguard the financial well-being of individuals and families across the nation.
 
 As India's leading life insurance provider, LIC offers a diverse range of insurance products tailored to meet the evolving needs of our customers. Whether it's securing your family's future, planning for retirement, or investing in wealth creation, LIC has you covered with innovative and reliable insurance plans.
 
@@ -757,10 +757,10 @@ Join hands with Jitendra Patidar and the LIC India team today to experience the 
  <meta property="og:type" content="website" />
  <meta property="og:url" content="https://eduxcel.vercel.app/lic-jitendra-patidar" />
  <meta property="og:image:alt" content="Jitendra Patidar" />
- <meta property="og:site_name" content="Jitendra Patidar | Associate Development Officer (ADO) at LIC India | Life Insurance Corporation of India | भारतीय जीवन बीमा निगम" />
+ <meta property="og:site_name" content="Jitendra Patidar | Development Officer (DO) at LIC India | Life Insurance Corporation of India | भारतीय जीवन बीमा निगम" />
 
  <meta name="twitter:card" content="summary_large_image" />
- <meta name="twitter:title" content="Jitendra Patidar, an esteemed Associate Development Officer (ADO) at LIC India, epitomizes the pinnacle of professionalism and expertise within the insurance industry. Jitendra Patidar, our esteemed Associate Development Officer (ADO), operates from the headquarters located in Neemuch District, Madhya Pradesh. With a strong presence across all regions and cities of India, including Ratangarh, Neemuch, Singoli, Mandsaur, and more, Jitendra diligently serves our valued clients nationwide. As a trusted representative of LIC, Jitendra ensures that our insurance solutions reach every corner of the country, providing financial security and peace of mind to individuals and families from diverse backgrounds. With his commitment and expertise, Jitendra exemplifies LIC's mission to be a beacon of trust and reliability in the insurance industry, serving our customers with dedication and integrity.With a rich background in fostering growth and nurturing talent, Jitendra leads by example, guiding his team towards excellence in serving our valued clients. At LIC India, we are committed to providing comprehensive life insurance solutions that safeguard the financial well-being of individuals and families across the nation.
+ <meta name="twitter:title" content="Jitendra Patidar, an esteemed  Development Officer (DO) at LIC India, epitomizes the pinnacle of professionalism and expertise within the insurance industry. Jitendra Patidar, our esteemed Development Officer (DO), operates from the headquarters located in Neemuch District, Madhya Pradesh. With a strong presence across all regions and cities of India, including Ratangarh, Neemuch, Singoli, Mandsaur, and more, Jitendra diligently serves our valued clients nationwide. As a trusted representative of LIC, Jitendra ensures that our insurance solutions reach every corner of the country, providing financial security and peace of mind to individuals and families from diverse backgrounds. With his commitment and expertise, Jitendra exemplifies LIC's mission to be a beacon of trust and reliability in the insurance industry, serving our customers with dedication and integrity.With a rich background in fostering growth and nurturing talent, Jitendra leads by example, guiding his team towards excellence in serving our valued clients. At LIC India, we are committed to providing comprehensive life insurance solutions that safeguard the financial well-being of individuals and families across the nation.
 
 As India's leading life insurance provider, LIC offers a diverse range of insurance products tailored to meet the evolving needs of our customers. Whether it's securing your family's future, planning for retirement, or investing in wealth creation, LIC has you covered with innovative and reliable insurance plans.
 
@@ -776,7 +776,7 @@ Join hands with Jitendra Patidar and the LIC India team today to experience the 
  <meta name="twitter:site" content="@sanjaypatidar" />
  <meta name="twitter:creator" content="@sanjaypatidar" />
 
- <meta name="keywords" content="Jitendra Patidar, LIC India, Associate Development Officer, ADO, life insurance, insurance solutions, financial security, retirement planning, wealth creation, insurance plans, financial goals, trusted insurance provider, customer service, financial literacy, financial inclusion, CSR initiatives, community support, financial empowerment, personalized service, expert guidance, comprehensive insurance coverage, financial well-being, trusted advisor, insurance policies, claims processing, educational initiatives, environmental sustainability, financial decisions, LIC agents, financial services, India's leading insurance company" />
+ <meta name="keywords" content="Jitendra Patidar, LIC India, Associate Development Officer, ADO,DO,life insurance, insurance solutions, financial security, retirement planning, wealth creation, insurance plans, financial goals, trusted insurance provider, customer service, financial literacy, financial inclusion, CSR initiatives, community support, financial empowerment, personalized service, expert guidance, comprehensive insurance coverage, financial well-being, trusted advisor, insurance policies, claims processing, educational initiatives, environmental sustainability, financial decisions, LIC agents, financial services, India's leading insurance company" />
  <meta name="author" content="Sanjay Patidar" />      
     
    
@@ -952,7 +952,7 @@ strings={[
 
 <Next>
                 ☎  <span className="light">Contact | Mobile Number : </span>{' '}
-                <span id="contactNumber">+91 822439413 </span>
+                <span id="contactNumber">+91 7987235207 </span>
                 
                 <button onClick={copyContactNumber} style={{  marginLeft : '4px', color: '#fff', padding: '2px 4px', border: '2px solid #ff6b6b', borderRadius: '30px', cursor: 'pointer' }}>Copy Number</button>
               </Next>
@@ -998,12 +998,12 @@ strings={[
         Hi there! I'm{' '}
     
         <F2> Jitendra Patidar</F2>  
-        <span className="highlight">Associate Development Officer (ADO) at LIC India</span><br/> 
+        <span className="highlight">Development Officer (DO) at LIC India</span><br/> 
 
 
 
 <Text>
-🙋‍♀️    Jitendra Patidar एलआईसी भारत में विकास अधिकारी (ADO) हैं। <br/>
+🙋‍♀️    Jitendra Patidar एलआईसी भारत में विकास अधिकारी (DO) हैं। <br/>
 🙋‍♀️ उन्होंने अपने उत्कृष्ट कार्य और प्रतिबद्धता के माध्यम से LIC के लिए महत्वपूर्ण योगदान दिया है।
 <br/>
 </Text>
@@ -1060,9 +1060,9 @@ strings={[
                       controlsContent.start({
                         y: 0,
                         opacity: 1,
-                        rotate: [0, index % 2 === 0 ? 360 : -360],
+                        scale: 1,
                         transition: {
-                          duration: 1.5,
+                          duration: 2,
                           delay: index * 0.2,
                           type: 'spring',
                           stiffness: 100,
