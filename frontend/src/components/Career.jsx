@@ -152,7 +152,7 @@
       const fetchData = async (collection) => {
         try {
           const response = await fetch(
-            `https://portfolio-api-b53a.onrender.com/api/${collection}`
+            `https://portfolio-api-u3de.onrender.com/api/${collection}`
           );
           const responseData = await response.json();
           setBlogsData((prevData) => ({
