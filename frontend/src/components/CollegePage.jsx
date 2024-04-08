@@ -67,7 +67,7 @@ const CollegePage = () => {
     useEffect(() => {
         async function fetchCareers() {
             try {
-                const response = await axios.get('https://apiforcollegeblogs.onrender.com/api/colleges');
+                const response = await axios.get('https://apiforcollegeblogs-t63y.onrender.com/api/colleges');
                 setCareerData(response.data);
             } catch (error) {
                 console.error('Error fetching courses:', error);
