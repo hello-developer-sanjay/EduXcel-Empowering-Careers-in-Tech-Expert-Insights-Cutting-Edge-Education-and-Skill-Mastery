@@ -162,7 +162,7 @@ import 'video.js/dist/video-js.css';
       const fetchData = async (collection) => {
         try {
           const response = await fetch(
-            `https://portfolio-api-b53a.onrender.com/api/${collection}`
+            `https://portfolio-api2-zhoj.onrender.com/api/${collection}`
           );
           const responseData = await response.json();
           setBlogsData((prevData) => ({
