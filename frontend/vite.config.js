@@ -9,7 +9,7 @@ export default defineConfig({
     },
   },
   build: {
-    sourcemap: 'cheap',  // This option ensures source maps are generated
+    sourcemap: true,  // Generate full source maps
   },
   esbuild: {
     jsxFactory: 'React.createElement',
