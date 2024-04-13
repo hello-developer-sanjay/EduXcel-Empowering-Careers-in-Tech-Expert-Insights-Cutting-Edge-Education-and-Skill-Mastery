@@ -832,7 +832,21 @@ import 'video.js/dist/video-js.css';
 <VStack spacing={2} id={`content-${blog.title}-security_measures  `} style={contentSectionStyle}>
   {renderMediaContent(blog.details?.chandigarh_university_information_management_system?.security_measures, blog.title)}
 </VStack>
+<VStack spacing={2} id={`content-${blog.title}-more`} style={contentSectionStyle}>
+  {renderMediaContent(blog.more?.what, blog.title)}
+</VStack>
 
+
+<VStack spacing={2} id={`content-${blog.title}-why`} style={contentSectionStyle}>
+  {renderMediaContent(blog.more?.why, blog.title)}
+</VStack>
+<VStack spacing={2} id={`content-${blog.title}-how`} style={contentSectionStyle}>
+  {renderMediaContent(blog.more?.how, blog.title)}
+</VStack>
+
+<VStack spacing={2} id={`content-${blog.title}-when`} style={contentSectionStyle}>
+  {renderMediaContent(blog.more?.when, blog.title)}
+</VStack>
 
                   </motion.div>
                 ))}
