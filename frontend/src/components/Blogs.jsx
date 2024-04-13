@@ -98,7 +98,6 @@ import 'video.js/dist/video-js.css';
     const Blogs = () => {
       const [blogsData, setBlogsData] = useState({
         tools: [],
-        working: [],
       });
       const [loading, setLoading] = useState(true);
  useEffect(() => {
@@ -175,7 +174,7 @@ import 'video.js/dist/video-js.css';
       };
 
       const fetchDataForAllCollections = async () => {
-        const collections = ["tools", "working"];
+        const collections = ["tools"];
         const promises = collections.map((collection) => fetchData(collection));
         await Promise.all(promises);
       };
