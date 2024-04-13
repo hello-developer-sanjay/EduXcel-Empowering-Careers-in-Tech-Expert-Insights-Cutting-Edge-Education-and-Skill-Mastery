@@ -234,7 +234,7 @@ function SignInSignUp({ showCloseButton }) {
 </Next>
     <Next>
     📞 Sanjay Patidar <span className="light">Contact | Mobile Number : </span>{' '}
-      <a href="tel:+919131743250" id="contactNumberforlap" style={{ textDecoration: 'none', color: '#007bff', fontWeight: 'bold' }}>+91 9131743250</a> 📞 | OR |
+      <a href="tel:+919131743250" id="contactNumberforlaptop" style={{ textDecoration: 'none', color: '#007bff', fontWeight: 'bold' }}>+91 9131743250</a> 📞 | OR |
       
       <button onClick={copyContactNumberforlaptop} style={{ marginLeft: '4px', color: '#fff', padding: '2px 4px', border: '2px solid #ff6b6b', borderRadius: '30px', cursor: 'pointer' }}>Copy Number</button>
     </Next>
