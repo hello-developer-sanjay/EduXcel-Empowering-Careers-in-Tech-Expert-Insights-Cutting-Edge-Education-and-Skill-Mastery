@@ -152,7 +152,7 @@
       const fetchData = async (collection) => {
         try {
           const response = await fetch(
-            `https://personal-dzjh.onrender.com/api/${collection}`
+            `https://eduxcel-api-13april.onrender.com/api/${collection}`
           );
           const responseData = await response.json();
           setBlogsData((prevData) => ({
