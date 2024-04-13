@@ -559,13 +559,14 @@ strings={[
                     if (inViewContent) {
                       controlsContent.start({
                         y: 0,
-                        opacity: 1,
-                        rotate: [0, index % 2 === 0 ? 360 : -360],
-                        transition: {
-                          duration: 1.5,
-                          delay: index * 0.2,
-                          type: 'spring',
-                          stiffness: 100,
+        opacity: 1,
+        scale: 1,
+        transition: {
+          duration: 1.5,
+          delay: index * 0.2,
+          type: 'spring',
+          stiffness: 100,
+          bounce: 0.5, 
                         },
                       });
                     }
