@@ -238,9 +238,9 @@ const Course = () => {
       try {
         let response;
         if (!category || category === 'all') { // Check if category is undefined or "all"
-          response = await axios.get('https://eduxcel-api3-j9a2.onrender.com/api/courses/category/all');
+          response = await axios.get('https://eduxcel-api-13april.onrender.com/api/courses/category/all');
         } else {
-          response = await axios.get(`https://eduxcel-api3-j9a2.onrender.com/api/courses/category/${category}`);
+          response = await axios.get(`https://eduxcel-api-13april.onrender.com/api/courses/category/${category}`);
         }
         setProjects(response.data);
         setLoading(true); 
