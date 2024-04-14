@@ -15,7 +15,7 @@ function ForgotPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://eduxcel-api-13april.onrender.com/api/forgotpassword', { email });
+      const response = await axios.post('https://eduxcel-api-14april.onrender.com/api/forgotpassword', { email });
       setMessage(response.data.message);
     } catch (error) {
       console.error('Forgot password error:', error.response.data.message);
