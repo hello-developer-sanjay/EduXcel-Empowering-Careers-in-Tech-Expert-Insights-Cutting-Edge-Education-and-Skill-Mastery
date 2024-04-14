@@ -12,7 +12,7 @@ function SubHeader() {
   useEffect(() => {
     async function fetchCourses() {
       try {
-        const response = await axios.get('https://eduxcel-api-13april.onrender.com/api/courses');
+        const response = await axios.get('https://eduxcel-api-14april.onrender.com/api/courses');
         setCourses(response.data);
       } catch (error) {
         console.error('Error fetching courses:', error);
