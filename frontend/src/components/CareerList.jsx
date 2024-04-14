@@ -15,12 +15,12 @@ function CareerList() {
       try {
         let response;
         if (!vision || vision === 'all') {
-          response = await axios.get('https://eduxcel-api-13april.onrender.com/api/careers/vision/all');
+          response = await axios.get('https://eduxcel-api-14april.onrender.com/api/careers/vision/all');
         } else {
-          response = await axios.get(`https://eduxcel-api-13april.onrender.com/api/careers/vision/${vision}`);
+          response = await axios.get(`https://eduxcel-api-14april.onrender.com/api/careers/vision/${vision}`);
         }
         if (!response) {
-          response = await axios.get('https://eduxcel-api-13april.onrender.com/api/careers/vision');
+          response = await axios.get('https://eduxcel-api-14april.onrender.com/api/careers/vision');
         }
         setCareers(response.data);
       } catch (error) {
