@@ -59,7 +59,7 @@ useEffect(() => {
         return;
       }
 
-      const response = await fetch('https://eduxcel-api-13april.onrender.com/api/profile', {
+      const response = await fetch('https://eduxcel-api-14april.onrender.com/api/profile', {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
