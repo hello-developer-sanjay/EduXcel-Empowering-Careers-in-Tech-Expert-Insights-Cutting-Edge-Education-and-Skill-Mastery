@@ -506,7 +506,7 @@ let endpoint = "submit-feedback";
         successMessage = "Query sent! Await our swift reply, tailored just for you.";
       }
 
-      const response = await fetch(`https://eduxcel-api-13april.onrender.com/api/${endpoint}`, {
+      const response = await fetch(`https://eduxcel-api-30april.onrender.com/api/${endpoint}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -638,7 +638,7 @@ let endpoint = "submit-feedback";
   <Column>
     <NavHeading>Institutes</NavHeading>
     <NavLink to="/institutes">
-      <FontAwesomeIcon icon={faUniversity} /> Institutes Home
+      <FontAwesomeIcon icon={faUniversity} /> College Directory
     </NavLink>
     <NavLink to="/institute/chandigarh-university-articles">
       <FontAwesomeIcon icon={faUniversity} /> Chandigarh University
@@ -653,7 +653,7 @@ let endpoint = "submit-feedback";
   <Column>  
     <NavHeading>Careers</NavHeading>
     <NavLink to="/careers">
-      <FontAwesomeIcon icon={faBriefcase} /> Careers Home
+      <FontAwesomeIcon icon={faBriefcase} /> Career Insights
     </NavLink>
     <NavLink to="/careers/frontend_development_careers">
       <FontAwesomeIcon icon={faBriefcase} /> Frontend Dev Career Option
