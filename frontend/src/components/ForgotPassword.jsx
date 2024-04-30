@@ -15,7 +15,7 @@ function ForgotPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://eduxcel-api-14april.onrender.com/api/forgotpassword', { email });
+      const response = await axios.post('https://eduxcel-api-30april.onrender.com/api/forgotpassword', { email });
       setMessage(response.data.message);
     } catch (error) {
       console.error('Forgot password error:', error.response.data.message);
@@ -55,7 +55,7 @@ function ForgotPassword() {
  <meta name="author" content="EduXcel" />        <script type="application/ld+json">
        {JSON.stringify({
          '@context': 'http://schema.org',
-         '@type': 'ItemList',
+         '@type': 'Person',
          "name": "Sanjay Patidar",
          "birthDate": "1998-07-01",
          "birthPlace": {
