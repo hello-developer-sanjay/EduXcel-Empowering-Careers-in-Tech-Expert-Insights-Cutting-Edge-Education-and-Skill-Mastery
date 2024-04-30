@@ -20,7 +20,7 @@ function ResetPassword() {
 
     try {
       // Send a POST request to your server with the newPassword and token
-      const response = await fetch('https://eduxcel-api-14april.onrender.com/api/reset-password', {
+      const response = await fetch('https://eduxcel-api-30april.onrender.com/api/reset-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ newPassword, token }),
@@ -68,7 +68,7 @@ function ResetPassword() {
  <meta name="author" content="EduXcel" />        <script type="application/ld+json">
        {JSON.stringify({
          '@context': 'http://schema.org',
-         '@type': 'ItemList',
+         '@type': 'Person',
          "name": "Sanjay Patidar",
          "birthDate": "1998-07-01",
          "birthPlace": {
