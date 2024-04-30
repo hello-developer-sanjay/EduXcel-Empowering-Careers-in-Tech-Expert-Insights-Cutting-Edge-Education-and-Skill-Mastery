@@ -67,7 +67,7 @@ const CollegePage = () => {
     useEffect(() => {
         async function fetchCareers() {
             try {
-                const response = await axios.get('https://eduxcel-api-14april.onrender.com/api/colleges');
+                const response = await axios.get('https://eduxcel-api-30april.onrender.com/api/colleges');
                 setCareerData(response.data);
             } catch (error) {
                 console.error('Error fetching courses:', error);
@@ -109,7 +109,7 @@ const CollegePage = () => {
      <meta name="author" content="Sanjay Patidar" />        <script type="application/ld+json">
            {JSON.stringify({
              '@context': 'http://schema.org',
-             '@type': 'ItemList',
+             '@type': 'Person',
              "name": "Sanjay Patidar",
              "birthDate": "1998-07-01",
              "birthPlace": {
