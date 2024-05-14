@@ -244,7 +244,7 @@ function CareerOption() {
 
     <div className={`${styles.sectionHeadText} text-center mb-4`}>Explore Featured Tech Career Paths</div>
 
-            <p className={`${styles.heroSubText} mt-8 text-white-100 text-center`}>Explore various tech careers like Frontend Development and Backend Development with EduXcel, where education meets innovation.<br/> Discover expert insights, career opportunities, and skill development pathways.<br/> Whether you're an experienced professional looking to advance your career or a novice enthusiast eager to delve into the world of technology, EduXcel provides a vibrant learning community that fosters curiosity, embraces challenges, and ensures growth. <br/>Join us on a journey of exploration, collaboration, and excellence.</p>
+            <p className={`${styles.heroSubText} mt-8 text-white-100 text-center`}>Explore various tech careers like Frontend Development and Backend Development with EduXcel, where education meets innovation. <br/>Join us on a journey of exploration, collaboration, and excellence.</p>
             <CareerList careerData={careerData} />
         </section>
     );
