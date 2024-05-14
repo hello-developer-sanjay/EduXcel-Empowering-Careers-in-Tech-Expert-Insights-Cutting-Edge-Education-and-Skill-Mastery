@@ -1,14 +1,28 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
+import { RingLoader } from 'react-spinners'; // Import the RingLoader component
+
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import '../styles/CourseList.css';
 import courseImage1 from '../assets/frontend1.png';
 import courseImage2 from '../assets/backend1.png';
-
+const LoadingOverlay = styled.div`
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 0; /* Ensure it's above other elements */
+`;
 function CareerList() {
   const [careers, setCareers] = useState([]);
   const { vision } = useParams();
+  const [loading, setLoading] = useState(true); // State to manage loading
 
   useEffect(() => {
     async function fetchCareers() {
@@ -23,6 +37,8 @@ function CareerList() {
           response = await axios.get('https://eduxcel-api-30april.onrender.com/api/careers/vision');
         }
         setCareers(response.data);
+                setLoading(false); // Set loading to false when data is fetched
+
       } catch (error) {
         console.error('Error fetching careers:', error);
       }
@@ -32,13 +48,13 @@ function CareerList() {
   }, [vision]);
 
   const uniqueCategories = Array.from(new Set(careers.map(career => career.vision)));
-
- 
-
-
- 
   return (
     <div className="course-list">
+     {loading && ( // Display loading animation if loading is true
+        <LoadingOverlay>
+          <RingLoader color="#fff" loading={loading} size={150} />
+        </LoadingOverlay>
+      )}
       <div className="course-cards">
         {uniqueCategories.map((vision, index) => {
           const career = careers.find(career => career.vision === vision);
