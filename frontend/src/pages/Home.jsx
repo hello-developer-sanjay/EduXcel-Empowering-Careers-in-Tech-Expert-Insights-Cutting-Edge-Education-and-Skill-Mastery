@@ -261,14 +261,7 @@ function Home() {
       title: 'Flexible Learning at Your Fingertips',
       description: 'Embrace flexibility with on-the-go access to course materials, allowing you to learn at your own pace and convenience. Whether you’re a busy professional or a full-time student, our platform adapts to your schedule and learning preferences.',
     },
-    {
-      title: 'Cutting-Edge Web Development and UI/UX Design',
-      description: 'Explore the remarkable journey of Sanjay Patidar, a dedicated and passionate individual excelling in the realms of web development and UI/UX design. With a proactive approach and unwavering dedication to excellence, Sanjay brings forth a wealth of experience and expertise in crafting immersive digital experiences.',
-    },
-    {
-      title: 'Trusted by Clients Nationwide',
-      description: 'Based in Indore, Madhya Pradesh, Sanjay serves clients across India, including Chandigarh, Punjab, Mumbai, Maharashtra, Bangalore, Karnataka, and beyond. With state-of-the-art security measures, your data is protected as you explore our wide range of online courses designed to enhance your skills and career prospects.',
-    },
+   
     
   ];
   const contentBlocks = [
