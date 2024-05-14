@@ -299,7 +299,7 @@ const CollegePage = () => {
 
           
             <SectionTitle>EduXcel College Directory: Navigate and Explore Your Path to Higher Education</SectionTitle>
-            <SectionSubtitle>EduXcel College Directory is your ultimate guide to finding the perfect higher education institution. Explore a diverse array of colleges and institutes worldwide, and embark on your educational journey with confidence. Navigate through detailed listings and discover the opportunities that await you as you pursue academic excellence.</SectionSubtitle>
+            <SectionSubtitle>EduXcel College Directory is your ultimate guide to finding the perfect higher education institution. Explore a diverse array of colleges and institutes worldwide, and embark on your educational journey with confidence.</SectionSubtitle>
             <CollegeList careerData={careerData} />
         </SectionContainer>
     );
