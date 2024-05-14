@@ -3,6 +3,18 @@ import { NavLink, useParams } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
+import { RingLoader } from 'react-spinners'; 
+const LoadingOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index:0; /* Ensure it's above other elements */
+`;
 
 const CourseContainer = styled.div`
   padding: 2rem;
@@ -186,7 +198,6 @@ const Talk = () => {
   const { vision } = useParams();
   const [careers, setCareers] = useState([]);
   const [loading, setLoading] = useState(true); // Add loading state
-
   useEffect(() => {
     async function fetchProjects() {
       try {
@@ -198,14 +209,20 @@ const Talk = () => {
           response = await axios.get(`https://eduxcel-api-30april.onrender.com/api/careers/vision/${vision}`);
         }
         setCareers(response.data);
-        setLoading(false); // Update loading state when data is fetched
+        setLoading(true); // Update loading state when data is fetched
+  
+        setTimeout(() => {
+          setLoading(false); // Set loading to false after 1 second
+        }, 1000);
       } catch (error) {
         console.error('Error fetching career options:', error);
+        setLoading(false); // In case of error, also set loading to false
       }
     }
-
+  
     fetchProjects();
   }, [vision]);
+  
 
   return (
     <CourseContainer>
@@ -213,7 +230,11 @@ const Talk = () => {
       <title>{`${vision ? vision.replace(/_/g, ' ').toUpperCase() : 'Explore Careers'} | Tech Careers with EduXcel - Sanjay Patidar`}</title>
  <meta name="description" content={`Explore various tech careers like Frontend Development and Backend Development with EduXcel, where education meets innovation. Discover expert insights, career opportunities, and skill development pathways. Whether you're an experienced professional looking to advance your career or a novice enthusiast eager to delve into the world of technology, EduXcel provides a vibrant learning community that fosters curiosity, embraces challenges, and ensures growth. Join us on a journey of exploration, collaboration, and excellence.`} />
       </Helmet>
- 
+      {loading && ( // Display loading animation if loading is true
+        <LoadingOverlay>
+          <RingLoader color="#fff" loading={loading} size={150} />
+        </LoadingOverlay>
+      )}
       <CourseNavigation>
         <CourseNavList>
           <CourseNavItem>
