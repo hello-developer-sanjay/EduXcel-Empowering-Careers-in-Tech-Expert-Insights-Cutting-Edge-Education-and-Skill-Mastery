@@ -29,12 +29,12 @@ function CareerList() {
       try {
         let response;
         if (!vision || vision === 'all') {
-          response = await axios.get('https://eduxcel-api-30april.onrender.com/api/careers/vision/all');
+          response = await axios.get('https://eduxcel-api-5jun.onrender.com/api/careers/vision/all');
         } else {
-          response = await axios.get(`https://eduxcel-api-30april.onrender.com/api/careers/vision/${vision}`);
+          response = await axios.get(`https://eduxcel-api-5jun.onrender.com/api/careers/vision/${vision}`);
         }
         if (!response) {
-          response = await axios.get('https://eduxcel-api-30april.onrender.com/api/careers/vision');
+          response = await axios.get('https://eduxcel-api-5jun.onrender.com/api/careers/vision');
         }
         setCareers(response.data);
                 setLoading(false); // Set loading to false when data is fetched
