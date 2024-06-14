@@ -170,7 +170,7 @@ const CourseDetailed = () => {
   useEffect(() => {
     async function fetchProjectDetails() {
       try {
-        const response = await axios.get(`https://edu-back-j3mz.onrender.com/api/courses/details/${id}`);
+        const response = await axios.get(`https://eduxcel-api-15jun.onrender.com/api/courses/details/${id}`);
         setProject(response.data);
       } catch (error) {
         console.error('Error fetching project details:', error);
