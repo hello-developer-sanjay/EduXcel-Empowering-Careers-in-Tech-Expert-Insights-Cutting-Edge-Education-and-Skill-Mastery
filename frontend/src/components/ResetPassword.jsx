@@ -20,7 +20,7 @@ function ResetPassword() {
 
     try {
       // Send a POST request to your server with the newPassword and token
-      const response = await fetch('https://eduxcel-api-5jun.onrender.com/api/reset-password', {
+      const response = await fetch('https://eduxcel-api-15jun.onrender.com/api/reset-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ newPassword, token }),
