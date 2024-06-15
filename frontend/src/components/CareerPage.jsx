@@ -204,9 +204,9 @@ const Talk = () => {
         let response;
         if (!vision || vision === 'all') {
           // Check if vision is undefined or "all"
-          response = await axios.get('https://eduxcel-api-15jun.onrender.com/api/careers/vision/all');
+          response = await axios.get('https://eduxcel-api-15jun-dtvt.onrender.com/api/careers/vision/all');
         } else {
-          response = await axios.get(`https://eduxcel-api-15jun.onrender.com/api/careers/vision/${vision}`);
+          response = await axios.get(`https://eduxcel-api-15jun-dtvt.onrender.com/api/careers/vision/${vision}`);
         }
         setCareers(response.data);
         setLoading(true); // Update loading state when data is fetched
