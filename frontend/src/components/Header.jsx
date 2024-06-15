@@ -305,7 +305,7 @@ function Header() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      fetch('https://eduxcel-api-15jun.onrender.com/api/profile', {
+      fetch('https://eduxcel-api-15jun-dtvt.onrender.com/api/profile', {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -320,7 +320,7 @@ function Header() {
         .then(data => {
           if (data.profileImage) {
             setProfileImage(
-              `https://eduxcel-api-15jun.onrender.com/${data.profileImage}?key=${Date.now()}`
+              `https://eduxcel-api-15jun-dtvt.onrender.com/${data.profileImage}?key=${Date.now()}`
             );
           } else {
             setProfileImage(
