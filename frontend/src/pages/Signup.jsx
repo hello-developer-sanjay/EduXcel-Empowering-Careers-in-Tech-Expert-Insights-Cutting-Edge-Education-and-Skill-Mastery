@@ -42,7 +42,7 @@ function Signup() {
         return;
       }
 
-      const response = await axios.post('https://eduxcel-api-15jun.onrender.com/api/signup', formData);
+      const response = await axios.post('https://eduxcel-api-15jun-dtvt.onrender.com/api/signup', formData);
       console.log('Signup success');
       setSignupSuccess('Signup successful!');
     } catch (error) {
