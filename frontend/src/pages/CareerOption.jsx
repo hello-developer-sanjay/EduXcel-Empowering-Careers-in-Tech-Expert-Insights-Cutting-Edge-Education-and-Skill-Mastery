@@ -15,7 +15,7 @@ function CareerOption() {
         // Fetch course data from your API endpoint
         async function fetchCareers() {
             try {
-                const response = await axios.get('https://eduxcel-api-15jun-dtvt.onrender.com/api/careers');
+                const response = await axios.get('https://eduxcel-api-26jun.onrender.com/api/careers');
                 setCareerData(response.data);
             } catch (error) {
                 console.error('Error fetching courses:', error);
