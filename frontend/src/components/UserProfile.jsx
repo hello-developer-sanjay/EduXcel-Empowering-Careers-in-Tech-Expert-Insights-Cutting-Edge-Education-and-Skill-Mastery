@@ -59,7 +59,7 @@ useEffect(() => {
         return;
       }
 
-      const response = await fetch('https://eduxcel-api-15jun-dtvt.onrender.com/api/profile', {
+      const response = await fetch('https://eduxcel-api-26jun.onrender.com/api/profile', {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -97,7 +97,7 @@ useEffect(() => {
  const handleUpdateProfile = async (updatedProfileData) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('https://eduxcel-api-15jun-dtvt.onrender.com/api/profile', {
+      const response = await fetch('https://eduxcel-api-26jun.onrender.com/api/profile', {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -125,7 +125,7 @@ useEffect(() => {
   const confirmLogout = async () => {
     try {
       // Send a request to the server to log the user out
-      await axios.post('https://eduxcel-api-15jun-dtvt.onrender.com/api/logout');
+      await axios.post('https://eduxcel-api-26jun.onrender.com/api/logout');
       // Clear the token from local storage
       localStorage.removeItem('token');
       // Redirect the user to the login page using navigate
@@ -384,7 +384,7 @@ useEffect(() => {
   <div className="profile-info">
     <div className="profile-image-container">
       <motion.img
-        src={`https://eduxcel-api-15jun-dtvt.onrender.com/${userProfile.profileImage}?key=${Date.now()}`}
+        src={`https://eduxcel-api-26jun.onrender.com/${userProfile.profileImage}?key=${Date.now()}`}
         alt="Profile"
         className="profile-image"
         whileHover={{ scale: 1.1 }}
