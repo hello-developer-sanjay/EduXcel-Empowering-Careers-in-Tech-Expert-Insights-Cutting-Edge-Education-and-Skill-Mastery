@@ -39,7 +39,7 @@ import 'video.js/dist/video-js.css';
         .replace(/\s+/g, '-')        // Replace spaces with -
         .replace(/[^\w-]+/g, '')     // Remove all non-word characters
         .replace(/--+/g, '-')        // Replace multiple - with single -
-        .replace(/^-+/, '')          // Trim - from start of text
+        .replace(/^-+/, '')          // Trim - from start of textmongodb+srv://patidardevelopersanjay:JyDAoKwoixhUD2zP@cluster0.uekkfrt.mongodb.net/mydb
         .replace(/-+$/, '');         // Trim - from end of text
     };
     
@@ -161,7 +161,7 @@ import 'video.js/dist/video-js.css';
       const fetchData = async (collection) => {
         try {
           const response = await fetch(
-            `https://eduxcel-api-15jun-dtvt.onrender.com/api/${collection}`
+            `https://eduxcel-api-26jun.onrender.com/api/${collection}`
           );
           const responseData = await response.json();
           setBlogsData((prevData) => ({
