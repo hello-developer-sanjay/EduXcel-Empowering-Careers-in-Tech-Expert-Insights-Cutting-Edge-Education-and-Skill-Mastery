@@ -58,13 +58,13 @@ function Signin() {
     setLoading(true);
 
     try {
-      const response = await axios.post('https://eduxcel-api-15jun-dtvt.onrender.com/api/signin', formData);
+      const response = await axios.post('https://eduxcel-api-26jun.onrender.com/api/signin', formData);
       console.log('Signin success');
       const token = response.data.token;
 
       localStorage.setItem('token', token);
 
-      const profileResponse = await axios.get('https://eduxcel-api-15jun-dtvt.onrender.com/api/profile', {
+      const profileResponse = await axios.get('https://eduxcel-api-26jun.onrender.com/api/profile', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
