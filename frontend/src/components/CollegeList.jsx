@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { RingLoader } from 'react-spinners'; // Import the RingLoader component
+import { RingLoader } from 'react-spinners'; 
 import styled from 'styled-components';
 
 import courseImage1 from '../assets/cu.jpg';
@@ -16,27 +16,27 @@ const LoadingOverlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 0; /* Ensure it's above other elements */
+  z-index: 0; 
 `;
 function CollegeList() {
   const [journals, setJournals] = useState([]);
   const { institute } = useParams();
-  const [loading, setLoading] = useState(true); // State to manage loading
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchJournals() {
     try {
         let response;
         if (!institute || institute === 'all') {
-          response = await axios.get('https://eduxcel-api-26jun.onrender.com/api/institute/all');
+          response = await axios.get('https://eduxcel-api-16july.onrender.com/api/institute/all');
         } else {
-          response = await axios.get(`https://eduxcel-api-26jun.onrender.com/api/institute/${institute}`);
+          response = await axios.get(`https://eduxcel-api-16july.onrender.com/api/institute/${institute}`);
         }
         if (!response) {
-          response = await axios.get('https://eduxcel-api-26jun.onrender.com/api/institute');
+          response = await axios.get('https://eduxcel-api-16july.onrender.com/api/institute');
         }
         setJournals(response.data);
-        setLoading(false); // Set loading to false when data is fetched
+        setLoading(false); 
 
       } catch (error) {
         console.error('Error fetching journals:', error);
