@@ -9,7 +9,7 @@ import courseImage2 from '../assets/css.png';
 import courseImage3 from '../assets/responsive1.png';
 import courseImage4 from '../assets/preprocessors.png';
 import SignInSignUp from './SignInSignUp';
-import { RingLoader } from 'react-spinners'; // Import the RingLoader component
+import { RingLoader } from 'react-spinners'; 
 import styled from 'styled-components';
 const LoadingOverlay = styled.div`
   position: relative;
@@ -34,12 +34,12 @@ function CourseList() {
       try {
         let response;
         if (!category || category === 'all') {
-          response = await axios.get('https://eduxcel-api-26jun.onrender.com/api/courses/category/all');
+          response = await axios.get('https://eduxcel-api-16july.onrender.com/api/courses/category/all');
         } else {
-          response = await axios.get(`https://eduxcel-api-26jun.onrender.com/api/courses/category/${category}`);
+          response = await axios.get(`https://eduxcel-api-16july.onrender.com/api/courses/category/${category}`);
         }
         if (!response) {
-          response = await axios.get('https://eduxcel-api-26jun.onrender.com/api/courses/category');
+          response = await axios.get('https://eduxcel-api-16july.onrender.com/api/courses/category');
         }
         setCourses(response.data);
                 setLoading(false); // Set loading to false when data is fetched
