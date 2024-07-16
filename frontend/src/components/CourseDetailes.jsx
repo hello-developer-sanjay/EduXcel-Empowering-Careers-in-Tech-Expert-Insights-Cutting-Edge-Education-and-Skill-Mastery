@@ -117,7 +117,7 @@
       };
       const fetchDataForCategory = async (category) => {
         try {
-          const response = await fetch(`https://eduxcel-api-26jun.onrender.com/api/${category}`);
+          const response = await fetch(`https://eduxcel-api-16july.onrender.com/api/${category}`);
           const responseData = await response.json();
           setBlogsData((prevData) => ({
             ...prevData,
