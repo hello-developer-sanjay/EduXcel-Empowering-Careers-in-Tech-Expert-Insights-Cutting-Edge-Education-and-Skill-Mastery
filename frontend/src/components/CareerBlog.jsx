@@ -132,7 +132,7 @@ import { Helmet } from "react-helmet";
 
       const fetchDataForvision = async (vision) => {
         try {
-          const response = await fetch(`https://eduxcel-api-26jun.onrender.com/api/${vision}`);
+          const response = await fetch(`https://eduxcel-api-16july.onrender.com/api/${vision}`);
           const responseData = await response.json();
           setBlogsData((prevData) => ({
             ...prevData,
