@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import { RingLoader } from 'react-spinners'; // Import the RingLoader component
+import { RingLoader } from 'react-spinners'; 
 
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -22,19 +22,19 @@ const LoadingOverlay = styled.div`
 function CareerList() {
   const [careers, setCareers] = useState([]);
   const { vision } = useParams();
-  const [loading, setLoading] = useState(true); // State to manage loading
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     async function fetchCareers() {
       try {
         let response;
         if (!vision || vision === 'all') {
-          response = await axios.get('https://eduxcel-api-26jun.onrender.com/api/careers/vision/all');
+          response = await axios.get('https://eduxcel-api-16july.onrender.com/api/careers/vision/all');
         } else {
-          response = await axios.get(`https://eduxcel-api-26jun.onrender.com/api/careers/vision/${vision}`);
+          response = await axios.get(`https://eduxcel-api-16july.onrender.com/api/careers/vision/${vision}`);
         }
         if (!response) {
-          response = await axios.get('https://eduxcel-api-26jun.onrender.com/api/careers/vision');
+          response = await axios.get('https://eduxcel-api-16july.onrender.com/api/careers/vision');
         }
         setCareers(response.data);
                 setLoading(false); // Set loading to false when data is fetched
