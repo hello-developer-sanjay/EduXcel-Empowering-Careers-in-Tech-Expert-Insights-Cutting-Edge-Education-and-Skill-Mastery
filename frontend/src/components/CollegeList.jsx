@@ -28,12 +28,12 @@ function CollegeList() {
     try {
         let response;
         if (!institute || institute === 'all') {
-          response = await axios.get('https://eduxcel-api-16july.onrender.com/api/institute/all');
+          response = await axios.get('https://eduxcel-api-5aug.onrender.com/api/institute/all');
         } else {
-          response = await axios.get(`https://eduxcel-api-16july.onrender.com/api/institute/${institute}`);
+          response = await axios.get(`https://eduxcel-api-5aug.onrender.com/api/institute/${institute}`);
         }
         if (!response) {
-          response = await axios.get('https://eduxcel-api-16july.onrender.com/api/institute');
+          response = await axios.get('https://eduxcel-api-5aug.onrender.com/api/institute');
         }
         setJournals(response.data);
         setLoading(false); 
