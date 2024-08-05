@@ -506,7 +506,7 @@ let endpoint = "submit-feedback";
         successMessage = "Query sent! Await our swift reply, tailored just for you.";
       }
 
-      const response = await fetch(`https://eduxcel-api-16july.onrender.com/api/${endpoint}`, {
+      const response = await fetch(`https://eduxcel-api-5aug.onrender.com/api/${endpoint}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
