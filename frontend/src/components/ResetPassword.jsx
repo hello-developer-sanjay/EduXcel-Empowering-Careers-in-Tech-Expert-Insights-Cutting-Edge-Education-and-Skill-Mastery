@@ -19,7 +19,7 @@ function ResetPassword() {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://eduxcel-api-16july.onrender.com/api/reset-password', {
+      const response = await fetch('https://eduxcel-api-5aug.onrender.com/api/reset-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ newPassword, token }),
